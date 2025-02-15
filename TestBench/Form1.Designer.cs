@@ -35,8 +35,8 @@
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             panel1 = new Panel();
-            tabPage2 = new TabPage();
             button2 = new Button();
+            tabPage2 = new TabPage();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             panel1.SuspendLayout();
@@ -75,6 +75,7 @@
             textBox2.Location = new Point(3, 61);
             textBox2.Multiline = true;
             textBox2.Name = "textBox2";
+            textBox2.ScrollBars = ScrollBars.Vertical;
             textBox2.Size = new Size(786, 315);
             textBox2.TabIndex = 3;
             // 
@@ -113,16 +114,6 @@
             panel1.Size = new Size(786, 58);
             panel1.TabIndex = 4;
             // 
-            // tabPage2
-            // 
-            tabPage2.Location = new Point(4, 24);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(494, 228);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "tabPage2";
-            tabPage2.UseVisualStyleBackColor = true;
-            // 
             // button2
             // 
             button2.Location = new Point(86, 29);
@@ -132,6 +123,16 @@
             button2.Text = "button2";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(792, 379);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "tabPage2";
+            tabPage2.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

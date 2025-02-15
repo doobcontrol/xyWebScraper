@@ -25,7 +25,7 @@ namespace TestBench
             this.ControlBox = false;
             button1.Enabled = false;
             label1.Text = "downloading ...";
-            await new startScraper().scraper(
+            await new startScraper().scrape(
                 textBox1.Text,
                 new TestParser(),
                 progress);
@@ -34,6 +34,7 @@ namespace TestBench
             label1.Text = "downloaded";
         }
 
+        List<string> messageBuffer = new List<string>();
         private void showMsg(string msg)
         {
             if (textBox2.InvokeRequired)
@@ -46,23 +47,31 @@ namespace TestBench
             }
             else
             {
-                textBox2.AppendText(msg);
+                messageBuffer.Add(msg);
+                if(messageBuffer.Count > 100)
+                {
+                    messageBuffer.RemoveAt(0);
+                }
+                textBox2.Text = string.Join("", messageBuffer);
             }
         }
 
         private async void button2_Click(object sender, EventArgs e)
         {
-            string jFile = @"textConfig.cfg";
+            string jFile = @"textConfig.cfg"; //test: textConfig.cfg
             string json = File.ReadAllText(jFile);
-            IParserConfig ips = new ParserJosnConfig(json);
+            ParserJosnConfig.setConfigs(json); 
+            IParserConfig ips = ParserJosnConfig.getParserConfig("meitulu.me.guochan");
 
             this.ControlBox = false;
             button2.Enabled = false;
             label1.Text = "downloading ...";
-            await new startScraper().scraper(
+
+            await new startScraper().scrape(
                 textBox1.Text,
                 new ParserByConfig(ips),
                 progress);
+
             this.ControlBox = true;
             button2.Enabled = true;
             label1.Text = "downloaded";

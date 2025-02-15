@@ -55,7 +55,7 @@ namespace xy.scraper.page
             if (startStr.Length != 0 && end_index > start_index)
             {
                 int start_indexIn =
-                    strForFind.LastIndexOf(startStr, end_index - endStr.Length, end_index - start_index);
+                    strForFind.LastIndexOf(startStr, end_index, end_index - start_index);
                 if (start_indexIn != -1)
                 {
                     start_index = start_indexIn + startStr.Length;
@@ -129,7 +129,8 @@ namespace xy.scraper.page
         }
 
         static List<string> illegalChrs = new List<string>{
-            "&nbsp;", 
+            "&nbsp;",
+            "amp;",
             "#", 
             "%", 
             "&",
@@ -144,13 +145,14 @@ namespace xy.scraper.page
             "$", 
             "!", 
             "\"",
-            ":", 
+            ":",
+            ";",
             "@", 
             "+", 
             "`", 
             "|", 
             "=",
-            "amp;" };
+            " " };
 
         static public string washPathStr(string pathStr)
         {

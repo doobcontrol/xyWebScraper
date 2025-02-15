@@ -15,7 +15,8 @@ namespace xy.scraper.page.parserConfig
         //2, may need muti replace
         //3, may need add something (such as: "https://")
         List<(List<(string, string)>, List<string>, string)> getFileCfg();
-
+        List<(List<(string, string)>, List<string>, string, string)> getNextCfg();
         string GetEncoding();
+        string GetConfigId();
     }
 }

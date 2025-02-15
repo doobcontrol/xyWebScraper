@@ -13,7 +13,7 @@ namespace xy.scraper.page
             _htmlDownloader = new HttpClientDownloader();
         }
 
-        public async Task<Dictionary<string, Type>> download(
+        public async Task<Dictionary<string, (Type, Object?)>> download(
             string pUrl,
             IProgress<string> progress,
             string savePath
