@@ -19,7 +19,8 @@ namespace xy.scraper.page
             string savePath
             )
         {
-            string htmlString = await _htmlDownloader.GetHtmlStringAsync(pUrl, progress);
+            string htmlString = await _htmlDownloader.GetHtmlStringAsync(
+                pUrl, _htmlParser.GetEncoding(), progress);
 
             Dictionary<string, string> downloadDict = 
                 _htmlParser.getDownloadDict(htmlString);

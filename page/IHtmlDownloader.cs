@@ -8,7 +8,13 @@ namespace xy.scraper.page
 {
     public interface IHtmlDownloader
     {
-        Task<string> GetHtmlStringAsync(string url, IProgress<string> progress);
-        Task DownloadFileAsync(string uri, string outputPath, IProgress<string> progress);
+        Task<string> GetHtmlStringAsync(
+            string url,
+            string encoding, 
+            IProgress<string> progress);
+        Task DownloadFileAsync(
+            string uri, 
+            string outputPath, 
+            IProgress<string> progress);
     }
 }

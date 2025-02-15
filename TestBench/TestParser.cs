@@ -51,6 +51,11 @@ namespace TestBench
             return retDic;
         }
 
+        public string GetEncoding()
+        {
+            return "GB18030";
+        }
+
         public Dictionary<string, Type> getOtherPageDict(string htmlString)
         {
             return new Dictionary<string, Type>();

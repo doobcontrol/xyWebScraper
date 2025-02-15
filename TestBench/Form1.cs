@@ -1,13 +1,14 @@
 using System;
 using System.Text;
 using xy.scraper.page;
+using xy.scraper.page.parserConfig;
 
 namespace TestBench
 {
     public partial class Form1 : Form
     {
         Progress<string> progress = new Progress<string>();
-        
+
         public Form1()
         {
             InitializeComponent();
@@ -25,7 +26,7 @@ namespace TestBench
             button1.Enabled = false;
             label1.Text = "downloading ...";
             await new startScraper().scraper(
-                textBox1.Text, 
+                textBox1.Text,
                 new TestParser(),
                 progress);
             this.ControlBox = true;
@@ -37,7 +38,8 @@ namespace TestBench
         {
             if (textBox2.InvokeRequired)
             {
-                textBox2.Invoke(() => {  //BeginInvoke debug:看是否能解决长时大量任务下的失去响应问题
+                textBox2.Invoke(() =>
+                {  //BeginInvoke debug:看是否能解决长时大量任务下的失去响应问题
                     showMsg(msg);
                 }
                 );
@@ -48,5 +50,22 @@ namespace TestBench
             }
         }
 
+        private async void button2_Click(object sender, EventArgs e)
+        {
+            string jFile = @"textConfig.cfg";
+            string json = File.ReadAllText(jFile);
+            IParserConfig ips = new ParserJosnConfig(json);
+
+            this.ControlBox = false;
+            button2.Enabled = false;
+            label1.Text = "downloading ...";
+            await new startScraper().scraper(
+                textBox1.Text,
+                new ParserByConfig(ips),
+                progress);
+            this.ControlBox = true;
+            button2.Enabled = true;
+            label1.Text = "downloaded";
+        }
     }
 }

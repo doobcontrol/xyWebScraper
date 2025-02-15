@@ -27,6 +27,7 @@ namespace xy.scraper.page
 
         public async Task<string> GetHtmlStringAsync(
             string url,
+            string encoding,
             IProgress<string> progress)
         {
             HttpClient _httpClient = new HttpClient();
@@ -35,8 +36,9 @@ namespace xy.scraper.page
             System.Text.Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             var responseString = await Task.Run(
                 () =>
-                Encoding.GetEncoding("GB18030").GetString(response, 0, response.Length - 1)
-            ); 
+                Encoding.GetEncoding(encoding).
+                    GetString(response, 0, response.Length - 1)
+            );
             return responseString;
         }
     }

@@ -11,5 +11,6 @@ namespace xy.scraper.page
     {
         Dictionary<string, string> getDownloadDict(string htmlString);
         Dictionary<string, Type> getOtherPageDict(string htmlString);
+        string GetEncoding();
     }
 }
