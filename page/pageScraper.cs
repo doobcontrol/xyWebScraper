@@ -19,10 +19,10 @@ namespace xy.scraper.page
             string savePath
             )
         {
+            progress.Report("get task html: " + pUrl);
             string htmlString = await _htmlDownloader.GetHtmlStringAsync(
                 pUrl, _htmlParser.GetEncoding(), progress);
 
-            progress.Report("get task html: " + pUrl);
             Dictionary<string, string> downloadDict = 
                 _htmlParser.getDownloadDict(htmlString);
             progress.Report("got download infomation:" + "\r\n"
