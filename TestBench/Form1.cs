@@ -9,6 +9,7 @@ namespace TestBench
     public partial class Form1 : Form
     {
         Progress<string> progress = new Progress<string>();
+        CancellationTokenSource cts = new CancellationTokenSource();
 
         public Form1()
         {
@@ -49,11 +50,12 @@ namespace TestBench
         {
             string jFile = @"textConfig.cfg"; //test: textConfig.cfg
             string json = File.ReadAllText(jFile);
-            ParserJosnConfig.setConfigs(json); 
+            ParserJosnConfig.setConfigs(json);
             IParserConfig ips = ParserJosnConfig.getParserConfig("meitulu.me.guochan");
 
             this.ControlBox = false;
             button2.Enabled = false;
+            button1.Visible = true;
             label1.Text = "downloading ...";
             XyLog.log("start download");
 
@@ -62,6 +64,7 @@ namespace TestBench
                 await new startScraper().scrape(
                 textBox1.Text,
                 new ParserByConfig(ips),
+                cts.Token,
                 progress);
             }
             catch (Exception error)
@@ -72,7 +75,15 @@ namespace TestBench
             XyLog.log("download end");
             this.ControlBox = true;
             button2.Enabled = true;
+            button1.Visible = false;
             label1.Text = "downloaded";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            showMsg("\r\nstart cancelling download task ... \r\n\r\n");
+            cts.Cancel();
+            button1.Visible = false;
         }
     }
 }

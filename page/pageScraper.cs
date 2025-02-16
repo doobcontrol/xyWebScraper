@@ -15,6 +15,7 @@ namespace xy.scraper.page
 
         public async Task<List<(string, (Type, Object?))>> download(
             string pUrl,
+            CancellationToken token,
             IProgress<string> progress,
             string savePath
             )
@@ -30,6 +31,11 @@ namespace xy.scraper.page
                 );
             foreach (string dUrl in downloadDict.Keys)
             {
+                if (token.IsCancellationRequested)
+                {
+                    progress.Report("\r\ntask canceled\r\n");
+                    return new List<(string, (Type, Object?))>();
+                }
                 try
                 {
                     string fileFullName = savePath + downloadDict[dUrl];

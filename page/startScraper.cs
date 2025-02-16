@@ -12,6 +12,7 @@ namespace xy.scraper.page
         public async Task scrape(
             string url, 
             IHtmlParser htmlParser,
+            CancellationToken token,
             IProgress<string> progress = null,
             string savePath = "download")
         {
@@ -19,10 +20,15 @@ namespace xy.scraper.page
 
             List<string> handledUrls = new List<string>();
             List<(string, (Type, Object?))> toBeHandledList 
-                = await Scraper.download(url, progress, savePath);
+                = await Scraper.download(url, token, progress, savePath);
 
             while (toBeHandledList.Count !=0)
             {
+                if (token.IsCancellationRequested)
+                {
+                    progress.Report("\r\ntask canceled\r\n");
+                    break;
+                }
                 (string, (Type, Object ?)) toBeHandled = toBeHandledList[0];
                 string toBeHandledUrl = toBeHandledList[0].Item1;
 
@@ -34,7 +40,7 @@ namespace xy.scraper.page
                     );
 
                 List<(string, (Type, Object?))> moreList
-                    = await Scraper.download(toBeHandledUrl, progress, savePath);
+                    = await Scraper.download(toBeHandledUrl, token, progress, savePath);
 
                 List<(string, (Type, Object?))> tempList = new List<(string, (Type, object?))>();
                 foreach ((string, (Type, Object?)) moretask in moreList)

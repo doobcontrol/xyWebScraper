@@ -36,9 +36,14 @@
             panel1 = new Panel();
             button2 = new Button();
             tabPage2 = new TabPage();
+            panel2 = new Panel();
+            panel3 = new Panel();
+            button1 = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             panel1.SuspendLayout();
+            panel2.SuspendLayout();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // textBox1
@@ -52,7 +57,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(86, 33);
+            label1.Location = new Point(98, 11);
             label1.Name = "label1";
             label1.Size = new Size(38, 15);
             label1.TabIndex = 2;
@@ -94,9 +99,8 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(panel2);
             panel1.Controls.Add(textBox1);
-            panel1.Controls.Add(button2);
-            panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
@@ -105,7 +109,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(5, 29);
+            button2.Location = new Point(17, 7);
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
             button2.TabIndex = 0;
@@ -123,6 +127,37 @@
             tabPage2.Text = "spare";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // panel2
+            // 
+            panel2.Controls.Add(panel3);
+            panel2.Controls.Add(button2);
+            panel2.Controls.Add(label1);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(0, 23);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(786, 35);
+            panel2.TabIndex = 3;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(button1);
+            panel3.Dock = DockStyle.Right;
+            panel3.Location = new Point(703, 0);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(83, 35);
+            panel3.TabIndex = 3;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(3, 7);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 0;
+            button1.Text = "Cancel";
+            button1.UseVisualStyleBackColor = true;
+            button1.Visible = false;
+            button1.Click += button1_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -136,6 +171,9 @@
             tabPage1.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            panel3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -149,5 +187,8 @@
         private Panel panel1;
         private TabPage tabPage2;
         private Button button2;
+        private Panel panel2;
+        private Panel panel3;
+        private Button button1;
     }
 }
