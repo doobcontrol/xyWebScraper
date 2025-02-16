@@ -22,9 +22,13 @@ namespace xy.scraper.page
             string htmlString = await _htmlDownloader.GetHtmlStringAsync(
                 pUrl, _htmlParser.GetEncoding(), progress);
 
+            progress.Report("get task html: " + pUrl);
             Dictionary<string, string> downloadDict = 
                 _htmlParser.getDownloadDict(htmlString);
-            foreach(string dUrl in downloadDict.Keys)
+            progress.Report("got download infomation:" + "\r\n"
+                    + "    download items: " + downloadDict.Count
+                );
+            foreach (string dUrl in downloadDict.Keys)
             {
                 try
                 {
@@ -53,8 +57,11 @@ namespace xy.scraper.page
                     }
                 }
             }
-            
-            return _htmlParser.getOtherPageDict(htmlString);
+
+            List<(string, (Type, Object?))> retList = _htmlParser.getOtherPageDict(htmlString);
+            progress.Report("get other page links: " + retList.Count);
+
+            return retList;
         }
     }
 }

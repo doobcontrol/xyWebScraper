@@ -64,6 +64,10 @@ namespace xy.scraper.page
                 //remove the first element, and save it for duplication handle
                 toBeHandledList.Remove(toBeHandled);
                 handledUrls.Add(toBeHandledUrl);
+                progress.Report("task statistics:" + "\r\n"
+                        + "    done: " + handledUrls.Count + "\r\n"
+                        + "    to be done: " + toBeHandledList.Count + "\r\n"
+                    );
             }
         }
     }

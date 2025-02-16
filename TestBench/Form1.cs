@@ -34,12 +34,14 @@ namespace TestBench
             }
             else
             {
-                messageBuffer.Insert(0, msg);
-                if(messageBuffer.Count > 100)
+                messageBuffer.Add(msg);
+                if (messageBuffer.Count > 100)
                 {
-                    messageBuffer.RemoveAt(messageBuffer.Count -1);
+                    messageBuffer.RemoveAt(0);
                 }
                 textBox2.Text = string.Join("", messageBuffer);
+                textBox2.Select(textBox2.Text.Length, 0);
+                textBox2.ScrollToCaret();
             }
         }
 

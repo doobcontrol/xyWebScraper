@@ -64,6 +64,7 @@
             textBox2.Location = new Point(3, 61);
             textBox2.Multiline = true;
             textBox2.Name = "textBox2";
+            textBox2.ReadOnly = true;
             textBox2.ScrollBars = ScrollBars.Vertical;
             textBox2.Size = new Size(786, 315);
             textBox2.TabIndex = 3;
