@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             textBox1 = new TextBox();
-            button1 = new Button();
             label1 = new Label();
             textBox2 = new TextBox();
             tabControl1 = new TabControl();
@@ -50,20 +49,10 @@
             textBox1.Size = new Size(786, 23);
             textBox1.TabIndex = 0;
             // 
-            // button1
-            // 
-            button1.Location = new Point(5, 29);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 1;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(167, 33);
+            label1.Location = new Point(86, 33);
             label1.Name = "label1";
             label1.Size = new Size(38, 15);
             label1.TabIndex = 2;
@@ -99,7 +88,7 @@
             tabPage1.Padding = new Padding(3);
             tabPage1.Size = new Size(792, 379);
             tabPage1.TabIndex = 0;
-            tabPage1.Text = "tabPage1";
+            tabPage1.Text = "scrape test";
             tabPage1.UseVisualStyleBackColor = true;
             // 
             // panel1
@@ -107,7 +96,6 @@
             panel1.Controls.Add(textBox1);
             panel1.Controls.Add(button2);
             panel1.Controls.Add(label1);
-            panel1.Controls.Add(button1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
@@ -116,11 +104,11 @@
             // 
             // button2
             // 
-            button2.Location = new Point(86, 29);
+            button2.Location = new Point(5, 29);
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
             button2.TabIndex = 0;
-            button2.Text = "button2";
+            button2.Text = "Start";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
@@ -131,7 +119,7 @@
             tabPage2.Padding = new Padding(3);
             tabPage2.Size = new Size(792, 379);
             tabPage2.TabIndex = 1;
-            tabPage2.Text = "tabPage2";
+            tabPage2.Text = "spare";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // Form1
@@ -141,7 +129,7 @@
             ClientSize = new Size(800, 407);
             Controls.Add(tabControl1);
             Name = "Form1";
-            Text = "Form1";
+            Text = "xyScraper";
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
@@ -153,7 +141,6 @@
         #endregion
 
         private TextBox textBox1;
-        private Button button1;
         private Label label1;
         private TextBox textBox2;
         private TabControl tabControl1;

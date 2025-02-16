@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using xy.scraper.page;
 using xy.scraper.page.parserConfig;
+using xySoft.log;
 
 namespace TestBench
 {
@@ -20,37 +21,23 @@ namespace TestBench
             };
         }
 
-        private async void button1_Click(object sender, EventArgs e)
-        {
-            this.ControlBox = false;
-            button1.Enabled = false;
-            label1.Text = "downloading ...";
-            await new startScraper().scrape(
-                textBox1.Text,
-                new TestParser(),
-                progress);
-            this.ControlBox = true;
-            button1.Enabled = true;
-            label1.Text = "downloaded";
-        }
-
         List<string> messageBuffer = new List<string>();
         private void showMsg(string msg)
         {
             if (textBox2.InvokeRequired)
             {
                 textBox2.Invoke(() =>
-                {  //BeginInvoke debug:看是否能解决长时大量任务下的失去响应问题
+                {
                     showMsg(msg);
                 }
                 );
             }
             else
             {
-                messageBuffer.Add(msg);
+                messageBuffer.Insert(0, msg);
                 if(messageBuffer.Count > 100)
                 {
-                    messageBuffer.RemoveAt(0);
+                    messageBuffer.RemoveAt(messageBuffer.Count -1);
                 }
                 textBox2.Text = string.Join("", messageBuffer);
             }
@@ -66,12 +53,21 @@ namespace TestBench
             this.ControlBox = false;
             button2.Enabled = false;
             label1.Text = "downloading ...";
+            XyLog.log("start download");
 
-            await new startScraper().scrape(
+            try
+            {
+                await new startScraper().scrape(
                 textBox1.Text,
                 new ParserByConfig(ips),
                 progress);
+            }
+            catch (Exception error)
+            {
+                XyLog.log(error);
+            }
 
+            XyLog.log("download end");
             this.ControlBox = true;
             button2.Enabled = true;
             label1.Text = "downloaded";
