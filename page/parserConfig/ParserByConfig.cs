@@ -80,15 +80,10 @@ namespace xy.scraper.page.parserConfig
             return retDic;
         }
 
-        public string GetEncoding()
-        {
-            return _parserConfig.GetEncoding();
-        }
-
-        public Dictionary<string, (Type, Object?)> getOtherPageDict(string htmlString)
+        public List<(string, (Type, Object?))> getOtherPageDict(string htmlString)
         {
             List<(List<(string, string)>, List<string>, string, string)> NextCfg = _parserConfig.getNextCfg();
-            Dictionary<string, (Type, Object?)> retDic = new Dictionary<string, (Type, Object?)>();
+            List<(string, (Type, Object?))> retList = new List<(string, (Type, Object?))>();
 
 
             foreach ((List<(string, string)>, List<string>, string, string) nCfg in NextCfg)
@@ -122,11 +117,16 @@ namespace xy.scraper.page.parserConfig
                     //add "https://" and domain name
                     UrlStr = nCfg.Item3 + UrlStr;
 
-                    retDic.Add(UrlStr, (typeof(ParserByConfig), ParserJosnConfig.getParserConfig(nCfg.Item4)));
+                    retList.Add((UrlStr, (typeof(ParserByConfig), ParserJosnConfig.getParserConfig(nCfg.Item4))));
                 }
             }
 
-            return retDic;
+            return retList;
+        }
+
+        public string GetEncoding()
+        {
+            return _parserConfig.GetEncoding();
         }
     }
 }

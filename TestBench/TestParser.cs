@@ -56,9 +56,9 @@ namespace TestBench
             return "GB18030";
         }
 
-        public Dictionary<string, (Type, Object?)> getOtherPageDict(string htmlString)
+        public List<(string, (Type, Object?))> getOtherPageDict(string htmlString)
         {
-            return new Dictionary<string, (Type, Object?)>();
+            return new List<(string, (Type, Object?))>();
         }
     }
 }

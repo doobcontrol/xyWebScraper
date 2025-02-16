@@ -18,34 +18,52 @@ namespace xy.scraper.page
             pageScraper Scraper = new pageScraper(htmlParser);
 
             List<string> handledUrls = new List<string>();
-            Dictionary<string, (Type, Object?)> toBeHandledDic 
+            List<(string, (Type, Object?))> toBeHandledList 
                 = await Scraper.download(url, progress, savePath);
 
-            while (toBeHandledDic.Count !=0)
+            while (toBeHandledList.Count !=0)
             {
-                string returnUrl = toBeHandledDic.Keys.ElementAt(0);
+                (string, (Type, Object ?)) toBeHandled = toBeHandledList[0];
+                string toBeHandledUrl = toBeHandledList[0].Item1;
 
                 Scraper = new pageScraper(
                     (IHtmlParser)Activator.CreateInstance(
-                            toBeHandledDic[returnUrl].Item1,
-                            new object[] { toBeHandledDic[returnUrl].Item2 }
+                            toBeHandled.Item2.Item1,
+                            new object[] { toBeHandled.Item2.Item2 }
                         )
                     );
 
-                Dictionary<string, (Type, Object?)> moreDic 
-                    = await Scraper.download(returnUrl, progress, savePath);
-                
-                foreach (string key in moreDic.Keys)
+                List<(string, (Type, Object?))> moreList
+                    = await Scraper.download(toBeHandledUrl, progress, savePath);
+
+                List<(string, (Type, Object?))> tempList = new List<(string, (Type, object?))>();
+                foreach ((string, (Type, Object?)) moretask in moreList)
                 {
-                    if (!toBeHandledDic.ContainsKey(key) && !handledUrls.Contains(key))
+                    if (!handledUrls.Contains(moretask.Item1))
                     {
-                        toBeHandledDic.Add(key, moreDic[key]);
+                        bool hasDuplication = false;
+                        //!toBeHandledDic.ContainsKey(key) && 
+                        foreach ((string, (Type, Object?)) handled in toBeHandledList)
+                        {
+                            if (handled.Item1 == moretask.Item1)
+                            {
+                                //if the url is already in the toBeHandledList
+                                //set the hasDuplication flag, then break it
+                                hasDuplication = true;
+                                break;
+                            }
+                        }
+                        if (!hasDuplication)
+                        {
+                            tempList.Add(moretask);
+                        }
                     }
                 }
+                toBeHandledList.InsertRange(0, tempList);
 
                 //remove the first element, and save it for duplication handle
-                toBeHandledDic.Remove(returnUrl);
-                handledUrls.Add(returnUrl);
+                toBeHandledList.Remove(toBeHandled);
+                handledUrls.Add(toBeHandledUrl);
             }
         }
     }
