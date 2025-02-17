@@ -61,6 +61,11 @@ namespace xy.scraper.page
                         //action, and that action failed.
                         progress.Report("Failed: " + downloadDict[dUrl]);
                     }
+                    else
+                    {
+                        progress.Report(
+                            "Failed: " + downloadDict[dUrl] + "\r\n" + e.Message);
+                    }
                 }
             }
 
