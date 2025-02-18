@@ -46,7 +46,8 @@ namespace xy.scraper.page
                 {
                     //save the downloadDict to a file
                     saveBreakpoint(e, toBeHandledList);
-                    token.ThrowIfCancellationRequested();
+                    //token.ThrowIfCancellationRequested();
+                    throw e;
                 }
 
                 List<(string, (Type, Object?))> tempList = new List<(string, (Type, object?))>();
@@ -72,8 +73,7 @@ namespace xy.scraper.page
 
                 //remove the first element, and save it for duplication handle
                 toBeHandledList.Remove(toBeHandled);
-                progress.Report("task statistics:" + "\r\n"
-                        + "    to be done: " + toBeHandledList.Count + "\r\n"
+                progress.Report("to be done: " + toBeHandledList.Count + "\r\n"
                     );
             }
 
@@ -113,6 +113,11 @@ namespace xy.scraper.page
             {
                 downloadDict[kvp.Key] = kvp.Value.GetValue<string>();
             }
+            progress.Report("start resume break point ...\r\n");
+            progress.Report("to be download break point files: " + downloadDict.Count);
+            await new pageScraper(null) // download function do not need a parser
+                .download(downloadDict, token, progress, _savePath);
+            progress.Report("break point files done\r\n");
 
             List<(string, (Type, Object?))> toBeHandledList
                 = new List<(string, (Type, object?))>();
@@ -130,6 +135,9 @@ namespace xy.scraper.page
                 );
                 downloadDict[kvp.Key] = kvp.Value.GetValue<string>();
             }
+
+            progress.Report("to be download break point tasks: " 
+                + toBeHandledList.Count);
 
             await doScrapeTask(
                 toBeHandledList, 
