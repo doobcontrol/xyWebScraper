@@ -10,6 +10,10 @@ namespace xy.scraper.page.parserConfig
     public class ParserByConfig : IHtmlParser
     {
         private IParserConfig _parserConfig;
+        public IParserConfig GetParserConfig()
+        {
+            return _parserConfig;
+        }
         public ParserByConfig(IParserConfig parserConfig)
         {
             _parserConfig = parserConfig;

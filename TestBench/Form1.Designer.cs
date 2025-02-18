@@ -34,11 +34,12 @@
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             panel1 = new Panel();
-            button2 = new Button();
-            tabPage2 = new TabPage();
             panel2 = new Panel();
             panel3 = new Panel();
             button1 = new Button();
+            button2 = new Button();
+            tabPage2 = new TabPage();
+            button3 = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             panel1.SuspendLayout();
@@ -57,7 +58,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(98, 11);
+            label1.Location = new Point(201, 11);
             label1.Name = "label1";
             label1.Size = new Size(38, 15);
             label1.TabIndex = 2;
@@ -107,28 +108,9 @@
             panel1.Size = new Size(786, 58);
             panel1.TabIndex = 4;
             // 
-            // button2
-            // 
-            button2.Location = new Point(17, 7);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 0;
-            button2.Text = "Start";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
-            // 
-            // tabPage2
-            // 
-            tabPage2.Location = new Point(4, 24);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(792, 379);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "spare";
-            tabPage2.UseVisualStyleBackColor = true;
-            // 
             // panel2
             // 
+            panel2.Controls.Add(button3);
             panel2.Controls.Add(panel3);
             panel2.Controls.Add(button2);
             panel2.Controls.Add(label1);
@@ -157,6 +139,37 @@
             button1.UseVisualStyleBackColor = true;
             button1.Visible = false;
             button1.Click += button1_Click;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(17, 7);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 23);
+            button2.TabIndex = 0;
+            button2.Text = "Start";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(792, 379);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "spare";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(98, 6);
+            button3.Name = "button3";
+            button3.Size = new Size(75, 23);
+            button3.TabIndex = 4;
+            button3.Text = "resume";
+            button3.UseVisualStyleBackColor = true;
+            button3.Visible = false;
+            button3.Click += button3_Click;
             // 
             // Form1
             // 
@@ -190,5 +203,6 @@
         private Panel panel2;
         private Panel panel3;
         private Button button1;
+        private Button button3;
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 
 namespace xy.scraper.page
 {
@@ -24,17 +26,24 @@ namespace xy.scraper.page
             string htmlString = await _htmlDownloader.GetHtmlStringAsync(
                 pUrl, _htmlParser.GetEncoding(), progress);
 
-            Dictionary<string, string> downloadDict = 
+            Dictionary<string, string> downloadDict =
                 _htmlParser.getDownloadDict(htmlString);
-            progress.Report("got download infomation:" + "\r\n"
-                    + "    download items: " + downloadDict.Count
-                );
+            List<(string, (Type, Object?))> retList = _htmlParser.getOtherPageDict(htmlString);
+            progress.Report("get other page links: " + retList.Count);
+            progress.Report("got download items:" + downloadDict.Count);
+
             foreach (string dUrl in downloadDict.Keys)
             {
                 if (token.IsCancellationRequested)
                 {
-                    progress.Report("\r\ntask canceled\r\n");
-                    return new List<(string, (Type, Object?))>();
+                    progress.Report("\r\ncancel task, start save break point ... \r\n");
+
+                    //save the downloadDict to a file
+                    OperationCanceledException e = new OperationCanceledException(token);
+                    e.Data["savePath"] = savePath;
+                    e.Data["retList"] = retList; 
+                    e.Data["downloadDict"] = downloadDict;
+                    throw e;
                 }
                 try
                 {
@@ -49,11 +58,11 @@ namespace xy.scraper.page
                     await _htmlDownloader.DownloadFileAsync(
                         dUrl, fileFullName, progress
                         );
-                    progress.Report("Succeed: "+ downloadDict[dUrl]);
+                    progress.Report("Succeed: " + downloadDict[dUrl]);
                 }
                 catch (HttpRequestException e)
                 {
-                    if(((int?)e.StatusCode) == 424)
+                    if (((int?)e.StatusCode) == 424)
                     {
                         //The HTTP 424 Failed Dependency client error response status
                         //code indicates that the method could not be performed on the
@@ -69,10 +78,62 @@ namespace xy.scraper.page
                 }
             }
 
-            List<(string, (Type, Object?))> retList = _htmlParser.getOtherPageDict(htmlString);
-            progress.Report("get other page links: " + retList.Count);
-
             return retList;
+        }
+
+
+        public async Task download(
+            Dictionary<string, string> downloadDict,
+            CancellationToken token,
+            IProgress<string> progress,
+            string savePath
+            )
+        {
+            foreach (string dUrl in downloadDict.Keys)
+            {
+                if (token.IsCancellationRequested)
+                {
+                    progress.Report("\r\ncancel task, start save break point ... \r\n");
+
+                    //save the downloadDict to a file
+                    OperationCanceledException e = new OperationCanceledException(token);
+                    e.Data["savePath"] = savePath;
+                    e.Data["retList"] = null;
+                    e.Data["downloadDict"] = downloadDict;
+                    throw e;
+                }
+                try
+                {
+                    string fileFullName = savePath + downloadDict[dUrl];
+                    //create driectory
+                    string filePath = new FileInfo(fileFullName).Directory.FullName;
+                    if (!Directory.Exists(filePath))
+                    {
+                        Directory.CreateDirectory(filePath);
+                    }
+
+                    await _htmlDownloader.DownloadFileAsync(
+                        dUrl, fileFullName, progress
+                        );
+                    progress.Report("Succeed: " + downloadDict[dUrl]);
+                }
+                catch (HttpRequestException e)
+                {
+                    if (((int?)e.StatusCode) == 424)
+                    {
+                        //The HTTP 424 Failed Dependency client error response status
+                        //code indicates that the method could not be performed on the
+                        //resource because the requested action depended on another
+                        //action, and that action failed.
+                        progress.Report("Failed: " + downloadDict[dUrl]);
+                    }
+                    else
+                    {
+                        progress.Report(
+                            "Failed: " + downloadDict[dUrl] + "\r\n" + e.Message);
+                    }
+                }
+            }
         }
     }
 }

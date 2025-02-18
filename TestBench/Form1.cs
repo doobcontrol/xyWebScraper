@@ -20,6 +20,15 @@ namespace TestBench
             {
                 showMsg(data + "\r\n");
             };
+
+            if (File.Exists(startScraper._breakPointSavePath))
+            {
+                button3.Visible = true;
+            }
+
+            string jFile = @"textConfig.cfg"; //test: textConfig.cfg
+            string json = File.ReadAllText(jFile);
+            ParserJosnConfig.setConfigs(json);
         }
 
         List<string> messageBuffer = new List<string>();
@@ -48,24 +57,58 @@ namespace TestBench
 
         private async void button2_Click(object sender, EventArgs e)
         {
-            string jFile = @"textConfig.cfg"; //test: textConfig.cfg
-            string json = File.ReadAllText(jFile);
-            ParserJosnConfig.setConfigs(json);
             IParserConfig ips = ParserJosnConfig.getParserConfig("meitulu.me.guochan");
 
             this.ControlBox = false;
             button2.Enabled = false;
+            button3.Visible = false;
             button1.Visible = true;
             label1.Text = "downloading ...";
             XyLog.log("start download");
 
             try
             {
-                await new startScraper().scrape(
+                await new startScraper().newScrape(
                 textBox1.Text,
                 new ParserByConfig(ips),
                 cts.Token,
                 progress);
+            }
+            catch (OperationCanceledException error)
+            {
+                XyLog.log("task canceled, break point has saved");
+                showMsg("\r\ntask canceled, break point has saved \r\n\r\n");
+            }
+            catch (Exception error)
+            {
+                XyLog.log(error);
+            }
+
+            XyLog.log("download end");
+            this.ControlBox = true;
+            button2.Enabled = true;
+            button1.Visible = false;
+            label1.Text = "downloaded";
+        }
+
+        private async void button3_Click(object sender, EventArgs e)
+        {
+            this.ControlBox = false;
+            button2.Enabled = false;
+            button3.Visible = false;
+            button1.Visible = true;
+            label1.Text = "downloading ...";
+            XyLog.log("start download");
+
+            try
+            {
+                await new startScraper().resumeScrape(
+                cts.Token,
+                progress);
+            }
+            catch (OperationCanceledException error)
+            {
+                XyLog.log("task canceled, break point has saved");
             }
             catch (Exception error)
             {
