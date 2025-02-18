@@ -178,6 +178,10 @@ namespace xy.scraper.page
                 {
                     toBeHandledList = new List<(string, (Type, Object?))>();
                 }
+                if (toBeHandledList.Count != 0)
+                {
+                    toBeHandledList.RemoveAt(0);
+                }
                 toBeHandledList.InsertRange(0, retList);
             }
 
