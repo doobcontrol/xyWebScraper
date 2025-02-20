@@ -1,5 +1,7 @@
 using System;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using xy.scraper.page;
 using xy.scraper.page.parserConfig;
 using xySoft.log;
@@ -127,6 +129,18 @@ namespace TestBench
             showMsg("\r\nstart cancelling download task ... \r\n\r\n");
             cts.Cancel();
             button1.Visible = false;
+        }
+
+        private void btnSaveConfig_Click(object sender, EventArgs e)
+        {
+            string jsonString = JsonSerializer.Serialize(scraperConfig1.JsonObj);
+            File.WriteAllText("test.cfg", jsonString);
+        }
+
+        private void btnLoadConfig_Click(object sender, EventArgs e)
+        {
+            string json = File.ReadAllText(@"test.cfg");
+            scraperConfig1.JsonObj= JsonSerializer.Deserialize<JsonArray>(json);
         }
     }
 }

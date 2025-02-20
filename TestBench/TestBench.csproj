@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\configControl\configControl.csproj" />
     <ProjectReference Include="..\page\page.csproj" />
   </ItemGroup>
 
