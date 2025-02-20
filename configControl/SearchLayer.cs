@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.Json.Nodes;
+using xy.scraper.page.parserConfig;
 
 namespace xy.scraper.configControl
 {
@@ -53,15 +54,15 @@ namespace xy.scraper.configControl
             get
             {
                 JsonObject json = new JsonObject();
-                json["start"] = Start;
-                json["end"] = End;
+                json[JCfgName.start] = Start;
+                json[JCfgName.end] = End;
                 return json;
             }
 
             set
             {
-                Start = value["start"].GetValue<String>();
-                End = value["end"].GetValue<String>();
+                Start = value[JCfgName.start].GetValue<String>();
+                End = value[JCfgName.end].GetValue<String>();
             }
         }
 

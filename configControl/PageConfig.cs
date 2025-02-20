@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.Json.Nodes;
+using xy.scraper.page.parserConfig;
 
 namespace xy.scraper.configControl
 {
@@ -129,13 +130,13 @@ namespace xy.scraper.configControl
             {
                 JsonObject json = new JsonObject();
 
-                json["cfgig"] = PageID;
-                json["encoding"] = txtCoding.Text;
+                json[JCfgName.cfgid] = PageID;
+                json[JCfgName.encoding] = txtCoding.Text;
 
                 if (pathsCb.Checked)
                 {
                     JsonArray paths = new JsonArray();
-                    json["paths"] = paths;
+                    json[JCfgName.paths] = paths;
                     foreach (TabPage tp in tcPath.Controls)
                     {
                         SearchConfig sc = (SearchConfig)tp.Controls[0];
@@ -146,7 +147,7 @@ namespace xy.scraper.configControl
                 if (filesCb.Checked)
                 {
                     JsonArray files = new JsonArray();
-                    json["files"] = files;
+                    json[JCfgName.files] = files;
                     foreach (TabPage tp in tcFile.Controls)
                     {
                         SearchConfig sc = (SearchConfig)tp.Controls[0];
@@ -157,14 +158,14 @@ namespace xy.scraper.configControl
                 if (nextsCb.Checked)
                 {
                     JsonArray nexts = new JsonArray();
-                    json["nexts"] = nexts;
+                    json[JCfgName.nexts] = nexts;
                     foreach (TabPage tp in tcNext.Controls)
                     {
                         SearchConfig sc = (SearchConfig)tp.Controls[0];
 
                         JsonObject nextObj = new JsonObject();
-                        nextObj["nextcfgid"] = ((TextBox)tp.Controls[1].Controls[1]).Text;
-                        nextObj["searchs"] = sc.JsonObj;
+                        nextObj[JCfgName.cfgid] = ((TextBox)tp.Controls[1].Controls[1]).Text;
+                        nextObj[JCfgName.searchs] = sc.JsonObj;
 
                         nexts.Add(nextObj);
                     }
@@ -176,14 +177,14 @@ namespace xy.scraper.configControl
             set
             {
                 PageID
-                    = value["cfgig"].GetValue<String>();
+                    = value[JCfgName.cfgid].GetValue<String>();
                 txtCoding.Text
-                    = value["encoding"].GetValue<String>();
+                    = value[JCfgName.encoding].GetValue<String>();
 
-                if (value.ContainsKey("paths"))
+                if (value.ContainsKey(JCfgName.paths))
                 {
                     JsonArray paths
-                        = value["paths"].AsArray();
+                        = value[JCfgName.paths].AsArray();
                     foreach (JsonObject item in paths)
                     {
                         SearchConfig sc;
@@ -215,10 +216,10 @@ namespace xy.scraper.configControl
                     pathsCb.Checked = false;
                 }
 
-                if (value.ContainsKey("files"))
+                if (value.ContainsKey(JCfgName.files))
                 {
                     JsonArray files
-                        = value["files"].AsArray();
+                        = value[JCfgName.files].AsArray();
                     foreach (JsonObject item in files)
                     {
                         SearchConfig sc;
@@ -250,10 +251,10 @@ namespace xy.scraper.configControl
                     filesCb.Checked = false;
                 }
 
-                if (value.ContainsKey("nexts"))
+                if (value.ContainsKey(JCfgName.nexts))
                 {
                     JsonArray nexts
-                    = value["nexts"].AsArray();
+                    = value[JCfgName.nexts].AsArray();
                     foreach (JsonObject item in nexts)
                     {
                         SearchConfig sc = new SearchConfig();
@@ -278,10 +279,10 @@ namespace xy.scraper.configControl
                             tp.Controls.Add(sc);
                             addNextTargetTextBox(tp);
                         }
-                        sc.JsonObj = item["searchs"].AsObject();
+                        sc.JsonObj = item[JCfgName.searchs].AsObject();
 
                         ((TextBox)tp.Controls[1].Controls[1]).Text
-                            = item["nextcfgid"].GetValue<String>();
+                            = item[JCfgName.cfgid].GetValue<String>();
                     }
                     nextsCb.Checked = true;
                 }

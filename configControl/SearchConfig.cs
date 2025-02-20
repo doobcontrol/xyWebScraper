@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.Json.Nodes;
+using xy.scraper.page.parserConfig;
 
 namespace xy.scraper.configControl
 {
@@ -78,23 +79,23 @@ namespace xy.scraper.configControl
             {
                 JsonObject json = new JsonObject();
                 JsonArray searchLayers = new JsonArray();
-                json["search"] = searchLayers;
+                json[JCfgName.search] = searchLayers;
                 foreach (SearchLayer sl in panel1.Controls)
                 {
                     searchLayers.Add(sl.JsonObj);
                 }
 
                 JsonArray replaces = new JsonArray();
-                json["replaces"] = replaces;
+                json[JCfgName.replaces] = replaces;
                 foreach (string item in lbReplaceList.Items)
                 {
                     JsonValue replace = JsonValue.Create(item);
                     replaces.Add(replace);
                 }
 
-                json["AddBefore"] = txtAddBefore.Text;
-                json["AddAfter"] = txtAddAfter.Text;
-                json["SearchList"] = cbSearchList.Checked;
+                json[JCfgName.AddBefore] = txtAddBefore.Text;
+                json[JCfgName.AddAfter] = txtAddAfter.Text;
+                json[JCfgName.SearchList] = cbSearchList.Checked;
 
                 return json;
             }
@@ -102,14 +103,14 @@ namespace xy.scraper.configControl
             set
             {
                 txtAddBefore.Text 
-                    = value["AddBefore"].GetValue<String>();
+                    = value[JCfgName.AddBefore].GetValue<String>();
                 txtAddAfter.Text
-                    = value["AddAfter"].GetValue<String>();
+                    = value[JCfgName.AddAfter].GetValue<String>();
                 cbSearchList.Checked
-                    = value["SearchList"].GetValue<bool>();
+                    = value[JCfgName.SearchList].GetValue<bool>();
 
                 JsonArray searchLayers 
-                    = value["search"].AsArray();
+                    = value[JCfgName.search].AsArray();
                 foreach (JsonObject item in searchLayers)
                 {
                     SearchLayer sl;
@@ -128,7 +129,7 @@ namespace xy.scraper.configControl
                 }
 
                 JsonArray replaces
-                    = value["replaces"].AsArray();
+                    = value[JCfgName.replaces].AsArray();
                 foreach (JsonValue item in replaces)
                 {
                     lbReplaceList.Items
