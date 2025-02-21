@@ -37,7 +37,7 @@ namespace xy.scraper.page
                 }
                 catch (HttpRequestException e)
                 {
-                    progress.Report("JsonException: " + e.Message);
+                    progress.Report("HttpRequestException: " + e.Message);
 
                     if (tryCount < 5)
                     {
