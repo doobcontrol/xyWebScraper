@@ -26,6 +26,30 @@ namespace xy.scraper.page
             progress.Report("get task html: " + pUrl);
             string htmlString = await _htmlDownloader.GetHtmlStringAsync(
                 pUrl, _htmlParser.GetEncoding(), progress);
+            int tryCount = 0;
+            while (true)
+            {
+                try
+                {
+                    htmlString = await _htmlDownloader.GetHtmlStringAsync(
+                    pUrl, _htmlParser.GetEncoding(), progress);
+                    break;
+                }
+                catch (HttpRequestException e)
+                {
+                    progress.Report("JsonException: " + e.Message);
+
+                    if (tryCount < 5)
+                    {
+                        tryCount++;
+                        Thread.Sleep(5000);
+                    }
+                    else
+                    {
+                        return new List<(string, (Type, Object?))>();
+                    }
+                }
+            }
 
             Dictionary<string, string> downloadDict =
                 _htmlParser.getDownloadDict(htmlString);

@@ -73,10 +73,8 @@ namespace xy.scraper.page
 
                 //remove the first element, and save it for duplication handle
                 toBeHandledList.Remove(toBeHandled);
-                progress.Report("to be done: " + toBeHandledList.Count + "\r\n"
-                    );
+                progress.Report("to be done: " + toBeHandledList.Count + "\r\n");
             }
-
         }
 
         public startScraper(string savePath = "download")
