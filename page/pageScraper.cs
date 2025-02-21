@@ -24,8 +24,7 @@ namespace xy.scraper.page
             )
         {
             progress.Report("get task html: " + pUrl);
-            string htmlString = await _htmlDownloader.GetHtmlStringAsync(
-                pUrl, _htmlParser.GetEncoding(), progress);
+            string htmlString;
             int tryCount = 0;
             while (true)
             {
@@ -42,10 +41,12 @@ namespace xy.scraper.page
                     if (tryCount < 5)
                     {
                         tryCount++;
-                        Thread.Sleep(5000);
+                        progress.Report("Retry: " + tryCount);
+                        await Task.Delay(1000);
                     }
                     else
                     {
+                        progress.Report("Tried many times and gave up");
                         return new List<(string, (Type, Object?))>();
                     }
                 }
@@ -66,15 +67,6 @@ namespace xy.scraper.page
                 //save the retList to a file
                 e.Data["retList"] = retList;
                 throw e;
-                //if (token.IsCancellationRequested)
-                //{
-                    //save the downloadDict to a file
-                    //OperationCanceledException ex = new OperationCanceledException(token);
-                    //ex.Data["savePath"] = e.Data["savePath"];
-                    //ex.Data["retList"] = retList;
-                    //ex.Data["downloadDict"] = e.Data["downloadDict"];
-                    //throw ex;
-                //}
             }
 
             return retList;
@@ -103,39 +95,54 @@ namespace xy.scraper.page
                 }
                 try
                 {
-                    string fileFullName = savePath + downloadDict[dUrl];
-                    //create driectory
-                    string filePath = new FileInfo(fileFullName).Directory.FullName;
-                    if (!Directory.Exists(filePath))
+                    int tryCount = 0;
+                    while (true)
                     {
-                        Directory.CreateDirectory(filePath);
-                    }
+                        try
+                        {
+                            string fileFullName = savePath + downloadDict[dUrl];
+                            //create driectory
+                            string filePath = new FileInfo(fileFullName).Directory.FullName;
+                            if (!Directory.Exists(filePath))
+                            {
+                                Directory.CreateDirectory(filePath);
+                            }
 
-                    await _htmlDownloader.DownloadFileAsync(
-                        dUrl, fileFullName, progress
-                        );
-                    progress.Report("Succeed: " + downloadDict[dUrl]);
-                }
-                catch (HttpRequestException e)
-                {
-                    if (((int?)e.StatusCode) == 424)
-                    {
-                        //The HTTP 424 Failed Dependency client error response status
-                        //code indicates that the method could not be performed on the
-                        //resource because the requested action depended on another
-                        //action, and that action failed.
-                        progress.Report("Failed: " + downloadDict[dUrl]);
-                    }
-                    else
-                    {
-                        progress.Report(
-                            "Failed: " + downloadDict[dUrl] + "\r\n" + e.Message);
+                            await _htmlDownloader.DownloadFileAsync(
+                                dUrl, fileFullName, progress
+                                );
+                            progress.Report("Succeed: " + downloadDict[dUrl]);
+                            break;
+                        }
+                        catch (HttpRequestException e)
+                        {
+                            progress.Report("HttpRequestException: " + e.Message);
+
+                            if (tryCount < 5)
+                            {
+                                tryCount++;
+                                progress.Report("Retry: " + tryCount);
+                                await Task.Delay(1000);
+                            }
+                            else
+                            {
+                                progress.Report("Tried many times and gave up");
+                                break;
+                            }
+                        }
                     }
                 }
                 catch (Exception e)
                 {
                     progress.Report(
                         "Failed: " + downloadDict[dUrl] + "\r\n" + e.Message);
+
+                    //save the downloadDict to a file
+                    OperationCanceledException oe = new OperationCanceledException(token);
+                    oe.Data["savePath"] = savePath;
+                    oe.Data["retList"] = null;
+                    oe.Data["downloadDict"] = downloadDict;
+                    throw oe;
                 }
                 finally
                 {

@@ -46,8 +46,20 @@ namespace xy.scraper.page
                 {
                     //save the downloadDict to a file
                     saveBreakpoint(e, toBeHandledList);
-                    //token.ThrowIfCancellationRequested();
                     throw e;
+                }
+                catch (Exception e)
+                {
+                    progress.Report(
+                        "Failed: " + e.Message);
+
+                    //save the downloadDict to a file
+                    OperationCanceledException oe = new OperationCanceledException(token);
+                    oe.Data["savePath"] = _savePath;
+                    oe.Data["retList"] = null;
+                    oe.Data["downloadDict"] = null;
+                    saveBreakpoint(oe, toBeHandledList);
+                    throw oe;
                 }
 
                 List<(string, (Type, Object?))> tempList = new List<(string, (Type, object?))>();
@@ -162,9 +174,12 @@ namespace xy.scraper.page
             downloadNode["savePath"] = savePath;
 
             JsonObject downloadDictNode = new JsonObject();
-            foreach (var kvp in downloadDict)
+            if (downloadDict != null)
             {
-                downloadDictNode[kvp.Key] = kvp.Value;
+                foreach (var kvp in downloadDict)
+                {
+                    downloadDictNode[kvp.Key] = kvp.Value;
+                }
             }
             downloadNode["downloadDict"] = downloadDictNode;
 
