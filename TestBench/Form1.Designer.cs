@@ -39,6 +39,12 @@
             panel3 = new Panel();
             button1 = new Button();
             button2 = new Button();
+            panel5 = new Panel();
+            panel7 = new Panel();
+            label3 = new Label();
+            panel6 = new Panel();
+            cbConfigIdList = new ComboBox();
+            label2 = new Label();
             tabPage2 = new TabPage();
             scraperConfig1 = new xy.scraper.configControl.ScraperConfig();
             panel4 = new Panel();
@@ -49,16 +55,19 @@
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
+            panel5.SuspendLayout();
+            panel7.SuspendLayout();
+            panel6.SuspendLayout();
             tabPage2.SuspendLayout();
             panel4.SuspendLayout();
             SuspendLayout();
             // 
             // textBox1
             // 
-            textBox1.Dock = DockStyle.Top;
-            textBox1.Location = new Point(0, 0);
+            textBox1.Dock = DockStyle.Fill;
+            textBox1.Location = new Point(335, 7);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(786, 23);
+            textBox1.Size = new Size(653, 23);
             textBox1.TabIndex = 0;
             // 
             // label1
@@ -73,12 +82,12 @@
             // textBox2
             // 
             textBox2.Dock = DockStyle.Fill;
-            textBox2.Location = new Point(3, 61);
+            textBox2.Location = new Point(3, 75);
             textBox2.Multiline = true;
             textBox2.Name = "textBox2";
             textBox2.ReadOnly = true;
             textBox2.ScrollBars = ScrollBars.Vertical;
-            textBox2.Size = new Size(786, 548);
+            textBox2.Size = new Size(988, 534);
             textBox2.TabIndex = 3;
             // 
             // tabControl1
@@ -89,7 +98,7 @@
             tabControl1.Location = new Point(0, 0);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(800, 640);
+            tabControl1.Size = new Size(1002, 640);
             tabControl1.TabIndex = 4;
             // 
             // tabPage1
@@ -99,7 +108,7 @@
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(792, 612);
+            tabPage1.Size = new Size(994, 612);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "scrape test";
             tabPage1.UseVisualStyleBackColor = true;
@@ -107,11 +116,11 @@
             // panel1
             // 
             panel1.Controls.Add(panel2);
-            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(panel5);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(786, 58);
+            panel1.Size = new Size(988, 72);
             panel1.TabIndex = 4;
             // 
             // panel2
@@ -121,9 +130,9 @@
             panel2.Controls.Add(button2);
             panel2.Controls.Add(label1);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(0, 23);
+            panel2.Location = new Point(0, 36);
             panel2.Name = "panel2";
-            panel2.Size = new Size(786, 35);
+            panel2.Size = new Size(988, 36);
             panel2.TabIndex = 3;
             // 
             // button3
@@ -141,9 +150,9 @@
             // 
             panel3.Controls.Add(button1);
             panel3.Dock = DockStyle.Right;
-            panel3.Location = new Point(703, 0);
+            panel3.Location = new Point(905, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(83, 35);
+            panel3.Size = new Size(83, 36);
             panel3.TabIndex = 3;
             // 
             // button1
@@ -167,6 +176,64 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // panel5
+            // 
+            panel5.Controls.Add(textBox1);
+            panel5.Controls.Add(panel7);
+            panel5.Controls.Add(panel6);
+            panel5.Dock = DockStyle.Top;
+            panel5.Location = new Point(0, 0);
+            panel5.Name = "panel5";
+            panel5.Padding = new Padding(0, 7, 0, 0);
+            panel5.Size = new Size(988, 36);
+            panel5.TabIndex = 4;
+            // 
+            // panel7
+            // 
+            panel7.Controls.Add(label3);
+            panel7.Dock = DockStyle.Left;
+            panel7.Location = new Point(295, 7);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(40, 29);
+            panel7.TabIndex = 4;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(6, 3);
+            label3.Name = "label3";
+            label3.Size = new Size(22, 15);
+            label3.TabIndex = 3;
+            label3.Text = "Url";
+            // 
+            // panel6
+            // 
+            panel6.Controls.Add(cbConfigIdList);
+            panel6.Controls.Add(label2);
+            panel6.Dock = DockStyle.Left;
+            panel6.Location = new Point(0, 7);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(295, 29);
+            panel6.TabIndex = 1;
+            // 
+            // cbConfigIdList
+            // 
+            cbConfigIdList.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbConfigIdList.FormattingEnabled = true;
+            cbConfigIdList.Location = new Point(78, 0);
+            cbConfigIdList.Name = "cbConfigIdList";
+            cbConfigIdList.Size = new Size(214, 23);
+            cbConfigIdList.TabIndex = 2;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(5, 3);
+            label2.Name = "label2";
+            label2.Size = new Size(67, 15);
+            label2.TabIndex = 2;
+            label2.Text = "PageModel";
+            // 
             // tabPage2
             // 
             tabPage2.Controls.Add(scraperConfig1);
@@ -174,9 +241,9 @@
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(792, 513);
+            tabPage2.Size = new Size(994, 612);
             tabPage2.TabIndex = 1;
-            tabPage2.Text = "spare";
+            tabPage2.Text = "Page Config";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // scraperConfig1
@@ -184,7 +251,7 @@
             scraperConfig1.Dock = DockStyle.Fill;
             scraperConfig1.Location = new Point(3, 37);
             scraperConfig1.Name = "scraperConfig1";
-            scraperConfig1.Size = new Size(786, 473);
+            scraperConfig1.Size = new Size(988, 572);
             scraperConfig1.TabIndex = 0;
             // 
             // panel4
@@ -194,14 +261,14 @@
             panel4.Dock = DockStyle.Top;
             panel4.Location = new Point(3, 3);
             panel4.Name = "panel4";
-            panel4.Size = new Size(786, 34);
+            panel4.Size = new Size(988, 34);
             panel4.TabIndex = 1;
             // 
             // btnLoadConfig
             // 
-            btnLoadConfig.Location = new Point(86, 8);
+            btnLoadConfig.Location = new Point(107, 8);
             btnLoadConfig.Name = "btnLoadConfig";
-            btnLoadConfig.Size = new Size(75, 23);
+            btnLoadConfig.Size = new Size(96, 23);
             btnLoadConfig.TabIndex = 1;
             btnLoadConfig.Text = "LoadConfig";
             btnLoadConfig.UseVisualStyleBackColor = true;
@@ -211,7 +278,7 @@
             // 
             btnSaveConfig.Location = new Point(5, 8);
             btnSaveConfig.Name = "btnSaveConfig";
-            btnSaveConfig.Size = new Size(75, 23);
+            btnSaveConfig.Size = new Size(96, 23);
             btnSaveConfig.TabIndex = 0;
             btnSaveConfig.Text = "SaveConfig";
             btnSaveConfig.UseVisualStyleBackColor = true;
@@ -221,7 +288,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 640);
+            ClientSize = new Size(1002, 640);
             Controls.Add(tabControl1);
             Name = "Form1";
             Text = "xyScraper";
@@ -229,10 +296,15 @@
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
             panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel3.ResumeLayout(false);
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
+            panel7.ResumeLayout(false);
+            panel7.PerformLayout();
+            panel6.ResumeLayout(false);
+            panel6.PerformLayout();
             tabPage2.ResumeLayout(false);
             panel4.ResumeLayout(false);
             ResumeLayout(false);
@@ -256,5 +328,11 @@
         private Panel panel4;
         private Button btnLoadConfig;
         private Button btnSaveConfig;
+        private Panel panel5;
+        private Label label3;
+        private Panel panel6;
+        private ComboBox cbConfigIdList;
+        private Label label2;
+        private Panel panel7;
     }
 }

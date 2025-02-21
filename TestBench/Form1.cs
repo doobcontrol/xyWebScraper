@@ -31,6 +31,11 @@ namespace TestBench
             string jFile = @"xyWebScraper.cfg"; //test: textConfig.cfg
             string json = File.ReadAllText(jFile);
             ParserJosnConfig.setConfigs(json);
+            cbConfigIdList.Items.AddRange(ParserJosnConfig.getConfigIdList().ToArray());
+            if(cbConfigIdList.Items.Count > 0)
+            {
+                cbConfigIdList.SelectedIndex = 0;
+            }
         }
 
         List<string> messageBuffer = new List<string>();
@@ -59,7 +64,7 @@ namespace TestBench
 
         private async void button2_Click(object sender, EventArgs e)
         {
-            IParserConfig ips = ParserJosnConfig.getParserConfig("meitulu.me.guochan");
+            IParserConfig ips = ParserJosnConfig.getParserConfig(cbConfigIdList.Text);
 
             this.ControlBox = false;
             button2.Enabled = false;

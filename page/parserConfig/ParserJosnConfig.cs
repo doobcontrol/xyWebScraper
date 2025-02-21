@@ -157,6 +157,10 @@ namespace xy.scraper.page.parserConfig
         {
             return parserConfigDic[configId];
         }
+        public static List<string> getConfigIdList()
+        {
+            return parserConfigDic.Keys.ToList();
+        }
 
 
 
