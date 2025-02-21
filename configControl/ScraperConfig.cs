@@ -18,7 +18,7 @@ namespace xy.scraper.configControl
         {
             InitializeComponent();
 
-            tabControl1.DrawItem 
+            tabControl1.DrawItem
                 += new DrawItemEventHandler(tabControl_DrawVerticalItem);
 
             defaultPageConfig.PageID = "pageModel1";
@@ -38,7 +38,7 @@ namespace xy.scraper.configControl
 
         private void tbDelPageConfig_Click(object sender, EventArgs e)
         {
-            if(tabControl1.SelectedIndex !=0 )
+            if (tabControl1.SelectedIndex != 0)
             {
                 int index = tabControl1.SelectedIndex;
                 TabPage tabPage = tabControl1.TabPages[index];
@@ -83,6 +83,20 @@ namespace xy.scraper.configControl
             _stringFlags.Alignment = StringAlignment.Center;
             _stringFlags.LineAlignment = StringAlignment.Center;
             g.DrawString(_tabPage.Text, _tabFont, _textBrush, _tabBounds, new StringFormat(_stringFlags));
+        }
+
+        private void tbCopyPageConfig_Click(object sender, EventArgs e)
+        {
+            if(tabControl1.SelectedIndex != 0)
+            {
+                PageConfig pc = new PageConfig();
+                pc.Dock = DockStyle.Fill;
+                pc.JsonObj = ((PageConfig)tabControl1.SelectedTab.Controls[0]).JsonObj;
+                TabPage tp = new TabPage();
+                tp.Text = pc.PageID;
+                tp.Controls.Add(pc);
+                tabControl1.TabPages.Add(tp);
+            }            
         }
 
         public JsonArray JsonObj
