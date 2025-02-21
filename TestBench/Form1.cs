@@ -28,7 +28,7 @@ namespace TestBench
                 button3.Visible = true;
             }
 
-            string jFile = @"textConfig.cfg"; //test: textConfig.cfg
+            string jFile = @"xyWebScraper.cfg"; //test: textConfig.cfg
             string json = File.ReadAllText(jFile);
             ParserJosnConfig.setConfigs(json);
         }
@@ -136,12 +136,12 @@ namespace TestBench
         private void btnSaveConfig_Click(object sender, EventArgs e)
         {
             string jsonString = JsonSerializer.Serialize(scraperConfig1.JsonObj);
-            File.WriteAllText("test.cfg", jsonString);
+            File.WriteAllText("xyWebScraper.cfg", jsonString);
         }
 
         private void btnLoadConfig_Click(object sender, EventArgs e)
         {
-            string json = File.ReadAllText(@"test.cfg");
+            string json = File.ReadAllText(@"xyWebScraper.cfg");
             scraperConfig1.JsonObj= JsonSerializer.Deserialize<JsonArray>(json);
         }
     }

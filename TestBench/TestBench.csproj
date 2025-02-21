@@ -17,10 +17,4 @@
     <ProjectReference Include="..\page\page.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="textConfig.cfg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
