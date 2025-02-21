@@ -11,7 +11,7 @@ namespace TestBench
     public partial class Form1 : Form
     {
         Progress<string> progress = new Progress<string>();
-        CancellationTokenSource cts = new CancellationTokenSource();
+        CancellationTokenSource cts;
 
         public Form1()
         {
@@ -70,6 +70,7 @@ namespace TestBench
 
             try
             {
+                cts = new CancellationTokenSource();
                 await new startScraper().newScrape(
                 textBox1.Text,
                 new ParserByConfig(ips),
@@ -104,6 +105,7 @@ namespace TestBench
 
             try
             {
+                cts = new CancellationTokenSource();
                 await new startScraper().resumeScrape(
                 cts.Token,
                 progress);
