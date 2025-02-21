@@ -82,7 +82,7 @@ namespace xy.scraper.configControl
                 json[JCfgName.search] = searchLayers;
                 foreach (SearchLayer sl in panel1.Controls)
                 {
-                    searchLayers.Add(sl.JsonObj);
+                    searchLayers.Insert(0, sl.JsonObj); //why use Add lead to reverse order?
                 }
 
                 JsonArray replaces = new JsonArray();
@@ -121,8 +121,9 @@ namespace xy.scraper.configControl
                     else
                     {
                         sl = new SearchLayer();
-                        panel1.Controls.Add(sl);
                         sl.Enter += searchLayer_Enter;
+                        panel1.Controls.Add(sl);
+                        sl.BringToFront();
                         sl.Dock = DockStyle.Top;
                     }
                     sl.JsonObj = item;
