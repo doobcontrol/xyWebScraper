@@ -48,7 +48,6 @@
             tabPage2 = new TabPage();
             scraperConfig1 = new xy.scraper.configControl.ScraperConfig();
             panel4 = new Panel();
-            btnLoadConfig = new Button();
             btnSaveConfig = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -256,23 +255,12 @@
             // 
             // panel4
             // 
-            panel4.Controls.Add(btnLoadConfig);
             panel4.Controls.Add(btnSaveConfig);
             panel4.Dock = DockStyle.Top;
             panel4.Location = new Point(3, 3);
             panel4.Name = "panel4";
             panel4.Size = new Size(988, 34);
             panel4.TabIndex = 1;
-            // 
-            // btnLoadConfig
-            // 
-            btnLoadConfig.Location = new Point(107, 8);
-            btnLoadConfig.Name = "btnLoadConfig";
-            btnLoadConfig.Size = new Size(96, 23);
-            btnLoadConfig.TabIndex = 1;
-            btnLoadConfig.Text = "LoadConfig";
-            btnLoadConfig.UseVisualStyleBackColor = true;
-            btnLoadConfig.Click += btnLoadConfig_Click;
             // 
             // btnSaveConfig
             // 
@@ -326,7 +314,6 @@
         private Button button3;
         private xy.scraper.configControl.ScraperConfig scraperConfig1;
         private Panel panel4;
-        private Button btnLoadConfig;
         private Button btnSaveConfig;
         private Panel panel5;
         private Label label3;

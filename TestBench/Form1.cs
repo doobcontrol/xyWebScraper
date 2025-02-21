@@ -28,11 +28,20 @@ namespace TestBench
                 button3.Visible = true;
             }
 
+            setPageModelConfigs();
+
+            string json = File.ReadAllText(@"xyWebScraper.cfg");
+            scraperConfig1.JsonObj = JsonSerializer.Deserialize<JsonArray>(json);
+        }
+
+        private void setPageModelConfigs()
+        {
             string jFile = @"xyWebScraper.cfg"; //test: textConfig.cfg
             string json = File.ReadAllText(jFile);
             ParserJosnConfig.setConfigs(json);
+            cbConfigIdList.Items.Clear();
             cbConfigIdList.Items.AddRange(ParserJosnConfig.getConfigIdList().ToArray());
-            if(cbConfigIdList.Items.Count > 0)
+            if (cbConfigIdList.Items.Count > 0)
             {
                 cbConfigIdList.SelectedIndex = 0;
             }
@@ -141,13 +150,8 @@ namespace TestBench
         private void btnSaveConfig_Click(object sender, EventArgs e)
         {
             string jsonString = JsonSerializer.Serialize(scraperConfig1.JsonObj);
-            File.WriteAllText("xyWebScraper.cfg", jsonString);
-        }
-
-        private void btnLoadConfig_Click(object sender, EventArgs e)
-        {
-            string json = File.ReadAllText(@"xyWebScraper.cfg");
-            scraperConfig1.JsonObj= JsonSerializer.Deserialize<JsonArray>(json);
+            File.WriteAllText("xyWebScraper.cfg", jsonString); 
+            setPageModelConfigs();
         }
     }
 }

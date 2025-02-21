@@ -142,10 +142,11 @@ namespace xy.scraper.page.parserConfig
 
         #region static members
 
-        private static Dictionary<string, ParserJosnConfig> parserConfigDic = new Dictionary<string, ParserJosnConfig>();
+        private static Dictionary<string, ParserJosnConfig> parserConfigDic;
         public static void setConfigs(string jsonStr)
         {
             JsonArray root = JsonSerializer.Deserialize<JsonArray>(jsonStr);
+            parserConfigDic = new Dictionary<string, ParserJosnConfig>();
 
             foreach (JsonObject configElement in root)
             {
@@ -160,70 +161,6 @@ namespace xy.scraper.page.parserConfig
         public static List<string> getConfigIdList()
         {
             return parserConfigDic.Keys.ToList();
-        }
-
-
-
-
-        //copilot created refrence code
-        public static string getJsonStr(string encoding, List<List<(string, string)>> pathCfg, List<(List<(string, string)>, List<string>, string)> fileCfg)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("{");
-            sb.Append("\"encoding\":\"" + encoding + "\",");
-            sb.Append("\"paths\":[");
-            foreach (List<(string, string)> path in pathCfg)
-            {
-                sb.Append("{");
-                sb.Append("\"search\":[");
-                foreach ((string, string) search in path)
-                {
-                    sb.Append("{");
-                    sb.Append("\"start\":\"" + search.Item1 + "\",");
-                    sb.Append("\"end\":\"" + search.Item2 + "\"");
-                    sb.Append("},");
-                }
-                sb.Remove(sb.Length - 1, 1);
-                sb.Append("},");
-            }
-            sb.Remove(sb.Length - 1, 1);
-            sb.Append("],");
-            sb.Append("\"files\":[");
-            foreach ((List<(string, string)>, List<string>, string) file in fileCfg)
-            {
-                sb.Append("{");
-                sb.Append("\"add\":\"" + file.Item3 + "\",");
-                sb.Append("\"search\":[");
-                foreach ((string, string) search in file.Item1)
-                {
-                    sb.Append("{");
-                    sb.Append("\"start\":\"" + search.Item1 + "\",");
-                    sb.Append("\"end\":\"" + search.Item2 + "\"");
-                    sb.Append("},");
-                }
-                sb.Remove(sb.Length - 1, 1);
-                sb.Append("],");
-                sb.Append("\"replaces\":[");
-                foreach (string replace in file.Item2)
-                {
-                    sb.Append("{");
-                    sb.Append("\"replace\":\"" + replace + "\"");
-                    sb.Append("},");
-                }
-                sb.Remove(sb.Length - 1, 1);
-                sb.Append("},");
-            }
-            sb.Remove(sb.Length - 1, 1);
-            sb.Append("],");
-            sb.Append("\"nexts\":[");
-            sb.Append("]");
-            sb.Append("}");
-            return sb.ToString();
-        }
-
-        public static void saveParserConfig(string jsonStr, string filePath)
-        {
-            System.IO.File.WriteAllText(filePath, jsonStr);
         }
 
         #endregion
