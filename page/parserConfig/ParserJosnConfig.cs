@@ -174,7 +174,15 @@ namespace xy.scraper.page.parserConfig
             {
                 string startStr = searchLayer[JCfgName.start].GetValue<String>();
                 string endStr = searchLayer[JCfgName.end].GetValue<String>();
-                retStr = htmlParserTool.findBetween(retStr, startStr, endStr);
+                string tempStr = htmlParserTool.findBetween(retStr, startStr, endStr);
+                if (tempStr != null)
+                {
+                    retStr = tempStr;
+                }
+                else
+                {
+                    break;
+                }
             }
 
             foreach (JsonValue replaceE in searchJson[JCfgName.replaces].AsArray())
@@ -212,7 +220,15 @@ namespace xy.scraper.page.parserConfig
                     }
                     string startStr = searchLayer[JCfgName.start].GetValue<String>();
                     string endStr = searchLayer[JCfgName.end].GetValue<String>();
-                    retStr = htmlParserTool.findBetween(retStr, startStr, endStr);
+                    string tempStr = htmlParserTool.findBetween(retStr, startStr, endStr);
+                    if (tempStr != null)
+                    {
+                        retStr = tempStr;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
                 foreach (JsonValue replaceE in searchJson[JCfgName.replaces].AsArray())
                 {

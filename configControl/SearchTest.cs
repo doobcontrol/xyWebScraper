@@ -18,6 +18,7 @@ namespace xy.scraper.configControl
         public SearchTest()
         {
             InitializeComponent();
+            tabControl1.Controls.Remove(tpTest);
         }
 
         private string html;
@@ -25,31 +26,51 @@ namespace xy.scraper.configControl
         {
             this.Enabled = false;
             HttpClientDownloader httpClientDownloader = new HttpClientDownloader();
-            html =
-                await new HttpClientDownloader().GetHtmlStringAsync(
-                    txtUrl.Text,
-                    scraperConfig.Encoding,
-                    new Progress<string>(s => { })
-                );
-            tabControl1.SelectedIndex = 1;
-            txtHtml.Text = html;
-            this.Enabled = true;
+            try
+            {
+                html =
+                    await new HttpClientDownloader().GetHtmlStringAsync(
+                        txtUrl.Text,
+                        scraperConfig.Encoding,
+                        new Progress<string>(s => { })
+                    );
+                tabControl1.SelectedIndex = 1;
+                txtHtml.Text = html;
+                tabControl1.Controls.Add(tpTest);
+            }
+            catch (Exception ex)
+            {
+                txtHtml.Text = ex.Message;
+                tabControl1.Controls.Remove(tpTest);
+            }
+            finally
+            {
+                this.Enabled = true;
+            }
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            JsonObject searchJson = scraperConfig.CurrentSearchConfig.JsonObj;
-            bool searchList = searchJson[JCfgName.SearchList].GetValue<bool>();
-            if (searchList)
+            try
             {
-                List<string> searchResult = ParserJosnConfig.searchList(html, searchJson);
-                txtShowBox.Text = string.Join("\r\n", searchResult);
-                txtShowBox.Text = searchResult.Count + " items:\r\n" + txtShowBox.Text;
+                JsonObject searchJson = scraperConfig.CurrentSearchConfig.JsonObj;
+                bool searchList = searchJson[JCfgName.SearchList].GetValue<bool>();
+                if (searchList)
+                {
+                    List<string> searchResult = ParserJosnConfig.searchList(html, searchJson);
+                    txtShowBox.Text = string.Join("\r\n", searchResult);
+                    txtShowBox.Text = "found " + searchResult.Count + " items:\r\n" + txtShowBox.Text;
+                }
+                else
+                {
+                    string searchResult = ParserJosnConfig.search(html, searchJson);
+                    txtShowBox.Text = searchResult;
+                    txtShowBox.Text = "found string:\r\n" + txtShowBox.Text;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                string searchResult = ParserJosnConfig.search(html, searchJson);
-                txtShowBox.Text = searchResult;
+                txtShowBox.Text = "search error:\r\n" + ex.Message;
             }
         }
 
