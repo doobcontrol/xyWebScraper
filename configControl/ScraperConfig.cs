@@ -23,6 +23,8 @@ namespace xy.scraper.configControl
 
             defaultPageConfig.PageID = "pageModel1";
             tabControl1.TabPages[0].Text = defaultPageConfig.PageID;
+
+            searchTest1.ScraperConfig = this;
         }
 
         private void tbAddPageConfig_Click(object sender, EventArgs e)
@@ -87,7 +89,7 @@ namespace xy.scraper.configControl
 
         private void tbCopyPageConfig_Click(object sender, EventArgs e)
         {
-            if(tabControl1.SelectedIndex != 0)
+            if (tabControl1.SelectedIndex != 0)
             {
                 PageConfig pc = new PageConfig();
                 pc.Dock = DockStyle.Fill;
@@ -96,7 +98,28 @@ namespace xy.scraper.configControl
                 tp.Text = pc.PageID;
                 tp.Controls.Add(pc);
                 tabControl1.TabPages.Add(tp);
-            }            
+            }
+        }
+
+        private void tbShowTest_Click(object sender, EventArgs e)
+        {
+            searchTest1.Visible = tbShowTest.Checked;
+        }
+
+        //for test
+        public SearchConfig CurrentSearchConfig
+        {
+            get
+            {
+                return ((PageConfig)tabControl1.SelectedTab.Controls[0]).CurrentSearchConfig;
+            }
+        }
+        public string Encoding
+        {
+            get
+            {
+                return ((PageConfig)tabControl1.SelectedTab.Controls[0]).Encoding;
+            }
         }
 
         public JsonArray JsonObj

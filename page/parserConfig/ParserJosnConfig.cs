@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -162,6 +163,71 @@ namespace xy.scraper.page.parserConfig
         {
             return parserConfigDic.Keys.ToList();
         }
+
+        #region search tools
+
+        public static string search(string searchString, JsonObject searchJson)
+        {
+            JsonArray searchLayers = searchJson[JCfgName.search].AsArray();
+            string retStr = searchString;
+            foreach (JsonObject searchLayer in searchLayers)
+            {
+                string startStr = searchLayer[JCfgName.start].GetValue<String>();
+                string endStr = searchLayer[JCfgName.end].GetValue<String>();
+                retStr = htmlParserTool.findBetween(retStr, startStr, endStr);
+            }
+
+            foreach (JsonValue replaceE in searchJson[JCfgName.replaces].AsArray())
+            {
+                retStr = retStr.Replace(replaceE.GetValue<String>(), "");
+            }
+
+            string addBefore = searchJson[JCfgName.AddBefore].GetValue<String>();
+            string addAfter = searchJson[JCfgName.AddAfter].GetValue<String>();
+            retStr = addBefore + retStr + addAfter;
+
+            return retStr;
+        }
+
+        public static List<string> searchList(string searchString, JsonObject searchJson)
+        {
+            JsonArray searchLayers = searchJson[JCfgName.search].AsArray();
+
+            string retStr = searchString;
+            List<string> retList = htmlParserTool.findAllBetween(
+                retStr,
+                searchLayers[0][JCfgName.start].GetValue<String>(),
+                searchLayers[0][JCfgName.end].GetValue<String>()
+                );
+
+            foreach(string subSeach in retList.ToList<string>())
+            {
+                int index = retList.IndexOf(subSeach);
+                retStr = subSeach;
+                foreach (JsonObject searchLayer in searchLayers)
+                {
+                    if(searchLayer == searchLayers[0])
+                    {
+                        continue;
+                    }
+                    string startStr = searchLayer[JCfgName.start].GetValue<String>();
+                    string endStr = searchLayer[JCfgName.end].GetValue<String>();
+                    retStr = htmlParserTool.findBetween(retStr, startStr, endStr);
+                }
+                foreach (JsonValue replaceE in searchJson[JCfgName.replaces].AsArray())
+                {
+                    retStr = retStr.Replace(replaceE.GetValue<String>(), "");
+                }
+                string addBefore = searchJson[JCfgName.AddBefore].GetValue<String>();
+                string addAfter = searchJson[JCfgName.AddAfter].GetValue<String>();
+                retStr = addBefore + retStr + addAfter;
+                retList[index] = retStr;
+            }
+
+            return retList;
+        }
+
+        #endregion
 
         #endregion
     }

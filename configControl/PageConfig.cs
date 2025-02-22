@@ -123,6 +123,27 @@ namespace xy.scraper.configControl
                 txtPageID.Text = value;
             }
         }
+        public string Encoding
+        {
+            get
+            {
+                return txtCoding.Text;
+            }
+            set
+            {
+                txtCoding.Text = value;
+            }
+        }
+
+        //for test
+        public SearchConfig CurrentSearchConfig
+        {
+            get
+            {
+                return (SearchConfig)((TabControl)tabControl1.SelectedTab.Controls[0])
+                    .SelectedTab.Controls[0];
+            }
+        }
 
         public JsonObject JsonObj
         {

@@ -33,9 +33,12 @@
             toolStrip1 = new ToolStrip();
             tbAddPageConfig = new ToolStripButton();
             tbDelPageConfig = new ToolStripButton();
+            tbCopyPageConfig = new ToolStripButton();
+            tbShowTest = new ToolStripButton();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
-            tbCopyPageConfig = new ToolStripButton();
+            searchTest1 = new SearchTest();
+            splitter1 = new Splitter();
             toolStrip1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -47,12 +50,12 @@
             defaultPageConfig.Location = new Point(3, 3);
             defaultPageConfig.Name = "defaultPageConfig";
             defaultPageConfig.PageID = "";
-            defaultPageConfig.Size = new Size(529, 408);
+            defaultPageConfig.Size = new Size(529, 253);
             defaultPageConfig.TabIndex = 2;
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { tbAddPageConfig, tbDelPageConfig, tbCopyPageConfig });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { tbAddPageConfig, tbDelPageConfig, tbCopyPageConfig, tbShowTest });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(693, 25);
@@ -79,6 +82,27 @@
             tbDelPageConfig.Text = "toolStripButton1";
             tbDelPageConfig.Click += tbDelPageConfig_Click;
             // 
+            // tbCopyPageConfig
+            // 
+            tbCopyPageConfig.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tbCopyPageConfig.Image = (Image)resources.GetObject("tbCopyPageConfig.Image");
+            tbCopyPageConfig.ImageTransparentColor = Color.Magenta;
+            tbCopyPageConfig.Name = "tbCopyPageConfig";
+            tbCopyPageConfig.Size = new Size(23, 22);
+            tbCopyPageConfig.Text = "toolStripButton1";
+            tbCopyPageConfig.Click += tbCopyPageConfig_Click;
+            // 
+            // tbShowTest
+            // 
+            tbShowTest.CheckOnClick = true;
+            tbShowTest.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tbShowTest.Image = (Image)resources.GetObject("tbShowTest.Image");
+            tbShowTest.ImageTransparentColor = Color.Magenta;
+            tbShowTest.Name = "tbShowTest";
+            tbShowTest.Size = new Size(23, 22);
+            tbShowTest.Text = "toolStripButton1";
+            tbShowTest.Click += tbShowTest_Click;
+            // 
             // tabControl1
             // 
             tabControl1.Alignment = TabAlignment.Left;
@@ -90,7 +114,7 @@
             tabControl1.Multiline = true;
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(693, 422);
+            tabControl1.Size = new Size(693, 267);
             tabControl1.SizeMode = TabSizeMode.Fixed;
             tabControl1.TabIndex = 4;
             // 
@@ -100,26 +124,36 @@
             tabPage1.Location = new Point(154, 4);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(535, 414);
+            tabPage1.Size = new Size(535, 259);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tbCopyPageConfig
+            // searchTest1
             // 
-            tbCopyPageConfig.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            tbCopyPageConfig.Image = (Image)resources.GetObject("tbCopyPageConfig.Image");
-            tbCopyPageConfig.ImageTransparentColor = Color.Magenta;
-            tbCopyPageConfig.Name = "tbCopyPageConfig";
-            tbCopyPageConfig.Size = new Size(23, 22);
-            tbCopyPageConfig.Text = "toolStripButton1";
-            tbCopyPageConfig.Click += tbCopyPageConfig_Click;
+            searchTest1.Dock = DockStyle.Bottom;
+            searchTest1.Location = new Point(0, 295);
+            searchTest1.Name = "searchTest1";
+            searchTest1.Size = new Size(693, 152);
+            searchTest1.TabIndex = 5;
+            searchTest1.Visible = false;
+            // 
+            // splitter1
+            // 
+            splitter1.Dock = DockStyle.Bottom;
+            splitter1.Location = new Point(0, 292);
+            splitter1.Name = "splitter1";
+            splitter1.Size = new Size(693, 3);
+            splitter1.TabIndex = 6;
+            splitter1.TabStop = false;
             // 
             // ScraperConfig
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(tabControl1);
+            Controls.Add(splitter1);
+            Controls.Add(searchTest1);
             Controls.Add(toolStrip1);
             Name = "ScraperConfig";
             Size = new Size(693, 447);
@@ -139,5 +173,8 @@
         private TabControl tabControl1;
         private TabPage tabPage1;
         private ToolStripButton tbCopyPageConfig;
+        private SearchTest searchTest1;
+        private ToolStripButton tbShowTest;
+        private Splitter splitter1;
     }
 }
