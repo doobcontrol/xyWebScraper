@@ -117,6 +117,7 @@
             txtPageID.Name = "txtPageID";
             txtPageID.Size = new Size(244, 23);
             txtPageID.TabIndex = 2;
+            txtPageID.TextChanged += txtPageID_TextChanged;
             // 
             // label1
             // 

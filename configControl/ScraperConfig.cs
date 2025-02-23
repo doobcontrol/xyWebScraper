@@ -27,15 +27,28 @@ namespace xy.scraper.configControl
             searchTest1.ScraperConfig = this;
         }
 
+        private void defaultPageConfig_PageIDChanged(object? sender, EventArgs e)
+        {
+            PageConfig? senderPageConfig = sender as PageConfig;
+            if (senderPageConfig != null)
+            {
+                TabPage? tp = senderPageConfig.Parent as TabPage;
+                if (tp != null)
+                {
+                    tp.Text = senderPageConfig.PageID;
+                }
+            }
+        }
+
         private void tbAddPageConfig_Click(object sender, EventArgs e)
         {
             PageConfig pc = new PageConfig();
+            pc.PageIDChanged += defaultPageConfig_PageIDChanged;
             pc.Dock = DockStyle.Fill;
-            pc.PageID = "pageModel" + (tabControl1.TabPages.Count + 1);
             TabPage tp = new TabPage();
-            tp.Text = pc.PageID;
             tp.Controls.Add(pc);
             tabControl1.TabPages.Add(tp);
+            pc.PageID = "pageModel" + (tabControl1.TabPages.Count + 1);
         }
 
         private void tbDelPageConfig_Click(object sender, EventArgs e)
@@ -156,8 +169,8 @@ namespace xy.scraper.configControl
                         tc.Controls.Add(tp);
                         tp.Controls.Add(pc);
                     }
+                    pc.PageIDChanged += defaultPageConfig_PageIDChanged;
                     pc.JsonObj = item;
-                    tp.Text = pc.PageID;
                 }
             }
         }

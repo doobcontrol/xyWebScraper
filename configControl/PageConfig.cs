@@ -68,14 +68,14 @@ namespace xy.scraper.configControl
         {
             TabControl tc = (TabControl)((ToolStripButton)sender).Tag;
             TabPage tp = new TabPage();
-            tp.Text = ((TabPage)tc.Controls[0]).Text 
+            tp.Text = ((TabPage)tc.Controls[0]).Text
                 + (tc.Controls.Count + 1);
             tc.Controls.Add(tp);
             SearchConfig sc = new SearchConfig();
             sc.Dock = DockStyle.Fill;
             tp.Controls.Add(sc);
 
-            if(tc == tcNext)
+            if (tc == tcNext)
             {
                 addNextTargetTextBox(tp);
             }
@@ -108,6 +108,24 @@ namespace xy.scraper.configControl
             {
                 tc.Controls.Remove(tp);
                 tp.Dispose();
+            }
+        }
+
+        private void txtPageID_TextChanged(object sender, EventArgs e)
+        {
+            onPageIDChanged?.Invoke(this, e);
+        }
+
+        private EventHandler onPageIDChanged;
+        public event EventHandler PageIDChanged
+        {
+            add
+            {
+                onPageIDChanged += value;
+            }
+            remove
+            {
+                onPageIDChanged -= value;
             }
         }
 
