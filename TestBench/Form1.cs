@@ -76,7 +76,7 @@ namespace TestBench
             IParserConfig ips = ParserJosnConfig.getParserConfig(cbConfigIdList.Text);
 
             this.ControlBox = false;
-            button2.Enabled = false;
+            button2.Visible = false;
             button3.Visible = false;
             button1.Visible = true;
             label1.Text = "downloading ...";
@@ -103,7 +103,7 @@ namespace TestBench
 
             XyLog.log("download end");
             this.ControlBox = true;
-            button2.Enabled = true;
+            button2.Visible = true;
             button1.Visible = false;
             label1.Text = "downloaded";
         }
@@ -111,7 +111,7 @@ namespace TestBench
         private async void button3_Click(object sender, EventArgs e)
         {
             this.ControlBox = false;
-            button2.Enabled = false;
+            button2.Visible = false;
             button3.Visible = false;
             button1.Visible = true;
             label1.Text = "downloading ...";
@@ -135,7 +135,7 @@ namespace TestBench
 
             XyLog.log("download end");
             this.ControlBox = true;
-            button2.Enabled = true;
+            button2.Visible = true;
             button1.Visible = false;
             label1.Text = "downloaded";
         }
