@@ -50,22 +50,26 @@ namespace TestBench
         List<string> messageBuffer = new List<string>();
         private void showMsg(string msg)
         {
+            messageBuffer.Add(msg);
+            if (messageBuffer.Count > 100)
+            {
+                messageBuffer.RemoveAt(0);
+            }
+            updateMsg(string.Join("", messageBuffer));
+        }
+        private void updateMsg(string msg)
+        {
             if (textBox2.InvokeRequired)
             {
                 textBox2.Invoke(() =>
                 {
-                    showMsg(msg);
+                    updateMsg(msg);
                 }
                 );
             }
             else
             {
-                messageBuffer.Add(msg);
-                if (messageBuffer.Count > 100)
-                {
-                    messageBuffer.RemoveAt(0);
-                }
-                textBox2.Text = string.Join("", messageBuffer);
+                textBox2.Text = msg;
                 textBox2.Select(textBox2.Text.Length, 0);
                 textBox2.ScrollToCaret();
             }
