@@ -4,133 +4,31 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace xy.scraper.page.parserConfig
 {
     public class ParserByConfig : IHtmlParser
     {
-        private IParserConfig _parserConfig;
-        public IParserConfig GetParserConfig()
-        {
-            return _parserConfig;
-        }
+        string _configId;
         public ParserByConfig(string configId)
         {
-            _parserConfig = ParserJosnConfig.getParserConfig(configId);
+            _configId = configId;
         }
 
         public Dictionary<string, string> getDownloadDict(string htmlString)
         {
-            List<List<(string, string)>> pathCfgs = _parserConfig.getPathCfg();
-
-            string path = null;
-            //get muti level path
-            foreach (List<(string, string)> pathCfg in pathCfgs)
-            {
-                string foundStr = htmlString;
-                //do muti times find
-                foreach ((string, string) sCfg in pathCfg)
-                {
-                    foundStr = htmlParserTool.findBetween(
-                        foundStr, sCfg.Item1, sCfg.Item2
-                        );
-                }
-                path += @"\" + htmlParserTool.washPathStr(foundStr);
-            }
-            path = path + @"\";
-
-            List<(List<(string, string)>, List<string>, string)> FileCfg
-                = _parserConfig.getFileCfg();
-            Dictionary<string, string> retDic = new Dictionary<string, string>();
-            foreach ((List<(string, string)>, List<string>, string) fCfg in FileCfg)
-            {
-                //get file url list(may need refind inside)
-                List<string> urlList = htmlParserTool.findAllBetween(
-                    htmlString, fCfg.Item1[0].Item1, fCfg.Item1[0].Item2
-                    );
-                foreach (string url in urlList)
-                {
-                    //refind inside every urlstring if need
-
-                    string UrlStr = url;
-                    foreach ((string, string) sCfg in fCfg.Item1)
-                    {
-                        if (fCfg.Item1.IndexOf(sCfg) == 0)
-                        {
-                            continue;
-                        }
-                        UrlStr = htmlParserTool.findBetween(
-                            UrlStr, sCfg.Item1, sCfg.Item2
-                            );
-                    }
-
-                    //handle url
-                    //Replace
-                    foreach (string rStr in fCfg.Item2)
-                    {
-                        UrlStr = UrlStr.Replace(rStr, "");
-                    }
-                    //add "https://" and domain name
-                    UrlStr = fCfg.Item3 + UrlStr;
-
-                    //find file name(must in url)
-                    string[] tArr = UrlStr.Split("/");
-                    string nameStr = path + tArr[tArr.Length - 1];//.Replace("_mthumb", "");
-
-                    retDic.Add(UrlStr, nameStr);
-                }
-            }
-
-            return retDic;
+            return ParserJosnConfig.searchDownloadDict(_configId, htmlString);
         }
 
         public List<(string, string)> getOtherPageDict(string htmlString)
         {
-            List<(List<(string, string)>, List<string>, string, string)> NextCfg = _parserConfig.getNextCfg();
-            List<(string, string)> retList = new List<(string, string)>();
-
-
-            foreach ((List<(string, string)>, List<string>, string, string) nCfg in NextCfg)
-            {
-                //get file url list(may need refind inside)
-                List<string> urlList = htmlParserTool.findAllBetween(
-                    htmlString, nCfg.Item1[0].Item1, nCfg.Item1[0].Item2
-                    );
-                foreach (string url in urlList)
-                {
-                    //refind inside every urlstring if need
-
-                    string UrlStr = url;
-                    foreach ((string, string) sCfg in nCfg.Item1)
-                    {
-                        if(nCfg.Item1.IndexOf(sCfg) == 0)
-                        {
-                            continue;
-                        }
-                        UrlStr = htmlParserTool.findBetween(
-                            UrlStr, sCfg.Item1, sCfg.Item2
-                            );
-                    }
-
-                    //handle url
-                    //Replace
-                    foreach (string rStr in nCfg.Item2)
-                    {
-                        UrlStr = UrlStr.Replace(rStr, "");
-                    }
-                    //add "https://" and domain name
-                    UrlStr = nCfg.Item3 + UrlStr;
-
-                    retList.Add((UrlStr, nCfg.Item4));
-                }
-            }
-
-            return retList;
+            return ParserJosnConfig.searchOtherPageDict(_configId, htmlString);
         }
 
         public string GetEncoding()
         {
-            return _parserConfig.GetEncoding();
+            return ParserJosnConfig.getParserConfig(_configId).Encoding;
         }
     }
 }

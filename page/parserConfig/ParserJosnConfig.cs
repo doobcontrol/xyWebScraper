@@ -10,13 +10,20 @@ using System.Threading.Tasks;
 
 namespace xy.scraper.page.parserConfig
 {
-    public class ParserJosnConfig : IParserConfig
+    public class ParserJosnConfig
     {
-        private List<List<(string, string)>> pathCfg;
-        private List<(List<(string, string)>, List<string>, string)> fileCfg;
-        List<(List<(string, string)>, List<string>, string, string)> nextCfg;
         private string encoding;
         private string configId;
+
+        private JsonArray pathsE;
+        private JsonArray filesE;
+        private JsonArray nextsE;
+
+        public JsonArray PathsE { get => pathsE;}
+        public JsonArray FilesE { get => filesE;}
+        public JsonArray NextsE { get => nextsE;}
+        public string Encoding { get => encoding;}
+        public string ConfigId { get => configId;}
 
         private ParserJosnConfig(JsonObject root)
         {
@@ -25,125 +32,23 @@ namespace xy.scraper.page.parserConfig
             encoding = root[JCfgName.encoding].GetValue<String>();
             configId = root[JCfgName.cfgid].GetValue<String>();
 
-            //get path string search configs
-            pathCfg = new List<List<(string, string)>>();
-            fileCfg = new List<(List<(string, string)>, List<string>, string)>();
-
-            JsonArray pathsE;
-            JsonArray filesE;
-
             if (root.ContainsKey(JCfgName.paths) && root.ContainsKey(JCfgName.files))
             {
                 pathsE = root[JCfgName.paths].AsArray();
-                foreach (JsonObject pathE in pathsE)
-                {
-                    List<(string, string)> search = new List<(string, string)>();
-
-                    foreach (JsonObject searchE in pathE[JCfgName.search].AsArray())
-                    {
-                        search.Add(
-                                (
-                                searchE[JCfgName.start].GetValue<String>(),
-                                searchE[JCfgName.end].GetValue<String>()
-                                )
-                            );
-                    }
-                    pathCfg.Add(search);
-                }
 
                 filesE = root[JCfgName.files].AsArray();
-                //get file download url string search configs
-                foreach (JsonObject fileE in filesE)
-                {
-
-                    List<(string, string)> fSearchs = new List<(string, string)>();
-                    List<string> fReplaces = new List<string>();
-                    string urlAddStr = null;
-
-                    urlAddStr = fileE[JCfgName.AddBefore].GetValue<String>();
-                    
-                    foreach (JsonObject searchE in fileE[JCfgName.search].AsArray())
-                    {
-                        fSearchs.Add(
-                                (
-                                searchE[JCfgName.start].GetValue<String>(),
-                                searchE[JCfgName.end].GetValue<String>()
-                                )
-                            );
-                    }
-                    JsonArray replacesE = fileE[JCfgName.replaces].AsArray();
-                    foreach (JsonValue replaceE in replacesE)
-                    {
-                        fReplaces.Add(replaceE.GetValue<String>());
-                    }
-
-                    fileCfg.Add((fSearchs, fReplaces, urlAddStr));
-                }
             }
 
-            //get next page url string search configs
-            JsonArray nextsE;
-            nextCfg = new List<(List<(string, string)>, List<string>, string, string)>();
             if (root.ContainsKey(JCfgName.nexts))
             {
                 nextsE = root[JCfgName.nexts].AsArray();
-                foreach (JsonObject nextE in nextsE)
-                {
-
-                    List<(string, string)> fSearchs = new List<(string, string)>();
-                    List<string> fReplaces = new List<string>();
-                    string urlAddStr = null;
-
-                    String cfgid = nextE[JCfgName.cfgid].GetValue<String>();
-
-                    JsonObject nextsSearchE = nextE[JCfgName.searchs].AsObject();
-                    urlAddStr = nextsSearchE[JCfgName.AddBefore].GetValue<String>();
-                    foreach (JsonObject searchE in nextsSearchE[JCfgName.search].AsArray())
-                    {
-                        fSearchs.Add(
-                                (
-                                searchE[JCfgName.start].GetValue<String>(),
-                                searchE[JCfgName.end].GetValue<String>()
-                                )
-                            );
-                    }
-                    JsonArray replacesE = nextsSearchE[JCfgName.replaces].AsArray();
-                    foreach (JsonValue replaceE in replacesE)
-                    {
-                        fReplaces.Add(replaceE.GetValue<String>());
-                    }
-
-                    nextCfg.Add((fSearchs, fReplaces, urlAddStr, cfgid));
-                }
             }
-        }
-
-        public string GetEncoding()
-        {
-            return encoding;
-        }
-        public string GetConfigId()
-        {
-            return configId;
-        }
-
-        public List<(List<(string, string)>, List<string>, string)> getFileCfg()
-        {
-            return fileCfg;
-        }
-        public List<(List<(string, string)>, List<string>, string, string)> getNextCfg()
-        {
-            return nextCfg;
-        }
-
-        public List<List<(string, string)>> getPathCfg()
-        {
-            return pathCfg;
         }
 
         #region static members
 
         private static Dictionary<string, ParserJosnConfig> parserConfigDic;
+
         public static void setConfigs(string jsonStr)
         {
             JsonArray root = JsonSerializer.Deserialize<JsonArray>(jsonStr);
@@ -152,7 +57,7 @@ namespace xy.scraper.page.parserConfig
             foreach (JsonObject configElement in root)
             {
                 ParserJosnConfig parserJosnConfig= new ParserJosnConfig(configElement);
-                parserConfigDic[parserJosnConfig.GetConfigId()] = parserJosnConfig;
+                parserConfigDic[parserJosnConfig.ConfigId] = parserJosnConfig;
             }
         }
         public static ParserJosnConfig getParserConfig(string configId)
@@ -238,6 +143,69 @@ namespace xy.scraper.page.parserConfig
                 string addAfter = searchJson[JCfgName.AddAfter].GetValue<String>();
                 retStr = addBefore + retStr + addAfter;
                 retList[index] = retStr;
+            }
+
+            return retList;
+        }
+
+        public static Dictionary<string, string> searchDownloadDict(
+            string configId, string htmlString)
+        {
+            Dictionary<string, string> retDic = new Dictionary<string, string>();
+            ParserJosnConfig parserJosnConfig = getParserConfig(configId);
+
+            if(parserJosnConfig.pathsE != null && parserJosnConfig.filesE != null)
+            {
+                List<string> pathList = new List<string>();
+                foreach (JsonObject pathE in parserJosnConfig.pathsE)
+                {
+                    pathList.Add(search(htmlString, pathE));
+
+                }
+                string path = String.Join(@"\", pathList);
+
+                foreach (JsonObject fileE in parserJosnConfig.filesE)
+                {
+                    List<string> fileList = searchList(htmlString, fileE);
+                    foreach (string fileUrl in fileList)
+                    {
+                        //make sure the file name is in the end of url ??
+                        string[] tArr = fileUrl.Split("/");
+                        retDic[fileUrl] = path + tArr[tArr.Length - 1];
+                    }
+                }
+            }
+
+            return retDic;
+        }
+
+        public static List<(string, string)> searchOtherPageDict(
+            string configId, string htmlString)
+        {
+            ParserJosnConfig parserJosnConfig = getParserConfig(configId);
+
+            List<(string, string)> retList = new List<(string, string)>();
+
+            if (parserJosnConfig.nextsE != null)
+            {
+                foreach (JsonObject nextE in parserJosnConfig.NextsE)
+                {
+                    String cfgid = nextE[JCfgName.cfgid].GetValue<String>();
+                    JsonObject nextsSearchE = nextE[JCfgName.searchs].AsObject();
+                    bool isList = nextsSearchE[JCfgName.SearchList].GetValue<Boolean>();
+                    if (isList)
+                    {
+                        List<string> urlList = searchList(htmlString, nextsSearchE);
+                        foreach (string url in urlList)
+                        {
+                            retList.Add((url, cfgid));
+                        }
+                    }
+                    else
+                    {
+                        retList.Add((search(htmlString, nextsSearchE), cfgid));
+                    }
+                }
             }
 
             return retList;
