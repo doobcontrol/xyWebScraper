@@ -14,9 +14,9 @@ namespace xy.scraper.page.parserConfig
         {
             return _parserConfig;
         }
-        public ParserByConfig(IParserConfig parserConfig)
+        public ParserByConfig(string configId)
         {
-            _parserConfig = parserConfig;
+            _parserConfig = ParserJosnConfig.getParserConfig(configId);
         }
 
         public Dictionary<string, string> getDownloadDict(string htmlString)
@@ -84,10 +84,10 @@ namespace xy.scraper.page.parserConfig
             return retDic;
         }
 
-        public List<(string, (Type, Object?))> getOtherPageDict(string htmlString)
+        public List<(string, string)> getOtherPageDict(string htmlString)
         {
             List<(List<(string, string)>, List<string>, string, string)> NextCfg = _parserConfig.getNextCfg();
-            List<(string, (Type, Object?))> retList = new List<(string, (Type, Object?))>();
+            List<(string, string)> retList = new List<(string, string)>();
 
 
             foreach ((List<(string, string)>, List<string>, string, string) nCfg in NextCfg)
@@ -121,7 +121,7 @@ namespace xy.scraper.page.parserConfig
                     //add "https://" and domain name
                     UrlStr = nCfg.Item3 + UrlStr;
 
-                    retList.Add((UrlStr, (typeof(ParserByConfig), ParserJosnConfig.getParserConfig(nCfg.Item4))));
+                    retList.Add((UrlStr, nCfg.Item4));
                 }
             }
 

@@ -73,8 +73,6 @@ namespace TestBench
 
         private async void button2_Click(object sender, EventArgs e)
         {
-            IParserConfig ips = ParserJosnConfig.getParserConfig(cbConfigIdList.Text);
-
             this.ControlBox = false;
             button2.Visible = false;
             button3.Visible = false;
@@ -87,7 +85,7 @@ namespace TestBench
                 cts = new CancellationTokenSource();
                 await new startScraper().newScrape(
                 textBox1.Text,
-                new ParserByConfig(ips),
+                cbConfigIdList.Text,
                 cts.Token,
                 progress);
             }

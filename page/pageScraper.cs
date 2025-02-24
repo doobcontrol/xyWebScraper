@@ -16,7 +16,7 @@ namespace xy.scraper.page
             _htmlDownloader = new HttpClientDownloader();
         }
 
-        public async Task<List<(string, (Type, Object?))>> download(
+        public async Task<List<(string, string)>> download(
             string pUrl,
             CancellationToken token,
             IProgress<string> progress,
@@ -47,14 +47,14 @@ namespace xy.scraper.page
                     else
                     {
                         progress.Report("Tried many times and gave up");
-                        return new List<(string, (Type, Object?))>();
+                        return new List<(string, string)>();
                     }
                 }
             }
 
             Dictionary<string, string> downloadDict =
                 _htmlParser.getDownloadDict(htmlString);
-            List<(string, (Type, Object?))> retList = _htmlParser.getOtherPageDict(htmlString);
+            List<(string, string)> retList = _htmlParser.getOtherPageDict(htmlString);
             progress.Report("get other page links: " + retList.Count);
             progress.Report("got download items:" + downloadDict.Count);
 

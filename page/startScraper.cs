@@ -16,7 +16,7 @@ namespace xy.scraper.page
         private string _savePath;
 
         private async Task doScrapeTask(
-            List<(string, (Type, Object?))> toBeHandledList,
+            List<(string, string)> toBeHandledList,
             CancellationToken token,
             IProgress<string> progress = null,
             Dictionary<string, string> preDownloadDict = null,
@@ -25,17 +25,14 @@ namespace xy.scraper.page
             pageScraper Scraper;
             while (toBeHandledList.Count != 0)
             {
-                (string, (Type, Object?)) toBeHandled = toBeHandledList[0];
+                (string, string) toBeHandled = toBeHandledList[0];
                 string toBeHandledUrl = toBeHandledList[0].Item1;
 
                 Scraper = new pageScraper(
-                    (IHtmlParser)Activator.CreateInstance(
-                            toBeHandled.Item2.Item1,
-                            new object[] { toBeHandled.Item2.Item2 }
-                        )
+                    new ParserByConfig(toBeHandled.Item2)
                     );
 
-                List<(string, (Type, Object?))> moreList = null;
+                List<(string, string)> moreList = null;
 
                 try
                 {
@@ -62,11 +59,11 @@ namespace xy.scraper.page
                     throw oe;
                 }
 
-                List<(string, (Type, Object?))> tempList = new List<(string, (Type, object?))>();
-                foreach ((string, (Type, Object?)) moretask in moreList)
+                List<(string, string)> tempList = new List<(string, string)>();
+                foreach ((string, string) moretask in moreList)
                 {
                     bool hasDuplication = false;
-                    foreach ((string, (Type, Object?)) handled in toBeHandledList)
+                    foreach ((string, string) handled in toBeHandledList)
                     {
                         if (handled.Item1 == moretask.Item1)
                         {
@@ -95,15 +92,13 @@ namespace xy.scraper.page
         }
         public async Task newScrape(
             string url,
-            ParserByConfig htmlParser,
+            string configId,
             CancellationToken token,
             IProgress<string> progress = null)
         {
-            List<(string, (Type, Object?))> toBeHandledList 
-                = new List<(string, (Type, object?))>();
-            toBeHandledList.Add((url, 
-                    (htmlParser.GetType(), htmlParser.GetParserConfig())
-                    )
+            List<(string, string)> toBeHandledList 
+                = new List<(string, string)>();
+            toBeHandledList.Add((url, configId)
                 );
             await doScrapeTask(toBeHandledList, token, progress);
         }
@@ -129,19 +124,13 @@ namespace xy.scraper.page
                 .download(downloadDict, token, progress, _savePath);
             progress.Report("break point files done\r\n");
 
-            List<(string, (Type, Object?))> toBeHandledList
-                = new List<(string, (Type, object?))>();
+            List<(string, string)> toBeHandledList
+                = new List<(string, string)>();
 
             foreach (var kvp in root["toBeHandledList"].AsObject())
             {
                 toBeHandledList.Add(
-                    (kvp.Key,
-                    (typeof(ParserByConfig),
-                    ParserJosnConfig.getParserConfig(
-                        kvp.Value.GetValue<string>()
-                        )
-                    )
-                    )
+                    (kvp.Key, kvp.Value.GetValue<string>())
                 );
                 downloadDict[kvp.Key] = kvp.Value.GetValue<string>();
             }
@@ -160,7 +149,7 @@ namespace xy.scraper.page
         public static string _breakPointSavePath = "breakPoint.json";
         private void saveBreakpoint(
             OperationCanceledException e,
-            List<(string, (Type, Object?))>? toBeHandledList)
+            List<(string, string)>? toBeHandledList)
         {
             string savePath = (string)e.Data["savePath"];
             Dictionary<string, string> downloadDict 
@@ -185,11 +174,11 @@ namespace xy.scraper.page
 
             if(e.Data["retList"] != null)
             {
-                List<(string, (Type, Object?))> retList
-                    = (List<(string, (Type, Object?))>)e.Data["retList"];
+                List<(string, string)> retList
+                    = (List<(string, string)>)e.Data["retList"];
                 if (toBeHandledList == null)
                 {
-                    toBeHandledList = new List<(string, (Type, Object?))>();
+                    toBeHandledList = new List<(string, string)>();
                 }
                 if (toBeHandledList.Count != 0)
                 {
@@ -200,10 +189,10 @@ namespace xy.scraper.page
 
 
             JsonObject toBeHandledListNode = new JsonObject();
-            foreach ((string, (Type, Object?)) ret in toBeHandledList)
+            foreach ((string, string) ret in toBeHandledList)
             {
                 toBeHandledListNode[ret.Item1] 
-                    = ((ParserJosnConfig)(ret.Item2.Item2)).GetConfigId();
+                    = ret.Item2;
             }
             root["toBeHandledList"] = toBeHandledListNode;
 
