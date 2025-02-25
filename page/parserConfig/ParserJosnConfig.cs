@@ -159,10 +159,10 @@ namespace xy.scraper.page.parserConfig
                 List<string> pathList = new List<string>();
                 foreach (JsonObject pathE in parserJosnConfig.pathsE)
                 {
-                    pathList.Add(search(htmlString, pathE));
+                    pathList.Add(htmlParserTool.washPathStr(search(htmlString, pathE)));
 
                 }
-                string path = String.Join(@"\", pathList);
+                string path = @"\" + String.Join(@"\", pathList) + @"\";
 
                 foreach (JsonObject fileE in parserJosnConfig.filesE)
                 {
