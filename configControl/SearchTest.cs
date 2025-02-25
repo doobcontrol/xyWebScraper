@@ -19,6 +19,8 @@ namespace xy.scraper.configControl
         {
             InitializeComponent();
             tabControl1.Controls.Remove(tpTest);
+            lbGetting.Text = "Getting html...";
+            lbGetting.Visible = false;
         }
 
         private string html;
@@ -26,7 +28,9 @@ namespace xy.scraper.configControl
         {
             tabControl1.Controls.Remove(tpTest);
             txtHtml.Clear();
-            this.Enabled = false;
+            lbGetting.Visible = true;
+            tabControl1.Visible = false;
+            btnGetHtml.Enabled = false;
             HttpClientDownloader httpClientDownloader = new HttpClientDownloader();
             try
             {
@@ -47,7 +51,9 @@ namespace xy.scraper.configControl
             }
             finally
             {
-                this.Enabled = true;
+                btnGetHtml.Enabled = true;
+                lbGetting.Visible = false;
+                tabControl1.Visible = true;
             }
         }
 

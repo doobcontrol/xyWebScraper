@@ -39,6 +39,7 @@
             panel1 = new Panel();
             panel2 = new Panel();
             btnGetHtml = new Button();
+            lbGetting = new Label();
             tabControl1.SuspendLayout();
             tpTest.SuspendLayout();
             panel3.SuspendLayout();
@@ -52,10 +53,10 @@
             tabControl1.Controls.Add(tpTest);
             tabControl1.Controls.Add(tpHtml);
             tabControl1.Dock = DockStyle.Fill;
-            tabControl1.Location = new Point(0, 27);
+            tabControl1.Location = new Point(0, 42);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(784, 397);
+            tabControl1.Size = new Size(784, 382);
             tabControl1.TabIndex = 0;
             // 
             // tpTest
@@ -65,7 +66,7 @@
             tpTest.Location = new Point(4, 24);
             tpTest.Name = "tpTest";
             tpTest.Padding = new Padding(3);
-            tpTest.Size = new Size(776, 369);
+            tpTest.Size = new Size(776, 354);
             tpTest.TabIndex = 0;
             tpTest.Text = "Test";
             tpTest.UseVisualStyleBackColor = true;
@@ -77,7 +78,7 @@
             txtShowBox.Multiline = true;
             txtShowBox.Name = "txtShowBox";
             txtShowBox.ScrollBars = ScrollBars.Vertical;
-            txtShowBox.Size = new Size(770, 313);
+            txtShowBox.Size = new Size(770, 298);
             txtShowBox.TabIndex = 1;
             // 
             // panel3
@@ -105,7 +106,7 @@
             tpHtml.Location = new Point(4, 24);
             tpHtml.Name = "tpHtml";
             tpHtml.Padding = new Padding(3);
-            tpHtml.Size = new Size(776, 369);
+            tpHtml.Size = new Size(776, 354);
             tpHtml.TabIndex = 1;
             tpHtml.Text = "Html Text";
             tpHtml.UseVisualStyleBackColor = true;
@@ -117,7 +118,7 @@
             txtHtml.Multiline = true;
             txtHtml.Name = "txtHtml";
             txtHtml.ScrollBars = ScrollBars.Vertical;
-            txtHtml.Size = new Size(770, 363);
+            txtHtml.Size = new Size(770, 348);
             txtHtml.TabIndex = 0;
             // 
             // txtUrl
@@ -158,11 +159,22 @@
             btnGetHtml.UseVisualStyleBackColor = true;
             btnGetHtml.Click += btnGetHtml_Click;
             // 
+            // lbGetting
+            // 
+            lbGetting.AutoSize = true;
+            lbGetting.Dock = DockStyle.Top;
+            lbGetting.Location = new Point(0, 27);
+            lbGetting.Name = "lbGetting";
+            lbGetting.Size = new Size(38, 15);
+            lbGetting.TabIndex = 3;
+            lbGetting.Text = "label1";
+            // 
             // SearchTest
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(tabControl1);
+            Controls.Add(lbGetting);
             Controls.Add(panel1);
             Name = "SearchTest";
             Size = new Size(784, 424);
@@ -176,6 +188,7 @@
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -191,5 +204,6 @@
         private Panel panel3;
         private TextBox txtShowBox;
         private Button btnSearch;
+        private Label lbGetting;
     }
 }
