@@ -24,6 +24,8 @@ namespace xy.scraper.configControl
         private string html;
         private async void btnGetHtml_Click(object sender, EventArgs e)
         {
+            tabControl1.Controls.Remove(tpTest);
+            txtHtml.Clear();
             this.Enabled = false;
             HttpClientDownloader httpClientDownloader = new HttpClientDownloader();
             try
