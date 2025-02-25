@@ -47,10 +47,11 @@
             // defaultPageConfig
             // 
             defaultPageConfig.Dock = DockStyle.Fill;
+            defaultPageConfig.Encoding = "UTF-8";
             defaultPageConfig.Location = new Point(3, 3);
             defaultPageConfig.Name = "defaultPageConfig";
             defaultPageConfig.PageID = "";
-            defaultPageConfig.Size = new Size(529, 253);
+            defaultPageConfig.Size = new Size(206, 408);
             defaultPageConfig.TabIndex = 2;
             // 
             // toolStrip1
@@ -114,7 +115,7 @@
             tabControl1.Multiline = true;
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(693, 267);
+            tabControl1.Size = new Size(370, 422);
             tabControl1.SizeMode = TabSizeMode.Fixed;
             tabControl1.TabIndex = 4;
             // 
@@ -124,26 +125,26 @@
             tabPage1.Location = new Point(154, 4);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(535, 259);
+            tabPage1.Size = new Size(212, 414);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
             // 
             // searchTest1
             // 
-            searchTest1.Dock = DockStyle.Bottom;
-            searchTest1.Location = new Point(0, 295);
+            searchTest1.Dock = DockStyle.Right;
+            searchTest1.Location = new Point(373, 25);
             searchTest1.Name = "searchTest1";
-            searchTest1.Size = new Size(693, 152);
+            searchTest1.Size = new Size(320, 422);
             searchTest1.TabIndex = 5;
             searchTest1.Visible = false;
             // 
             // splitter1
             // 
-            splitter1.Dock = DockStyle.Bottom;
-            splitter1.Location = new Point(0, 292);
+            splitter1.Dock = DockStyle.Right;
+            splitter1.Location = new Point(370, 25);
             splitter1.Name = "splitter1";
-            splitter1.Size = new Size(693, 3);
+            splitter1.Size = new Size(3, 422);
             splitter1.TabIndex = 6;
             splitter1.TabStop = false;
             // 
