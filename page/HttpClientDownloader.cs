@@ -19,7 +19,7 @@ namespace xy.scraper.page
             Uri uriResult;
 
             if (!Uri.TryCreate(uri, UriKind.Absolute, out uriResult))
-                throw new InvalidOperationException("URI is invalid.");
+                throw new InvalidOperationException(Resources.URIIsInvalid);
 
             byte[] fileBytes = await _httpClient.GetByteArrayAsync(uri);
             File.WriteAllBytes(outputPath, fileBytes);

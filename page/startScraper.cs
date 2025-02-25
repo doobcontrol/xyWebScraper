@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -48,7 +49,7 @@ namespace xy.scraper.page
                 catch (Exception e)
                 {
                     progress.Report(
-                        "Failed: " + e.Message);
+                        Resources.Failed + e.Message);
 
                     //save the downloadDict to a file
                     OperationCanceledException oe = new OperationCanceledException(token);
@@ -82,7 +83,7 @@ namespace xy.scraper.page
 
                 //remove the first element, and save it for duplication handle
                 toBeHandledList.Remove(toBeHandled);
-                progress.Report("to be done: " + toBeHandledList.Count + "\r\n");
+                progress.Report(Resources.ToBeDone + toBeHandledList.Count + "\r\n");
             }
         }
 
@@ -118,11 +119,11 @@ namespace xy.scraper.page
             {
                 downloadDict[kvp.Key] = kvp.Value.GetValue<string>();
             }
-            progress.Report("start resume break point ...\r\n");
-            progress.Report("to be download break point files: " + downloadDict.Count);
+            progress.Report(Resources.StartResumeBreakPoint);
+            progress.Report(Resources.BreakPointFiles + downloadDict.Count);
             await new pageScraper(null) // download function do not need a parser
                 .download(downloadDict, token, progress, _savePath);
-            progress.Report("break point files done\r\n");
+            progress.Report(Resources.BreakPointFilesDone);
 
             List<(string, string)> toBeHandledList
                 = new List<(string, string)>();
@@ -135,7 +136,7 @@ namespace xy.scraper.page
                 downloadDict[kvp.Key] = kvp.Value.GetValue<string>();
             }
 
-            progress.Report("to be download break point tasks: " 
+            progress.Report(Resources.BreakPointTasks
                 + toBeHandledList.Count);
 
             await doScrapeTask(

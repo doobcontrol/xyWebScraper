@@ -23,7 +23,7 @@ namespace xy.scraper.page
             string savePath
             )
         {
-            progress.Report("get task html: " + pUrl);
+            progress.Report(Resources.GetTaskHtml + pUrl);
             string htmlString;
             int tryCount = 0;
             while (true)
@@ -32,7 +32,7 @@ namespace xy.scraper.page
                 {
                     if (token.IsCancellationRequested)
                     {
-                        progress.Report("\r\ncancel task, start save break point ... \r\n");
+                        progress.Report(Resources.CancelTaskStartSaveBreakPoint);
 
                         OperationCanceledException e = new OperationCanceledException(token);
                         e.Data["savePath"] = savePath;
@@ -46,17 +46,17 @@ namespace xy.scraper.page
                 }
                 catch (HttpRequestException e)
                 {
-                    progress.Report("HttpRequestException: " + e.Message);
+                    progress.Report(Resources.HttpRequestException + e.Message);
 
                     if (tryCount < 5)
                     {
                         tryCount++;
-                        progress.Report("Retry: " + tryCount);
+                        progress.Report(Resources.Retry + tryCount);
                         await Task.Delay(1000);
                     }
                     else
                     {
-                        progress.Report("Tried many times and gave up");
+                        progress.Report(Resources.GaveUpTry);
                         return new List<(string, string)>();
                     }
                 }
@@ -65,8 +65,8 @@ namespace xy.scraper.page
             Dictionary<string, string> downloadDict =
                 _htmlParser.getDownloadDict(htmlString);
             List<(string, string)> retList = _htmlParser.getOtherPageDict(htmlString);
-            progress.Report("get other page links: " + retList.Count);
-            progress.Report("got download items:" + downloadDict.Count);
+            progress.Report(Resources.GotOtherPageLinks + retList.Count);
+            progress.Report(Resources.GotDownloadItems + downloadDict.Count);
 
             try
             {
@@ -94,7 +94,7 @@ namespace xy.scraper.page
             {
                 if (token.IsCancellationRequested)
                 {
-                    progress.Report("\r\ncancel task, start save break point ... \r\n");
+                    progress.Report(Resources.CancelTaskStartSaveBreakPoint);
 
                     //save the downloadDict to a file
                     OperationCanceledException e = new OperationCanceledException(token);
@@ -121,22 +121,22 @@ namespace xy.scraper.page
                             await _htmlDownloader.DownloadFileAsync(
                                 dUrl, fileFullName, progress
                                 );
-                            progress.Report("Succeed: " + downloadDict[dUrl]);
+                            progress.Report(Resources.Succeed + downloadDict[dUrl]);
                             break;
                         }
                         catch (HttpRequestException e)
                         {
-                            progress.Report("HttpRequestException: " + e.Message);
+                            progress.Report(Resources.HttpRequestException + e.Message);
 
                             if (tryCount < 5)
                             {
                                 tryCount++;
-                                progress.Report("Retry: " + tryCount);
+                                progress.Report(Resources.Retry + tryCount);
                                 await Task.Delay(1000);
                             }
                             else
                             {
-                                progress.Report("Tried many times and gave up");
+                                progress.Report(Resources.GaveUpTry);
                                 break;
                             }
                         }
@@ -145,7 +145,7 @@ namespace xy.scraper.page
                 catch (Exception e)
                 {
                     progress.Report(
-                        "Failed: " + downloadDict[dUrl] + "\r\n" + e.Message);
+                        Resources.Failed + downloadDict[dUrl] + "\r\n" + e.Message);
 
                     //save the downloadDict to a file
                     OperationCanceledException oe = new OperationCanceledException(token);
