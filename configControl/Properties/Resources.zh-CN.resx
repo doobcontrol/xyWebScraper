@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!--
-    Microsoft ResX Schema
-
+  <!-- 
+    Microsoft ResX Schema 
+    
     Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
     associated with the data types.
-
+    
     Example:
-
+    
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-
-    There are any number of "resheader" rows that contain simple
+                
+    There are any number of "resheader" rows that contain simple 
     name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
     mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
     extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
     read any of the formats listed below.
-
+    
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-
+    
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
+    value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -117,41 +117,103 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="tbAddSearchLayer.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAArSURBVDhPY2CgJZBvkP+PLkYSGDWABANACknF6GZgBUQr
-        xAVGDaCCAXQBAA5rK3ZHFvWVAAAAAElFTkSuQmCC
-</value>
+  <data name="btnGetHtml" xml:space="preserve">
+    <value>下载Html文本</value>
   </data>
-  <data name="tbDelSearchLayer.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABpSURBVDhPYzjCJV56mFvcgQEKQGyQGIxPEBzmEbXZzyr4
-        8ii3uBMyG10dXgCyFaQRhJFdQzSgyIAjPCK2FHmB4kAcXEBRUfGBoqLifwL4Abo+OAApkJOTk8SHQWrQ
-        9cEBNQygzAsjFAAA85NNindbZKkAAAAASUVORK5CYII=
-</value>
+  <data name="btnSearch" xml:space="preserve">
+    <value>搜索</value>
   </data>
-  <metadata name="toolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="tbAddReplace.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAArSURBVDhPY2CgJZBvkP+PLkYSGDWABANACknF6GZgBUQr
-        xAVGDaCCAXQBAA5rK3ZHFvWVAAAAAElFTkSuQmCC
-</value>
+  <data name="cbSearchList" xml:space="preserve">
+    <value>返回多个搜索结果</value>
   </data>
-  <data name="tbDelReplace.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABpSURBVDhPYzjCJV56mFvcgQEKQGyQGIxPEBzmEbXZzyr4
-        8ii3uBMyG10dXgCyFaQRhJFdQzSgyIAjPCK2FHmB4kAcXEBRUfGBoqLifwL4Abo+OAApkJOTk8SHQWrQ
-        9cEBNQygzAsjFAAA85NNindbZKkAAAAASUVORK5CYII=
-</value>
+  <data name="filesCb" xml:space="preserve">
+    <value>下载文件</value>
+  </data>
+  <data name="lbAddAfter" xml:space="preserve">
+    <value>在前面添加</value>
+  </data>
+  <data name="lbAddBefore" xml:space="preserve">
+    <value>在后面添加</value>
+  </data>
+  <data name="lbEncoding" xml:space="preserve">
+    <value>网页编码</value>
+  </data>
+  <data name="lbEnd" xml:space="preserve">
+    <value>结束位置</value>
+  </data>
+  <data name="lbGetting" xml:space="preserve">
+    <value>正在下载...</value>
+  </data>
+  <data name="lbPageConfigID" xml:space="preserve">
+    <value>网页模型ID</value>
+  </data>
+  <data name="lbReplace" xml:space="preserve">
+    <value>替换项</value>
+  </data>
+  <data name="lbStart" xml:space="preserve">
+    <value>开始位置</value>
+  </data>
+  <data name="nextsCb" xml:space="preserve">
+    <value>链接</value>
+  </data>
+  <data name="pathsCb" xml:space="preserve">
+    <value>保存路径</value>
+  </data>
+  <data name="tbAddFile" xml:space="preserve">
+    <value>新增一项文件搜索</value>
+  </data>
+  <data name="tbAddNext" xml:space="preserve">
+    <value>新增一项url搜索</value>
+  </data>
+  <data name="tbAddPageConfig" xml:space="preserve">
+    <value>新增一个网页模型</value>
+  </data>
+  <data name="tbAddPath" xml:space="preserve">
+    <value>新增一项保存路径搜索</value>
+  </data>
+  <data name="tbAddReplace" xml:space="preserve">
+    <value>新增一个替换项</value>
+  </data>
+  <data name="tbAddSearchLayer" xml:space="preserve">
+    <value>新增一层搜索</value>
+  </data>
+  <data name="tbCopyPageConfig" xml:space="preserve">
+    <value>拷贝当前网页模型生成新模型</value>
+  </data>
+  <data name="tbDelFile" xml:space="preserve">
+    <value>删除当前文件搜索</value>
+  </data>
+  <data name="tbDelNext" xml:space="preserve">
+    <value>删除当前url搜索</value>
+  </data>
+  <data name="tbDelPageConfig" xml:space="preserve">
+    <value>删除当前网页模型</value>
+  </data>
+  <data name="tbDelPath" xml:space="preserve">
+    <value>删除当前保存路径搜索</value>
+  </data>
+  <data name="tbDelReplace" xml:space="preserve">
+    <value>删除当前替换项</value>
+  </data>
+  <data name="tbDelSearchLayer" xml:space="preserve">
+    <value>删除当前搜索层</value>
+  </data>
+  <data name="tbShowTest" xml:space="preserve">
+    <value>显示/隐藏测试面板</value>
+  </data>
+  <data name="tpFinalHandle" xml:space="preserve">
+    <value>搜索结果</value>
+  </data>
+  <data name="tpHtml" xml:space="preserve">
+    <value>Html文本</value>
+  </data>
+  <data name="tpOtherSetting" xml:space="preserve">
+    <value>其它配置</value>
+  </data>
+  <data name="tpSearchLayers" xml:space="preserve">
+    <value>搜索层级</value>
+  </data>
+  <data name="tpTest" xml:space="preserve">
+    <value>测试</value>
   </data>
 </root>

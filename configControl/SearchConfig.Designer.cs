@@ -30,13 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchConfig));
             tabControl1 = new TabControl();
-            tabPage1 = new TabPage();
+            tpSearchLayers = new TabPage();
             panel1 = new Panel();
             defaultDearchLayer = new SearchLayer();
             toolStrip1 = new ToolStrip();
             tbAddSearchLayer = new ToolStripButton();
             tbDelSearchLayer = new ToolStripButton();
-            tabPage2 = new TabPage();
+            tpFinalHandle = new TabPage();
             txtAddAfter = new TextBox();
             txtAddBefore = new TextBox();
             panel3 = new Panel();
@@ -46,27 +46,27 @@
             tbAddReplace = new ToolStripButton();
             tbDelReplace = new ToolStripButton();
             panel2 = new Panel();
-            label3 = new Label();
-            label2 = new Label();
-            label1 = new Label();
-            tabPage3 = new TabPage();
+            lbAddAfter = new Label();
+            lbAddBefore = new Label();
+            lbReplace = new Label();
+            tpOtherSetting = new TabPage();
             cbSearchList = new CheckBox();
             tabControl1.SuspendLayout();
-            tabPage1.SuspendLayout();
+            tpSearchLayers.SuspendLayout();
             panel1.SuspendLayout();
             toolStrip1.SuspendLayout();
-            tabPage2.SuspendLayout();
+            tpFinalHandle.SuspendLayout();
             panel3.SuspendLayout();
             toolStrip2.SuspendLayout();
             panel2.SuspendLayout();
-            tabPage3.SuspendLayout();
+            tpOtherSetting.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
             // 
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Controls.Add(tabPage2);
-            tabControl1.Controls.Add(tabPage3);
+            tabControl1.Controls.Add(tpSearchLayers);
+            tabControl1.Controls.Add(tpFinalHandle);
+            tabControl1.Controls.Add(tpOtherSetting);
             tabControl1.Dock = DockStyle.Fill;
             tabControl1.Location = new Point(0, 0);
             tabControl1.Name = "tabControl1";
@@ -74,17 +74,17 @@
             tabControl1.Size = new Size(606, 298);
             tabControl1.TabIndex = 0;
             // 
-            // tabPage1
+            // tpSearchLayers
             // 
-            tabPage1.Controls.Add(panel1);
-            tabPage1.Controls.Add(toolStrip1);
-            tabPage1.Location = new Point(4, 24);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(598, 270);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "Search Layers";
-            tabPage1.UseVisualStyleBackColor = true;
+            tpSearchLayers.Controls.Add(panel1);
+            tpSearchLayers.Controls.Add(toolStrip1);
+            tpSearchLayers.Location = new Point(4, 24);
+            tpSearchLayers.Name = "tpSearchLayers";
+            tpSearchLayers.Padding = new Padding(3);
+            tpSearchLayers.Size = new Size(598, 270);
+            tpSearchLayers.TabIndex = 0;
+            tpSearchLayers.Text = "Search Layers";
+            tpSearchLayers.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -137,34 +137,34 @@
             tbDelSearchLayer.Text = "toolStripButton1";
             tbDelSearchLayer.Click += tbDelSearchLayer_Click;
             // 
-            // tabPage2
+            // tpFinalHandle
             // 
-            tabPage2.Controls.Add(txtAddAfter);
-            tabPage2.Controls.Add(txtAddBefore);
-            tabPage2.Controls.Add(panel3);
-            tabPage2.Controls.Add(panel2);
-            tabPage2.Location = new Point(4, 24);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(598, 270);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Final Handle";
-            tabPage2.UseVisualStyleBackColor = true;
+            tpFinalHandle.Controls.Add(txtAddAfter);
+            tpFinalHandle.Controls.Add(txtAddBefore);
+            tpFinalHandle.Controls.Add(panel3);
+            tpFinalHandle.Controls.Add(panel2);
+            tpFinalHandle.Location = new Point(4, 24);
+            tpFinalHandle.Name = "tpFinalHandle";
+            tpFinalHandle.Padding = new Padding(3);
+            tpFinalHandle.Size = new Size(598, 270);
+            tpFinalHandle.TabIndex = 1;
+            tpFinalHandle.Text = "Final Handle";
+            tpFinalHandle.UseVisualStyleBackColor = true;
             // 
             // txtAddAfter
             // 
             txtAddAfter.Dock = DockStyle.Top;
-            txtAddAfter.Location = new Point(105, 206);
+            txtAddAfter.Location = new Point(125, 206);
             txtAddAfter.Name = "txtAddAfter";
-            txtAddAfter.Size = new Size(490, 23);
+            txtAddAfter.Size = new Size(470, 23);
             txtAddAfter.TabIndex = 5;
             // 
             // txtAddBefore
             // 
             txtAddBefore.Dock = DockStyle.Top;
-            txtAddBefore.Location = new Point(105, 183);
+            txtAddBefore.Location = new Point(125, 183);
             txtAddBefore.Name = "txtAddBefore";
-            txtAddBefore.Size = new Size(490, 23);
+            txtAddBefore.Size = new Size(470, 23);
             txtAddBefore.TabIndex = 4;
             // 
             // panel3
@@ -173,9 +173,9 @@
             panel3.Controls.Add(txtAddReplace);
             panel3.Controls.Add(toolStrip2);
             panel3.Dock = DockStyle.Top;
-            panel3.Location = new Point(105, 3);
+            panel3.Location = new Point(125, 3);
             panel3.Name = "panel3";
-            panel3.Size = new Size(490, 180);
+            panel3.Size = new Size(470, 180);
             panel3.TabIndex = 3;
             // 
             // lbReplaceList
@@ -185,7 +185,7 @@
             lbReplaceList.ItemHeight = 15;
             lbReplaceList.Location = new Point(0, 48);
             lbReplaceList.Name = "lbReplaceList";
-            lbReplaceList.Size = new Size(490, 124);
+            lbReplaceList.Size = new Size(470, 124);
             lbReplaceList.TabIndex = 2;
             // 
             // txtAddReplace
@@ -193,7 +193,7 @@
             txtAddReplace.Dock = DockStyle.Top;
             txtAddReplace.Location = new Point(0, 25);
             txtAddReplace.Name = "txtAddReplace";
-            txtAddReplace.Size = new Size(490, 23);
+            txtAddReplace.Size = new Size(470, 23);
             txtAddReplace.TabIndex = 4;
             // 
             // toolStrip2
@@ -201,7 +201,7 @@
             toolStrip2.Items.AddRange(new ToolStripItem[] { tbAddReplace, tbDelReplace });
             toolStrip2.Location = new Point(0, 0);
             toolStrip2.Name = "toolStrip2";
-            toolStrip2.Size = new Size(490, 25);
+            toolStrip2.Size = new Size(470, 25);
             toolStrip2.TabIndex = 3;
             toolStrip2.Text = "toolStrip2";
             // 
@@ -227,51 +227,51 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(label3);
-            panel2.Controls.Add(label2);
-            panel2.Controls.Add(label1);
+            panel2.Controls.Add(lbAddAfter);
+            panel2.Controls.Add(lbAddBefore);
+            panel2.Controls.Add(lbReplace);
             panel2.Dock = DockStyle.Left;
             panel2.Location = new Point(3, 3);
             panel2.Name = "panel2";
-            panel2.Size = new Size(102, 264);
+            panel2.Size = new Size(122, 264);
             panel2.TabIndex = 1;
             // 
-            // label3
+            // lbAddAfter
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(26, 203);
-            label3.Name = "label3";
-            label3.Size = new Size(58, 15);
-            label3.TabIndex = 2;
-            label3.Text = "Add After";
+            lbAddAfter.AutoSize = true;
+            lbAddAfter.Location = new Point(26, 203);
+            lbAddAfter.Name = "lbAddAfter";
+            lbAddAfter.Size = new Size(58, 15);
+            lbAddAfter.TabIndex = 2;
+            lbAddAfter.Text = "Add After";
             // 
-            // label2
+            // lbAddBefore
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(26, 180);
-            label2.Name = "label2";
-            label2.Size = new Size(66, 15);
-            label2.TabIndex = 1;
-            label2.Text = "Add Before";
+            lbAddBefore.AutoSize = true;
+            lbAddBefore.Location = new Point(26, 180);
+            lbAddBefore.Name = "lbAddBefore";
+            lbAddBefore.Size = new Size(66, 15);
+            lbAddBefore.TabIndex = 1;
+            lbAddBefore.Text = "Add Before";
             // 
-            // label1
+            // lbReplace
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(26, 14);
-            label1.Name = "label1";
-            label1.Size = new Size(48, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Replace";
+            lbReplace.AutoSize = true;
+            lbReplace.Location = new Point(26, 14);
+            lbReplace.Name = "lbReplace";
+            lbReplace.Size = new Size(48, 15);
+            lbReplace.TabIndex = 0;
+            lbReplace.Text = "Replace";
             // 
-            // tabPage3
+            // tpOtherSetting
             // 
-            tabPage3.Controls.Add(cbSearchList);
-            tabPage3.Location = new Point(4, 24);
-            tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(598, 270);
-            tabPage3.TabIndex = 2;
-            tabPage3.Text = "Other Setting";
-            tabPage3.UseVisualStyleBackColor = true;
+            tpOtherSetting.Controls.Add(cbSearchList);
+            tpOtherSetting.Location = new Point(4, 24);
+            tpOtherSetting.Name = "tpOtherSetting";
+            tpOtherSetting.Size = new Size(598, 270);
+            tpOtherSetting.TabIndex = 2;
+            tpOtherSetting.Text = "Other Setting";
+            tpOtherSetting.UseVisualStyleBackColor = true;
             // 
             // cbSearchList
             // 
@@ -291,38 +291,38 @@
             Name = "SearchConfig";
             Size = new Size(606, 298);
             tabControl1.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
-            tabPage1.PerformLayout();
+            tpSearchLayers.ResumeLayout(false);
+            tpSearchLayers.PerformLayout();
             panel1.ResumeLayout(false);
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
-            tabPage2.ResumeLayout(false);
-            tabPage2.PerformLayout();
+            tpFinalHandle.ResumeLayout(false);
+            tpFinalHandle.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            tabPage3.ResumeLayout(false);
-            tabPage3.PerformLayout();
+            tpOtherSetting.ResumeLayout(false);
+            tpOtherSetting.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
         private TabControl tabControl1;
-        private TabPage tabPage1;
-        private TabPage tabPage2;
+        private TabPage tpSearchLayers;
+        private TabPage tpFinalHandle;
         private ToolStrip toolStrip1;
         private ToolStripButton tbAddSearchLayer;
         private SearchLayer defaultDearchLayer;
         private ToolStripButton tbDelSearchLayer;
         private Panel panel1;
         private Panel panel2;
-        private Label label3;
-        private Label label2;
-        private Label label1;
+        private Label lbAddAfter;
+        private Label lbAddBefore;
+        private Label lbReplace;
         private ListBox lbReplaceList;
         private Panel panel3;
         private TextBox txtAddBefore;
@@ -331,7 +331,7 @@
         private ToolStripButton tbAddReplace;
         private ToolStripButton tbDelReplace;
         private TextBox txtAddAfter;
-        private TabPage tabPage3;
+        private TabPage tpOtherSetting;
         private CheckBox cbSearchList;
     }
 }

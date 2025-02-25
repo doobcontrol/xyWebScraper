@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.Json.Nodes;
 using xy.scraper.page.parserConfig;
+using xy.scraper.configControl.Properties;
 
 namespace xy.scraper.configControl
 {
@@ -22,6 +23,13 @@ namespace xy.scraper.configControl
             this.TabStop = true;
 
             defaultBackColor = panel1.BackColor;
+
+            setUiText();
+        }
+        private void setUiText()
+        {
+            lbStart.Text = Resources.lbStart;
+            lbEnd.Text = Resources.lbEnd;
         }
 
         public string Start

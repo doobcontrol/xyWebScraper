@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Text.Json.Nodes;
+using System.Globalization;
+using xy.scraper.configControl.Properties;
 
 namespace xy.scraper.configControl
 {
@@ -25,6 +27,15 @@ namespace xy.scraper.configControl
             tabControl1.TabPages[0].Text = defaultPageConfig.PageID;
 
             searchTest1.ScraperConfig = this;
+
+            setUiText();
+        }
+        private void setUiText()
+        {
+            tbAddPageConfig.ToolTipText = Resources.tbAddPageConfig;
+            tbCopyPageConfig.ToolTipText = Resources.tbCopyPageConfig;
+            tbDelPageConfig.ToolTipText = Resources.tbDelPageConfig;
+            tbShowTest.ToolTipText = Resources.tbShowTest;
         }
 
         private void defaultPageConfig_PageIDChanged(object? sender, EventArgs e)

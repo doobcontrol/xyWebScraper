@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            label2 = new Label();
-            label1 = new Label();
+            lbEnd = new Label();
+            lbStart = new Label();
             txtStart = new TextBox();
             txtEnd = new TextBox();
             panel1.SuspendLayout();
@@ -38,49 +38,49 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(label1);
+            panel1.Controls.Add(lbEnd);
+            panel1.Controls.Add(lbStart);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(59, 46);
+            panel1.Size = new Size(81, 46);
             panel1.TabIndex = 0;
             panel1.Click += panel1_Click;
             // 
-            // label2
+            // lbEnd
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(13, 26);
-            label2.Name = "label2";
-            label2.Size = new Size(27, 15);
-            label2.TabIndex = 1;
-            label2.Text = "End";
-            label2.Click += panel1_Click;
+            lbEnd.AutoSize = true;
+            lbEnd.Location = new Point(13, 26);
+            lbEnd.Name = "lbEnd";
+            lbEnd.Size = new Size(27, 15);
+            lbEnd.TabIndex = 1;
+            lbEnd.Text = "End";
+            lbEnd.Click += panel1_Click;
             // 
-            // label1
+            // lbStart
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(13, 3);
-            label1.Name = "label1";
-            label1.Size = new Size(31, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Start";
-            label1.Click += panel1_Click;
+            lbStart.AutoSize = true;
+            lbStart.Location = new Point(13, 3);
+            lbStart.Name = "lbStart";
+            lbStart.Size = new Size(31, 15);
+            lbStart.TabIndex = 0;
+            lbStart.Text = "Start";
+            lbStart.Click += panel1_Click;
             // 
             // txtStart
             // 
             txtStart.Dock = DockStyle.Top;
-            txtStart.Location = new Point(59, 0);
+            txtStart.Location = new Point(81, 0);
             txtStart.Name = "txtStart";
-            txtStart.Size = new Size(220, 23);
+            txtStart.Size = new Size(198, 23);
             txtStart.TabIndex = 1;
             // 
             // txtEnd
             // 
             txtEnd.Dock = DockStyle.Top;
-            txtEnd.Location = new Point(59, 23);
+            txtEnd.Location = new Point(81, 23);
             txtEnd.Name = "txtEnd";
-            txtEnd.Size = new Size(220, 23);
+            txtEnd.Size = new Size(198, 23);
             txtEnd.TabIndex = 2;
             // 
             // SearchLayer
@@ -105,8 +105,8 @@
         #endregion
 
         private Panel panel1;
-        private Label label2;
-        private Label label1;
+        private Label lbEnd;
+        private Label lbStart;
         private TextBox txtStart;
         private TextBox txtEnd;
     }

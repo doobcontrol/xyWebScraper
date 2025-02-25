@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.Json.Nodes;
 using xy.scraper.page.parserConfig;
+using xy.scraper.configControl.Properties;
 
 namespace xy.scraper.configControl
 {
@@ -17,6 +18,22 @@ namespace xy.scraper.configControl
         public SearchConfig()
         {
             InitializeComponent();
+
+            setUiText();
+        }
+        private void setUiText()
+        {
+            tpSearchLayers.Text = Resources.tpSearchLayers;
+            tpFinalHandle.Text = Resources.tpFinalHandle;
+            tpOtherSetting.Text = Resources.tpOtherSetting;
+            tbAddSearchLayer.ToolTipText = Resources.tbAddSearchLayer;
+            tbDelSearchLayer.ToolTipText = Resources.tpOtherSetting;
+            tbAddReplace.ToolTipText = Resources.tbAddReplace;
+            tbDelReplace.ToolTipText = Resources.tbDelReplace;
+            lbReplace.Text = Resources.lbReplace;
+            lbAddBefore.Text = Resources.lbAddBefore;
+            lbAddAfter.Text = Resources.lbAddAfter;
+            cbSearchList.Text = Resources.cbSearchList;
         }
 
         #region SearchLayers

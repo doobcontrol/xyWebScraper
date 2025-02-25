@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.Json.Nodes;
 using xy.scraper.page.parserConfig;
+using System.Globalization;
+using System.Text.RegularExpressions;
+using System.Resources;
+using xy.scraper.configControl.Properties;
 
 namespace xy.scraper.configControl
 {
@@ -51,6 +55,8 @@ namespace xy.scraper.configControl
             tbDelFile.Click += new EventHandler(tbDel_Click);
             tbAddNext.Click += new EventHandler(tbAdd_Click);
             tbDelNext.Click += new EventHandler(tbDel_Click);
+
+            setUiText();
         }
         private void searchConfig_CheckedChanged(object sender, EventArgs e)
         {
@@ -62,6 +68,27 @@ namespace xy.scraper.configControl
                     tabControl1.TabPages.Add((TabPage)cb.Tag);
                 }
             }
+        }
+        private void setUiText()
+        {
+            lbPageConfigID.Text = Resources.lbPageConfigID;
+            lbNextPageConfigID.Text = Resources.lbPageConfigID;
+            lbEncoding.Text = Resources.lbEncoding;
+            pathsCb.Text = Resources.pathsCb;
+            filesCb.Text = Resources.filesCb;
+            nextsCb.Text = Resources.nextsCb;
+            pathsTp.Text = Resources.pathsCb;
+            filesTp.Text = Resources.filesCb;
+            nextsTp.Text = Resources.nextsCb;
+            tcPath.Controls[0].Text = Resources.pathsCb;
+            tcFile.Controls[0].Text = Resources.filesCb;
+            tcNext.Controls[0].Text = Resources.nextsCb;
+            tbAddPath.ToolTipText = Resources.tbAddPath;
+            tbDelPath.ToolTipText = Resources.tbDelPath;
+            tbAddFile.ToolTipText = Resources.tbAddFile;
+            tbDelFile.ToolTipText = Resources.tbDelFile;
+            tbAddNext.ToolTipText = Resources.tbAddNext;
+            tbDelNext.ToolTipText = Resources.tbDelNext;
         }
 
         private void tbAdd_Click(object sender, EventArgs e)
@@ -89,9 +116,9 @@ namespace xy.scraper.configControl
 
             Label label = new Label();
             panel.Controls.Add(label);
-            label.Text = label3.Text;
-            label.Top = label3.Top;
-            label.Left = label3.Left;
+            label.Text = lbNextPageConfigID.Text;
+            label.Top = lbNextPageConfigID.Top;
+            label.Left = lbNextPageConfigID.Left;
 
             TextBox textBox = new TextBox();
             panel.Controls.Add(textBox);

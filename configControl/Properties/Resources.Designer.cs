@@ -59,5 +59,302 @@ namespace xy.scraper.configControl.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get Html.
+        /// </summary>
+        internal static string btnGetHtml {
+            get {
+                return ResourceManager.GetString("btnGetHtml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        internal static string btnSearch {
+            get {
+                return ResourceManager.GetString("btnSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search List.
+        /// </summary>
+        internal static string cbSearchList {
+            get {
+                return ResourceManager.GetString("cbSearchList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to files.
+        /// </summary>
+        internal static string filesCb {
+            get {
+                return ResourceManager.GetString("filesCb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add After.
+        /// </summary>
+        internal static string lbAddAfter {
+            get {
+                return ResourceManager.GetString("lbAddAfter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Before.
+        /// </summary>
+        internal static string lbAddBefore {
+            get {
+                return ResourceManager.GetString("lbAddBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encoding.
+        /// </summary>
+        internal static string lbEncoding {
+            get {
+                return ResourceManager.GetString("lbEncoding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End.
+        /// </summary>
+        internal static string lbEnd {
+            get {
+                return ResourceManager.GetString("lbEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Getting html....
+        /// </summary>
+        internal static string lbGetting {
+            get {
+                return ResourceManager.GetString("lbGetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PageConfig ID.
+        /// </summary>
+        internal static string lbPageConfigID {
+            get {
+                return ResourceManager.GetString("lbPageConfigID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace.
+        /// </summary>
+        internal static string lbReplace {
+            get {
+                return ResourceManager.GetString("lbReplace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        internal static string lbStart {
+            get {
+                return ResourceManager.GetString("lbStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Urls.
+        /// </summary>
+        internal static string nextsCb {
+            get {
+                return ResourceManager.GetString("nextsCb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to paths.
+        /// </summary>
+        internal static string pathsCb {
+            get {
+                return ResourceManager.GetString("pathsCb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a file search.
+        /// </summary>
+        internal static string tbAddFile {
+            get {
+                return ResourceManager.GetString("tbAddFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a url search.
+        /// </summary>
+        internal static string tbAddNext {
+            get {
+                return ResourceManager.GetString("tbAddNext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a web page model.
+        /// </summary>
+        internal static string tbAddPageConfig {
+            get {
+                return ResourceManager.GetString("tbAddPageConfig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a path search.
+        /// </summary>
+        internal static string tbAddPath {
+            get {
+                return ResourceManager.GetString("tbAddPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a replace item.
+        /// </summary>
+        internal static string tbAddReplace {
+            get {
+                return ResourceManager.GetString("tbAddReplace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a search layer.
+        /// </summary>
+        internal static string tbAddSearchLayer {
+            get {
+                return ResourceManager.GetString("tbAddSearchLayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy current web page model to create a new model.
+        /// </summary>
+        internal static string tbCopyPageConfig {
+            get {
+                return ResourceManager.GetString("tbCopyPageConfig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete current file search.
+        /// </summary>
+        internal static string tbDelFile {
+            get {
+                return ResourceManager.GetString("tbDelFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete current url search.
+        /// </summary>
+        internal static string tbDelNext {
+            get {
+                return ResourceManager.GetString("tbDelNext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete current web page model.
+        /// </summary>
+        internal static string tbDelPageConfig {
+            get {
+                return ResourceManager.GetString("tbDelPageConfig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete current path search.
+        /// </summary>
+        internal static string tbDelPath {
+            get {
+                return ResourceManager.GetString("tbDelPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete current replace item.
+        /// </summary>
+        internal static string tbDelReplace {
+            get {
+                return ResourceManager.GetString("tbDelReplace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete current search layer.
+        /// </summary>
+        internal static string tbDelSearchLayer {
+            get {
+                return ResourceManager.GetString("tbDelSearchLayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show/Hide the test panel.
+        /// </summary>
+        internal static string tbShowTest {
+            get {
+                return ResourceManager.GetString("tbShowTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Final Handle.
+        /// </summary>
+        internal static string tpFinalHandle {
+            get {
+                return ResourceManager.GetString("tpFinalHandle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Html.
+        /// </summary>
+        internal static string tpHtml {
+            get {
+                return ResourceManager.GetString("tpHtml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other Setting.
+        /// </summary>
+        internal static string tpOtherSetting {
+            get {
+                return ResourceManager.GetString("tpOtherSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search Layers.
+        /// </summary>
+        internal static string tpSearchLayers {
+            get {
+                return ResourceManager.GetString("tpSearchLayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test.
+        /// </summary>
+        internal static string tpTest {
+            get {
+                return ResourceManager.GetString("tpTest", resourceCulture);
+            }
+        }
     }
 }

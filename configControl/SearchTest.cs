@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using xy.scraper.page;
 using xy.scraper.page.parserConfig;
 using System.Text.Json.Nodes;
+using xy.scraper.configControl.Properties;
 
 namespace xy.scraper.configControl
 {
@@ -19,8 +20,17 @@ namespace xy.scraper.configControl
         {
             InitializeComponent();
             tabControl1.Controls.Remove(tpTest);
-            lbGetting.Text = "Getting html...";
             lbGetting.Visible = false;
+
+            setUiText();
+        }
+        private void setUiText()
+        {
+            btnGetHtml.Text = Resources.btnGetHtml;
+            btnSearch.Text = Resources.btnSearch;
+            lbGetting.Text = Resources.lbGetting;
+            tpHtml.Text = Resources.tpHtml;
+            tpTest.Text = Resources.tpTest;
         }
 
         private string html;

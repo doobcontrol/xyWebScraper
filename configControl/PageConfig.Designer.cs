@@ -31,9 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PageConfig));
             panel1 = new Panel();
             txtCoding = new TextBox();
-            label2 = new Label();
+            lbEncoding = new Label();
             txtPageID = new TextBox();
-            label1 = new Label();
+            lbPageConfigID = new Label();
             panel2 = new Panel();
             nextsCb = new CheckBox();
             filesCb = new CheckBox();
@@ -58,7 +58,7 @@
             tabPage3 = new TabPage();
             searchConfig3 = new SearchConfig();
             panel3 = new Panel();
-            label3 = new Label();
+            lbNextPageConfigID = new Label();
             textBox1 = new TextBox();
             toolStrip3 = new ToolStrip();
             tbAddNext = new ToolStripButton();
@@ -84,9 +84,9 @@
             // panel1
             // 
             panel1.Controls.Add(txtCoding);
-            panel1.Controls.Add(label2);
+            panel1.Controls.Add(lbEncoding);
             panel1.Controls.Add(txtPageID);
-            panel1.Controls.Add(label1);
+            panel1.Controls.Add(lbPageConfigID);
             panel1.Controls.Add(panel2);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
@@ -102,14 +102,14 @@
             txtCoding.TabIndex = 4;
             txtCoding.Text = "UTF-8";
             // 
-            // label2
+            // lbEncoding
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(13, 47);
-            label2.Name = "label2";
-            label2.Size = new Size(57, 15);
-            label2.TabIndex = 3;
-            label2.Text = "Encoding";
+            lbEncoding.AutoSize = true;
+            lbEncoding.Location = new Point(13, 47);
+            lbEncoding.Name = "lbEncoding";
+            lbEncoding.Size = new Size(57, 15);
+            lbEncoding.TabIndex = 3;
+            lbEncoding.Text = "Encoding";
             // 
             // txtPageID
             // 
@@ -119,14 +119,14 @@
             txtPageID.TabIndex = 2;
             txtPageID.TextChanged += txtPageID_TextChanged;
             // 
-            // label1
+            // lbPageConfigID
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(13, 15);
-            label1.Name = "label1";
-            label1.Size = new Size(83, 15);
-            label1.TabIndex = 1;
-            label1.Text = "PageConfig ID";
+            lbPageConfigID.AutoSize = true;
+            lbPageConfigID.Location = new Point(13, 15);
+            lbPageConfigID.Name = "lbPageConfigID";
+            lbPageConfigID.Size = new Size(83, 15);
+            lbPageConfigID.TabIndex = 1;
+            lbPageConfigID.Text = "PageConfig ID";
             // 
             // panel2
             // 
@@ -142,7 +142,7 @@
             // nextsCb
             // 
             nextsCb.AutoSize = true;
-            nextsCb.Location = new Point(127, 11);
+            nextsCb.Location = new Point(193, 14);
             nextsCb.Name = "nextsCb";
             nextsCb.Size = new Size(53, 19);
             nextsCb.TabIndex = 2;
@@ -152,7 +152,7 @@
             // filesCb
             // 
             filesCb.AutoSize = true;
-            filesCb.Location = new Point(74, 11);
+            filesCb.Location = new Point(108, 14);
             filesCb.Name = "filesCb";
             filesCb.Size = new Size(47, 19);
             filesCb.TabIndex = 1;
@@ -162,7 +162,7 @@
             // pathsCb
             // 
             pathsCb.AutoSize = true;
-            pathsCb.Location = new Point(13, 11);
+            pathsCb.Location = new Point(15, 14);
             pathsCb.Name = "pathsCb";
             pathsCb.Size = new Size(55, 19);
             pathsCb.TabIndex = 0;
@@ -360,7 +360,7 @@
             // 
             // panel3
             // 
-            panel3.Controls.Add(label3);
+            panel3.Controls.Add(lbNextPageConfigID);
             panel3.Controls.Add(textBox1);
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(3, 3);
@@ -368,14 +368,14 @@
             panel3.Size = new Size(634, 42);
             panel3.TabIndex = 6;
             // 
-            // label3
+            // lbNextPageConfigID
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(9, 15);
-            label3.Name = "label3";
-            label3.Size = new Size(83, 15);
-            label3.TabIndex = 0;
-            label3.Text = "PageConfig ID";
+            lbNextPageConfigID.AutoSize = true;
+            lbNextPageConfigID.Location = new Point(9, 15);
+            lbNextPageConfigID.Name = "lbNextPageConfigID";
+            lbNextPageConfigID.Size = new Size(83, 15);
+            lbNextPageConfigID.TabIndex = 0;
+            lbNextPageConfigID.Text = "PageConfig ID";
             // 
             // textBox1
             // 
@@ -459,9 +459,9 @@
         private CheckBox nextsCb;
         private CheckBox filesCb;
         private TextBox txtPageID;
-        private Label label1;
+        private Label lbPageConfigID;
         private TextBox txtCoding;
-        private Label label2;
+        private Label lbEncoding;
         private SearchConfig searchConfig1;
         private ToolStrip toolStrip1;
         private ToolStripButton tbAddSearchLayer;
@@ -482,7 +482,7 @@
         private TabControl tcNext;
         private TabPage tabPage3;
         private Panel panel3;
-        private Label label3;
+        private Label lbNextPageConfigID;
         private TextBox textBox1;
     }
 }
