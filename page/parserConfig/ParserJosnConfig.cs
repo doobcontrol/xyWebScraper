@@ -27,8 +27,6 @@ namespace xy.scraper.page.parserConfig
 
         private ParserJosnConfig(JsonObject root)
         {
-            JsonElement searchsE;
-
             encoding = root[JCfgName.encoding].GetValue<String>();
             configId = root[JCfgName.cfgid].GetValue<String>();
 
