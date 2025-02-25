@@ -30,6 +30,16 @@ namespace xy.scraper.page
             {
                 try
                 {
+                    if (token.IsCancellationRequested)
+                    {
+                        progress.Report("\r\ncancel task, start save break point ... \r\n");
+
+                        OperationCanceledException e = new OperationCanceledException(token);
+                        e.Data["savePath"] = savePath;
+                        e.Data["retList"] = null;
+                        e.Data["downloadDict"] = null;
+                        throw e;
+                    }
                     htmlString = await _htmlDownloader.GetHtmlStringAsync(
                     pUrl, _htmlParser.GetEncoding(), progress);
                     break;
