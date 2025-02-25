@@ -71,10 +71,10 @@ namespace xy.scraper.page.parserConfig
 
         #region search tools
 
-        public static string search(string searchString, JsonObject searchJson)
+        public static string? search(string searchString, JsonObject searchJson)
         {
             JsonArray searchLayers = searchJson[JCfgName.search].AsArray();
-            string retStr = searchString;
+            string? retStr = searchString;
             foreach (JsonObject searchLayer in searchLayers)
             {
                 string startStr = searchLayer[JCfgName.start].GetValue<String>();
@@ -86,18 +86,22 @@ namespace xy.scraper.page.parserConfig
                 }
                 else
                 {
+                    retStr = null;
                     break;
                 }
             }
 
-            foreach (JsonValue replaceE in searchJson[JCfgName.replaces].AsArray())
+            if (retStr != null)
             {
-                retStr = retStr.Replace(replaceE.GetValue<String>(), "");
-            }
+                foreach (JsonValue replaceE in searchJson[JCfgName.replaces].AsArray())
+                {
+                    retStr = retStr?.Replace(replaceE.GetValue<String>(), "");
+                }
 
-            string addBefore = searchJson[JCfgName.AddBefore].GetValue<String>();
-            string addAfter = searchJson[JCfgName.AddAfter].GetValue<String>();
-            retStr = addBefore + retStr + addAfter;
+                string addBefore = searchJson[JCfgName.AddBefore].GetValue<String>();
+                string addAfter = searchJson[JCfgName.AddAfter].GetValue<String>();
+                retStr = addBefore + retStr + addAfter;
+            }
 
             return retStr;
         }
@@ -106,7 +110,7 @@ namespace xy.scraper.page.parserConfig
         {
             JsonArray searchLayers = searchJson[JCfgName.search].AsArray();
 
-            string retStr = searchString;
+            string? retStr = searchString;
             List<string> retList = htmlParserTool.findAllBetween(
                 retStr,
                 searchLayers[0][JCfgName.start].GetValue<String>(),
@@ -132,17 +136,21 @@ namespace xy.scraper.page.parserConfig
                     }
                     else
                     {
+                        retStr = null;
                         break;
                     }
                 }
-                foreach (JsonValue replaceE in searchJson[JCfgName.replaces].AsArray())
+                if(retStr != null)
                 {
-                    retStr = retStr.Replace(replaceE.GetValue<String>(), "");
+                    foreach (JsonValue replaceE in searchJson[JCfgName.replaces].AsArray())
+                    {
+                        retStr = retStr?.Replace(replaceE.GetValue<String>(), "");
+                    }
+                    string addBefore = searchJson[JCfgName.AddBefore].GetValue<String>();
+                    string addAfter = searchJson[JCfgName.AddAfter].GetValue<String>();
+                    retStr = addBefore + retStr + addAfter;
+                    retList[index] = retStr;
                 }
-                string addBefore = searchJson[JCfgName.AddBefore].GetValue<String>();
-                string addAfter = searchJson[JCfgName.AddAfter].GetValue<String>();
-                retStr = addBefore + retStr + addAfter;
-                retList[index] = retStr;
             }
 
             return retList;
@@ -159,8 +167,11 @@ namespace xy.scraper.page.parserConfig
                 List<string> pathList = new List<string>();
                 foreach (JsonObject pathE in parserJosnConfig.pathsE)
                 {
-                    pathList.Add(htmlParserTool.washPathStr(search(htmlString, pathE)));
-
+                    string? subpath = search(htmlString, pathE);
+                    if (subpath != null)
+                    {
+                        pathList.Add(htmlParserTool.washPathStr(subpath));
+                    }
                 }
                 string path = @"\" + String.Join(@"\", pathList) + @"\";
 
@@ -203,7 +214,11 @@ namespace xy.scraper.page.parserConfig
                     }
                     else
                     {
-                        retList.Add((search(htmlString, nextsSearchE), cfgid));
+                        string? url = search(htmlString, nextsSearchE);
+                        if (url != null)
+                        {
+                            retList.Add((url, cfgid));
+                        }
                     }
                 }
             }
