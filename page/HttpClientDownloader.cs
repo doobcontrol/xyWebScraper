@@ -13,8 +13,7 @@ namespace xy.scraper.page
 
         public async Task DownloadFileAsync(
             string uri, 
-            string outputPath, 
-            IProgress<string> progress)
+            string outputPath)
         {
             Uri uriResult;
 
@@ -27,8 +26,7 @@ namespace xy.scraper.page
 
         public async Task<string> GetHtmlStringAsync(
             string url,
-            string encoding,
-            IProgress<string> progress)
+            string encoding)
         {
             HttpClient _httpClient = new HttpClient();
             _httpClient.DefaultRequestHeaders.Add("User-Agent", "Custom");

@@ -41,7 +41,7 @@ namespace xy.scraper.page
                         throw e;
                     }
                     htmlString = await _htmlDownloader.GetHtmlStringAsync(
-                    pUrl, _htmlParser.GetEncoding(), progress);
+                    pUrl, _htmlParser.GetEncoding());
                     break;
                 }
                 catch (HttpRequestException e)
@@ -119,8 +119,7 @@ namespace xy.scraper.page
                             }
 
                             await _htmlDownloader.DownloadFileAsync(
-                                dUrl, fileFullName, progress
-                                );
+                                dUrl, fileFullName);
                             progress.Report(Resources.Succeed + downloadDict[dUrl]);
                             break;
                         }

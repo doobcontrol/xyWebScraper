@@ -10,11 +10,9 @@ namespace xy.scraper.page
     {
         Task<string> GetHtmlStringAsync(
             string url,
-            string encoding, 
-            IProgress<string> progress);
+            string encoding);
         Task DownloadFileAsync(
             string uri, 
-            string outputPath, 
-            IProgress<string> progress);
+            string outputPath);
     }
 }
