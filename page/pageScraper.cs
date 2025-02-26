@@ -140,6 +140,7 @@ namespace xy.scraper.page
                             }
                         }
                     }
+                    downloadDict.Remove(dUrl);
                 }
                 catch (Exception e)
                 {
@@ -152,10 +153,6 @@ namespace xy.scraper.page
                     oe.Data["retList"] = null;
                     oe.Data["downloadDict"] = downloadDict;
                     throw oe;
-                }
-                finally
-                {
-                    downloadDict.Remove(dUrl);
                 }
             }
         }
