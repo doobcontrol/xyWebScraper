@@ -47,9 +47,7 @@ namespace xy.scraper.configControl
                 html =
                     await new HttpClientDownloader().GetHtmlStringAsync(
                         txtUrl.Text,
-                        scraperConfig.Encoding,
-                        new Progress<string>(s => { })
-                    );
+                        scraperConfig.Encoding);
                 tabControl1.SelectedIndex = 1;
                 txtHtml.Text = html;
                 tabControl1.Controls.Add(tpTest);
