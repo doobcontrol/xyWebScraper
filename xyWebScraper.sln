@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "page", "page\page.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "configControl", "configControl\configControl.csproj", "{1015091D-5F11-4B35-B608-026CE8A3B52F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pageTest", "pageTest\pageTest.csproj", "{9A3C98AF-E5AB-4F1F-83B9-6E20AA7A1C2E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1015091D-5F11-4B35-B608-026CE8A3B52F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1015091D-5F11-4B35-B608-026CE8A3B52F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1015091D-5F11-4B35-B608-026CE8A3B52F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A3C98AF-E5AB-4F1F-83B9-6E20AA7A1C2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A3C98AF-E5AB-4F1F-83B9-6E20AA7A1C2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A3C98AF-E5AB-4F1F-83B9-6E20AA7A1C2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A3C98AF-E5AB-4F1F-83B9-6E20AA7A1C2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
