@@ -100,6 +100,15 @@ namespace xy.scraper.page {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: {1}.
+        /// </summary>
+        internal static string ExceptionInfo {
+            get {
+                return ResourceManager.GetString("ExceptionInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed: .
         /// </summary>
         internal static string Failed {
@@ -109,7 +118,7 @@ namespace xy.scraper.page {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tried many times and gave up.
+        ///   Looks up a localized string similar to Tried many times and gave up: .
         /// </summary>
         internal static string GaveUpTry {
             get {
@@ -141,15 +150,6 @@ namespace xy.scraper.page {
         internal static string GotOtherPageLinks {
             get {
                 return ResourceManager.GetString("GotOtherPageLinks", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to HttpRequestException: .
-        /// </summary>
-        internal static string HttpRequestException {
-            get {
-                return ResourceManager.GetString("HttpRequestException", resourceCulture);
             }
         }
         

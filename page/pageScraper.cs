@@ -46,7 +46,8 @@ namespace xy.scraper.page
                 }
                 catch (HttpRequestException e)
                 {
-                    progress.Report(Resources.HttpRequestException + e.Message);
+                    progress.Report(string.Format(Resources.ExceptionInfo,
+                        "HttpRequestException", e.Message));
 
                     if (tryCount < 5)
                     {
@@ -58,6 +59,23 @@ namespace xy.scraper.page
                     {
                         progress.Report(Resources.GaveUpTry);
                         return new List<(string, string)>();
+                    }
+                }
+                catch (TaskCanceledException e)
+                {
+                    progress.Report(string.Format(Resources.ExceptionInfo,
+                        "TaskCanceledException", e.Message));
+
+                    if (tryCount < 5)
+                    {
+                        tryCount++;
+                        progress.Report(Resources.Retry + tryCount);
+                        await Task.Delay(10000);
+                    }
+                    else
+                    {
+                        progress.Report(Resources.GaveUpTry);
+                        throw e;
                     }
                 }
             }
@@ -125,7 +143,8 @@ namespace xy.scraper.page
                         }
                         catch (HttpRequestException e)
                         {
-                            progress.Report(Resources.HttpRequestException + e.Message);
+                            progress.Report(string.Format(Resources.ExceptionInfo,
+                                "HttpRequestException", e.Message));
 
                             if (tryCount < 5)
                             {
@@ -135,8 +154,25 @@ namespace xy.scraper.page
                             }
                             else
                             {
-                                progress.Report(Resources.GaveUpTry);
+                                progress.Report(Resources.GaveUpTry + downloadDict[dUrl]);
                                 break;
+                            }
+                        }
+                        catch (TaskCanceledException e)
+                        {
+                            progress.Report(string.Format(Resources.ExceptionInfo,
+                                "TaskCanceledException", e.Message));
+
+                            if (tryCount < 5)
+                            {
+                                tryCount++;
+                                progress.Report(Resources.Retry + tryCount);
+                                await Task.Delay(10000);
+                            }
+                            else
+                            {
+                                progress.Report(Resources.GaveUpTry + downloadDict[dUrl]);
+                                throw e;
                             }
                         }
                     }

@@ -136,7 +136,7 @@ cancel task, start save break point ...
     <value>Failed: </value>
   </data>
   <data name="GaveUpTry" xml:space="preserve">
-    <value>Tried many times and gave up</value>
+    <value>Tried many times and gave up: </value>
   </data>
   <data name="GotOtherPageLinks" xml:space="preserve">
     <value>got other page links: </value>
@@ -147,8 +147,8 @@ cancel task, start save break point ...
   <data name="GotDownloadItems" xml:space="preserve">
     <value>got download items:</value>
   </data>
-  <data name="HttpRequestException" xml:space="preserve">
-    <value>HttpRequestException: </value>
+  <data name="ExceptionInfo" xml:space="preserve">
+    <value>{0}: {1}</value>
   </data>
   <data name="Retry" xml:space="preserve">
     <value>Retry: </value>

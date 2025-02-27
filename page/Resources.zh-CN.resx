@@ -136,7 +136,7 @@
     <value>失败: </value>
   </data>
   <data name="GaveUpTry" xml:space="preserve">
-    <value>多次重试未成功，已放弃</value>
+    <value>多次重试未成功，已放弃: </value>
   </data>
   <data name="GotOtherPageLinks" xml:space="preserve">
     <value>其它页面链接: </value>
@@ -147,8 +147,8 @@
   <data name="GotDownloadItems" xml:space="preserve">
     <value>要下载的文件: </value>
   </data>
-  <data name="HttpRequestException" xml:space="preserve">
-    <value>出现HttpRequestException错误: </value>
+  <data name="ExceptionInfo" xml:space="preserve">
+    <value>出现{0}错误: {1}</value>
   </data>
   <data name="Retry" xml:space="preserve">
     <value>重试: </value>
