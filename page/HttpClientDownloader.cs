@@ -9,7 +9,12 @@ namespace xy.scraper.page
 {
     public class HttpClientDownloader : IHtmlDownloader
     {
-        private readonly HttpClient _httpClient = new HttpClient();
+        private readonly HttpClient _httpClient;
+
+        //For unit testing
+        public HttpClientDownloader(HttpClient? httpClient = null) {
+            _httpClient = httpClient ?? new HttpClient();
+        }
 
         public async Task DownloadFileAsync(
             string uri, 
@@ -28,14 +33,13 @@ namespace xy.scraper.page
             string url,
             string encoding)
         {
-            HttpClient _httpClient = new HttpClient();
             _httpClient.DefaultRequestHeaders.Add("User-Agent", "Custom");
             var response = await _httpClient.GetByteArrayAsync(url);
             System.Text.Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             var responseString = await Task.Run(
                 () =>
                 Encoding.GetEncoding(encoding).
-                    GetString(response, 0, response.Length - 1)
+                    GetString(response, 0, response.Length)
             );
             return responseString;
         }
