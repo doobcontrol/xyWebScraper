@@ -14,20 +14,37 @@ namespace pageTest
     public class HttpClientDownloaderTests
     {
         private HttpClientDownloader MockHttpClientDownloader(
-            HttpStatusCode statusCode, string returnStr)
+            HttpStatusCode statusCode, 
+            string returnStr,
+            Exception? ex = null)
         {
             var handlerMock = new Mock<HttpMessageHandler>();
-            handlerMock
-                .Protected()
-                .Setup<Task<HttpResponseMessage>>(
-                    "SendAsync",
-                    ItExpr.IsAny<HttpRequestMessage>(),
-                    ItExpr.IsAny<CancellationToken>())
-                .ReturnsAsync(new HttpResponseMessage()
-                {
-                    StatusCode = statusCode,
-                    Content = new StringContent(returnStr),
-                });
+
+            if(ex == null)
+            {
+                handlerMock
+                    .Protected()
+                    .Setup<Task<HttpResponseMessage>>(
+                        "SendAsync",
+                        ItExpr.IsAny<HttpRequestMessage>(),
+                        ItExpr.IsAny<CancellationToken>())
+                    .ReturnsAsync(new HttpResponseMessage()
+                    {
+                        StatusCode = statusCode,
+                        Content = new StringContent(returnStr),
+                    });
+            }
+            else
+            {
+                handlerMock
+                    .Protected()
+                    .Setup<Task<HttpResponseMessage>>(
+                        "SendAsync",
+                        ItExpr.IsAny<HttpRequestMessage>(),
+                        ItExpr.IsAny<CancellationToken>())
+                    //.Callback(() => throw ex);
+                    .ThrowsAsync(ex);
+            }
 
             // use real http client with mocked handler here
             var httpClient = new HttpClient(handlerMock.Object);
@@ -101,6 +118,32 @@ namespace pageTest
             Assert.AreEqual("URI is invalid.", ex.Message);
         }
         [TestMethod]
+        public async Task DownloadFileAsync_Timeout()
+        {
+            // ARRANGE
+            string expected = "The request was canceled due to the configured HttpClient.Timeout of 100 seconds elapsing.";
+            TaskCanceledException expectedEx = new TaskCanceledException(expected);
+            HttpClientDownloader mockHttpClientDownloader =
+                MockHttpClientDownloader(HttpStatusCode.NotFound, "",
+                expectedEx
+                );
+            string uri = "https://test.txt";
+            string savePath = "test.txt";
+            if (File.Exists(savePath))
+            {
+                File.Delete(savePath);
+            }
+
+            // ACT
+            // ASSERT
+            TaskCanceledException ex =
+                await Assert.ThrowsExceptionAsync<TaskCanceledException>(
+                async () => await mockHttpClientDownloader
+               .DownloadFileAsync(uri, savePath)
+                );
+            Assert.AreEqual(expected, ex.Message);
+        }
+        [TestMethod]
         public async Task DownloadFileAsync_404()
         {
             // ARRANGE
@@ -122,8 +165,6 @@ namespace pageTest
                 );
             Assert.AreEqual(HttpStatusCode.NotFound, ex.StatusCode);
         }
-
-
         #endregion
     }
 }
