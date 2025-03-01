@@ -9,6 +9,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+using System.Web;
 using xy.scraper.page;
 
 namespace pageTest
@@ -37,12 +38,13 @@ namespace pageTest
         string savePath = @"download";
         string filePath = @"\path1\path2\";
         string fileName = @"name";
-        string urlStr = "url";
+        string fileUrlStr = "fileUrl";
         string msgSucceed = "Succeed: ";
         string cancelFlag = "cancel";
         string HttpRequestExceptionFlag = "HttpRequestException";
         string TaskCanceledExceptionFlag = "TaskCanceledException";
         string ExceptionFlag = "Exception";
+        string downloadUrl = "downloadUrl";
         private void deleteFolder(string FolderName)
         {
             if(!Directory.Exists(FolderName))
@@ -65,8 +67,8 @@ namespace pageTest
         }
         private Dictionary<string, string> createDownloadDict(
             int Count, 
-            int FlagLoc,
-            string? flag)
+            int FlagLoc = -1,
+            string? flag = null)
         {
             Dictionary<string, string> downloadDict = new Dictionary<string, string>();
             for (int i = 0; i < Count; i++)
@@ -77,7 +79,7 @@ namespace pageTest
                 }
                 else
                 {
-                    downloadDict.Add(urlStr + i, filePath + fileName + i);
+                    downloadDict.Add(fileUrlStr + i, filePath + fileName + i);
                 }
             }
             return downloadDict;
@@ -91,7 +93,7 @@ namespace pageTest
             }
             return expectReportList;
         }
-        private void IHtmlDownloaderMockSetup(
+        private void IHtmlDownloaderMockSetup_File(
             Mock<IHtmlDownloader> IHtmlDownloaderMock
             )
         {
@@ -120,17 +122,144 @@ namespace pageTest
                     }
                 });
         }
+        private void IHtmlDownloaderMockSetup_Html(
+            Mock<IHtmlDownloader> IHtmlDownloaderMock
+            )
+        {
+            IHtmlDownloaderMock.Setup(
+                x => x.GetHtmlStringAsync(It.IsAny<string>(), It.IsAny<string>()))
+                .Callback<string, string>((uri, path) =>
+                {
+                    if (uri == TaskCanceledExceptionFlag)
+                    {
+                        throw new TaskCanceledException();
+                    }
+                    else if (uri == cancelFlag)
+                    {
+                        throw new OperationCanceledException();
+                    }
+                    else if (uri == HttpRequestExceptionFlag)
+                    {
+                        throw new HttpRequestException();
+                    }
+                    else if (uri == ExceptionFlag)
+                    {
+                        throw new Exception();
+                    }
+                })
+                .ReturnsAsync(teststream);
+        }
+
+        string pageUrlStr = "pageUrl";
+        private List<(string, string)> createTaskList(int Count)
+        {
+            List<(string, string)> taskList = new List<(string, string)>();
+            for (int i = 0; i < Count; i++)
+            {
+                taskList.Add((pageUrlStr, i.ToString()));
+            }
+            return taskList;
+        }
+        private void IHtmlParserMockSetup(
+            Mock<IHtmlParser> IHtmlParserMock,
+            int files,
+            int links,
+            string MockEncoding = "utf-8"
+            )
+        {
+            IHtmlParserMock.Setup(
+                x => x.GetEncoding())
+                .Returns(MockEncoding);
+            IHtmlParserMock.Setup<List<(string, string)>>(
+                x => x.getOtherPageDict(It.IsAny<string>()))
+                .Returns((string htmlString) => {
+                    List < (string, string) > taskList;
+                    if (links > 0)
+                    {
+                        taskList = createTaskList(links);
+                    }
+                    else
+                    {
+                        taskList = new List<(string, string)>();
+                    }
+                    return taskList;
+                });
+            IHtmlParserMock.Setup<Dictionary<string, string>>(
+                x => x.getDownloadDict(It.IsAny<string>()))
+                .Returns((string htmlString) => {
+                    if(files > 0)
+                    {
+                        return createDownloadDict(files);
+                    }
+                    else
+                    {
+                        return new Dictionary<string, string>();
+                    }
+                });
+        }
 
         #region download_Url
         [TestMethod]
-        public void download_Url()
+        public async Task download_Url()
+        {
+            await download_Url(20, 2);
+        }
+        [TestMethod]
+        public async Task download_Url_OnlyFiles()
+        {
+            await download_Url(20, 0);
+        }
+        [TestMethod]
+        public async Task download_Url_OnlyLinks()
+        {
+            await download_Url(0, 20);
+        }
+        private async Task download_Url(int files, int links)
         {
             // ARRANGE
 
+            //parameters
+            CancellationTokenSource cts = new CancellationTokenSource();
+            IProgress<string> progress = new Progress<string>();
+            if (Directory.Exists(savePath))
+            {
+                deleteFolder(savePath);
+            }
+
+            //mockPageScraper
+            int downloadDictCount = files;
+            int expectCount = downloadDictCount;
+            int retListCount = links;
+
+            var IHtmlParserMock = new Mock<IHtmlParser>();
+            IHtmlParserMockSetup(IHtmlParserMock, downloadDictCount, retListCount);
+
+            var IHtmlDownloaderMock = new Mock<IHtmlDownloader>();
+            IHtmlDownloaderMockSetup_Html(IHtmlDownloaderMock);
+            IHtmlDownloaderMockSetup_File(IHtmlDownloaderMock);
+            pageScraper mockPageScraper = new pageScraper(
+                IHtmlParserMock.Object,
+                IHtmlDownloaderMock.Object);
+
             // ACT
+            List<(string, string)> retList =
+                await mockPageScraper.download(downloadUrl, cts.Token, progress, savePath);
 
             // ASSERT
-
+            Assert.AreEqual(retList.Count, retListCount);
+            if(files > 0)
+            {
+                Assert.IsTrue(Directory.Exists(savePath + filePath));
+            }
+            IHtmlParserMock.Verify(
+                x => x.getOtherPageDict(It.IsAny<string>()),
+                Times.Once);
+            IHtmlParserMock.Verify(
+                x => x.getDownloadDict(It.IsAny<string>()),
+                Times.Once);
+            IHtmlDownloaderMock.Verify(
+                x => x.DownloadFileAsync(It.IsAny<string>(), It.IsAny<string>()),
+                Times.Exactly(expectCount));
         }
         #endregion
 
@@ -155,7 +284,7 @@ namespace pageTest
             //mockPageScraper
             var IHtmlParserMock = new Mock<IHtmlParser>();
             var IHtmlDownloaderMock = new Mock<IHtmlDownloader>();
-            IHtmlDownloaderMockSetup(IHtmlDownloaderMock);
+            IHtmlDownloaderMockSetup_File(IHtmlDownloaderMock);
             pageScraper mockPageScraper = new pageScraper(
                 IHtmlParserMock.Object,
                 IHtmlDownloaderMock.Object);
@@ -190,7 +319,7 @@ namespace pageTest
             //mockPageScraper
             var IHtmlParserMock = new Mock<IHtmlParser>();
             var IHtmlDownloaderMock = new Mock<IHtmlDownloader>();
-            IHtmlDownloaderMockSetup(IHtmlDownloaderMock);
+            IHtmlDownloaderMockSetup_File(IHtmlDownloaderMock);
             pageScraper mockPageScraper = new pageScraper(
                 IHtmlParserMock.Object,
                 IHtmlDownloaderMock.Object);
@@ -238,7 +367,7 @@ namespace pageTest
             //mockPageScraper
             var IHtmlParserMock = new Mock<IHtmlParser>();
             var IHtmlDownloaderMock = new Mock<IHtmlDownloader>();
-            IHtmlDownloaderMockSetup(IHtmlDownloaderMock);
+            IHtmlDownloaderMockSetup_File(IHtmlDownloaderMock);
             pageScraper mockPageScraper = new pageScraper(
                 IHtmlParserMock.Object,
                 IHtmlDownloaderMock.Object);
@@ -279,7 +408,7 @@ namespace pageTest
             //mockPageScraper
             var IHtmlParserMock = new Mock<IHtmlParser>();
             var IHtmlDownloaderMock = new Mock<IHtmlDownloader>();
-            IHtmlDownloaderMockSetup(IHtmlDownloaderMock);
+            IHtmlDownloaderMockSetup_File(IHtmlDownloaderMock);
             pageScraper mockPageScraper = new pageScraper(
                 IHtmlParserMock.Object,
                 IHtmlDownloaderMock.Object);
@@ -314,7 +443,7 @@ namespace pageTest
             //mockPageScraper
             var IHtmlParserMock = new Mock<IHtmlParser>();
             var IHtmlDownloaderMock = new Mock<IHtmlDownloader>();
-            IHtmlDownloaderMockSetup(IHtmlDownloaderMock);
+            IHtmlDownloaderMockSetup_File(IHtmlDownloaderMock);
             pageScraper mockPageScraper = new pageScraper(
                 IHtmlParserMock.Object,
                 IHtmlDownloaderMock.Object);
@@ -356,7 +485,7 @@ namespace pageTest
             //mockPageScraper
             var IHtmlParserMock = new Mock<IHtmlParser>();
             var IHtmlDownloaderMock = new Mock<IHtmlDownloader>();
-            IHtmlDownloaderMockSetup(IHtmlDownloaderMock);
+            IHtmlDownloaderMockSetup_File(IHtmlDownloaderMock);
             pageScraper mockPageScraper = new pageScraper(
                 IHtmlParserMock.Object,
                 IHtmlDownloaderMock.Object);
