@@ -7,13 +7,14 @@ namespace xy.scraper.page
 {
     public class pageScraper
     {
-        protected IHtmlDownloader _htmlDownloader = new HttpClientDownloader();
+        protected IHtmlDownloader _htmlDownloader;
         protected IHtmlParser _htmlParser;
 
-        public pageScraper(IHtmlParser htmlParser)
+        public pageScraper(IHtmlParser htmlParser,
+            IHtmlDownloader? htmlDownloader = null)
         {
             _htmlParser = htmlParser;
-            _htmlDownloader = new HttpClientDownloader();
+            _htmlDownloader = htmlDownloader ?? new HttpClientDownloader();
         }
 
         public async Task<List<(string, string)>> download(
