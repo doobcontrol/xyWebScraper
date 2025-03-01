@@ -40,6 +40,9 @@ namespace pageTest
         string urlStr = "url";
         string msgSucceed = "Succeed: ";
         string cancelFlag = "cancel";
+        string HttpRequestExceptionFlag = "HttpRequestException";
+        string TaskCanceledExceptionFlag = "TaskCanceledException";
+        string ExceptionFlag = "Exception";
         private void deleteFolder(string FolderName)
         {
             if(!Directory.Exists(FolderName))
@@ -99,9 +102,21 @@ namespace pageTest
                 x => x.DownloadFileAsync(It.IsAny<string>(), It.IsAny<string>()))
                 .Callback<string, string>((uri, path) =>
                 {
-                    if (uri == cancelFlag)
+                    if (uri == TaskCanceledExceptionFlag)
+                    {
+                        throw new TaskCanceledException();
+                    }
+                    else if (uri == cancelFlag)
                     {
                         throw new OperationCanceledException();
+                    }
+                    else if (uri == HttpRequestExceptionFlag)
+                    {
+                        throw new HttpRequestException();
+                    }
+                    else if (uri == ExceptionFlag)
+                    {
+                        throw new Exception();
                     }
                 });
         }
@@ -126,8 +141,10 @@ namespace pageTest
             // ARRANGE
 
             //parameters
-            Dictionary<string, string> downloadDict = createDownloadDict(20, -1, null);
-            int count = downloadDict.Count;
+            int downloadDictCount = 20;
+            Dictionary<string, string> downloadDict 
+                = createDownloadDict(downloadDictCount, -1, null);
+            int expectCount = downloadDictCount;
             CancellationTokenSource cts = new CancellationTokenSource();
             IProgress<string> progress = new Progress<string>();
             if (Directory.Exists(savePath))
@@ -150,7 +167,7 @@ namespace pageTest
             Assert.IsTrue(Directory.Exists(savePath + filePath));
             IHtmlDownloaderMock.Verify(
                 x => x.DownloadFileAsync(It.IsAny<string>(), It.IsAny<string>()),
-                Times.Exactly(count));
+                Times.Exactly(expectCount));
         }
         [TestMethod]
         public async Task download_Dict_Cancel()
@@ -159,9 +176,10 @@ namespace pageTest
 
             //parameters
             int FlagLoc = 11;
+            int downloadDictCount = 20;
             Dictionary<string, string> downloadDict 
-                = createDownloadDict(20, FlagLoc, cancelFlag);
-            int count = FlagLoc + 1;
+                = createDownloadDict(downloadDictCount, FlagLoc, cancelFlag);
+            int expectCount = FlagLoc + 1;
             CancellationTokenSource cts = new CancellationTokenSource();
             IProgress<string> progress = new Progress<string>();
             if (Directory.Exists(savePath))
@@ -183,19 +201,26 @@ namespace pageTest
                 await Assert.ThrowsExceptionAsync<OperationCanceledException>(
                 () => mockPageScraper.download(downloadDict, cts.Token, progress, savePath)
                 );
+            Assert.AreEqual(ex.Data["savePath"], savePath);
+            Assert.AreEqual(ex.Data["retList"], null);
+            Dictionary<string,string> saveDic = (Dictionary<string, string>)ex.Data["downloadDict"];
+            Assert.AreEqual(saveDic.Count, downloadDictCount - FlagLoc);
+
             Assert.IsTrue(Directory.Exists(savePath + filePath));
             IHtmlDownloaderMock.Verify(
                 x => x.DownloadFileAsync(It.IsAny<string>(), It.IsAny<string>()),
-                Times.Exactly(count));
+                Times.Exactly(expectCount));
         }
         [TestMethod]
         public async Task download_Dict_Report()
         {
             // ARRANGE
-            
+
             //parameters
-            Dictionary<string, string> downloadDict = createDownloadDict(20, -1, null);
-            int count = downloadDict.Count;
+            int downloadDictCount = 20;
+            Dictionary<string, string> downloadDict 
+                = createDownloadDict(downloadDictCount, -1, null);
+            int expectCount = downloadDictCount;
             CancellationTokenSource cts = new CancellationTokenSource();
             List<string> expectReportList = createExpectReportList(20);
             List<string> reportList = new List<string>();
@@ -231,42 +256,30 @@ namespace pageTest
             }
             IHtmlDownloaderMock.Verify(
                 x => x.DownloadFileAsync(It.IsAny<string>(), It.IsAny<string>()),
-                Times.Exactly(count));
+                Times.Exactly(expectCount));
         }
         [TestMethod]
-        public async Task download_Dict_TaskCanceledException()
+        public async Task download_Dict_HttpRequestException()
         {
             // ARRANGE
+
             //parameters
-            Dictionary<string, string> downloadDict = new Dictionary<string, string>();
-            downloadDict.Add("url1", @"\path1\path2\name1");
-            int count = downloadDict.Count;
+            int FlagLoc = 11;
+            int downloadDictCount = 20;
+            Dictionary<string, string> downloadDict
+                = createDownloadDict(20, FlagLoc, HttpRequestExceptionFlag);
+            int expectCount = downloadDictCount + 5;
             CancellationTokenSource cts = new CancellationTokenSource();
             IProgress<string> progress = new Progress<string>();
-            string savePath = @"download";
-            if (System.IO.Directory.Exists(savePath))
+            if (Directory.Exists(savePath))
             {
-                deleteFolder("download");
+                deleteFolder(savePath);
             }
 
             //mockPageScraper
             var IHtmlParserMock = new Mock<IHtmlParser>();
             var IHtmlDownloaderMock = new Mock<IHtmlDownloader>();
-            IHtmlDownloaderMock.Setup(
-                x => x.GetHtmlStringAsync(It.IsAny<string>(), It.IsAny<string>()))
-                .ReturnsAsync("teststream");
-            IHtmlDownloaderMock.Setup(
-                x => x.DownloadFileAsync(It.IsAny<string>(), It.IsAny<string>()))
-                .Callback<string, string>((uri, path) => {
-                    if (uri == "HttpRequestException")
-                    {
-                        throw new HttpRequestException();
-                    }
-                    else if (uri == "TaskCanceledException")
-                    {
-                        throw new TaskCanceledException();
-                    }
-                });
+            IHtmlDownloaderMockSetup(IHtmlDownloaderMock);
             pageScraper mockPageScraper = new pageScraper(
                 IHtmlParserMock.Object,
                 IHtmlDownloaderMock.Object);
@@ -275,7 +288,94 @@ namespace pageTest
             await mockPageScraper.download(downloadDict, cts.Token, progress, savePath);
 
             // ASSERT
-            Assert.IsTrue(System.IO.Directory.Exists(savePath + @"\path1\path2"));
+            Assert.IsTrue(Directory.Exists(savePath + filePath));
+            IHtmlDownloaderMock.Verify(
+                x => x.DownloadFileAsync(It.IsAny<string>(), It.IsAny<string>()),
+                Times.Exactly(expectCount));
+        }
+        [TestMethod]
+        public async Task download_Dict_TaskCanceledException()
+        {
+            // ARRANGE
+
+            //parameters
+            int FlagLoc = 11;
+            int downloadDictCount = 20;
+            Dictionary<string, string> downloadDict
+                = createDownloadDict(20, FlagLoc, TaskCanceledExceptionFlag);
+            int expectCount = FlagLoc + 1 + 5;
+            CancellationTokenSource cts = new CancellationTokenSource();
+            IProgress<string> progress = new Progress<string>();
+            if (Directory.Exists(savePath))
+            {
+                deleteFolder(savePath);
+            }
+
+            //mockPageScraper
+            var IHtmlParserMock = new Mock<IHtmlParser>();
+            var IHtmlDownloaderMock = new Mock<IHtmlDownloader>();
+            IHtmlDownloaderMockSetup(IHtmlDownloaderMock);
+            pageScraper mockPageScraper = new pageScraper(
+                IHtmlParserMock.Object,
+                IHtmlDownloaderMock.Object);
+
+            // ACT
+            // ASSERT
+            OperationCanceledException ex =
+                await Assert.ThrowsExceptionAsync<OperationCanceledException>(
+                () => mockPageScraper.download(downloadDict, cts.Token, progress, savePath)
+                );
+            Assert.AreEqual(ex.Data["savePath"], savePath);
+            Assert.AreEqual(ex.Data["retList"], null);
+            Dictionary<string, string> saveDic = (Dictionary<string, string>)ex.Data["downloadDict"];
+            Assert.AreEqual(saveDic.Count, downloadDictCount - FlagLoc);
+
+            Assert.IsTrue(Directory.Exists(savePath + filePath));
+            IHtmlDownloaderMock.Verify(
+                x => x.DownloadFileAsync(It.IsAny<string>(), It.IsAny<string>()),
+                Times.Exactly(expectCount));
+        }
+        [TestMethod]
+        public async Task download_Dict_Exception()
+        {
+            // ARRANGE
+
+            //parameters
+            int FlagLoc = 11;
+            int downloadDictCount = 20;
+            Dictionary<string, string> downloadDict
+                = createDownloadDict(20, FlagLoc, ExceptionFlag);
+            int expectCount = FlagLoc + 1;
+            CancellationTokenSource cts = new CancellationTokenSource();
+            IProgress<string> progress = new Progress<string>();
+            if (Directory.Exists(savePath))
+            {
+                deleteFolder(savePath);
+            }
+
+            //mockPageScraper
+            var IHtmlParserMock = new Mock<IHtmlParser>();
+            var IHtmlDownloaderMock = new Mock<IHtmlDownloader>();
+            IHtmlDownloaderMockSetup(IHtmlDownloaderMock);
+            pageScraper mockPageScraper = new pageScraper(
+                IHtmlParserMock.Object,
+                IHtmlDownloaderMock.Object);
+
+            // ACT
+            // ASSERT
+            OperationCanceledException ex =
+                await Assert.ThrowsExceptionAsync<OperationCanceledException>(
+                () => mockPageScraper.download(downloadDict, cts.Token, progress, savePath)
+                );
+            Assert.AreEqual(ex.Data["savePath"], savePath);
+            Assert.AreEqual(ex.Data["retList"], null);
+            Dictionary<string, string> saveDic = (Dictionary<string, string>)ex.Data["downloadDict"];
+            Assert.AreEqual(saveDic.Count, downloadDictCount - FlagLoc);
+
+            Assert.IsTrue(Directory.Exists(savePath + filePath));
+            IHtmlDownloaderMock.Verify(
+                x => x.DownloadFileAsync(It.IsAny<string>(), It.IsAny<string>()),
+                Times.Exactly(expectCount));
         }
         #endregion
     }
