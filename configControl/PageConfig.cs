@@ -123,9 +123,9 @@ namespace xy.scraper.configControl
 
             TextBox textBox = new TextBox();
             panel.Controls.Add(textBox);
-            textBox.Top = textBox1.Top;
-            textBox.Left = textBox1.Left;
-            textBox.Width = textBox1.Width;
+            textBox.Top = txtNextUrlPageID.Top;
+            textBox.Left = txtNextUrlPageID.Left;
+            textBox.Width = txtNextUrlPageID.Width;
         }
 
         private void tbDel_Click(object sender, EventArgs e)

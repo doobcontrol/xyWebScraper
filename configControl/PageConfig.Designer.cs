@@ -59,7 +59,7 @@
             searchConfig3 = new SearchConfig();
             panel3 = new Panel();
             lbNextPageConfigID = new Label();
-            textBox1 = new TextBox();
+            txtNextUrlPageID = new TextBox();
             toolStrip3 = new ToolStrip();
             tbAddNext = new ToolStripButton();
             tbDelNext = new ToolStripButton();
@@ -361,7 +361,7 @@
             // panel3
             // 
             panel3.Controls.Add(lbNextPageConfigID);
-            panel3.Controls.Add(textBox1);
+            panel3.Controls.Add(txtNextUrlPageID);
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(3, 3);
             panel3.Name = "panel3";
@@ -377,12 +377,12 @@
             lbNextPageConfigID.TabIndex = 0;
             lbNextPageConfigID.Text = "PageConfig ID";
             // 
-            // textBox1
+            // txtNextUrlPageID
             // 
-            textBox1.Location = new Point(98, 12);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(244, 23);
-            textBox1.TabIndex = 2;
+            txtNextUrlPageID.Location = new Point(98, 12);
+            txtNextUrlPageID.Name = "txtNextUrlPageID";
+            txtNextUrlPageID.Size = new Size(244, 23);
+            txtNextUrlPageID.TabIndex = 2;
             // 
             // toolStrip3
             // 
@@ -482,6 +482,6 @@
         private TabPage tabPage3;
         private Panel panel3;
         private Label lbNextPageConfigID;
-        private TextBox textBox1;
+        private TextBox txtNextUrlPageID;
     }
 }
