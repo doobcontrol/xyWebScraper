@@ -43,8 +43,6 @@ namespace configControlTest
             SearchConfig searchConfig = new SearchConfig();
             searchConfig.Dock = System.Windows.Forms.DockStyle.Fill;
 
-            Color selectedBackColor = Color.LightBlue;
-
             Form testForm = new Form();
             testForm.SuspendLayout();
             testForm.Controls.Add(searchConfig);
@@ -89,6 +87,78 @@ namespace configControlTest
             else
             {
                 Assert.Fail();
+            }
+        }
+
+        [TestMethod]
+        public void SearchConfig_Add_Del_Replace()
+        {
+            SearchConfig searchConfig = new SearchConfig();
+            searchConfig.Dock = System.Windows.Forms.DockStyle.Fill;
+
+            Color selectedBackColor = Color.LightBlue;
+
+            Form testForm = new Form();
+            testForm.SuspendLayout();
+            testForm.Controls.Add(searchConfig);
+            testForm.ResumeLayout(false);
+            testForm.Show();
+
+            ToolStrip? toolStrip2 =
+                GetControl(searchConfig, "toolStrip2") as ToolStrip;
+
+            Assert.IsNotNull(toolStrip2);
+
+            TabPage? tpFinalHandle = 
+                GetControl(searchConfig, "tpFinalHandle") as TabPage;
+            Assert.IsNotNull(tpFinalHandle);
+            ToolStripButton? tbAddReplace =
+                toolStrip2.Items["tbAddReplace"] as ToolStripButton;
+            Assert.IsNotNull(tbAddReplace);
+            ToolStripButton? tbDelReplace =
+                toolStrip2.Items["tbDelReplace"] as ToolStripButton;
+            Assert.IsNotNull(tbDelReplace);
+            TextBox? txtAddReplace =
+                GetControl(searchConfig, "txtAddReplace") as TextBox;
+            Assert.IsNotNull(txtAddReplace);
+
+            TabControl? tabControl = (tpFinalHandle.Parent as TabControl);
+            Assert.IsNotNull(tabControl);
+            tabControl.SelectedTab = tpFinalHandle;
+
+            string testStr = "testabc";
+            txtAddReplace.Text = testStr;
+            tbAddReplace.PerformClick();
+
+            ListBox? lbReplaceList =
+                GetControl(searchConfig, "lbReplaceList") as ListBox;
+            Assert.IsNotNull(lbReplaceList);
+
+            Assert.AreEqual(1, lbReplaceList.Items.Count);
+            Assert.AreEqual(testStr, lbReplaceList.Items[0].ToString());
+            Assert.AreEqual("", txtAddReplace.Text);
+
+            lbReplaceList.SelectedIndex = 0; ;
+            tbDelReplace.PerformClick();
+
+            Assert.AreEqual(0, lbReplaceList.Items.Count);
+
+            for(int i = 0; i < 10; i++)
+            {
+                txtAddReplace.Text = testStr + i;
+                tbAddReplace.PerformClick();
+
+                Assert.AreEqual(i + 1, lbReplaceList.Items.Count);
+                Assert.AreEqual(testStr + i, lbReplaceList.Items[i].ToString());
+                Assert.AreEqual("", txtAddReplace.Text);
+            }
+
+            while(lbReplaceList.Items.Count > 0)
+            {
+                int count = lbReplaceList.Items.Count;
+                lbReplaceList.SelectedIndex = count - 1 ;
+                tbDelReplace.PerformClick();
+                Assert.AreEqual(count - 1, lbReplaceList.Items.Count);
             }
         }
     }
