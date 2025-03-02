@@ -30,5 +30,33 @@ namespace configControlTest
             }
             return retControl;
         }
+    
+        public static Control? GetControl(Control control, string name, 
+            List<Type> excludeInTypes)
+        {
+            Control? retControl = null;
+            foreach (Control c in control.Controls)
+            {
+                if (c.Name == name)
+                {
+                    retControl = c;
+                    break;
+                }
+                else
+                {
+                    if(!excludeInTypes.Contains(c.GetType()))
+                    {
+                        Control? subControl = CTool.GetControl(
+                            c, name, excludeInTypes);
+                        if (subControl != null)
+                        {
+                            retControl = subControl;
+                            break;
+                        }
+                    }
+                }
+            }
+            return retControl;
+        }
     }
 }
