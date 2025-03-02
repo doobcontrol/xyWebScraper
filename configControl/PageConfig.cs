@@ -101,6 +101,7 @@ namespace xy.scraper.configControl
             SearchConfig sc = new SearchConfig();
             sc.Dock = DockStyle.Fill;
             tp.Controls.Add(sc);
+            tc.SelectedTab = tp;
 
             if (tc == tcNext)
             {
