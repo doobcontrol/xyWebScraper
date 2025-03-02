@@ -464,7 +464,6 @@
         private Label lbEncoding;
         private SearchConfig searchConfig1;
         private ToolStrip toolStrip1;
-        private ToolStripButton tbAddSearchLayer;
         private ToolStripButton tbAddPath;
         private ToolStripButton tbDelPath;
         private TabControl tcPath;
