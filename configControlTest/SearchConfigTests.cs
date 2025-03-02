@@ -16,29 +16,6 @@ namespace configControlTest
     [TestClass]
     public class SearchConfigTests
     {
-        public Control? GetControl(Control control, string name)
-        {
-            Control? retControl = null;
-            foreach (Control c in control.Controls)
-            {
-                if (c.Name == name)
-                {
-                    retControl = c;
-                    break;
-                }
-                else
-                {
-                    Control? subControl = GetControl(c, name);
-                    if (subControl != null)
-                    {
-                        retControl = subControl;
-                        break;
-                    }
-                }
-            }
-            return retControl;
-        }
-
         [TestMethod]
         public void SearchConfig_Add_Del_SearchLayer()
         {
@@ -52,7 +29,7 @@ namespace configControlTest
             testForm.Show();
 
             ToolStrip? toolStrip1 =
-                GetControl(searchConfig, "toolStrip1") as ToolStrip;
+                CTool.GetControl(searchConfig, "toolStrip1") as ToolStrip;
 
             if (toolStrip1 == null)
             {
@@ -69,7 +46,7 @@ namespace configControlTest
                 tbAddSearchLayer.PerformClick();
 
                 Panel? panel1 =
-                    GetControl(searchConfig, "panel1") as Panel;
+                    CTool.GetControl(searchConfig, "panel1") as Panel;
                 if (panel1 != null)
                 {
                     Assert.AreEqual(panel1.Controls.Count, 2);
@@ -105,12 +82,12 @@ namespace configControlTest
             testForm.Show();
 
             ToolStrip? toolStrip2 =
-                GetControl(searchConfig, "toolStrip2") as ToolStrip;
+                CTool.GetControl(searchConfig, "toolStrip2") as ToolStrip;
 
             Assert.IsNotNull(toolStrip2);
 
             TabPage? tpFinalHandle = 
-                GetControl(searchConfig, "tpFinalHandle") as TabPage;
+                CTool.GetControl(searchConfig, "tpFinalHandle") as TabPage;
             Assert.IsNotNull(tpFinalHandle);
             ToolStripButton? tbAddReplace =
                 toolStrip2.Items["tbAddReplace"] as ToolStripButton;
@@ -119,7 +96,7 @@ namespace configControlTest
                 toolStrip2.Items["tbDelReplace"] as ToolStripButton;
             Assert.IsNotNull(tbDelReplace);
             TextBox? txtAddReplace =
-                GetControl(searchConfig, "txtAddReplace") as TextBox;
+                CTool.GetControl(searchConfig, "txtAddReplace") as TextBox;
             Assert.IsNotNull(txtAddReplace);
 
             TabControl? tabControl = (tpFinalHandle.Parent as TabControl);
@@ -131,7 +108,7 @@ namespace configControlTest
             tbAddReplace.PerformClick();
 
             ListBox? lbReplaceList =
-                GetControl(searchConfig, "lbReplaceList") as ListBox;
+                CTool.GetControl(searchConfig, "lbReplaceList") as ListBox;
             Assert.IsNotNull(lbReplaceList);
 
             Assert.AreEqual(1, lbReplaceList.Items.Count);
@@ -175,7 +152,7 @@ namespace configControlTest
             testForm.Show();
 
             ToolStrip? toolStrip1 =
-                GetControl(searchConfig, "toolStrip1") as ToolStrip;
+                CTool.GetControl(searchConfig, "toolStrip1") as ToolStrip;
             Assert.IsNotNull(toolStrip1);
             ToolStripButton? tbAddSearchLayer =
                 toolStrip1.Items["tbAddSearchLayer"] as ToolStripButton;
@@ -183,7 +160,7 @@ namespace configControlTest
             tbAddSearchLayer.PerformClick();
 
             Panel? panel1 =
-                GetControl(searchConfig, "panel1") as Panel;
+                CTool.GetControl(searchConfig, "panel1") as Panel;
             Assert.IsNotNull(panel1);
             Assert.AreEqual(panel1.Controls.Count, 2);
 
@@ -202,16 +179,16 @@ namespace configControlTest
 
 
             ToolStrip? toolStrip2 =
-                GetControl(searchConfig, "toolStrip2") as ToolStrip;
+                CTool.GetControl(searchConfig, "toolStrip2") as ToolStrip;
             Assert.IsNotNull(toolStrip2);
             TabPage? tpFinalHandle =
-                GetControl(searchConfig, "tpFinalHandle") as TabPage;
+                CTool.GetControl(searchConfig, "tpFinalHandle") as TabPage;
             Assert.IsNotNull(tpFinalHandle);
             ToolStripButton? tbAddReplace =
                 toolStrip2.Items["tbAddReplace"] as ToolStripButton;
             Assert.IsNotNull(tbAddReplace);
             TextBox? txtAddReplace =
-                GetControl(searchConfig, "txtAddReplace") as TextBox;
+                CTool.GetControl(searchConfig, "txtAddReplace") as TextBox;
             Assert.IsNotNull(txtAddReplace);
             TabControl? tabControl = (tpFinalHandle.Parent as TabControl);
             Assert.IsNotNull(tabControl);
@@ -225,17 +202,17 @@ namespace configControlTest
             tbAddReplace.PerformClick();
 
             ListBox? lbReplaceList =
-                GetControl(searchConfig, "lbReplaceList") as ListBox;
+                CTool.GetControl(searchConfig, "lbReplaceList") as ListBox;
             Assert.IsNotNull(lbReplaceList);
 
             Assert.AreEqual(2, lbReplaceList.Items.Count);
             Assert.AreEqual("", txtAddReplace.Text);
 
             TextBox? txtAddBefore =
-                GetControl(searchConfig, "txtAddBefore") as TextBox;
+                CTool.GetControl(searchConfig, "txtAddBefore") as TextBox;
             Assert.IsNotNull(txtAddBefore);
             TextBox? txtAddAfter =
-                GetControl(searchConfig, "txtAddAfter") as TextBox;
+                CTool.GetControl(searchConfig, "txtAddAfter") as TextBox;
             Assert.IsNotNull(txtAddAfter);
             string testAddBefore = "testAddBefore";
             string testAddAfter = "testAddAfter";
@@ -243,7 +220,7 @@ namespace configControlTest
             txtAddAfter.Text = testAddAfter;
 
             CheckBox? cbSearchList =
-                GetControl(searchConfig, "cbSearchList") as CheckBox;
+                CTool.GetControl(searchConfig, "cbSearchList") as CheckBox;
             Assert.IsNotNull(cbSearchList);
             bool testSearchList = true;
             cbSearchList.Checked = testSearchList;
@@ -332,7 +309,7 @@ namespace configControlTest
             testForm.Show();
 
             Panel? panel1 =
-                GetControl(searchConfig, "panel1") as Panel;
+                CTool.GetControl(searchConfig, "panel1") as Panel;
             Assert.IsNotNull(panel1);
             Assert.AreEqual(panel1.Controls.Count, 2);
 
@@ -346,14 +323,14 @@ namespace configControlTest
             Assert.AreEqual(endString1, searchLayer1.End);
 
             TabPage? tpFinalHandle =
-                GetControl(searchConfig, "tpFinalHandle") as TabPage;
+                CTool.GetControl(searchConfig, "tpFinalHandle") as TabPage;
             Assert.IsNotNull(tpFinalHandle);
             TabControl? tabControl = (tpFinalHandle.Parent as TabControl);
             Assert.IsNotNull(tabControl);
             tabControl.SelectedTab = tpFinalHandle;
 
             ListBox? lbReplaceList =
-                GetControl(searchConfig, "lbReplaceList") as ListBox;
+                CTool.GetControl(searchConfig, "lbReplaceList") as ListBox;
             Assert.IsNotNull(lbReplaceList);
 
             Assert.AreEqual(2, lbReplaceList.Items.Count);
@@ -361,16 +338,16 @@ namespace configControlTest
             Assert.AreEqual(testReplace1, lbReplaceList.Items[1].ToString());
 
             TextBox? txtAddBefore =
-                GetControl(searchConfig, "txtAddBefore") as TextBox;
+                CTool.GetControl(searchConfig, "txtAddBefore") as TextBox;
             Assert.IsNotNull(txtAddBefore);
             TextBox? txtAddAfter =
-                GetControl(searchConfig, "txtAddAfter") as TextBox;
+                CTool.GetControl(searchConfig, "txtAddAfter") as TextBox;
             Assert.IsNotNull(txtAddAfter);
             Assert.AreEqual(testAddBefore, txtAddBefore.Text);
             Assert.AreEqual(testAddAfter, txtAddAfter.Text);
 
             CheckBox? cbSearchList =
-                GetControl(searchConfig, "cbSearchList") as CheckBox;
+                CTool.GetControl(searchConfig, "cbSearchList") as CheckBox;
             Assert.IsNotNull(cbSearchList);
             Assert.AreEqual(testSearchList, cbSearchList.Checked);
         }
