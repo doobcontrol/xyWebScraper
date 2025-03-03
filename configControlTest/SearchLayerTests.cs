@@ -8,6 +8,7 @@ using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using xy.scraper.configControl;
+using xy.scraper.page.parserConfig;
 
 namespace configControlTest
 {
@@ -73,30 +74,46 @@ namespace configControlTest
         [TestMethod]
         public void SearchLayer_JsonObj_get()
         {
+            JsonObject expectedJObj = CTool.testSearchLayer_JsonObj();
+
             SearchLayer searchLayer1 = new SearchLayer();
             searchLayer1.Dock = System.Windows.Forms.DockStyle.Top;
-            searchLayer1.Start = "startString";
-            searchLayer1.End = "endString";
+            string initStart = CTool.randomString();
+            string initEnd = CTool.randomString();
+            searchLayer1.Start = initStart;
+            searchLayer1.End = initEnd;
 
             Form testForm = new Form();
             testForm.Controls.Add(searchLayer1);
             testForm.Show();
 
-            JsonObject jObj = searchLayer1.JsonObj;
-            Assert.IsNotNull(jObj);
-            Assert.AreEqual(jObj["start"].ToString(), "startString");
-            Assert.AreEqual(jObj["end"].ToString(), "endString");
-            Assert.AreEqual(jObj.ToJsonString(), 
-                "{\"start\":\"startString\",\"end\":\"endString\"}");
+            TextBox? txtStart = searchLayer1.Controls["txtStart"] as TextBox;
+            Assert.IsNotNull(txtStart);
+            TextBox? txtEnd = searchLayer1.Controls["txtEnd"] as TextBox;
+            Assert.IsNotNull(txtEnd);
+            //Assert perporties(Start, End) set
+            Assert.AreEqual(initStart, txtStart.Text);
+            Assert.AreEqual(initEnd, txtEnd.Text);
 
+            txtStart.Text = expectedJObj[JCfgName.start].GetValue<string>();
+            txtEnd.Text = expectedJObj[JCfgName.end].GetValue<string>();
+
+            //Assert perporties(Start, End) get
+            Assert.AreEqual(expectedJObj[JCfgName.start].GetValue<string>(),
+                searchLayer1.Start);
+            Assert.AreEqual(expectedJObj[JCfgName.end].GetValue<string>(),
+                searchLayer1.End);
+
+            //Assert perportie JsonObj get
+            JsonObject actualJObj = searchLayer1.JsonObj;
+            Assert.IsNotNull(actualJObj);
+            Assert.AreEqual(expectedJObj.ToJsonString(), actualJObj.ToJsonString());
         }
 
         [TestMethod]
         public void SearchLayer_JsonObj_set()
         {
-            JsonObject jObj =
-                JsonSerializer.Deserialize<JsonObject>
-                ("{\"start\":\"startString\",\"end\":\"endString\"}");
+            JsonObject jObj = CTool.testSearchLayer_JsonObj();
 
             SearchLayer searchLayer1 = new SearchLayer();
             searchLayer1.JsonObj = jObj;
@@ -110,7 +127,8 @@ namespace configControlTest
             TextBox? txtStart = searchLayer1.Controls["txtStart"] as TextBox;
             if (txtStart != null)
             {
-                Assert.AreEqual(txtStart.Text, "startString");
+                Assert.AreEqual(txtStart.Text, 
+                    jObj[JCfgName.start].GetValue<string>());
             }
             else
             {
@@ -119,7 +137,8 @@ namespace configControlTest
             TextBox? txtEnd = searchLayer1.Controls["txtEnd"] as TextBox;
             if (txtEnd != null)
             {
-                Assert.AreEqual(txtEnd.Text, "endString");
+                Assert.AreEqual(txtEnd.Text, 
+                    jObj[JCfgName.end].GetValue<string>());
             }
             else
             {

@@ -142,6 +142,8 @@ namespace configControlTest
         [TestMethod]
         public void SearchConfig_JsonObj_get()
         {
+            JsonObject expectedJObj = CTool.testSearchConfig_JsonObj();
+
             SearchConfig searchConfig = new SearchConfig();
             searchConfig.Dock = System.Windows.Forms.DockStyle.Fill;
 
@@ -157,26 +159,27 @@ namespace configControlTest
             ToolStripButton? tbAddSearchLayer =
                 toolStrip1.Items["tbAddSearchLayer"] as ToolStripButton;
             Assert.IsNotNull(tbAddSearchLayer);
-            tbAddSearchLayer.PerformClick();
 
             Panel? panel1 =
                 CTool.GetControl(searchConfig, "panel1") as Panel;
             Assert.IsNotNull(panel1);
-            Assert.AreEqual(panel1.Controls.Count, 2);
+            Assert.AreEqual(panel1.Controls.Count, 1);
 
-            SearchLayer? searchLayer1 = panel1.Controls[0] as SearchLayer;
-            SearchLayer? searchLayer0 = panel1.Controls[1] as SearchLayer;
-            Assert.IsNotNull(searchLayer0);
-            Assert.IsNotNull(searchLayer1);
-            string startString0 = "startString0";
-            string endString0 = "endString0";
-            string startString1 = "startString1";
-            string endString1 = "endString1";
-            searchLayer0.Start = startString0;
-            searchLayer0.End = endString0;
-            searchLayer1.Start = startString1;
-            searchLayer1.End = endString1;
+            int layerCount = expectedJObj[JCfgName.search].AsArray().Count;
+            for (int i = 0; i < layerCount; i++)
+            {
+                if (i > 0)
+                {
+                    tbAddSearchLayer.PerformClick();
+                    Assert.AreEqual(panel1.Controls.Count, i + 1);
+                }
 
+                SearchLayer? searchLayer = panel1.Controls[0] as SearchLayer;
+                Assert.IsNotNull(searchLayer);
+                searchLayer.JsonObj =
+                    expectedJObj[JCfgName.search].AsArray()[i] as JsonObject;
+            }
+            Assert.AreEqual(panel1.Controls.Count, layerCount);
 
             ToolStrip? toolStrip2 =
                 CTool.GetControl(searchConfig, "toolStrip2") as ToolStrip;
@@ -194,18 +197,20 @@ namespace configControlTest
             Assert.IsNotNull(tabControl);
             tabControl.SelectedTab = tpFinalHandle;
 
-            string testReplace0 = "testReplace0";
-            txtAddReplace.Text = testReplace0;
-            tbAddReplace.PerformClick();
-            string testReplace1 = "testReplace1";
-            txtAddReplace.Text = testReplace1;
-            tbAddReplace.PerformClick();
+
+            JsonArray replaces
+                = expectedJObj[JCfgName.replaces].AsArray();
+            foreach (JsonValue item in replaces)
+            {
+                txtAddReplace.Text = item.GetValue<string>();
+                tbAddReplace.PerformClick();
+            }
 
             ListBox? lbReplaceList =
                 CTool.GetControl(searchConfig, "lbReplaceList") as ListBox;
             Assert.IsNotNull(lbReplaceList);
 
-            Assert.AreEqual(2, lbReplaceList.Items.Count);
+            Assert.AreEqual(replaces.Count, lbReplaceList.Items.Count);
             Assert.AreEqual("", txtAddReplace.Text);
 
             TextBox? txtAddBefore =
@@ -214,93 +219,30 @@ namespace configControlTest
             TextBox? txtAddAfter =
                 CTool.GetControl(searchConfig, "txtAddAfter") as TextBox;
             Assert.IsNotNull(txtAddAfter);
-            string testAddBefore = "testAddBefore";
-            string testAddAfter = "testAddAfter";
-            txtAddBefore.Text = testAddBefore;
-            txtAddAfter.Text = testAddAfter;
+
+            txtAddBefore.Text = 
+                expectedJObj[JCfgName.AddBefore].GetValue<string>();
+            txtAddAfter.Text = 
+                expectedJObj[JCfgName.AddAfter].GetValue<string>();
 
             CheckBox? cbSearchList =
                 CTool.GetControl(searchConfig, "cbSearchList") as CheckBox;
             Assert.IsNotNull(cbSearchList);
-            bool testSearchList = true;
-            cbSearchList.Checked = testSearchList;
+            cbSearchList.Checked = 
+                expectedJObj[JCfgName.SearchList].GetValue<Boolean>();
 
-            string repectStr = "{" 
-                + "\"" + JCfgName.search + "\":" + "[" 
-                + "{"
-                + "\"" + JCfgName.start + "\":\"" + startString0 + "\""
-                + ","
-                + "\"" + JCfgName.end + "\":\"" + endString0 + "\""
-                + "}"
-                + ","
-                + "{"
-                + "\"" + JCfgName.start + "\":\"" + startString1 + "\""
-                + ","
-                + "\"" + JCfgName.end + "\":\"" + endString1 + "\""
-                + "}"
-                + "]"
-                + ","
-                + "\"" + JCfgName.replaces + "\":" + "["
-                + "\"" + testReplace0 + "\""
-                + ","
-                + "\"" + testReplace1 + "\""
-                + "]"
-                + ","
-                + "\"" + JCfgName.AddBefore + "\":\"" + testAddBefore + "\""
-                + ","
-                + "\"" + JCfgName.AddAfter + "\":\"" + testAddAfter + "\""
-                + ","
-                + "\"" + JCfgName.SearchList + "\":" 
-                + testSearchList.ToString().ToLower()
-                + "}";
-            Assert.AreEqual(repectStr, searchConfig.JsonObj.ToJsonString());
+            Assert.AreEqual(expectedJObj.ToJsonString(), 
+                searchConfig.JsonObj.ToJsonString());
         }
 
         [TestMethod]
         public void SearchConfig_JsonObj_set()
         {
-            string startString0 = "startString0";
-            string endString0 = "endString0";
-            string startString1 = "startString1";
-            string endString1 = "endString1";
-            string testReplace0 = "testReplace0";
-            string testReplace1 = "testReplace1";
-            string testAddBefore = "testAddBefore";
-            string testAddAfter = "testAddAfter";
-            bool testSearchList = true;
-
-            string repectStr = "{"
-                + "\"" + JCfgName.search + "\":" + "["
-                + "{"
-                + "\"" + JCfgName.start + "\":\"" + startString0 + "\""
-                + ","
-                + "\"" + JCfgName.end + "\":\"" + endString0 + "\""
-                + "}"
-                + ","
-                + "{"
-                + "\"" + JCfgName.start + "\":\"" + startString1 + "\""
-                + ","
-                + "\"" + JCfgName.end + "\":\"" + endString1 + "\""
-                + "}"
-                + "]"
-                + ","
-                + "\"" + JCfgName.replaces + "\":" + "["
-                + "\"" + testReplace0 + "\""
-                + ","
-                + "\"" + testReplace1 + "\""
-                + "]"
-                + ","
-                + "\"" + JCfgName.AddBefore + "\":\"" + testAddBefore + "\""
-                + ","
-                + "\"" + JCfgName.AddAfter + "\":\"" + testAddAfter + "\""
-                + ","
-                + "\"" + JCfgName.SearchList + "\":"
-                + testSearchList.ToString().ToLower()
-                + "}";
+            JsonObject expectedJObj = CTool.testSearchConfig_JsonObj();
 
             SearchConfig searchConfig = new SearchConfig();
             searchConfig.Dock = System.Windows.Forms.DockStyle.Fill;
-            searchConfig.JsonObj = JsonObject.Parse(repectStr) as JsonObject;
+            searchConfig.JsonObj = expectedJObj;
 
             Form testForm = new Form();
             testForm.SuspendLayout();
@@ -311,16 +253,20 @@ namespace configControlTest
             Panel? panel1 =
                 CTool.GetControl(searchConfig, "panel1") as Panel;
             Assert.IsNotNull(panel1);
-            Assert.AreEqual(panel1.Controls.Count, 2);
+            JsonArray layers = expectedJObj[JCfgName.search].AsArray();
+            Assert.AreEqual(panel1.Controls.Count, layers.Count);
 
-            SearchLayer? searchLayer1 = panel1.Controls[0] as SearchLayer;
-            SearchLayer? searchLayer0 = panel1.Controls[1] as SearchLayer;
-            Assert.IsNotNull(searchLayer0);
-            Assert.IsNotNull(searchLayer1);
-            Assert.AreEqual(startString0, searchLayer0.Start);
-            Assert.AreEqual(endString0, searchLayer0.End);
-            Assert.AreEqual(startString1, searchLayer1.Start);
-            Assert.AreEqual(endString1, searchLayer1.End);
+            foreach(JsonObject lObj in layers)
+            {
+                SearchLayer? searchLayer = 
+                    panel1.Controls[layers.Count - 1 - layers.IndexOf(lObj)] //reverse order
+                    as SearchLayer;
+                Assert.IsNotNull(searchLayer);
+                Assert.AreEqual(lObj[JCfgName.start].GetValue<string>(), 
+                    searchLayer.Start);
+                Assert.AreEqual(lObj[JCfgName.end].GetValue<string>(), 
+                    searchLayer.End);
+            }
 
             TabPage? tpFinalHandle =
                 CTool.GetControl(searchConfig, "tpFinalHandle") as TabPage;
@@ -333,9 +279,13 @@ namespace configControlTest
                 CTool.GetControl(searchConfig, "lbReplaceList") as ListBox;
             Assert.IsNotNull(lbReplaceList);
 
-            Assert.AreEqual(2, lbReplaceList.Items.Count);
-            Assert.AreEqual(testReplace0, lbReplaceList.Items[0].ToString());
-            Assert.AreEqual(testReplace1, lbReplaceList.Items[1].ToString());
+            JsonArray replaces = expectedJObj[JCfgName.replaces].AsArray();
+            Assert.AreEqual(replaces.Count, lbReplaceList.Items.Count);
+            foreach(JsonValue item in replaces)
+            {
+                Assert.AreEqual(item.GetValue<string>(), 
+                    lbReplaceList.Items[replaces.IndexOf(item)].ToString());
+            }
 
             TextBox? txtAddBefore =
                 CTool.GetControl(searchConfig, "txtAddBefore") as TextBox;
@@ -343,13 +293,16 @@ namespace configControlTest
             TextBox? txtAddAfter =
                 CTool.GetControl(searchConfig, "txtAddAfter") as TextBox;
             Assert.IsNotNull(txtAddAfter);
-            Assert.AreEqual(testAddBefore, txtAddBefore.Text);
-            Assert.AreEqual(testAddAfter, txtAddAfter.Text);
+            Assert.AreEqual(expectedJObj[JCfgName.AddBefore].GetValue<string>(), 
+                txtAddBefore.Text);
+            Assert.AreEqual(expectedJObj[JCfgName.AddAfter].GetValue<string>(),
+                txtAddAfter.Text);
 
             CheckBox? cbSearchList =
                 CTool.GetControl(searchConfig, "cbSearchList") as CheckBox;
             Assert.IsNotNull(cbSearchList);
-            Assert.AreEqual(testSearchList, cbSearchList.Checked);
+            Assert.AreEqual(expectedJObj[JCfgName.SearchList].GetValue<Boolean>(),
+                cbSearchList.Checked);
         }
     }
 }

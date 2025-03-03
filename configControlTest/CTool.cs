@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
+using xy.scraper.configControl;
+using xy.scraper.page.parserConfig;
 
 namespace configControlTest
 {
@@ -57,6 +60,49 @@ namespace configControlTest
                 }
             }
             return retControl;
+        }
+
+        public static string randomString(int minLength, int maxLength)
+        {
+            Random random = new Random();
+            int length = random.Next(minLength, maxLength);
+            const string chars = 
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+        public static string randomString()
+        {
+            return randomString(10, 20);
+        }
+
+        public static JsonObject testSearchLayer_JsonObj()
+        {
+            JsonObject jObj = new JsonObject();
+            jObj[JCfgName.start] = randomString();
+            jObj[JCfgName.end] = randomString();
+            return jObj;
+        }
+
+        public static JsonObject testSearchConfig_JsonObj()
+        {
+            JsonObject jObj = new JsonObject();
+
+            JsonArray searchLayers = new JsonArray();
+            jObj[JCfgName.search] = searchLayers;
+            searchLayers.Insert(0, testSearchLayer_JsonObj());
+            searchLayers.Insert(0, testSearchLayer_JsonObj());
+
+            JsonArray replaces = new JsonArray();
+            jObj[JCfgName.replaces] = replaces;
+            replaces.Add(JsonValue.Create(randomString()));
+            replaces.Add(JsonValue.Create(randomString()));
+
+            jObj[JCfgName.AddBefore] = randomString();
+            jObj[JCfgName.AddAfter] = randomString();
+            jObj[JCfgName.SearchList] = true;
+
+            return jObj;
         }
     }
 }
