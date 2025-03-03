@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using xy.scraper.configControl;
 using xy.scraper.page.parserConfig;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace configControlTest
 {
@@ -101,6 +104,42 @@ namespace configControlTest
             jObj[JCfgName.AddBefore] = randomString();
             jObj[JCfgName.AddAfter] = randomString();
             jObj[JCfgName.SearchList] = true;
+
+            return jObj;
+        }
+
+        public static JsonObject testPageConfig_JsonObj()
+        {
+            JsonObject jObj = new JsonObject();
+            int count = 3;
+
+            jObj[JCfgName.cfgid] = randomString();
+            jObj[JCfgName.encoding] = randomString();
+
+            JsonArray paths = new JsonArray();
+            jObj[JCfgName.paths] = paths;
+            for (int i = 0; i < count; i++)
+            {
+                paths.Add(testSearchConfig_JsonObj());
+            }
+
+            JsonArray files = new JsonArray();
+            jObj[JCfgName.files] = files;
+            for (int i = 0; i < count; i++)
+            {
+                files.Add(testSearchConfig_JsonObj());
+            }
+
+            JsonArray nexts = new JsonArray();
+            jObj[JCfgName.nexts] = nexts;
+            for (int i = 0; i < count; i++)
+            {
+                JsonObject nextObj = new JsonObject();
+                nextObj[JCfgName.cfgid] = randomString();
+                nextObj[JCfgName.searchs] = testSearchConfig_JsonObj();
+
+                nexts.Add(nextObj);
+            }
 
             return jObj;
         }
