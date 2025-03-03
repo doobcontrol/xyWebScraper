@@ -45,9 +45,7 @@ namespace xy.scraper.configControl
             try
             {
                 html =
-                    await new HttpClientDownloader().GetHtmlStringAsync(
-                        txtUrl.Text,
-                        scraperConfig.Encoding);
+                    await getHtmlString(txtUrl.Text);
                 tabControl1.SelectedIndex = 1;
                 txtHtml.Text = html;
                 tabControl1.Controls.Add(tpTest);
@@ -69,7 +67,7 @@ namespace xy.scraper.configControl
         {
             try
             {
-                JsonObject searchJson = scraperConfig.CurrentSearchConfig.JsonObj;
+                JsonObject searchJson = searchJsonObject();
                 bool searchList = searchJson[JCfgName.SearchList].GetValue<bool>();
                 if (searchList)
                 {
@@ -90,12 +88,23 @@ namespace xy.scraper.configControl
             }
         }
 
-        private ScraperConfig scraperConfig;
-        public ScraperConfig ScraperConfig
+        public delegate JsonObject SearchJsonObject();
+        private SearchJsonObject searchJsonObject;
+        public SearchJsonObject SearchJsonObj
         {
             set
             {
-                scraperConfig = value;
+                searchJsonObject = value;
+            }
+        }
+
+        public delegate Task<string> GetHtmlString(string Url);
+        GetHtmlString getHtmlString;
+        public GetHtmlString GetHtmlStringObj
+        {
+            set
+            {
+                getHtmlString = value;
             }
         }
     }

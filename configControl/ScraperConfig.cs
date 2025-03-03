@@ -11,6 +11,7 @@ using System.IO;
 using System.Text.Json.Nodes;
 using System.Globalization;
 using xy.scraper.configControl.Properties;
+using xy.scraper.page;
 
 namespace xy.scraper.configControl
 {
@@ -26,7 +27,10 @@ namespace xy.scraper.configControl
             defaultPageConfig.PageID = "pageModel1";
             tabControl1.TabPages[0].Text = defaultPageConfig.PageID;
 
-            searchTest1.ScraperConfig = this;
+            searchTest1.SearchJsonObj = 
+                new SearchTest.SearchJsonObject(getCurrentSearchJsonObject);
+            searchTest1.GetHtmlStringObj = 
+                new SearchTest.GetHtmlString(GetHtmlStringObj);
 
             setUiText();
         }
@@ -129,15 +133,6 @@ namespace xy.scraper.configControl
         {
             searchTest1.Visible = tbShowTest.Checked;
         }
-
-        //for test
-        public SearchConfig CurrentSearchConfig
-        {
-            get
-            {
-                return ((PageConfig)tabControl1.SelectedTab.Controls[0]).CurrentSearchConfig;
-            }
-        }
         public string Encoding
         {
             get
@@ -184,6 +179,27 @@ namespace xy.scraper.configControl
                     pc.JsonObj = item;
                 }
             }
+        }
+
+        //for test
+        public SearchConfig CurrentSearchConfig
+        {
+            get
+            {
+                return ((PageConfig)tabControl1.SelectedTab.Controls[0]).CurrentSearchConfig;
+            }
+        }
+        private JsonObject getCurrentSearchJsonObject()
+        {
+            return CurrentSearchConfig.JsonObj;
+        }
+        private async Task<string> GetHtmlStringObj(string Url)
+        {
+            string html =
+                    await new HttpClientDownloader().GetHtmlStringAsync(
+                        Url,
+                        Encoding);
+            return html;
         }
     }
 }
