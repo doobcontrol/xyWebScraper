@@ -78,12 +78,63 @@ namespace configControlTest
         {
             return randomString(10, 20);
         }
+        public static int randomInt(int min, int max)
+        {
+            Random random = new Random();
+            int length = random.Next(min, min);
+            return random.Next(min, min);
+        }
+        public static (string start, string end, string searchStr, string resultStr) 
+            generateSearchTestData()
+        {
+            string start = randomString();
+            string end = randomString();
+            string resultStr = randomString();
+            string searchStr = 
+                randomString(20, 50) 
+                + start 
+                + resultStr
+                + end 
+                + randomString(20, 50);
+
+            return (start, end, searchStr, resultStr);
+        }
+        public static 
+            (string start, string end, string searchStr, List<string> resultStrs)
+            generateSearchListTestData()
+        {
+            int count = randomInt(5, 10);
+            string start = randomString();
+            string end = randomString();
+            string searchStr = randomString(20, 50);
+            List<string> resultStrs = new List<string>();
+            for (int i = 0; i < count; i++)
+            {
+                string resultStr = randomString(20, 50);
+                resultStrs.Add(resultStr);
+                searchStr += randomString(20, 50) 
+                    + start
+                    + resultStr
+                    + end
+                    + randomString(20, 50);
+            }
+            searchStr += randomString(20, 50);
+
+            return (start, end, searchStr, resultStrs);
+        }
 
         public static JsonObject testSearchLayer_JsonObj()
         {
             JsonObject jObj = new JsonObject();
             jObj[JCfgName.start] = randomString();
             jObj[JCfgName.end] = randomString();
+            return jObj;
+        }
+        public static JsonObject testSearchLayer_JsonObj(string start, string end)
+        {
+            JsonObject jObj = new JsonObject();
+            jObj[JCfgName.start] = start;
+            jObj[JCfgName.end] = end;
             return jObj;
         }
 
@@ -103,6 +154,29 @@ namespace configControlTest
 
             jObj[JCfgName.AddBefore] = randomString();
             jObj[JCfgName.AddAfter] = randomString();
+            jObj[JCfgName.SearchList] = true;
+
+            return jObj;
+        }
+        public static JsonObject testSearchConfig_JsonObj(
+            List<JsonObject> searchLayerList)
+        {
+            JsonObject jObj = new JsonObject();
+
+            JsonArray searchLayers = new JsonArray();
+            jObj[JCfgName.search] = searchLayers;
+            foreach (JsonObject layer in searchLayerList)
+            {
+                searchLayers.Insert(0, layer);
+            }
+
+            JsonArray replaces = new JsonArray();
+            jObj[JCfgName.replaces] = replaces;
+            replaces.Add(JsonValue.Create(randomString()));
+            replaces.Add(JsonValue.Create(randomString()));
+
+            jObj[JCfgName.AddBefore] = "";
+            jObj[JCfgName.AddAfter] = "";
             jObj[JCfgName.SearchList] = true;
 
             return jObj;
