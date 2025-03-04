@@ -72,8 +72,10 @@ namespace xy.scraper.configControl
                 if (searchList)
                 {
                     List<string> searchResult = ParserJosnConfig.searchList(html, searchJson);
-                    txtShowBox.Text = string.Join("\r\n", searchResult);
-                    txtShowBox.Text = "found " + searchResult.Count + " items:\r\n" + txtShowBox.Text;
+                     txtShowBox.Text = "found " 
+                        + searchResult.Count 
+                        + " items:\r\n" 
+                        + string.Join("\r\n", searchResult);
                 }
                 else
                 {
