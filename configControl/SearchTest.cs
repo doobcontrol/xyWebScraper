@@ -100,7 +100,7 @@ namespace xy.scraper.configControl
 
         public delegate Task<string> GetHtmlString(string Url);
         GetHtmlString getHtmlString;
-        public GetHtmlString GetHtmlStringObj
+        public GetHtmlString GetHtmlStringHandler
         {
             set
             {

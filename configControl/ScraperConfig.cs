@@ -29,7 +29,7 @@ namespace xy.scraper.configControl
 
             searchTest1.SearchJsonObj = 
                 new SearchTest.SearchJsonObject(getCurrentSearchJsonObject);
-            searchTest1.GetHtmlStringObj = 
+            searchTest1.GetHtmlStringHandler = 
                 new SearchTest.GetHtmlString(GetHtmlStringObj);
 
             setUiText();
