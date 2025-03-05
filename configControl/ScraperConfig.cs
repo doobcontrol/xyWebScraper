@@ -118,7 +118,7 @@ namespace xy.scraper.configControl
 
         private void tbCopyPageConfig_Click(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedIndex != 0)
+            if (tabControl1.SelectedTab != null)
             {
                 PageConfig pc = new PageConfig();
                 pc.Dock = DockStyle.Fill;
@@ -127,6 +127,7 @@ namespace xy.scraper.configControl
                 tp.Text = pc.PageID;
                 tp.Controls.Add(pc);
                 tabControl1.TabPages.Add(tp);
+                tabControl1.SelectedTab = tp;
             }
         }
 
