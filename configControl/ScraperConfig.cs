@@ -63,6 +63,7 @@ namespace xy.scraper.configControl
             TabPage tp = new TabPage();
             tp.Controls.Add(pc);
             tabControl1.TabPages.Add(tp);
+            tabControl1.SelectedTab = tp;
             pc.PageID = "pageModel" + (tabControl1.TabPages.Count + 1);
         }
 
