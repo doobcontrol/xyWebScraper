@@ -32,6 +32,8 @@ namespace xy.scraper.configControl
             searchTest1.GetHtmlStringHandler = 
                 new SearchTest.GetHtmlString(GetHtmlStringObj);
 
+            defaultPageConfig.PageIDChanged += defaultPageConfig_PageIDChanged;
+
             setUiText();
         }
         private void setUiText()
