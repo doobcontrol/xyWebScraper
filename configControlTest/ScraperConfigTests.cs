@@ -109,5 +109,61 @@ namespace configControlTest
             Assert.AreEqual(pageCount, tabControl1.Controls.Count);
             Assert.AreEqual(0, tabControl1.SelectedIndex);
         }
+
+        [TestMethod]
+        public void ScraperConfig_Page_Copy()
+        {
+            ScraperConfig scraperConfig = new ScraperConfig();
+            scraperConfig.Dock = System.Windows.Forms.DockStyle.Fill;
+
+            Form testForm = new Form();
+            testForm.Width *= 3;
+            testForm.Height *= 2;
+            testForm.SuspendLayout();
+            testForm.Controls.Add(scraperConfig);
+            testForm.ResumeLayout(false);
+            testForm.Show();
+
+            ToolStrip? toolStrip1 =
+                GetControl(scraperConfig, "toolStrip1") as ToolStrip;
+            Assert.IsNotNull(toolStrip1);
+            ToolStripButton? tbCopyPageConfig =
+                toolStrip1.Items["tbCopyPageConfig"] as ToolStripButton;
+            Assert.IsNotNull(tbCopyPageConfig);
+
+            TabControl? tabControl1 =
+                GetControl(scraperConfig, "tabControl1") as TabControl;
+            Assert.IsNotNull(tabControl1);
+
+            int pageCount = 1;
+            string page1Name = "pageModel";// tabControl1.Controls[0].Text;
+
+            Assert.AreEqual(pageCount, tabControl1.Controls.Count);
+            Assert.AreEqual(pageCount - 1, tabControl1.SelectedIndex);
+            Assert.AreEqual(page1Name + pageCount, tabControl1.SelectedTab.Text);
+
+            PageConfig? expectPageConfig =
+                tabControl1.SelectedTab.Controls[0] as PageConfig;
+            Assert.IsNotNull(expectPageConfig);
+            string PageID = CTool.randomString();
+            string Encoding = CTool.randomString();
+            expectPageConfig.PageID = PageID;
+            expectPageConfig.Encoding = Encoding;
+            Assert.AreEqual(PageID, tabControl1.SelectedTab.Text);
+
+            //copy one path
+            tbCopyPageConfig.PerformClick();
+            pageCount++;
+            Assert.AreEqual(pageCount, tabControl1.Controls.Count);
+            Assert.AreEqual(pageCount - 1, tabControl1.SelectedIndex);
+            Assert.AreEqual(PageID, tabControl1.SelectedTab.Text);
+
+            PageConfig? actualPageConfig =
+                tabControl1.TabPages[pageCount - 1].Controls[0] as PageConfig;
+            Assert.IsNotNull(actualPageConfig);
+
+            Assert.AreEqual(expectPageConfig.JsonObj.ToJsonString(),
+                actualPageConfig.JsonObj.ToJsonString());
+        }
     }
 }
