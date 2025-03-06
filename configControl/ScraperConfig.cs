@@ -23,7 +23,7 @@ namespace xy.scraper.configControl
 
             tabControl1.DrawItem
                 += new DrawItemEventHandler(tabControl_DrawVerticalItem);
-
+            tabControl1.ShowToolTips = true;
             defaultPageConfig.PageID = "pageModel1";
             tabControl1.TabPages[0].Text = defaultPageConfig.PageID;
 
@@ -53,6 +53,7 @@ namespace xy.scraper.configControl
                 if (tp != null)
                 {
                     tp.Text = senderPageConfig.PageID;
+                    tp.ToolTipText = senderPageConfig.PageID;
                 }
             }
         }
