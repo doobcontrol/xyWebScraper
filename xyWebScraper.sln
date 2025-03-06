@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pageTest", "pageTest\pageTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "configControlTest", "configControlTest\configControlTest.csproj", "{67E7293C-8B9F-4262-9306-4FE98E3F1BE0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xyWebScraper", "xyWebScraper\xyWebScraper.csproj", "{C0FB6A7C-03B2-4340-BB07-DE615A5B4BDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{67E7293C-8B9F-4262-9306-4FE98E3F1BE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67E7293C-8B9F-4262-9306-4FE98E3F1BE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67E7293C-8B9F-4262-9306-4FE98E3F1BE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0FB6A7C-03B2-4340-BB07-DE615A5B4BDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0FB6A7C-03B2-4340-BB07-DE615A5B4BDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0FB6A7C-03B2-4340-BB07-DE615A5B4BDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0FB6A7C-03B2-4340-BB07-DE615A5B4BDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

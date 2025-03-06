@@ -1,0 +1,329 @@
+﻿namespace xy.scraper.xyWebScraper
+{
+    partial class FrmMain
+    {
+        /// <summary>
+        ///  Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        ///  Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        ///  Required method for Designer support - do not modify
+        ///  the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            components = new System.ComponentModel.Container();
+            statusStrip1 = new StatusStrip();
+            toolStripStatusLabel1 = new ToolStripStatusLabel();
+            toolStripProgressBar1 = new ToolStripProgressBar();
+            panel1 = new Panel();
+            panel3 = new Panel();
+            textBox1 = new TextBox();
+            comboBox1 = new ComboBox();
+            pbScrapeFlag = new PictureBox();
+            panel2 = new Panel();
+            toolStrip1 = new ToolStrip();
+            tbStart = new ToolStripButton();
+            tbLog = new ToolStripButton();
+            tbSetting = new ToolStripButton();
+            toolTip1 = new ToolTip(components);
+            dataGridView1 = new DataGridView();
+            panel4 = new Panel();
+            label4 = new Label();
+            label3 = new Label();
+            label2 = new Label();
+            label1 = new Label();
+            panel5 = new Panel();
+            txtLog = new TextBox();
+            splitter1 = new Splitter();
+            statusStrip1.SuspendLayout();
+            panel1.SuspendLayout();
+            panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbScrapeFlag).BeginInit();
+            panel2.SuspendLayout();
+            toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            panel4.SuspendLayout();
+            panel5.SuspendLayout();
+            SuspendLayout();
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1, toolStripProgressBar1 });
+            statusStrip1.Location = new Point(0, 428);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(800, 22);
+            statusStrip1.TabIndex = 3;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new Size(683, 17);
+            toolStripStatusLabel1.Spring = true;
+            toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            toolStripStatusLabel1.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // toolStripProgressBar1
+            // 
+            toolStripProgressBar1.Name = "toolStripProgressBar1";
+            toolStripProgressBar1.RightToLeft = RightToLeft.No;
+            toolStripProgressBar1.Size = new Size(100, 16);
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(panel3);
+            panel1.Controls.Add(panel2);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(800, 33);
+            panel1.TabIndex = 5;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(textBox1);
+            panel3.Controls.Add(comboBox1);
+            panel3.Controls.Add(pbScrapeFlag);
+            panel3.Dock = DockStyle.Fill;
+            panel3.Location = new Point(0, 0);
+            panel3.Name = "panel3";
+            panel3.Padding = new Padding(0, 5, 0, 0);
+            panel3.Size = new Size(688, 33);
+            panel3.TabIndex = 1;
+            // 
+            // textBox1
+            // 
+            textBox1.Dock = DockStyle.Fill;
+            textBox1.Location = new Point(138, 5);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(550, 23);
+            textBox1.TabIndex = 3;
+            // 
+            // comboBox1
+            // 
+            comboBox1.Dock = DockStyle.Left;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(17, 5);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(121, 23);
+            comboBox1.TabIndex = 1;
+            // 
+            // pbScrapeFlag
+            // 
+            pbScrapeFlag.Dock = DockStyle.Left;
+            pbScrapeFlag.Image = Properties.Resources.Button_Blank_Green_icon;
+            pbScrapeFlag.Location = new Point(0, 5);
+            pbScrapeFlag.Name = "pbScrapeFlag";
+            pbScrapeFlag.Padding = new Padding(0, 4, 0, 0);
+            pbScrapeFlag.Size = new Size(17, 28);
+            pbScrapeFlag.TabIndex = 4;
+            pbScrapeFlag.TabStop = false;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(toolStrip1);
+            panel2.Dock = DockStyle.Right;
+            panel2.Location = new Point(688, 0);
+            panel2.Name = "panel2";
+            panel2.Padding = new Padding(0, 5, 0, 0);
+            panel2.Size = new Size(112, 33);
+            panel2.TabIndex = 0;
+            // 
+            // toolStrip1
+            // 
+            toolStrip1.Items.AddRange(new ToolStripItem[] { tbStart, tbLog, tbSetting });
+            toolStrip1.Location = new Point(0, 5);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(112, 25);
+            toolStrip1.TabIndex = 0;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // tbStart
+            // 
+            tbStart.CheckOnClick = true;
+            tbStart.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tbStart.Image = Properties.Resources.StartWebSite;
+            tbStart.ImageTransparentColor = Color.Magenta;
+            tbStart.Name = "tbStart";
+            tbStart.Size = new Size(23, 22);
+            tbStart.Text = "toolStripButton1";
+            tbStart.Click += tbStart_Click;
+            // 
+            // tbLog
+            // 
+            tbLog.CheckOnClick = true;
+            tbLog.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tbLog.Image = Properties.Resources.Log;
+            tbLog.ImageTransparentColor = Color.Magenta;
+            tbLog.Name = "tbLog";
+            tbLog.Size = new Size(23, 22);
+            tbLog.Text = "toolStripButton2";
+            tbLog.Click += tbLog_Click;
+            // 
+            // tbSetting
+            // 
+            tbSetting.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tbSetting.Image = Properties.Resources.ConfigureComputer;
+            tbSetting.ImageTransparentColor = Color.Magenta;
+            tbSetting.Name = "tbSetting";
+            tbSetting.Size = new Size(23, 22);
+            tbSetting.Text = "toolStripButton1";
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Dock = DockStyle.Fill;
+            dataGridView1.Location = new Point(0, 63);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(536, 332);
+            dataGridView1.TabIndex = 6;
+            // 
+            // panel4
+            // 
+            panel4.Controls.Add(label4);
+            panel4.Controls.Add(label3);
+            panel4.Controls.Add(label2);
+            panel4.Controls.Add(label1);
+            panel4.Dock = DockStyle.Top;
+            panel4.Location = new Point(0, 0);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(536, 63);
+            panel4.TabIndex = 7;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(83, 29);
+            label4.Name = "label4";
+            label4.Size = new Size(38, 15);
+            label4.TabIndex = 3;
+            label4.Text = "label4";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(83, 3);
+            label3.Name = "label3";
+            label3.Size = new Size(38, 15);
+            label3.TabIndex = 2;
+            label3.Text = "label3";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 29);
+            label2.Name = "label2";
+            label2.Size = new Size(38, 15);
+            label2.TabIndex = 1;
+            label2.Text = "label2";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 3);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 15);
+            label1.TabIndex = 0;
+            label1.Text = "label1";
+            // 
+            // panel5
+            // 
+            panel5.Controls.Add(dataGridView1);
+            panel5.Controls.Add(panel4);
+            panel5.Dock = DockStyle.Fill;
+            panel5.Location = new Point(0, 33);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(536, 395);
+            panel5.TabIndex = 8;
+            // 
+            // txtLog
+            // 
+            txtLog.Dock = DockStyle.Right;
+            txtLog.Location = new Point(539, 33);
+            txtLog.Multiline = true;
+            txtLog.Name = "txtLog";
+            txtLog.Size = new Size(261, 395);
+            txtLog.TabIndex = 9;
+            // 
+            // splitter1
+            // 
+            splitter1.Dock = DockStyle.Right;
+            splitter1.Location = new Point(536, 33);
+            splitter1.Name = "splitter1";
+            splitter1.Size = new Size(3, 395);
+            splitter1.TabIndex = 10;
+            splitter1.TabStop = false;
+            // 
+            // FrmMain
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(panel5);
+            Controls.Add(splitter1);
+            Controls.Add(txtLog);
+            Controls.Add(panel1);
+            Controls.Add(statusStrip1);
+            Name = "FrmMain";
+            Text = "Form1";
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbScrapeFlag).EndInit();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
+            panel5.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
+        }
+
+        #endregion
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel toolStripStatusLabel1;
+        private Panel panel1;
+        private Panel panel3;
+        private TextBox textBox1;
+        private ComboBox comboBox1;
+        private Panel panel2;
+        private ToolStrip toolStrip1;
+        private ToolStripButton tbStart;
+        private ToolTip toolTip1;
+        private ToolStripProgressBar toolStripProgressBar1;
+        private DataGridView dataGridView1;
+        private Panel panel4;
+        private Label label4;
+        private Label label3;
+        private Label label2;
+        private Label label1;
+        private ToolStripButton tbLog;
+        private Panel panel5;
+        private TextBox txtLog;
+        private Splitter splitter1;
+        private PictureBox pbScrapeFlag;
+        private ToolStripButton tbSetting;
+    }
+}
