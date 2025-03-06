@@ -123,6 +123,7 @@ namespace xy.scraper.configControl
             if (tabControl1.SelectedTab != null)
             {
                 PageConfig pc = new PageConfig();
+                pc.PageIDChanged += defaultPageConfig_PageIDChanged;
                 pc.Dock = DockStyle.Fill;
                 pc.JsonObj = ((PageConfig)tabControl1.SelectedTab.Controls[0]).JsonObj;
                 TabPage tp = new TabPage();
