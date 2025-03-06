@@ -45,23 +45,23 @@ namespace configControlTest
             {
                 tbAddSearchLayer.PerformClick();
 
-                Panel? panel1 =
-                    CTool.GetControl(searchConfig, "panel1") as Panel;
-                if (panel1 != null)
+                TableLayoutPanel? tableLayoutPanel1 =
+                    CTool.GetControl(searchConfig, "tableLayoutPanel1") as TableLayoutPanel;
+                if (tableLayoutPanel1 != null)
                 {
-                    Assert.AreEqual(panel1.Controls.Count, 2);
+                    Assert.AreEqual(tableLayoutPanel1.Controls.Count, 2);
                     //the new control be BringToFront, so it is the first control
-                    Assert.IsTrue(panel1.Controls[0] is SearchLayer);
+                    Assert.IsTrue(tableLayoutPanel1.Controls[0] is SearchLayer);
                 }
                 else
                 {
                     Assert.Fail();
                 }
 
-                panel1.Controls[0].Focus();
+                tableLayoutPanel1.Controls[1].Focus();
                 tbDelSearchLayer.PerformClick();
 
-                Assert.AreEqual(1, panel1.Controls.Count);
+                Assert.AreEqual(1, tableLayoutPanel1.Controls.Count);
             }
             else
             {
@@ -160,10 +160,10 @@ namespace configControlTest
                 toolStrip1.Items["tbAddSearchLayer"] as ToolStripButton;
             Assert.IsNotNull(tbAddSearchLayer);
 
-            Panel? panel1 =
-                CTool.GetControl(searchConfig, "panel1") as Panel;
-            Assert.IsNotNull(panel1);
-            Assert.AreEqual(panel1.Controls.Count, 1);
+            TableLayoutPanel? tableLayoutPanel1 =
+                CTool.GetControl(searchConfig, "tableLayoutPanel1") as TableLayoutPanel;
+            Assert.IsNotNull(tableLayoutPanel1);
+            Assert.AreEqual(tableLayoutPanel1.Controls.Count, 1);
 
             int layerCount = expectedJObj[JCfgName.search].AsArray().Count;
             for (int i = 0; i < layerCount; i++)
@@ -171,15 +171,15 @@ namespace configControlTest
                 if (i > 0)
                 {
                     tbAddSearchLayer.PerformClick();
-                    Assert.AreEqual(panel1.Controls.Count, i + 1);
+                    Assert.AreEqual(tableLayoutPanel1.Controls.Count, i + 1);
                 }
 
-                SearchLayer? searchLayer = panel1.Controls[0] as SearchLayer;
+                SearchLayer? searchLayer = tableLayoutPanel1.Controls[i] as SearchLayer;
                 Assert.IsNotNull(searchLayer);
                 searchLayer.JsonObj =
                     expectedJObj[JCfgName.search].AsArray()[i] as JsonObject;
             }
-            Assert.AreEqual(panel1.Controls.Count, layerCount);
+            Assert.AreEqual(tableLayoutPanel1.Controls.Count, layerCount);
 
             ToolStrip? toolStrip2 =
                 CTool.GetControl(searchConfig, "toolStrip2") as ToolStrip;
@@ -250,16 +250,16 @@ namespace configControlTest
             testForm.ResumeLayout(false);
             testForm.Show();
 
-            Panel? panel1 =
-                CTool.GetControl(searchConfig, "panel1") as Panel;
-            Assert.IsNotNull(panel1);
+            TableLayoutPanel? tableLayoutPanel1 =
+                CTool.GetControl(searchConfig, "tableLayoutPanel1") as TableLayoutPanel;
+            Assert.IsNotNull(tableLayoutPanel1);
             JsonArray layers = expectedJObj[JCfgName.search].AsArray();
-            Assert.AreEqual(panel1.Controls.Count, layers.Count);
+            Assert.AreEqual(tableLayoutPanel1.Controls.Count, layers.Count);
 
             foreach(JsonObject lObj in layers)
             {
                 SearchLayer? searchLayer = 
-                    panel1.Controls[layers.Count - 1 - layers.IndexOf(lObj)] //reverse order
+                    tableLayoutPanel1.Controls[layers.IndexOf(lObj)]
                     as SearchLayer;
                 Assert.IsNotNull(searchLayer);
                 Assert.AreEqual(lObj[JCfgName.start].GetValue<string>(), 
