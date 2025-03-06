@@ -81,7 +81,7 @@ namespace xy.scraper.configControl
             }
         }
 
-        //make tabControl vertical(tab left)
+        //make tabControl vertical(tab to left)
         private void tabControl_DrawVerticalItem(
             Object sender, System.Windows.Forms.DrawItemEventArgs e)
         {
@@ -108,8 +108,8 @@ namespace xy.scraper.configControl
                 e.DrawBackground();
             }
 
-            // Use our own font.
-            Font _tabFont = new Font("Arial", 10.0f, FontStyle.Bold, GraphicsUnit.Pixel);
+            // Do not change font.
+            Font _tabFont = _tabPage.Font;
 
             // Draw string. Center the text.
             StringFormat _stringFlags = new StringFormat();
