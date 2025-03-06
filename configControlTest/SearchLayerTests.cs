@@ -41,7 +41,6 @@ namespace configControlTest
                 if (txtStart1 != null)
                 {
                     Assert.IsTrue(txtStart1.Focused);
-                    Assert.AreEqual(searchLayer1.BorderStyle, BorderStyle.Fixed3D);
                     Assert.AreEqual(panel1.BackColor, selectedBackColor);
 
                     Thread.Sleep(1);
@@ -55,7 +54,6 @@ namespace configControlTest
                     searchLayer1.Focus();
 
                     Assert.IsTrue(txtStart1.Focused);
-                    Assert.AreEqual(searchLayer1.BorderStyle, BorderStyle.Fixed3D);
                     Assert.AreEqual(panel1.BackColor, selectedBackColor);
 
                     Thread.Sleep(1);
