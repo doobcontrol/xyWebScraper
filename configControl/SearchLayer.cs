@@ -81,7 +81,6 @@ namespace xy.scraper.configControl
         private void SearchLayer_Enter(object sender, EventArgs e)
         {
             panel1.BackColor = selectedBackColor;
-            this.BorderStyle = BorderStyle.Fixed3D;
         }
 
         private void SearchLayer_Leave(object sender, EventArgs e)
