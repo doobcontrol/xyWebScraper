@@ -41,17 +41,22 @@ namespace xy.scraper.configControl
         private void tbAddSearchLayer_Click(object sender, EventArgs e)
         {
             SearchLayer sl = new SearchLayer();
-            sl.Enter += searchLayer_Enter;
-            panel1.Controls.Add(sl);
-            sl.BringToFront();
+            sl.Height = defaultDearchLayer.Height;
             sl.Dock = DockStyle.Top;
+            sl.Enter += searchLayer_Enter;
+
+            RowStyle tempStyle = tableLayoutPanel1.RowStyles[0];
+            tableLayoutPanel1.RowStyles.Add(
+                new RowStyle(tempStyle.SizeType));
+
+            tableLayoutPanel1.Controls.Add(sl);
         }
 
         private void tbDelSearchLayer_Click(object sender, EventArgs e)
         {
             if (selectedSearchLayer != null)
             {
-                panel1.Controls.Remove(selectedSearchLayer);
+                tableLayoutPanel1.Controls.Remove(selectedSearchLayer);
                 selectedSearchLayer.Dispose();
             }
         }
@@ -97,9 +102,9 @@ namespace xy.scraper.configControl
                 JsonObject json = new JsonObject();
                 JsonArray searchLayers = new JsonArray();
                 json[JCfgName.search] = searchLayers;
-                foreach (SearchLayer sl in panel1.Controls)
+                foreach (SearchLayer sl in tableLayoutPanel1.Controls)
                 {
-                    searchLayers.Insert(0, sl.JsonObj); //why use Add lead to reverse order?
+                    searchLayers.Add(sl.JsonObj);
                 }
 
                 JsonArray replaces = new JsonArray();
@@ -133,15 +138,20 @@ namespace xy.scraper.configControl
                     SearchLayer sl;
                     if (searchLayers.IndexOf(item) == 0)
                     {
-                        sl = ((SearchLayer)panel1.Controls[0]);
+                        sl = ((SearchLayer)tableLayoutPanel1.Controls[0]);
                     }
                     else
                     {
                         sl = new SearchLayer();
-                        sl.Enter += searchLayer_Enter;
-                        panel1.Controls.Add(sl);
-                        sl.BringToFront();
+                        sl.Height = defaultDearchLayer.Height;
                         sl.Dock = DockStyle.Top;
+                        sl.Enter += searchLayer_Enter;
+
+                        RowStyle tempStyle = tableLayoutPanel1.RowStyles[0];
+                        tableLayoutPanel1.RowStyles.Add(
+                            new RowStyle(tempStyle.SizeType));
+
+                        tableLayoutPanel1.Controls.Add(sl);
                     }
                     sl.JsonObj = item;
                 }

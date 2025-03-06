@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchConfig));
             tabControl1 = new TabControl();
             tpSearchLayers = new TabPage();
-            panel1 = new Panel();
+            tableLayoutPanel1 = new TableLayoutPanel();
             defaultDearchLayer = new SearchLayer();
             toolStrip1 = new ToolStrip();
             tbAddSearchLayer = new ToolStripButton();
@@ -53,7 +53,7 @@
             cbSearchList = new CheckBox();
             tabControl1.SuspendLayout();
             tpSearchLayers.SuspendLayout();
-            panel1.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
             toolStrip1.SuspendLayout();
             tpFinalHandle.SuspendLayout();
             panel3.SuspendLayout();
@@ -76,7 +76,7 @@
             // 
             // tpSearchLayers
             // 
-            tpSearchLayers.Controls.Add(panel1);
+            tpSearchLayers.Controls.Add(tableLayoutPanel1);
             tpSearchLayers.Controls.Add(toolStrip1);
             tpSearchLayers.Location = new Point(4, 24);
             tpSearchLayers.Name = "tpSearchLayers";
@@ -86,25 +86,29 @@
             tpSearchLayers.Text = "Search Layers";
             tpSearchLayers.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // tableLayoutPanel1
             // 
-            panel1.AutoScroll = true;
-            panel1.Controls.Add(defaultDearchLayer);
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(3, 28);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(592, 239);
-            panel1.TabIndex = 2;
+            tableLayoutPanel1.AutoScroll = true;
+            tableLayoutPanel1.ColumnCount = 1;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Controls.Add(defaultDearchLayer, 0, 0);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Location = new Point(3, 28);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 1;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle());
+            tableLayoutPanel1.Size = new Size(592, 239);
+            tableLayoutPanel1.TabIndex = 2;
             // 
             // defaultDearchLayer
             // 
             defaultDearchLayer.BorderStyle = BorderStyle.FixedSingle;
             defaultDearchLayer.Dock = DockStyle.Top;
             defaultDearchLayer.End = "";
-            defaultDearchLayer.Location = new Point(0, 0);
+            defaultDearchLayer.Location = new Point(3, 3);
             defaultDearchLayer.Name = "defaultDearchLayer";
             defaultDearchLayer.Padding = new Padding(0, 0, 3, 0);
-            defaultDearchLayer.Size = new Size(592, 48);
+            defaultDearchLayer.Size = new Size(586, 49);
             defaultDearchLayer.Start = "";
             defaultDearchLayer.TabIndex = 1;
             // 
@@ -293,7 +297,7 @@
             tabControl1.ResumeLayout(false);
             tpSearchLayers.ResumeLayout(false);
             tpSearchLayers.PerformLayout();
-            panel1.ResumeLayout(false);
+            tableLayoutPanel1.ResumeLayout(false);
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             tpFinalHandle.ResumeLayout(false);
@@ -318,7 +322,6 @@
         private ToolStripButton tbAddSearchLayer;
         private SearchLayer defaultDearchLayer;
         private ToolStripButton tbDelSearchLayer;
-        private Panel panel1;
         private Panel panel2;
         private Label lbAddAfter;
         private Label lbAddBefore;
@@ -333,5 +336,6 @@
         private TextBox txtAddAfter;
         private TabPage tpOtherSetting;
         private CheckBox cbSearchList;
+        private TableLayoutPanel tableLayoutPanel1;
     }
 }
