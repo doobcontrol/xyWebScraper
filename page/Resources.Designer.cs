@@ -89,9 +89,7 @@ namespace xy.scraper.page {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 
-        ///cancel task, start save break point ... 
-        ///.
+        ///   Looks up a localized string similar to cancel task, start save break point ....
         /// </summary>
         internal static string CancelTaskStartSaveBreakPoint {
             get {
@@ -163,8 +161,7 @@ namespace xy.scraper.page {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to start resume break point ...
-        ///.
+        ///   Looks up a localized string similar to start resume break point ....
         /// </summary>
         internal static string StartResumeBreakPoint {
             get {

@@ -30,12 +30,12 @@
         {
             components = new System.ComponentModel.Container();
             statusStrip1 = new StatusStrip();
-            toolStripStatusLabel1 = new ToolStripStatusLabel();
-            toolStripProgressBar1 = new ToolStripProgressBar();
+            tslbMsg = new ToolStripStatusLabel();
+            spbFileTask = new ToolStripProgressBar();
             panel1 = new Panel();
             panel3 = new Panel();
-            textBox1 = new TextBox();
-            comboBox1 = new ComboBox();
+            txtUrl = new TextBox();
+            cbConfigIdList = new ComboBox();
             pbScrapeFlag = new PictureBox();
             panel2 = new Panel();
             toolStrip1 = new ToolStrip();
@@ -65,26 +65,26 @@
             // 
             // statusStrip1
             // 
-            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1, toolStripProgressBar1 });
+            statusStrip1.Items.AddRange(new ToolStripItem[] { tslbMsg, spbFileTask });
             statusStrip1.Location = new Point(0, 428);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new Size(800, 22);
             statusStrip1.TabIndex = 3;
             statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // tslbMsg
             // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new Size(683, 17);
-            toolStripStatusLabel1.Spring = true;
-            toolStripStatusLabel1.Text = "toolStripStatusLabel1";
-            toolStripStatusLabel1.TextAlign = ContentAlignment.MiddleLeft;
+            tslbMsg.Name = "tslbMsg";
+            tslbMsg.Size = new Size(683, 17);
+            tslbMsg.Spring = true;
+            tslbMsg.Text = "toolStripStatusLabel1";
+            tslbMsg.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // toolStripProgressBar1
+            // spbFileTask
             // 
-            toolStripProgressBar1.Name = "toolStripProgressBar1";
-            toolStripProgressBar1.RightToLeft = RightToLeft.No;
-            toolStripProgressBar1.Size = new Size(100, 16);
+            spbFileTask.Name = "spbFileTask";
+            spbFileTask.RightToLeft = RightToLeft.No;
+            spbFileTask.Size = new Size(100, 16);
             // 
             // panel1
             // 
@@ -98,8 +98,8 @@
             // 
             // panel3
             // 
-            panel3.Controls.Add(textBox1);
-            panel3.Controls.Add(comboBox1);
+            panel3.Controls.Add(txtUrl);
+            panel3.Controls.Add(cbConfigIdList);
             panel3.Controls.Add(pbScrapeFlag);
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(0, 0);
@@ -108,22 +108,25 @@
             panel3.Size = new Size(688, 33);
             panel3.TabIndex = 1;
             // 
-            // textBox1
+            // txtUrl
             // 
-            textBox1.Dock = DockStyle.Fill;
-            textBox1.Location = new Point(138, 5);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(550, 23);
-            textBox1.TabIndex = 3;
+            txtUrl.Dock = DockStyle.Fill;
+            txtUrl.Location = new Point(190, 5);
+            txtUrl.Name = "txtUrl";
+            txtUrl.Size = new Size(498, 23);
+            txtUrl.TabIndex = 3;
+            txtUrl.TextChanged += txtUrl_TextChanged;
             // 
-            // comboBox1
+            // cbConfigIdList
             // 
-            comboBox1.Dock = DockStyle.Left;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(17, 5);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 1;
+            cbConfigIdList.Dock = DockStyle.Left;
+            cbConfigIdList.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbConfigIdList.FormattingEnabled = true;
+            cbConfigIdList.Location = new Point(17, 5);
+            cbConfigIdList.Name = "cbConfigIdList";
+            cbConfigIdList.Size = new Size(173, 23);
+            cbConfigIdList.TabIndex = 1;
+            cbConfigIdList.SelectedIndexChanged += cbConfigIdList_SelectedIndexChanged;
             // 
             // pbScrapeFlag
             // 
@@ -303,16 +306,16 @@
 
         #endregion
         private StatusStrip statusStrip1;
-        private ToolStripStatusLabel toolStripStatusLabel1;
+        private ToolStripStatusLabel tslbMsg;
         private Panel panel1;
         private Panel panel3;
-        private TextBox textBox1;
-        private ComboBox comboBox1;
+        private TextBox txtUrl;
+        private ComboBox cbConfigIdList;
         private Panel panel2;
         private ToolStrip toolStrip1;
         private ToolStripButton tbStart;
         private ToolTip toolTip1;
-        private ToolStripProgressBar toolStripProgressBar1;
+        private ToolStripProgressBar spbFileTask;
         private DataGridView dataGridView1;
         private Panel panel4;
         private Label label4;

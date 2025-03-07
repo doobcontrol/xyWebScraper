@@ -118,6 +118,7 @@ namespace xy.scraper.page
             string savePath
             )
         {
+            CReport.reportFileTask(progress, downloadDict);
             List<string> urlList = downloadDict.Keys.ToList();
             foreach (string dUrl in urlList)
             {
@@ -135,6 +136,7 @@ namespace xy.scraper.page
                 }
                 try
                 {
+                    CReport.reportFileStart(progress, dUrl);
                     int tryCount = 0;
                     while (true)
                     {
@@ -152,6 +154,7 @@ namespace xy.scraper.page
                                 dUrl, fileFullName);
                             CReport.reportMsg(progress,
                                 Resources.Succeed + downloadDict[dUrl]);
+                            CReport.reportFileDone(progress, (dUrl, true));
                             break;
                         }
                         catch (HttpRequestException e)
@@ -171,6 +174,7 @@ namespace xy.scraper.page
                             {
                                 CReport.reportMsg(progress,
                                     Resources.GaveUpTry + downloadDict[dUrl]);
+                                CReport.reportFileDone(progress, (dUrl, false));
                                 break;
                             }
                         }
@@ -191,6 +195,7 @@ namespace xy.scraper.page
                             {
                                 CReport.reportMsg(progress,
                                     Resources.GaveUpTry + downloadDict[dUrl]);
+                                CReport.reportFileDone(progress, (dUrl, false));
                                 throw e;
                             }
                         }
@@ -201,6 +206,7 @@ namespace xy.scraper.page
                 {
                     CReport.reportError(progress,
                         Resources.Failed + downloadDict[dUrl], e);
+                    CReport.reportFileDone(progress, (dUrl, false));
 
                     //save the downloadDict to a file
                     OperationCanceledException oe = new OperationCanceledException(token);

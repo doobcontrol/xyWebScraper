@@ -128,9 +128,7 @@
     <value>to be download break point tasks: </value>
   </data>
   <data name="CancelTaskStartSaveBreakPoint" xml:space="preserve">
-    <value>
-cancel task, start save break point ... 
-</value>
+    <value>cancel task, start save break point ...</value>
   </data>
   <data name="Failed" xml:space="preserve">
     <value>Failed: </value>
@@ -154,8 +152,7 @@ cancel task, start save break point ...
     <value>Retry: </value>
   </data>
   <data name="StartResumeBreakPoint" xml:space="preserve">
-    <value>start resume break point ...
-</value>
+    <value>start resume break point ...</value>
   </data>
   <data name="ToBeDone" xml:space="preserve">
     <value>to be done: </value>

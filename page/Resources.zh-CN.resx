@@ -128,9 +128,7 @@
     <value>断点网页任务数: </value>
   </data>
   <data name="CancelTaskStartSaveBreakPoint" xml:space="preserve">
-    <value>
-收到取消指令，开始保存断点 ... 
-</value>
+    <value>收到取消指令，开始保存断点 ...</value>
   </data>
   <data name="Failed" xml:space="preserve">
     <value>失败: </value>
@@ -154,8 +152,7 @@
     <value>重试: </value>
   </data>
   <data name="StartResumeBreakPoint" xml:space="preserve">
-    <value>开始还原断点下载任务...
-</value>
+    <value>开始还原断点下载任务...</value>
   </data>
   <data name="ToBeDone" xml:space="preserve">
     <value>等待网页数: </value>
