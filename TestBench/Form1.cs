@@ -10,7 +10,7 @@ namespace TestBench
 {
     public partial class Form1 : Form
     {
-        Progress<string> progress = new Progress<string>();
+        Progress<CReport> progress = new Progress<CReport>();
         CancellationTokenSource cts;
 
         public Form1()
@@ -20,7 +20,7 @@ namespace TestBench
 
             progress.ProgressChanged += async (_, data) =>
             {
-                showMsg(data + "\r\n");
+                showMsg(data.Msg + "\r\n");
             };
 
             if (File.Exists(startScraper._breakPointSavePath))

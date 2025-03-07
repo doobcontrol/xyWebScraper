@@ -220,7 +220,7 @@ namespace pageTest
 
             //parameters
             CancellationTokenSource cts = new CancellationTokenSource();
-            IProgress<string> progress = new Progress<string>();
+            IProgress<CReport> progress = new Progress<CReport>();
             if (Directory.Exists(savePath))
             {
                 deleteFolder(savePath);
@@ -275,7 +275,7 @@ namespace pageTest
                 = createDownloadDict(downloadDictCount, -1, null);
             int expectCount = downloadDictCount;
             CancellationTokenSource cts = new CancellationTokenSource();
-            IProgress<string> progress = new Progress<string>();
+            IProgress<CReport> progress = new Progress<CReport>();
             if (Directory.Exists(savePath))
             {
                 deleteFolder(savePath);
@@ -310,7 +310,7 @@ namespace pageTest
                 = createDownloadDict(downloadDictCount, FlagLoc, cancelFlag);
             int expectCount = FlagLoc + 1;
             CancellationTokenSource cts = new CancellationTokenSource();
-            IProgress<string> progress = new Progress<string>();
+            IProgress<CReport> progress = new Progress<CReport>();
             if (Directory.Exists(savePath))
             {
                 deleteFolder(savePath);
@@ -353,9 +353,9 @@ namespace pageTest
             CancellationTokenSource cts = new CancellationTokenSource();
             List<string> expectReportList = createExpectReportList(20);
             List<string> reportList = new List<string>();
-            IProgress<string> progress = new Progress<string>((report) =>
+            IProgress<CReport> progress = new Progress<CReport>((report) =>
             {
-                reportList.Add(report);
+                reportList.Add(report.Msg);
             });
 
             
@@ -399,7 +399,7 @@ namespace pageTest
                 = createDownloadDict(20, FlagLoc, HttpRequestExceptionFlag);
             int expectCount = downloadDictCount + 5;
             CancellationTokenSource cts = new CancellationTokenSource();
-            IProgress<string> progress = new Progress<string>();
+            IProgress<CReport> progress = new Progress<CReport>();
             if (Directory.Exists(savePath))
             {
                 deleteFolder(savePath);
@@ -434,7 +434,7 @@ namespace pageTest
                 = createDownloadDict(20, FlagLoc, TaskCanceledExceptionFlag);
             int expectCount = FlagLoc + 1 + 5;
             CancellationTokenSource cts = new CancellationTokenSource();
-            IProgress<string> progress = new Progress<string>();
+            IProgress<CReport> progress = new Progress<CReport>();
             if (Directory.Exists(savePath))
             {
                 deleteFolder(savePath);
@@ -476,7 +476,7 @@ namespace pageTest
                 = createDownloadDict(20, FlagLoc, ExceptionFlag);
             int expectCount = FlagLoc + 1;
             CancellationTokenSource cts = new CancellationTokenSource();
-            IProgress<string> progress = new Progress<string>();
+            IProgress<CReport> progress = new Progress<CReport>();
             if (Directory.Exists(savePath))
             {
                 deleteFolder(savePath);

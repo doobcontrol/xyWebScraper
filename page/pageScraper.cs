@@ -20,11 +20,12 @@ namespace xy.scraper.page
         public async Task<List<(string, string)>> download(
             string pUrl,
             CancellationToken token,
-            IProgress<string> progress,
+            IProgress<CReport> progress,
             string savePath
             )
         {
-            progress.Report(Resources.GetTaskHtml + pUrl);
+            CReport.reportMsg(progress,
+                Resources.GetTaskHtml + pUrl);
             string htmlString;
             int tryCount = 0;
             while (true)
@@ -33,7 +34,8 @@ namespace xy.scraper.page
                 {
                     if (token.IsCancellationRequested)
                     {
-                        progress.Report(Resources.CancelTaskStartSaveBreakPoint);
+                        CReport.reportMsg(progress,
+                            Resources.CancelTaskStartSaveBreakPoint);
 
                         OperationCanceledException e = new OperationCanceledException(token);
                         e.Data["savePath"] = savePath;
@@ -47,35 +49,41 @@ namespace xy.scraper.page
                 }
                 catch (HttpRequestException e)
                 {
-                    progress.Report(string.Format(Resources.ExceptionInfo,
-                        "HttpRequestException", e.Message));
+                    CReport.reportError(progress,
+                        string.Format(Resources.ExceptionInfo,
+                        "HttpRequestException", e.Message), e);
 
                     if (tryCount < 5)
                     {
                         tryCount++;
-                        progress.Report(Resources.Retry + tryCount);
+                        CReport.reportMsg(progress,
+                            Resources.Retry + tryCount);
                         await Task.Delay(1000);
                     }
                     else
                     {
-                        progress.Report(Resources.GaveUpTry);
+                        CReport.reportMsg(progress,
+                            Resources.GaveUpTry);
                         return new List<(string, string)>();
                     }
                 }
                 catch (TaskCanceledException e)
                 {
-                    progress.Report(string.Format(Resources.ExceptionInfo,
-                        "TaskCanceledException", e.Message));
+                    CReport.reportError(progress,
+                        string.Format(Resources.ExceptionInfo,
+                        "TaskCanceledException", e.Message), e);
 
                     if (tryCount < 5)
                     {
                         tryCount++;
-                        progress.Report(Resources.Retry + tryCount);
+                        CReport.reportMsg(progress,
+                            Resources.Retry + tryCount);
                         await Task.Delay(10000);
                     }
                     else
                     {
-                        progress.Report(Resources.GaveUpTry);
+                        CReport.reportMsg(progress,
+                            Resources.GaveUpTry);
                         throw e;
                     }
                 }
@@ -84,8 +92,10 @@ namespace xy.scraper.page
             Dictionary<string, string> downloadDict =
                 _htmlParser.getDownloadDict(htmlString);
             List<(string, string)> retList = _htmlParser.getOtherPageDict(htmlString);
-            progress.Report(Resources.GotOtherPageLinks + retList.Count);
-            progress.Report(Resources.GotDownloadItems + downloadDict.Count);
+            CReport.reportMsg(progress,
+                Resources.GotOtherPageLinks + retList.Count);
+            CReport.reportMsg(progress,
+                Resources.GotDownloadItems + downloadDict.Count);
 
             try
             {
@@ -104,7 +114,7 @@ namespace xy.scraper.page
         public async Task download(
             Dictionary<string, string> downloadDict,
             CancellationToken token,
-            IProgress<string> progress,
+            IProgress<CReport> progress,
             string savePath
             )
         {
@@ -113,7 +123,8 @@ namespace xy.scraper.page
             {
                 if (token.IsCancellationRequested)
                 {
-                    progress.Report(Resources.CancelTaskStartSaveBreakPoint);
+                    CReport.reportMsg(progress,
+                        Resources.CancelTaskStartSaveBreakPoint);
 
                     //save the downloadDict to a file
                     OperationCanceledException e = new OperationCanceledException(token);
@@ -139,40 +150,47 @@ namespace xy.scraper.page
 
                             await _htmlDownloader.DownloadFileAsync(
                                 dUrl, fileFullName);
-                            progress.Report(Resources.Succeed + downloadDict[dUrl]);
+                            CReport.reportMsg(progress,
+                                Resources.Succeed + downloadDict[dUrl]);
                             break;
                         }
                         catch (HttpRequestException e)
                         {
-                            progress.Report(string.Format(Resources.ExceptionInfo,
-                                "HttpRequestException", e.Message));
+                            CReport.reportError(progress,
+                                string.Format(Resources.ExceptionInfo,
+                                "HttpRequestException", e.Message), e);
 
                             if (tryCount < 5)
                             {
                                 tryCount++;
-                                progress.Report(Resources.Retry + tryCount);
+                                CReport.reportMsg(progress,
+                                    Resources.Retry + tryCount);
                                 await Task.Delay(1000);
                             }
                             else
                             {
-                                progress.Report(Resources.GaveUpTry + downloadDict[dUrl]);
+                                CReport.reportMsg(progress,
+                                    Resources.GaveUpTry + downloadDict[dUrl]);
                                 break;
                             }
                         }
                         catch (TaskCanceledException e)
                         {
-                            progress.Report(string.Format(Resources.ExceptionInfo,
-                                "TaskCanceledException", e.Message));
+                            CReport.reportError(progress,
+                                string.Format(Resources.ExceptionInfo,
+                                "TaskCanceledException", e.Message), e);
 
                             if (tryCount < 5)
                             {
                                 tryCount++;
-                                progress.Report(Resources.Retry + tryCount);
+                                CReport.reportMsg(progress,
+                                    Resources.Retry + tryCount);
                                 await Task.Delay(10000);
                             }
                             else
                             {
-                                progress.Report(Resources.GaveUpTry + downloadDict[dUrl]);
+                                CReport.reportMsg(progress,
+                                    Resources.GaveUpTry + downloadDict[dUrl]);
                                 throw e;
                             }
                         }
@@ -181,8 +199,8 @@ namespace xy.scraper.page
                 }
                 catch (Exception e)
                 {
-                    progress.Report(
-                        Resources.Failed + downloadDict[dUrl] + "\r\n" + e.Message);
+                    CReport.reportError(progress,
+                        Resources.Failed + downloadDict[dUrl], e);
 
                     //save the downloadDict to a file
                     OperationCanceledException oe = new OperationCanceledException(token);

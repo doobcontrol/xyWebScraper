@@ -19,7 +19,7 @@ namespace xy.scraper.page
         private async Task doScrapeTask(
             List<(string, string)> toBeHandledList,
             CancellationToken token,
-            IProgress<string> progress = null,
+            IProgress<CReport> progress = null,
             Dictionary<string, string> preDownloadDict = null,
             string preDownloadSavePath = "")
         {
@@ -48,8 +48,7 @@ namespace xy.scraper.page
                 }
                 catch (Exception e)
                 {
-                    progress.Report(
-                        Resources.Failed + e.Message);
+                    CReport.reportError(progress, Resources.Failed, e);
 
                     //save the downloadDict to a file
                     OperationCanceledException oe = new OperationCanceledException(token);
@@ -83,7 +82,9 @@ namespace xy.scraper.page
 
                 //remove the first element, and save it for duplication handle
                 toBeHandledList.Remove(toBeHandled);
-                progress.Report(Resources.ToBeDone + toBeHandledList.Count + "\r\n");
+
+                CReport.reportMsg(progress, 
+                    Resources.ToBeDone + toBeHandledList.Count + "\r\n");
             }
         }
 
@@ -95,7 +96,7 @@ namespace xy.scraper.page
             string url,
             string configId,
             CancellationToken token,
-            IProgress<string> progress = null)
+            IProgress<CReport> progress = null)
         {
             List<(string, string)> toBeHandledList 
                 = new List<(string, string)>();
@@ -105,7 +106,7 @@ namespace xy.scraper.page
         }
 
         public async Task resumeScrape(CancellationToken token,
-            IProgress<string> progress = null)
+            IProgress<CReport> progress = null)
         {
             JsonObject root = JsonSerializer.Deserialize<JsonObject>
                 (File.ReadAllText(_breakPointSavePath));
@@ -119,11 +120,15 @@ namespace xy.scraper.page
             {
                 downloadDict[kvp.Key] = kvp.Value.GetValue<string>();
             }
-            progress.Report(Resources.StartResumeBreakPoint);
-            progress.Report(Resources.BreakPointFiles + downloadDict.Count);
+
+            CReport.reportMsg(progress,
+                Resources.StartResumeBreakPoint);
+            CReport.reportMsg(progress,
+                Resources.BreakPointFiles + downloadDict.Count);
             await new pageScraper(null) // download function do not need a parser
                 .download(downloadDict, token, progress, _savePath);
-            progress.Report(Resources.BreakPointFilesDone);
+            CReport.reportMsg(progress,
+                Resources.BreakPointFilesDone);
 
             List<(string, string)> toBeHandledList
                 = new List<(string, string)>();
@@ -136,7 +141,8 @@ namespace xy.scraper.page
                 downloadDict[kvp.Key] = kvp.Value.GetValue<string>();
             }
 
-            progress.Report(Resources.BreakPointTasks
+            CReport.reportMsg(progress,
+                Resources.BreakPointTasks
                 + toBeHandledList.Count);
 
             await doScrapeTask(
