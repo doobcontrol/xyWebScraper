@@ -25,6 +25,8 @@ namespace xy.scraper.page
         internal Exception? e;
 
         internal List<(string, string)>? pageTaskList;
+        internal string pageUrl;
+        internal (string pageUrl, bool succeed) pageRusult;
 
         internal Dictionary<string, string>? fileTaskDict;
         internal string fileUrl;
@@ -39,6 +41,8 @@ namespace xy.scraper.page
         public Exception? E { get => e; }
         public string FileUrl { get => fileUrl; set => fileUrl = value; }
         public (string fileUrl, bool succeed) FileRusult { get => fileRusult; set => fileRusult = value; }
+        public string PageUrl { get => pageUrl; set => pageUrl = value; }
+        public (string pageUrl, bool succeed) PageRusult { get => pageRusult; set => pageRusult = value; }
 
         static public void reportMsg(IProgress<CReport> progress, string msg)
         {
@@ -81,6 +85,36 @@ namespace xy.scraper.page
             {
                 reportType = rType.FileDone,
                 fileRusult = fileRusult
+            });
+        }
+
+        static public void reportPageTask(IProgress<CReport> progress,
+            List<(string, string)>? pageTaskList)
+        {
+            progress.Report(new CReport()
+            {
+                reportType = rType.PageTask,
+                pageTaskList = pageTaskList
+            });
+        }
+
+        static public void reportPageStart(IProgress<CReport> progress,
+            string pageUrl)
+        {
+            progress.Report(new CReport()
+            {
+                reportType = rType.PageStart,
+                PageUrl = pageUrl
+            });
+        }
+
+        static public void reportPageDone(IProgress<CReport> progress,
+            (string pageUrl, bool succeed) pageRusult)
+        {
+            progress.Report(new CReport()
+            {
+                reportType = rType.PageDone,
+                PageRusult = pageRusult
             });
         }
     }

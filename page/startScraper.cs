@@ -21,7 +21,10 @@ namespace xy.scraper.page
             CancellationToken token,
             IProgress<CReport> progress = null)
         {
+            CReport.reportPageTask(progress, toBeHandledList);
+
             pageScraper Scraper;
+            bool pageSucceed = true;
             while (toBeHandledList.Count != 0)
             {
                 (string, string) toBeHandled = toBeHandledList[0];
@@ -35,6 +38,8 @@ namespace xy.scraper.page
 
                 try
                 {
+                    CReport.reportPageStart(progress, toBeHandledUrl);
+                    pageSucceed = true;
                     moreList
                     = await Scraper.download(toBeHandledUrl, token, progress, _savePath);
                 }
@@ -42,11 +47,13 @@ namespace xy.scraper.page
                 {
                     //save the downloadDict to a file
                     saveBreakpoint(e, toBeHandledList);
+                    pageSucceed = false;
                     throw e;
                 }
                 catch (Exception e)
                 {
                     CReport.reportError(progress, Resources.Failed, e);
+                    pageSucceed = false;
 
                     //save the downloadDict to a file
                     OperationCanceledException oe = new OperationCanceledException(token);
@@ -83,6 +90,8 @@ namespace xy.scraper.page
 
                 CReport.reportMsg(progress, 
                     Resources.ToBeDone + toBeHandledList.Count + "\r\n");
+
+                CReport.reportPageDone(progress, (toBeHandledUrl, pageSucceed));
             }
         }
 
@@ -136,7 +145,6 @@ namespace xy.scraper.page
                 toBeHandledList.Add(
                     (kvp.Key, kvp.Value.GetValue<string>())
                 );
-                //downloadDict[kvp.Key] = kvp.Value.GetValue<string>();
             }
 
             CReport.reportMsg(progress,

@@ -37,6 +37,9 @@ namespace xy.scraper.xyWebScraper
             progress = new Progress<CReport>(scrappingReport);
 
             formateDatagridview(dataGridView1);
+
+            lbPageTask.Text = "Page tasks: 0";
+            lbCurrentPage.Text = "Current page: ";
         }
 
         private void setPageModelConfigs()
@@ -154,6 +157,7 @@ namespace xy.scraper.xyWebScraper
             }
         }
         Dictionary<string, string>? fileTaskDict;
+        List<(string, string)>? pageTaskList;
         private void scrappingReport(CReport data)
         {
             switch (data.ReportType)
@@ -193,6 +197,19 @@ namespace xy.scraper.xyWebScraper
                         ColorTranslator.FromHtml("#DBC2CF"),
                         ColorTranslator.FromHtml("#DBC2CF"));
                     }
+                    break;
+
+                case CReport.rType.PageTask:
+                    pageTaskList = data.PageTaskList;
+                    showPageTaskInfo("");
+                    break;
+                case CReport.rType.PageStart:
+                    showPageTaskInfo(data.PageUrl);
+                    break;
+                case CReport.rType.PageDone:
+                    showPageTaskInfo(data.PageRusult.pageUrl + " ("
+                        + (data.PageRusult.succeed ? "succeed" : "fail")
+                        + ")");
                     break;
             }
         }
@@ -247,7 +264,7 @@ namespace xy.scraper.xyWebScraper
                 row.DefaultCellStyle.SelectionForeColor = row.DefaultCellStyle.ForeColor;
             }
         }
-        static public void formateDatagridview(DataGridView dgv)
+        private void formateDatagridview(DataGridView dgv)
         {
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;
@@ -264,6 +281,25 @@ namespace xy.scraper.xyWebScraper
             dgv.Columns.Clear();
             dgv.Columns.Add("url", "url");
             dgv.Columns.Add("file", "file");
+        }
+        private void showPageTaskInfo(string CurrentPage)
+        {
+
+            DataGridView dgv = dataGridView1;
+
+            if (panelPageTaskInfo.InvokeRequired)
+            {
+                panelPageTaskInfo.Invoke(() =>
+                {
+                    showPageTaskInfo(CurrentPage);
+                }
+                );
+            }
+            else
+            {
+                lbPageTask.Text = "Page tasks: " + pageTaskList.Count;
+                lbCurrentPage.Text = "Current page: " + CurrentPage;
+            }
         }
     }
 }

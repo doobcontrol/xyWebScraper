@@ -44,11 +44,9 @@
             tbSetting = new ToolStripButton();
             toolTip1 = new ToolTip(components);
             dataGridView1 = new DataGridView();
-            panel4 = new Panel();
-            label4 = new Label();
-            label3 = new Label();
-            label2 = new Label();
-            label1 = new Label();
+            panelPageTaskInfo = new Panel();
+            lbCurrentPage = new Label();
+            lbPageTask = new Label();
             panel5 = new Panel();
             txtLog = new TextBox();
             splitter1 = new Splitter();
@@ -59,7 +57,7 @@
             panel2.SuspendLayout();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            panel4.SuspendLayout();
+            panelPageTaskInfo.SuspendLayout();
             panel5.SuspendLayout();
             SuspendLayout();
             // 
@@ -198,58 +196,38 @@
             dataGridView1.Size = new Size(536, 332);
             dataGridView1.TabIndex = 6;
             // 
-            // panel4
+            // panelPageTaskInfo
             // 
-            panel4.Controls.Add(label4);
-            panel4.Controls.Add(label3);
-            panel4.Controls.Add(label2);
-            panel4.Controls.Add(label1);
-            panel4.Dock = DockStyle.Top;
-            panel4.Location = new Point(0, 0);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(536, 63);
-            panel4.TabIndex = 7;
+            panelPageTaskInfo.Controls.Add(lbCurrentPage);
+            panelPageTaskInfo.Controls.Add(lbPageTask);
+            panelPageTaskInfo.Dock = DockStyle.Top;
+            panelPageTaskInfo.Location = new Point(0, 0);
+            panelPageTaskInfo.Name = "panelPageTaskInfo";
+            panelPageTaskInfo.Size = new Size(536, 63);
+            panelPageTaskInfo.TabIndex = 7;
             // 
-            // label4
+            // lbCurrentPage
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(83, 29);
-            label4.Name = "label4";
-            label4.Size = new Size(38, 15);
-            label4.TabIndex = 3;
-            label4.Text = "label4";
+            lbCurrentPage.AutoSize = true;
+            lbCurrentPage.Location = new Point(12, 29);
+            lbCurrentPage.Name = "lbCurrentPage";
+            lbCurrentPage.Size = new Size(38, 15);
+            lbCurrentPage.TabIndex = 1;
+            lbCurrentPage.Text = "label2";
             // 
-            // label3
+            // lbPageTask
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(83, 3);
-            label3.Name = "label3";
-            label3.Size = new Size(38, 15);
-            label3.TabIndex = 2;
-            label3.Text = "label3";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(12, 29);
-            label2.Name = "label2";
-            label2.Size = new Size(38, 15);
-            label2.TabIndex = 1;
-            label2.Text = "label2";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(12, 3);
-            label1.Name = "label1";
-            label1.Size = new Size(38, 15);
-            label1.TabIndex = 0;
-            label1.Text = "label1";
+            lbPageTask.AutoSize = true;
+            lbPageTask.Location = new Point(12, 3);
+            lbPageTask.Name = "lbPageTask";
+            lbPageTask.Size = new Size(38, 15);
+            lbPageTask.TabIndex = 0;
+            lbPageTask.Text = "label1";
             // 
             // panel5
             // 
             panel5.Controls.Add(dataGridView1);
-            panel5.Controls.Add(panel4);
+            panel5.Controls.Add(panelPageTaskInfo);
             panel5.Dock = DockStyle.Fill;
             panel5.Location = new Point(0, 33);
             panel5.Name = "panel5";
@@ -297,8 +275,8 @@
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            panel4.ResumeLayout(false);
-            panel4.PerformLayout();
+            panelPageTaskInfo.ResumeLayout(false);
+            panelPageTaskInfo.PerformLayout();
             panel5.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -317,11 +295,9 @@
         private ToolTip toolTip1;
         private ToolStripProgressBar spbFileTask;
         private DataGridView dataGridView1;
-        private Panel panel4;
-        private Label label4;
-        private Label label3;
-        private Label label2;
-        private Label label1;
+        private Panel panelPageTaskInfo;
+        private Label lbCurrentPage;
+        private Label lbPageTask;
         private ToolStripButton tbLog;
         private Panel panel5;
         private TextBox txtLog;
