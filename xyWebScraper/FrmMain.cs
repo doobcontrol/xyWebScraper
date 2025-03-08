@@ -91,6 +91,7 @@ namespace xy.scraper.xyWebScraper
             if (File.Exists(startScraper._breakPointSavePath))
             {
                 tbStart.Checked = true;
+                tbStart.Enabled = true;
                 tbStart.ToolTipText =
                     "push to cancel scrap";
                 await runScrappingAsync(true);
@@ -136,9 +137,7 @@ namespace xy.scraper.xyWebScraper
             {
                 pbScrapeFlag.Image = Resources.Button_Blank_Gray_icon;
 
-                tbStart.Enabled = true;
-                tbStart.ToolTipText =
-                    "push to start scrap";
+                inputCheck();
             }
         }
 
