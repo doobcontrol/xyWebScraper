@@ -26,7 +26,7 @@ namespace xy.scraper.xyWebScraper
             spbFileTask.Visible = false;
 
             tbStart.Enabled = false;
-            tbStart.ToolTipText = 
+            tbStart.ToolTipText =
                 "please select page model, and input page url to active this button";
 
             tslbMsg.Text = "";
@@ -86,6 +86,21 @@ namespace xy.scraper.xyWebScraper
             }
         }
 
+        private async void tbBreakPoint_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(startScraper._breakPointSavePath))
+            {
+                tbStart.Checked = true;
+                tbStart.ToolTipText =
+                    "push to cancel scrap";
+                await runScrappingAsync(true);
+            }
+            else
+            {
+                tslbMsg.Text = "No break point";
+            }
+        }
+
         private void inputCheck()
         {
             if (cbConfigIdList.Text.Trim().Length > 0
@@ -103,6 +118,29 @@ namespace xy.scraper.xyWebScraper
                     "please select page model, and input page url to active this button";
             }
         }
+        private void setUIScrappingStatus(bool inScrapping = true)
+        {
+            tbLog.Visible = inScrapping;
+            tbSetting.Visible = !inScrapping;
+            tbBreakPoint.Visible = !inScrapping;
+            cbConfigIdList.Enabled = !inScrapping;
+            txtUrl.Enabled = !inScrapping;
+            ControlBox = !inScrapping;
+
+            if (inScrapping)
+            {
+                pbScrapeFlag.Image = Resources.Button_Blank_Green_icon;
+
+            }
+            else
+            {
+                pbScrapeFlag.Image = Resources.Button_Blank_Gray_icon;
+
+                tbStart.Enabled = true;
+                tbStart.ToolTipText =
+                    "push to start scrap";
+            }
+        }
 
         private void txtUrl_TextChanged(object sender, EventArgs e)
         {
@@ -114,24 +152,27 @@ namespace xy.scraper.xyWebScraper
             inputCheck();
         }
 
-        private async Task runScrappingAsync()
+        private async Task runScrappingAsync(bool breakPointResume = false)
         {
             try
             {
-                pbScrapeFlag.Image = Resources.Button_Blank_Yellow_icon;
-                tbLog.Visible = true;
-                tbSetting.Visible = false;
-                cbConfigIdList.Enabled = false;
-                txtUrl.Enabled = false;
-
-                ControlBox = false;
+                setUIScrappingStatus();
 
                 cts = new CancellationTokenSource();
-                await new startScraper().newScrape(
-                txtUrl.Text,
-                cbConfigIdList.Text,
-                cts.Token,
-                progress);
+                if (breakPointResume)
+                {
+                    await new startScraper().resumeScrape(
+                    cts.Token,
+                    progress);
+                }
+                else
+                {
+                    await new startScraper().newScrape(
+                    txtUrl.Text,
+                    cbConfigIdList.Text,
+                    cts.Token,
+                    progress);
+                }
             }
             catch (OperationCanceledException error)
             {
@@ -143,17 +184,7 @@ namespace xy.scraper.xyWebScraper
             }
             finally
             {
-                pbScrapeFlag.Image = Resources.Button_Blank_Gray_icon;
-                tbLog.Visible = false;
-                tbSetting.Visible = true;
-                cbConfigIdList.Enabled = true;
-                txtUrl.Enabled = true;
-
-                tbStart.Enabled = true;
-                tbStart.ToolTipText =
-                    "push to start scrap";
-
-                ControlBox = true;
+                setUIScrappingStatus(false);
             }
         }
         Dictionary<string, string>? fileTaskDict;

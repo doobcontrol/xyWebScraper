@@ -42,6 +42,7 @@
             tbStart = new ToolStripButton();
             tbLog = new ToolStripButton();
             tbSetting = new ToolStripButton();
+            tbBreakPoint = new ToolStripButton();
             toolTip1 = new ToolTip(components);
             dataGridView1 = new DataGridView();
             panelPageTaskInfo = new Panel();
@@ -103,7 +104,7 @@
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
             panel3.Padding = new Padding(0, 5, 0, 0);
-            panel3.Size = new Size(688, 33);
+            panel3.Size = new Size(655, 33);
             panel3.TabIndex = 1;
             // 
             // txtUrl
@@ -111,7 +112,7 @@
             txtUrl.Dock = DockStyle.Fill;
             txtUrl.Location = new Point(190, 5);
             txtUrl.Name = "txtUrl";
-            txtUrl.Size = new Size(498, 23);
+            txtUrl.Size = new Size(465, 23);
             txtUrl.TabIndex = 3;
             txtUrl.TextChanged += txtUrl_TextChanged;
             // 
@@ -141,18 +142,18 @@
             // 
             panel2.Controls.Add(toolStrip1);
             panel2.Dock = DockStyle.Right;
-            panel2.Location = new Point(688, 0);
+            panel2.Location = new Point(655, 0);
             panel2.Name = "panel2";
             panel2.Padding = new Padding(0, 5, 0, 0);
-            panel2.Size = new Size(112, 33);
+            panel2.Size = new Size(145, 33);
             panel2.TabIndex = 0;
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { tbStart, tbLog, tbSetting });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { tbStart, tbLog, tbSetting, tbBreakPoint });
             toolStrip1.Location = new Point(0, 5);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(112, 25);
+            toolStrip1.Size = new Size(145, 25);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -186,6 +187,16 @@
             tbSetting.Name = "tbSetting";
             tbSetting.Size = new Size(23, 22);
             tbSetting.Text = "toolStripButton1";
+            // 
+            // tbBreakPoint
+            // 
+            tbBreakPoint.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tbBreakPoint.Image = Properties.Resources.BreakpointsWindow;
+            tbBreakPoint.ImageTransparentColor = Color.Magenta;
+            tbBreakPoint.Name = "tbBreakPoint";
+            tbBreakPoint.Size = new Size(23, 22);
+            tbBreakPoint.Text = "toolStripButton1";
+            tbBreakPoint.Click += tbBreakPoint_Click;
             // 
             // dataGridView1
             // 
@@ -304,5 +315,6 @@
         private Splitter splitter1;
         private PictureBox pbScrapeFlag;
         private ToolStripButton tbSetting;
+        private ToolStripButton tbBreakPoint;
     }
 }

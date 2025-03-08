@@ -63,6 +63,16 @@ namespace xy.scraper.xyWebScraper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BreakpointsWindow {
+            get {
+                object obj = ResourceManager.GetObject("BreakpointsWindow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Button_Blank_Gray_icon {
             get {
                 object obj = ResourceManager.GetObject("Button-Blank-Gray-icon", resourceCulture);
