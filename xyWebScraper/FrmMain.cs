@@ -299,6 +299,7 @@ namespace xy.scraper.xyWebScraper
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;
             dgv.AllowUserToResizeColumns = false;
+            dgv.AllowUserToResizeRows = false;
             dgv.ReadOnly = true;
             dgv.RowHeadersVisible = false;
             dgv.ColumnHeadersVisible = false;
