@@ -19,9 +19,7 @@ namespace xy.scraper.page
         private async Task doScrapeTask(
             List<(string, string)> toBeHandledList,
             CancellationToken token,
-            IProgress<CReport> progress = null,
-            Dictionary<string, string> preDownloadDict = null,
-            string preDownloadSavePath = "")
+            IProgress<CReport> progress = null)
         {
             pageScraper Scraper;
             while (toBeHandledList.Count != 0)
@@ -138,7 +136,7 @@ namespace xy.scraper.page
                 toBeHandledList.Add(
                     (kvp.Key, kvp.Value.GetValue<string>())
                 );
-                downloadDict[kvp.Key] = kvp.Value.GetValue<string>();
+                //downloadDict[kvp.Key] = kvp.Value.GetValue<string>();
             }
 
             CReport.reportMsg(progress,
@@ -148,9 +146,7 @@ namespace xy.scraper.page
             await doScrapeTask(
                 toBeHandledList, 
                 token, 
-                progress, 
-                downloadDict, 
-                savePath);
+                progress);
         }
 
         public static string _breakPointSavePath = "breakPoint.json";
