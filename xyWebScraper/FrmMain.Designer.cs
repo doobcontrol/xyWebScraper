@@ -110,9 +110,9 @@
             // txtUrl
             // 
             txtUrl.Dock = DockStyle.Fill;
-            txtUrl.Location = new Point(190, 5);
+            txtUrl.Location = new Point(194, 5);
             txtUrl.Name = "txtUrl";
-            txtUrl.Size = new Size(465, 23);
+            txtUrl.Size = new Size(461, 23);
             txtUrl.TabIndex = 3;
             txtUrl.TextChanged += txtUrl_TextChanged;
             // 
@@ -121,7 +121,7 @@
             cbConfigIdList.Dock = DockStyle.Left;
             cbConfigIdList.DropDownStyle = ComboBoxStyle.DropDownList;
             cbConfigIdList.FormattingEnabled = true;
-            cbConfigIdList.Location = new Point(17, 5);
+            cbConfigIdList.Location = new Point(21, 5);
             cbConfigIdList.Name = "cbConfigIdList";
             cbConfigIdList.Size = new Size(173, 23);
             cbConfigIdList.TabIndex = 1;
@@ -133,8 +133,8 @@
             pbScrapeFlag.Image = Properties.Resources.Button_Blank_Green_icon;
             pbScrapeFlag.Location = new Point(0, 5);
             pbScrapeFlag.Name = "pbScrapeFlag";
-            pbScrapeFlag.Padding = new Padding(0, 4, 0, 0);
-            pbScrapeFlag.Size = new Size(17, 28);
+            pbScrapeFlag.Padding = new Padding(2, 4, 2, 0);
+            pbScrapeFlag.Size = new Size(21, 28);
             pbScrapeFlag.TabIndex = 4;
             pbScrapeFlag.TabStop = false;
             // 
