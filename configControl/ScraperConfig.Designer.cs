@@ -35,6 +35,10 @@
             tbDelPageConfig = new ToolStripButton();
             tbCopyPageConfig = new ToolStripButton();
             tbShowTest = new ToolStripButton();
+            toolStripSeparator1 = new ToolStripSeparator();
+            tbSave = new ToolStripButton();
+            tbSaveAs = new ToolStripButton();
+            tbImport = new ToolStripButton();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             searchTest1 = new SearchTest();
@@ -56,7 +60,7 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { tbAddPageConfig, tbDelPageConfig, tbCopyPageConfig, tbShowTest });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { tbAddPageConfig, tbDelPageConfig, tbCopyPageConfig, tbShowTest, toolStripSeparator1, tbSave, tbSaveAs, tbImport });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(693, 25);
@@ -103,6 +107,41 @@
             tbShowTest.Size = new Size(23, 22);
             tbShowTest.Text = "toolStripButton1";
             tbShowTest.Click += tbShowTest_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(6, 25);
+            // 
+            // tbSave
+            // 
+            tbSave.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tbSave.Image = (Image)resources.GetObject("tbSave.Image");
+            tbSave.ImageTransparentColor = Color.Magenta;
+            tbSave.Name = "tbSave";
+            tbSave.Size = new Size(23, 22);
+            tbSave.Text = "toolStripButton1";
+            tbSave.Click += tbSave_Click;
+            // 
+            // tbSaveAs
+            // 
+            tbSaveAs.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tbSaveAs.Image = (Image)resources.GetObject("tbSaveAs.Image");
+            tbSaveAs.ImageTransparentColor = Color.Magenta;
+            tbSaveAs.Name = "tbSaveAs";
+            tbSaveAs.Size = new Size(23, 22);
+            tbSaveAs.Text = "toolStripButton1";
+            tbSaveAs.Click += tbSaveAs_Click;
+            // 
+            // tbImport
+            // 
+            tbImport.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tbImport.Image = (Image)resources.GetObject("tbImport.Image");
+            tbImport.ImageTransparentColor = Color.Magenta;
+            tbImport.Name = "tbImport";
+            tbImport.Size = new Size(23, 22);
+            tbImport.Text = "toolStripButton1";
+            tbImport.Click += tbImport_Click;
             // 
             // tabControl1
             // 
@@ -177,5 +216,9 @@
         private SearchTest searchTest1;
         private ToolStripButton tbShowTest;
         private Splitter splitter1;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripButton tbSave;
+        private ToolStripButton tbSaveAs;
+        private ToolStripButton tbImport;
     }
 }

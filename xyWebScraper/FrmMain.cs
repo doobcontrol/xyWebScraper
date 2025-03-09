@@ -1,4 +1,7 @@
+using System.Text.Json.Nodes;
+using System.Text.Json;
 using System.Threading.Tasks;
+using xy.scraper.configControl;
 using xy.scraper.page;
 using xy.scraper.page.parserConfig;
 using xy.scraper.xyWebScraper.Properties;
@@ -331,6 +334,27 @@ namespace xy.scraper.xyWebScraper
                 lbPageTask.Text = "Page tasks: " + pageTaskList.Count;
                 lbCurrentPage.Text = "Current page: " + CurrentPage;
             }
+        }
+
+        private void tbSetting_Click(object sender, EventArgs e)
+        {
+            Form pageSetting = new Form();
+            pageSetting.Height *= 2;
+            pageSetting.Width *= 3;
+            pageSetting.Text = tbSetting.Text;
+
+            ScraperConfig sageScraper = new ScraperConfig();
+            sageScraper.Saved += pageConifg_saved;
+            sageScraper.Dock = DockStyle.Fill;
+            string json = File.ReadAllText(confnfigFile);
+            sageScraper.JsonObj = JsonSerializer.Deserialize<JsonArray>(json);
+
+            pageSetting.Controls.Add(sageScraper);
+            pageSetting.Show();
+        }
+        private void pageConifg_saved(object? sender, EventArgs e)
+        {
+            setPageModelConfigs();
         }
     }
 }

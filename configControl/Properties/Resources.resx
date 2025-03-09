@@ -117,103 +117,112 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="btnGetHtml" xml:space="preserve">
-    <value>Get Html</value>
-  </data>
-  <data name="btnSearch" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="cbSearchList" xml:space="preserve">
-    <value>Search List</value>
-  </data>
-  <data name="filesCb" xml:space="preserve">
-    <value>files</value>
-  </data>
-  <data name="lbAddAfter" xml:space="preserve">
-    <value>Add After</value>
-  </data>
-  <data name="lbAddBefore" xml:space="preserve">
-    <value>Add Before</value>
-  </data>
-  <data name="lbEncoding" xml:space="preserve">
-    <value>Encoding</value>
-  </data>
-  <data name="lbEnd" xml:space="preserve">
-    <value>End</value>
-  </data>
-  <data name="lbGetting" xml:space="preserve">
-    <value>Getting html...</value>
-  </data>
-  <data name="lbPageConfigID" xml:space="preserve">
-    <value>PageConfig ID</value>
-  </data>
-  <data name="lbReplace" xml:space="preserve">
-    <value>Replace</value>
-  </data>
-  <data name="lbStart" xml:space="preserve">
-    <value>Start</value>
-  </data>
-  <data name="nextsCb" xml:space="preserve">
-    <value>Urls</value>
-  </data>
-  <data name="pathsCb" xml:space="preserve">
-    <value>paths</value>
-  </data>
-  <data name="tbAddFile" xml:space="preserve">
-    <value>Add a file search</value>
-  </data>
-  <data name="tbAddNext" xml:space="preserve">
-    <value>Add a url search</value>
-  </data>
-  <data name="tbAddPageConfig" xml:space="preserve">
-    <value>Add a web page model</value>
-  </data>
-  <data name="tbAddPath" xml:space="preserve">
-    <value>Add a path search</value>
-  </data>
-  <data name="tbAddReplace" xml:space="preserve">
-    <value>Add a replace item</value>
-  </data>
-  <data name="tbAddSearchLayer" xml:space="preserve">
-    <value>Add a search layer</value>
-  </data>
-  <data name="tbCopyPageConfig" xml:space="preserve">
-    <value>Copy current web page model to create a new model</value>
-  </data>
-  <data name="tbDelFile" xml:space="preserve">
-    <value>Delete current file search</value>
-  </data>
-  <data name="tbDelNext" xml:space="preserve">
-    <value>Delete current url search</value>
-  </data>
-  <data name="tbDelPageConfig" xml:space="preserve">
-    <value>Delete current web page model</value>
+  <data name="tpOtherSetting" xml:space="preserve">
+    <value>Other Setting</value>
   </data>
   <data name="tbDelPath" xml:space="preserve">
     <value>Delete current path search</value>
   </data>
+  <data name="tbAddNext" xml:space="preserve">
+    <value>Add a url search</value>
+  </data>
+  <data name="lbAddAfter" xml:space="preserve">
+    <value>Add After</value>
+  </data>
+  <data name="lbStart" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="lbReplace" xml:space="preserve">
+    <value>Replace</value>
+  </data>
+  <data name="tbAddPageConfig" xml:space="preserve">
+    <value>Add a web page model</value>
+  </data>
   <data name="tbDelReplace" xml:space="preserve">
     <value>Delete current replace item</value>
   </data>
-  <data name="tbDelSearchLayer" xml:space="preserve">
-    <value>Delete current search layer</value>
+  <data name="lbEnd" xml:space="preserve">
+    <value>End</value>
   </data>
-  <data name="tbShowTest" xml:space="preserve">
-    <value>Show/Hide the test panel</value>
+  <data name="lbAddBefore" xml:space="preserve">
+    <value>Add Before</value>
   </data>
-  <data name="tpFinalHandle" xml:space="preserve">
-    <value>Final Handle</value>
+  <data name="cbSearchList" xml:space="preserve">
+    <value>Search List</value>
+  </data>
+  <data name="pathsCb" xml:space="preserve">
+    <value>paths</value>
+  </data>
+  <data name="tpTest" xml:space="preserve">
+    <value>Test</value>
+  </data>
+  <data name="tbAddReplace" xml:space="preserve">
+    <value>Add a replace item</value>
   </data>
   <data name="tpHtml" xml:space="preserve">
     <value>Html</value>
   </data>
-  <data name="tpOtherSetting" xml:space="preserve">
-    <value>Other Setting</value>
-  </data>
   <data name="tpSearchLayers" xml:space="preserve">
     <value>Search Layers</value>
   </data>
-  <data name="tpTest" xml:space="preserve">
-    <value>Test</value>
+  <data name="tbCopyPageConfig" xml:space="preserve">
+    <value>Copy current web page model to create a new model</value>
+  </data>
+  <data name="tbDelNext" xml:space="preserve">
+    <value>Delete current url search</value>
+  </data>
+  <data name="tbAddSearchLayer" xml:space="preserve">
+    <value>Add a search layer</value>
+  </data>
+  <data name="filesCb" xml:space="preserve">
+    <value>files</value>
+  </data>
+  <data name="lbPageConfigID" xml:space="preserve">
+    <value>PageConfig ID</value>
+  </data>
+  <data name="lbGetting" xml:space="preserve">
+    <value>Getting html...</value>
+  </data>
+  <data name="tbDelPageConfig" xml:space="preserve">
+    <value>Delete current web page model</value>
+  </data>
+  <data name="btnGetHtml" xml:space="preserve">
+    <value>Get Html</value>
+  </data>
+  <data name="tbDelFile" xml:space="preserve">
+    <value>Delete current file search</value>
+  </data>
+  <data name="nextsCb" xml:space="preserve">
+    <value>Urls</value>
+  </data>
+  <data name="btnSearch" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="lbEncoding" xml:space="preserve">
+    <value>Encoding</value>
+  </data>
+  <data name="tbDelSearchLayer" xml:space="preserve">
+    <value>Delete current search layer</value>
+  </data>
+  <data name="tbAddFile" xml:space="preserve">
+    <value>Add a file search</value>
+  </data>
+  <data name="tpFinalHandle" xml:space="preserve">
+    <value>Final Handle</value>
+  </data>
+  <data name="tbAddPath" xml:space="preserve">
+    <value>Add a path search</value>
+  </data>
+  <data name="tbShowTest" xml:space="preserve">
+    <value>Show/Hide the test panel</value>
+  </data>
+  <data name="tbSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="tbSaveAs" xml:space="preserve">
+    <value>Save as...</value>
+  </data>
+  <data name="tbImport" xml:space="preserve">
+    <value>Import</value>
   </data>
 </root>

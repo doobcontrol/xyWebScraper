@@ -304,6 +304,33 @@ namespace xy.scraper.configControl.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Import.
+        /// </summary>
+        internal static string tbImport {
+            get {
+                return ResourceManager.GetString("tbImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string tbSave {
+            get {
+                return ResourceManager.GetString("tbSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save as....
+        /// </summary>
+        internal static string tbSaveAs {
+            get {
+                return ResourceManager.GetString("tbSaveAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show/Hide the test panel.
         /// </summary>
         internal static string tbShowTest {

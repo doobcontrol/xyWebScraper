@@ -12,6 +12,9 @@ using System.Text.Json.Nodes;
 using System.Globalization;
 using xy.scraper.configControl.Properties;
 using xy.scraper.page;
+using System.Text.Json;
+using System.Diagnostics;
+using System.Security;
 
 namespace xy.scraper.configControl
 {
@@ -27,9 +30,9 @@ namespace xy.scraper.configControl
             defaultPageConfig.PageID = "pageModel1";
             tabControl1.TabPages[0].Text = defaultPageConfig.PageID;
 
-            searchTest1.SearchJsonObj = 
+            searchTest1.SearchJsonObj =
                 new SearchTest.SearchJsonObject(getCurrentSearchJsonObject);
-            searchTest1.GetHtmlStringHandler = 
+            searchTest1.GetHtmlStringHandler =
                 new SearchTest.GetHtmlString(GetHtmlStringObj);
 
             defaultPageConfig.PageIDChanged += defaultPageConfig_PageIDChanged;
@@ -42,6 +45,9 @@ namespace xy.scraper.configControl
             tbCopyPageConfig.ToolTipText = Resources.tbCopyPageConfig;
             tbDelPageConfig.ToolTipText = Resources.tbDelPageConfig;
             tbShowTest.ToolTipText = Resources.tbShowTest;
+            tbSave.ToolTipText = Resources.tbSave;
+            tbSaveAs.ToolTipText = Resources.tbSaveAs;
+            tbImport.ToolTipText = Resources.tbImport;
         }
 
         private void defaultPageConfig_PageIDChanged(object? sender, EventArgs e)
@@ -195,6 +201,8 @@ namespace xy.scraper.configControl
                 return ((PageConfig)tabControl1.SelectedTab.Controls[0]).CurrentSearchConfig;
             }
         }
+
+
         private JsonObject getCurrentSearchJsonObject()
         {
             return CurrentSearchConfig.JsonObj;
@@ -206,6 +214,71 @@ namespace xy.scraper.configControl
                         Url,
                         Encoding);
             return html;
+        }
+
+
+        private EventHandler onSaved;
+        public event EventHandler Saved
+        {
+            add
+            {
+                onSaved += value;
+            }
+            remove
+            {
+                onSaved -= value;
+            }
+        }
+        private string confnfigFile = @"xyWebScraper.cfg";
+        public string ConfnfigFile { get => confnfigFile; set => confnfigFile = value; }
+        private void tbSave_Click(object sender, EventArgs e)
+        {
+            string jsonString = JsonSerializer.Serialize(JsonObj);
+            File.WriteAllText(ConfnfigFile, jsonString);
+            onSaved?.Invoke(this, e);
+        }
+
+        private void tbSaveAs_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog()
+            {
+                FileName = "pageConfig",
+                Filter = "page config files (*.cfg)|*.cfg",
+                Title = "Save config file"
+            };
+
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string jsonString = JsonSerializer.Serialize(JsonObj);
+                File.WriteAllText(saveFileDialog1.FileName, jsonString);
+            }
+        }
+
+        private void tbImport_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog()
+            {
+                FileName = "Select a page config file",
+                Filter = "page config files (*.cfg)|*.cfg",
+                Title = "Select config file"
+            }; 
+            
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    string json = File.ReadAllText(openFileDialog1.FileName);
+                    JsonObj = JsonSerializer.Deserialize<JsonArray>(json);
+                }
+                catch (SecurityException ex)
+                {
+                    MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
+                    $"Details:\n\n{ex.StackTrace}");
+                }
+            }
         }
     }
 }

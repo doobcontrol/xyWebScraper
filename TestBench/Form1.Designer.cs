@@ -247,6 +247,7 @@
             // 
             // scraperConfig1
             // 
+            scraperConfig1.ConfnfigFile = "xyWebScraper.cfg";
             scraperConfig1.Dock = DockStyle.Fill;
             scraperConfig1.Location = new Point(3, 37);
             scraperConfig1.Name = "scraperConfig1";

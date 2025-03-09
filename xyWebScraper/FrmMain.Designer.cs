@@ -41,8 +41,8 @@
             toolStrip1 = new ToolStrip();
             tbStart = new ToolStripButton();
             tbLog = new ToolStripButton();
-            tbSetting = new ToolStripButton();
             tbBreakPoint = new ToolStripButton();
+            tbSetting = new ToolStripButton();
             toolTip1 = new ToolTip(components);
             dataGridView1 = new DataGridView();
             panelPageTaskInfo = new Panel();
@@ -150,7 +150,7 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { tbStart, tbLog, tbSetting, tbBreakPoint });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { tbStart, tbLog, tbBreakPoint, tbSetting });
             toolStrip1.Location = new Point(0, 5);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(145, 25);
@@ -179,15 +179,6 @@
             tbLog.Text = "toolStripButton2";
             tbLog.Click += tbLog_Click;
             // 
-            // tbSetting
-            // 
-            tbSetting.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            tbSetting.Image = Properties.Resources.ConfigureComputer;
-            tbSetting.ImageTransparentColor = Color.Magenta;
-            tbSetting.Name = "tbSetting";
-            tbSetting.Size = new Size(23, 22);
-            tbSetting.Text = "toolStripButton1";
-            // 
             // tbBreakPoint
             // 
             tbBreakPoint.DisplayStyle = ToolStripItemDisplayStyle.Image;
@@ -197,6 +188,16 @@
             tbBreakPoint.Size = new Size(23, 22);
             tbBreakPoint.Text = "toolStripButton1";
             tbBreakPoint.Click += tbBreakPoint_Click;
+            // 
+            // tbSetting
+            // 
+            tbSetting.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tbSetting.Image = Properties.Resources.ConfigureComputer;
+            tbSetting.ImageTransparentColor = Color.Magenta;
+            tbSetting.Name = "tbSetting";
+            tbSetting.Size = new Size(23, 22);
+            tbSetting.Text = "toolStripButton1";
+            tbSetting.Click += tbSetting_Click;
             // 
             // dataGridView1
             // 
