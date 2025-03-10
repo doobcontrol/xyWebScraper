@@ -11,6 +11,7 @@ using System.Threading.Channels;
 using System.Threading.Tasks;
 using System.Web;
 using xy.scraper.page;
+using static xy.scraper.page.CReport;
 
 namespace pageTest
 {
@@ -83,15 +84,6 @@ namespace pageTest
                 }
             }
             return downloadDict;
-        }
-        private List<string> createExpectReportList(int Count)
-        {
-            List<string> expectReportList = new List<string>();
-            for (int i = 0; i < Count; i++)
-            {
-                expectReportList.Add(msgSucceed + filePath + fileName + i);
-            }
-            return expectReportList;
         }
         private void IHtmlDownloaderMockSetup_File(
             Mock<IHtmlDownloader> IHtmlDownloaderMock
@@ -351,11 +343,10 @@ namespace pageTest
                 = createDownloadDict(downloadDictCount, -1, null);
             int expectCount = downloadDictCount;
             CancellationTokenSource cts = new CancellationTokenSource();
-            List<string> expectReportList = createExpectReportList(20);
-            List<string> reportList = new List<string>();
-            IProgress<CReport> progress = new Progress<CReport>((report) =>
+            List<CReport> reportList = new List<CReport>();
+            IProgress<CReport> progress = new SimpleProgress<CReport>((report) =>
             {
-                reportList.Add(report.Msg);
+                reportList.Add(report);
             });
 
             
@@ -377,11 +368,15 @@ namespace pageTest
 
             // ASSERT
             Assert.IsTrue(Directory.Exists(savePath + filePath));
-            Thread.Sleep(5000); //wait for the progress report(when batch execute tests, this is must)
-            Assert.AreEqual(expectReportList.Count, reportList.Count);
-            for (int i = 0; i < expectReportList.Count; i++)
+            Assert.AreEqual(downloadDictCount * 3 + 1, reportList.Count);
+            Assert.AreEqual(reportList[0].ReportType, CReport.rType.FileTask);
+            Assert.AreEqual(reportList[0].FileTaskDict, downloadDict);
+
+            for (int i = 0; i < downloadDictCount; i++)
             {
-                Assert.AreEqual(expectReportList[i], reportList[i]);
+                Assert.AreEqual(reportList[i * 3 + 1].ReportType, CReport.rType.FileStart);
+                Assert.AreEqual(reportList[i * 3 + 2].ReportType, CReport.rType.Msg);
+                Assert.AreEqual(reportList[i * 3 + 3].ReportType, CReport.rType.FileDone);
             }
             IHtmlDownloaderMock.Verify(
                 x => x.DownloadFileAsync(It.IsAny<string>(), It.IsAny<string>()),
