@@ -11,7 +11,7 @@ namespace xy.scraper.xyWebScraper
 {
     public partial class FrmMain : Form
     {
-        Progress<CReport> progress;
+        IProgress<CReport> progress;
         CancellationTokenSource cts;
         string confnfigFile = @"xyWebScraper.cfg";
 
@@ -37,7 +37,7 @@ namespace xy.scraper.xyWebScraper
 
             setPageModelConfigs();
 
-            progress = new Progress<CReport>(scrappingReport);
+            progress = new SimpleProgress<CReport>(scrappingReport);
 
             formateDatagridview(dataGridView1);
 
