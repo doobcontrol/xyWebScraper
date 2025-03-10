@@ -25,6 +25,7 @@ namespace xy.scraper.xyWebScraper
             txtLog.Visible = false;
             splitter1.Visible = false;
             tbLog.Visible = false;
+            tbLog.ToolTipText = "show/hide scraping log";
             pbScrapeFlag.Image = Resources.Button_Blank_Gray_icon;
             spbFileTask.Visible = false;
 
@@ -66,8 +67,13 @@ namespace xy.scraper.xyWebScraper
 
         private void tbLog_Click(object sender, EventArgs e)
         {
-            txtLog.Visible = tbLog.Checked;
             splitter1.Visible = tbLog.Checked;
+            txtLog.Visible = tbLog.Checked;
+            if (!tbLog.Checked)
+            {
+                messageBuffer.Clear();
+                txtLog.Clear();
+            }
         }
 
         private async void tbStart_Click(object sender, EventArgs e)
@@ -197,9 +203,11 @@ namespace xy.scraper.xyWebScraper
             {
                 case CReport.rType.Msg:
                     tslbMsg.Text = data.Msg;
+                    showMsg(data.Msg);
                     break;
                 case CReport.rType.Error:
                     tslbMsg.Text = data.Msg;
+                    showMsg(data.Msg);
                     break;
 
                 case CReport.rType.FileTask:
@@ -243,6 +251,7 @@ namespace xy.scraper.xyWebScraper
                     showPageTaskInfo(data.PageRusult.pageUrl + " ("
                         + (data.PageRusult.succeed ? "succeed" : "fail")
                         + ")");
+                    showMsg("");
                     break;
             }
         }
@@ -356,5 +365,41 @@ namespace xy.scraper.xyWebScraper
         {
             setPageModelConfigs();
         }
+
+        #region scrapping log box
+
+        List<string> messageBuffer = new List<string>();
+        int messageBufferSize = 100;
+        private void showMsg(string msg)
+        {
+            if (tbLog.Checked)
+            {
+                messageBuffer.Add(msg);
+                if (messageBuffer.Count > messageBufferSize)
+                {
+                    messageBuffer.RemoveAt(0);
+                }
+                updateMsg(string.Join("\r\n", messageBuffer));
+            }
+        }
+        private void updateMsg(string msg)
+        {
+            if (txtLog.InvokeRequired)
+            {
+                txtLog.Invoke(() =>
+                {
+                    updateMsg(msg);
+                }
+                );
+            }
+            else
+            {
+                txtLog.Text = msg;
+                txtLog.Select(txtLog.Text.Length, 0);
+                txtLog.ScrollToCaret();
+            }
+        }
+
+        #endregion
     }
 }

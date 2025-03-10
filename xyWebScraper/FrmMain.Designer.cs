@@ -48,7 +48,7 @@
             panelPageTaskInfo = new Panel();
             lbCurrentPage = new Label();
             lbPageTask = new Label();
-            panel5 = new Panel();
+            panelScrappingShow = new Panel();
             txtLog = new TextBox();
             splitter1 = new Splitter();
             statusStrip1.SuspendLayout();
@@ -59,7 +59,7 @@
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panelPageTaskInfo.SuspendLayout();
-            panel5.SuspendLayout();
+            panelScrappingShow.SuspendLayout();
             SuspendLayout();
             // 
             // statusStrip1
@@ -236,15 +236,15 @@
             lbPageTask.TabIndex = 0;
             lbPageTask.Text = "label1";
             // 
-            // panel5
+            // panelScrappingShow
             // 
-            panel5.Controls.Add(dataGridView1);
-            panel5.Controls.Add(panelPageTaskInfo);
-            panel5.Dock = DockStyle.Fill;
-            panel5.Location = new Point(0, 33);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(536, 395);
-            panel5.TabIndex = 8;
+            panelScrappingShow.Controls.Add(dataGridView1);
+            panelScrappingShow.Controls.Add(panelPageTaskInfo);
+            panelScrappingShow.Dock = DockStyle.Fill;
+            panelScrappingShow.Location = new Point(0, 33);
+            panelScrappingShow.Name = "panelScrappingShow";
+            panelScrappingShow.Size = new Size(536, 395);
+            panelScrappingShow.TabIndex = 8;
             // 
             // txtLog
             // 
@@ -252,6 +252,7 @@
             txtLog.Location = new Point(539, 33);
             txtLog.Multiline = true;
             txtLog.Name = "txtLog";
+            txtLog.ScrollBars = ScrollBars.Vertical;
             txtLog.Size = new Size(261, 395);
             txtLog.TabIndex = 9;
             // 
@@ -269,7 +270,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(panel5);
+            Controls.Add(panelScrappingShow);
             Controls.Add(splitter1);
             Controls.Add(txtLog);
             Controls.Add(panel1);
@@ -289,7 +290,7 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panelPageTaskInfo.ResumeLayout(false);
             panelPageTaskInfo.PerformLayout();
-            panel5.ResumeLayout(false);
+            panelScrappingShow.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -311,7 +312,7 @@
         private Label lbCurrentPage;
         private Label lbPageTask;
         private ToolStripButton tbLog;
-        private Panel panel5;
+        private Panel panelScrappingShow;
         private TextBox txtLog;
         private Splitter splitter1;
         private PictureBox pbScrapeFlag;

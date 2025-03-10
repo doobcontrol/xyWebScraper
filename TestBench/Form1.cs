@@ -20,7 +20,15 @@ namespace TestBench
 
             progress.ProgressChanged += async (_, data) =>
             {
-                showMsg(data.Msg + "\r\n");
+                if (data.ReportType == CReport.rType.Msg 
+                    || data.ReportType == CReport.rType.Error)
+                {
+                    showMsg(data.Msg);
+                }
+                else if (data.ReportType == CReport.rType.PageDone)
+                {
+                    showMsg("");
+                }
             };
 
             if (File.Exists(startScraper._breakPointSavePath))
@@ -55,7 +63,7 @@ namespace TestBench
             {
                 messageBuffer.RemoveAt(0);
             }
-            updateMsg(string.Join("", messageBuffer));
+            updateMsg(string.Join("\r\n", messageBuffer));
         }
         private void updateMsg(string msg)
         {

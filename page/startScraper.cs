@@ -89,7 +89,7 @@ namespace xy.scraper.page
                 toBeHandledList.Remove(toBeHandled);
 
                 CReport.reportMsg(progress, 
-                    Resources.ToBeDone + toBeHandledList.Count + "\r\n");
+                    Resources.ToBeDone + toBeHandledList.Count);
 
                 CReport.reportPageDone(progress, (toBeHandledUrl, pageSucceed));
             }
