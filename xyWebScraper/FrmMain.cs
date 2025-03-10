@@ -26,6 +26,8 @@ namespace xy.scraper.xyWebScraper
             splitter1.Visible = false;
             tbLog.Visible = false;
             tbLog.ToolTipText = "show/hide scraping log";
+            tbSetting.ToolTipText = "Set page models";
+            tbBreakPoint.ToolTipText = "Resume breakpoint scrape";
             pbScrapeFlag.Image = Resources.Button_Blank_Gray_icon;
             spbFileTask.Visible = false;
 
@@ -355,8 +357,12 @@ namespace xy.scraper.xyWebScraper
             ScraperConfig sageScraper = new ScraperConfig();
             sageScraper.Saved += pageConifg_saved;
             sageScraper.Dock = DockStyle.Fill;
-            string json = File.ReadAllText(confnfigFile);
-            sageScraper.JsonObj = JsonSerializer.Deserialize<JsonArray>(json);
+
+            if (File.Exists(confnfigFile))
+            {
+                string json = File.ReadAllText(confnfigFile);
+                sageScraper.JsonObj = JsonSerializer.Deserialize<JsonArray>(json);
+            }
 
             pageSetting.Controls.Add(sageScraper);
             pageSetting.Show();

@@ -15,6 +15,7 @@ using xy.scraper.page;
 using System.Text.Json;
 using System.Diagnostics;
 using System.Security;
+using System.Reflection;
 
 namespace xy.scraper.configControl
 {
@@ -78,13 +79,18 @@ namespace xy.scraper.configControl
 
         private void tbDelPageConfig_Click(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedIndex != 0)
+            TabPage? tabPage = tabControl1.SelectedTab;
+            if (tabPage != null)
             {
-                int index = tabControl1.SelectedIndex;
-                TabPage tabPage = tabControl1.TabPages[index];
+                int deleteIndex = tabControl1.SelectedIndex;
                 tabControl1.TabPages.Remove(tabPage);
                 tabPage.Dispose();
-                tabControl1.SelectedIndex = index - 1;
+
+                int newIndex = deleteIndex - 1;
+                if (newIndex > 0)
+                {
+                    tabControl1.SelectedIndex = newIndex;
+                }
             }
         }
 
@@ -169,27 +175,32 @@ namespace xy.scraper.configControl
 
             set
             {
-                foreach (JsonObject item in value)
+                setJsonObj(value, true);
+            }
+        }
+
+        private void setJsonObj(JsonArray jsonObj, bool init)
+        {
+            foreach (JsonObject item in jsonObj)
+            {
+                PageConfig pc;
+                TabControl tc = tabControl1;
+                TabPage tp;
+                if (jsonObj.IndexOf(item) == 0 && init)
                 {
-                    PageConfig pc;
-                    TabControl tc = tabControl1;
-                    TabPage tp;
-                    if (value.IndexOf(item) == 0)
-                    {
-                        tp = ((TabPage)tc.Controls[0]);
-                        pc = ((PageConfig)tp.Controls[0]);
-                    }
-                    else
-                    {
-                        pc = new PageConfig();
-                        pc.Dock = DockStyle.Fill;
-                        tp = new TabPage();
-                        tc.Controls.Add(tp);
-                        tp.Controls.Add(pc);
-                    }
-                    pc.PageIDChanged += defaultPageConfig_PageIDChanged;
-                    pc.JsonObj = item;
+                    tp = ((TabPage)tc.Controls[0]);
+                    pc = ((PageConfig)tp.Controls[0]);
                 }
+                else
+                {
+                    pc = new PageConfig();
+                    pc.Dock = DockStyle.Fill;
+                    tp = new TabPage();
+                    tc.Controls.Add(tp);
+                    tp.Controls.Add(pc);
+                }
+                pc.PageIDChanged += defaultPageConfig_PageIDChanged;
+                pc.JsonObj = item;
             }
         }
 
@@ -252,8 +263,15 @@ namespace xy.scraper.configControl
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                string jsonString = JsonSerializer.Serialize(JsonObj);
-                File.WriteAllText(saveFileDialog1.FileName, jsonString);
+                FrmPageModelSelect fpms = new FrmPageModelSelect(
+                    JsonObj, 
+                    "Save selected page models to - " + saveFileDialog1.FileName, 
+                    "Save");
+                if(fpms.ShowDialog() == DialogResult.OK)
+                {
+                    string jsonString = JsonSerializer.Serialize(fpms.SelectedJsonObj);
+                    File.WriteAllText(saveFileDialog1.FileName, jsonString);
+                }
             }
         }
 
@@ -271,7 +289,14 @@ namespace xy.scraper.configControl
                 try
                 {
                     string json = File.ReadAllText(openFileDialog1.FileName);
-                    JsonObj = JsonSerializer.Deserialize<JsonArray>(json);
+                    FrmPageModelSelect fpms = new FrmPageModelSelect(
+                        JsonSerializer.Deserialize<JsonArray>(json),
+                        "Import selected page models from - " + openFileDialog1.FileName,
+                        "Import");
+                    if (fpms.ShowDialog() == DialogResult.OK)
+                    {
+                        setJsonObj(fpms.SelectedJsonObj, false);
+                    }
                 }
                 catch (SecurityException ex)
                 {
