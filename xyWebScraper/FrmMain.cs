@@ -131,6 +131,7 @@ namespace xy.scraper.xyWebScraper
                 tbStart.Enabled = false;
                 tbStart.ToolTipText = Resources.toolTipText_tbStart;
             }
+            tbStart.Checked = false;
         }
         private void setUIScrappingStatus(bool inScrapping = true)
         {
