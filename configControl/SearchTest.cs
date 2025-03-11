@@ -27,7 +27,7 @@ namespace xy.scraper.configControl
         private void setUiText()
         {
             btnGetHtml.Text = Resources.btnGetHtml;
-            btnSearch.Text = Resources.btnSearch;
+            btnSearch.Text = Resources.btnImport;
             lbGetting.Text = Resources.lbGetting;
             tpHtml.Text = Resources.tpHtml;
             tpTest.Text = Resources.tpTest;

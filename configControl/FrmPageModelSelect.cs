@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xy.scraper.configControl.Properties;
 using xy.scraper.page.parserConfig;
 
 namespace xy.scraper.configControl
@@ -26,7 +27,7 @@ namespace xy.scraper.configControl
 
             Text = ActionName;
             btnOk.Text = OkName;
-            btnCancel.Text = "Cancel";
+            btnCancel.Text = Resources.btnCancel;
             ShowPageModelList(JsonObj);
         }
 
@@ -48,7 +49,8 @@ namespace xy.scraper.configControl
                 lbPageModelList.SelectedItems.Add(pModelList[i]);
             }
 
-            tslbSelectMsg.Text = "Selected items: " + lbPageModelList.SelectedItems.Count;
+            tslbSelectMsg.Text = Resources.msg_selectedCount 
+                + lbPageModelList.SelectedItems.Count;
         }
 
         private JsonArray selectedJsonObj;
@@ -73,7 +75,8 @@ namespace xy.scraper.configControl
 
         private void lbPageModelList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tslbSelectMsg.Text = "Selected items: " + lbPageModelList.SelectedItems.Count;
+            tslbSelectMsg.Text = Resources.msg_selectedCount 
+                + lbPageModelList.SelectedItems.Count;
         }
     }
 }

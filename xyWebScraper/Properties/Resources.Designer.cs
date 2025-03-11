@@ -131,12 +131,156 @@ namespace xy.scraper.xyWebScraper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fail.
+        /// </summary>
+        internal static string msg_fail {
+            get {
+                return ResourceManager.GetString("msg_fail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No break point.
+        /// </summary>
+        internal static string msg_Nobreakpoint {
+            get {
+                return ResourceManager.GetString("msg_Nobreakpoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to no page model configed.
+        /// </summary>
+        internal static string msg_NoPageModel {
+            get {
+                return ResourceManager.GetString("msg_NoPageModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Succeed.
+        /// </summary>
+        internal static string msg_succeed {
+            get {
+                return ResourceManager.GetString("msg_succeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap StartWebSite {
             get {
                 object obj = ResourceManager.GetObject("StartWebSite", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to xyWebScraper.
+        /// </summary>
+        internal static string text_AppName {
+            get {
+                return ResourceManager.GetString("text_AppName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current page: .
+        /// </summary>
+        internal static string text_lbCurrentPage {
+            get {
+                return ResourceManager.GetString("text_lbCurrentPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page tasks: .
+        /// </summary>
+        internal static string text_lbPageTask {
+            get {
+                return ResourceManager.GetString("text_lbPageTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to select PageModel.
+        /// </summary>
+        internal static string toolTipText_cbConfigIdList {
+            get {
+                return ResourceManager.GetString("toolTipText_cbConfigIdList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resume breakpoint scrape.
+        /// </summary>
+        internal static string toolTipText_tbBreakPoint {
+            get {
+                return ResourceManager.GetString("toolTipText_tbBreakPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to show/hide scraping log.
+        /// </summary>
+        internal static string toolTipText_tbLog {
+            get {
+                return ResourceManager.GetString("toolTipText_tbLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set page models.
+        /// </summary>
+        internal static string toolTipText_tbSetting {
+            get {
+                return ResourceManager.GetString("toolTipText_tbSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to please select page model, and input page url to active this button.
+        /// </summary>
+        internal static string toolTipText_tbStart {
+            get {
+                return ResourceManager.GetString("toolTipText_tbStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to start scrape.
+        /// </summary>
+        internal static string toolTipText_tbStart_active {
+            get {
+                return ResourceManager.GetString("toolTipText_tbStart_active", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scraping, push to cancel scrap.
+        /// </summary>
+        internal static string toolTipText_tbStart_scraping {
+            get {
+                return ResourceManager.GetString("toolTipText_tbStart_scraping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to waitting for canceled....
+        /// </summary>
+        internal static string toolTipText_tbStart_waitingCancel {
+            get {
+                return ResourceManager.GetString("toolTipText_tbStart_waitingCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to input Url.
+        /// </summary>
+        internal static string toolTipText_txtUrl {
+            get {
+                return ResourceManager.GetString("toolTipText_txtUrl", resourceCulture);
             }
         }
     }

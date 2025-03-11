@@ -132,6 +132,9 @@
   <data name="lbStart" xml:space="preserve">
     <value>Start</value>
   </data>
+  <data name="msg_selectedCount" xml:space="preserve">
+    <value>Selected items: </value>
+  </data>
   <data name="lbReplace" xml:space="preserve">
     <value>Replace</value>
   </data>
@@ -153,8 +156,23 @@
   <data name="pathsCb" xml:space="preserve">
     <value>paths</value>
   </data>
+  <data name="selectFormText_Import" xml:space="preserve">
+    <value>Import selected page models from - </value>
+  </data>
+  <data name="selectFormText_Save" xml:space="preserve">
+    <value>Save selected page models to - </value>
+  </data>
   <data name="tpTest" xml:space="preserve">
     <value>Test</value>
+  </data>
+  <data name="title_save" xml:space="preserve">
+    <value>Save as config file</value>
+  </data>
+  <data name="title_import" xml:space="preserve">
+    <value>Import from config file</value>
+  </data>
+  <data name="fileType_cfg" xml:space="preserve">
+    <value>page config files</value>
   </data>
   <data name="tbAddReplace" xml:space="preserve">
     <value>Add a replace item</value>
@@ -195,8 +213,14 @@
   <data name="nextsCb" xml:space="preserve">
     <value>Urls</value>
   </data>
-  <data name="btnSearch" xml:space="preserve">
-    <value>Search</value>
+  <data name="btnCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="btnImport" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="btnSave" xml:space="preserve">
+    <value>Save</value>
   </data>
   <data name="lbEncoding" xml:space="preserve">
     <value>Encoding</value>
@@ -224,5 +248,8 @@
   </data>
   <data name="tbImport" xml:space="preserve">
     <value>Import</value>
+  </data>
+  <data name="btnSearch" xml:space="preserve">
+    <value>Search</value>
   </data>
 </root>

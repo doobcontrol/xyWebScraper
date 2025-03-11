@@ -117,139 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="tpOtherSetting" xml:space="preserve">
-    <value>其它配置</value>
+  <data name="toolTipText_cbConfigIdList" xml:space="preserve">
+    <value>选择网页模型</value>
   </data>
-  <data name="tbDelPath" xml:space="preserve">
-    <value>删除当前保存路径搜索</value>
+  <data name="toolTipText_tbSetting" xml:space="preserve">
+    <value>网页模型配置</value>
   </data>
-  <data name="tbAddNext" xml:space="preserve">
-    <value>新增一项url搜索</value>
+  <data name="toolTipText_tbBreakPoint" xml:space="preserve">
+    <value>任务断点续传</value>
   </data>
-  <data name="lbAddAfter" xml:space="preserve">
-    <value>在前面添加</value>
+  <data name="toolTipText_txtUrl" xml:space="preserve">
+    <value>输入网页地址</value>
   </data>
-  <data name="lbStart" xml:space="preserve">
-    <value>开始位置</value>
+  <data name="msg_NoPageModel" xml:space="preserve">
+    <value>没有配置好的网页模型</value>
   </data>
-  <data name="msg_selectedCount" xml:space="preserve">
-    <value>选中数量: </value>
+  <data name="msg_Nobreakpoint" xml:space="preserve">
+    <value>没有断点</value>
   </data>
-  <data name="lbReplace" xml:space="preserve">
-    <value>替换项</value>
+  <data name="msg_fail" xml:space="preserve">
+    <value>失败</value>
   </data>
-  <data name="tbAddPageConfig" xml:space="preserve">
-    <value>新增一个网页模型</value>
+  <data name="msg_succeed" xml:space="preserve">
+    <value>成功</value>
   </data>
-  <data name="tbDelReplace" xml:space="preserve">
-    <value>删除当前替换项</value>
+  <data name="text_AppName" xml:space="preserve">
+    <value>西山爬虫</value>
   </data>
-  <data name="lbEnd" xml:space="preserve">
-    <value>结束位置</value>
+  <data name="text_lbCurrentPage" xml:space="preserve">
+    <value>当前网页: </value>
   </data>
-  <data name="lbAddBefore" xml:space="preserve">
-    <value>在后面添加</value>
+  <data name="text_lbPageTask" xml:space="preserve">
+    <value>网页数量: </value>
   </data>
-  <data name="cbSearchList" xml:space="preserve">
-    <value>返回多个搜索结果</value>
+  <data name="toolTipText_tbStart" xml:space="preserve">
+    <value>选择网页模型并输入网页地址以激活此按钮</value>
   </data>
-  <data name="pathsCb" xml:space="preserve">
-    <value>保存路径</value>
+  <data name="toolTipText_tbStart_active" xml:space="preserve">
+    <value>开始抓取</value>
   </data>
-  <data name="selectFormText_Import" xml:space="preserve">
-    <value>把选中的网页模型从文件中导入 - </value>
+  <data name="toolTipText_tbStart_scraping" xml:space="preserve">
+    <value>抓取进行中, 点击取消</value>
   </data>
-  <data name="selectFormText_Save" xml:space="preserve">
-    <value>把选中的网页模型保存到 - </value>
+  <data name="toolTipText_tbStart_waitingCancel" xml:space="preserve">
+    <value>正在取消任务...</value>
   </data>
-  <data name="tpTest" xml:space="preserve">
-    <value>测试</value>
-  </data>
-  <data name="title_save" xml:space="preserve">
-    <value>另存为文件</value>
-  </data>
-  <data name="title_import" xml:space="preserve">
-    <value>从文件导入</value>
-  </data>
-  <data name="fileType_cfg" xml:space="preserve">
-    <value>网页模型配置文件</value>
-  </data>
-  <data name="tbAddReplace" xml:space="preserve">
-    <value>新增一个替换项</value>
-  </data>
-  <data name="tpHtml" xml:space="preserve">
-    <value>Html文本</value>
-  </data>
-  <data name="tpSearchLayers" xml:space="preserve">
-    <value>搜索层级</value>
-  </data>
-  <data name="tbCopyPageConfig" xml:space="preserve">
-    <value>拷贝当前网页模型生成新模型</value>
-  </data>
-  <data name="tbDelNext" xml:space="preserve">
-    <value>删除当前url搜索</value>
-  </data>
-  <data name="tbAddSearchLayer" xml:space="preserve">
-    <value>新增一层搜索</value>
-  </data>
-  <data name="filesCb" xml:space="preserve">
-    <value>下载文件</value>
-  </data>
-  <data name="lbPageConfigID" xml:space="preserve">
-    <value>网页模型ID</value>
-  </data>
-  <data name="lbGetting" xml:space="preserve">
-    <value>正在下载...</value>
-  </data>
-  <data name="tbDelPageConfig" xml:space="preserve">
-    <value>删除当前网页模型</value>
-  </data>
-  <data name="btnGetHtml" xml:space="preserve">
-    <value>下载Html文本</value>
-  </data>
-  <data name="tbDelFile" xml:space="preserve">
-    <value>删除当前文件搜索</value>
-  </data>
-  <data name="nextsCb" xml:space="preserve">
-    <value>链接</value>
-  </data>
-  <data name="btnCancel" xml:space="preserve">
-    <value>取消</value>
-  </data>
-  <data name="btnImport" xml:space="preserve">
-    <value>导入</value>
-  </data>
-  <data name="btnSave" xml:space="preserve">
-    <value>保存</value>
-  </data>
-  <data name="lbEncoding" xml:space="preserve">
-    <value>网页编码</value>
-  </data>
-  <data name="tbDelSearchLayer" xml:space="preserve">
-    <value>删除当前搜索层</value>
-  </data>
-  <data name="tbAddFile" xml:space="preserve">
-    <value>新增一项文件搜索</value>
-  </data>
-  <data name="tpFinalHandle" xml:space="preserve">
-    <value>搜索结果</value>
-  </data>
-  <data name="tbAddPath" xml:space="preserve">
-    <value>新增一项保存路径搜索</value>
-  </data>
-  <data name="tbShowTest" xml:space="preserve">
-    <value>显示/隐藏测试面板</value>
-  </data>
-  <data name="tbSave" xml:space="preserve">
-    <value>保存</value>
-  </data>
-  <data name="tbSaveAs" xml:space="preserve">
-    <value>另存为</value>
-  </data>
-  <data name="tbImport" xml:space="preserve">
-    <value>导入</value>
-  </data>
-  <data name="btnSearch" xml:space="preserve">
-    <value>搜索</value>
+  <data name="toolTipText_tbLog" xml:space="preserve">
+    <value>显示/隐藏实时日志</value>
   </data>
 </root>

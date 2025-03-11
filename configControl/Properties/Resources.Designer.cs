@@ -61,11 +61,38 @@ namespace xy.scraper.configControl.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string btnCancel {
+            get {
+                return ResourceManager.GetString("btnCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Get Html.
         /// </summary>
         internal static string btnGetHtml {
             get {
                 return ResourceManager.GetString("btnGetHtml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import.
+        /// </summary>
+        internal static string btnImport {
+            get {
+                return ResourceManager.GetString("btnImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string btnSave {
+            get {
+                return ResourceManager.GetString("btnSave", resourceCulture);
             }
         }
         
@@ -93,6 +120,15 @@ namespace xy.scraper.configControl.Properties {
         internal static string filesCb {
             get {
                 return ResourceManager.GetString("filesCb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to page config files.
+        /// </summary>
+        internal static string fileType_cfg {
+            get {
+                return ResourceManager.GetString("fileType_cfg", resourceCulture);
             }
         }
         
@@ -169,6 +205,15 @@ namespace xy.scraper.configControl.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Selected items: .
+        /// </summary>
+        internal static string msg_selectedCount {
+            get {
+                return ResourceManager.GetString("msg_selectedCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Urls.
         /// </summary>
         internal static string nextsCb {
@@ -183,6 +228,24 @@ namespace xy.scraper.configControl.Properties {
         internal static string pathsCb {
             get {
                 return ResourceManager.GetString("pathsCb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import selected page models from - .
+        /// </summary>
+        internal static string selectFormText_Import {
+            get {
+                return ResourceManager.GetString("selectFormText_Import", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save selected page models to - .
+        /// </summary>
+        internal static string selectFormText_Save {
+            get {
+                return ResourceManager.GetString("selectFormText_Save", resourceCulture);
             }
         }
         
@@ -336,6 +399,24 @@ namespace xy.scraper.configControl.Properties {
         internal static string tbShowTest {
             get {
                 return ResourceManager.GetString("tbShowTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import from config file.
+        /// </summary>
+        internal static string title_import {
+            get {
+                return ResourceManager.GetString("title_import", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save as config file.
+        /// </summary>
+        internal static string title_save {
+            get {
+                return ResourceManager.GetString("title_save", resourceCulture);
             }
         }
         

@@ -142,4 +142,52 @@
   <data name="BreakpointsWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BreakpointsWindow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="toolTipText_cbConfigIdList" xml:space="preserve">
+    <value>select PageModel</value>
+  </data>
+  <data name="toolTipText_tbSetting" xml:space="preserve">
+    <value>Set page models</value>
+  </data>
+  <data name="toolTipText_tbBreakPoint" xml:space="preserve">
+    <value>Resume breakpoint scrape</value>
+  </data>
+  <data name="toolTipText_txtUrl" xml:space="preserve">
+    <value>input Url</value>
+  </data>
+  <data name="msg_NoPageModel" xml:space="preserve">
+    <value>no page model configed</value>
+  </data>
+  <data name="msg_Nobreakpoint" xml:space="preserve">
+    <value>No break point</value>
+  </data>
+  <data name="msg_fail" xml:space="preserve">
+    <value>Fail</value>
+  </data>
+  <data name="msg_succeed" xml:space="preserve">
+    <value>Succeed</value>
+  </data>
+  <data name="text_AppName" xml:space="preserve">
+    <value>xyWebScraper</value>
+  </data>
+  <data name="text_lbCurrentPage" xml:space="preserve">
+    <value>Current page: </value>
+  </data>
+  <data name="text_lbPageTask" xml:space="preserve">
+    <value>Page tasks: </value>
+  </data>
+  <data name="toolTipText_tbStart" xml:space="preserve">
+    <value>please select page model, and input page url to active this button</value>
+  </data>
+  <data name="toolTipText_tbStart_active" xml:space="preserve">
+    <value>start scrape</value>
+  </data>
+  <data name="toolTipText_tbStart_scraping" xml:space="preserve">
+    <value>Scraping, push to cancel scrap</value>
+  </data>
+  <data name="toolTipText_tbStart_waitingCancel" xml:space="preserve">
+    <value>waitting for canceled...</value>
+  </data>
+  <data name="toolTipText_tbLog" xml:space="preserve">
+    <value>show/hide scraping log</value>
+  </data>
 </root>

@@ -19,24 +19,15 @@ namespace xy.scraper.xyWebScraper
         {
             InitializeComponent();
 
-            toolTip1.SetToolTip(cbConfigIdList, "select PageModel");
-            toolTip1.SetToolTip(txtUrl, "input Url");
-
             txtLog.Visible = false;
             splitter1.Visible = false;
             tbLog.Visible = false;
-            tbLog.ToolTipText = "show/hide scraping log";
-            tbSetting.ToolTipText = "Set page models";
-            tbBreakPoint.ToolTipText = "Resume breakpoint scrape";
             pbScrapeFlag.Image = Resources.Button_Blank_Gray_icon;
             spbFileTask.Visible = false;
 
             tbStart.Enabled = false;
-            tbStart.ToolTipText =
-                "please select page model, and input page url to active this button";
 
             tslbMsg.Text = "";
-            this.Text = "xyWebScraper";
 
             setPageModelConfigs();
 
@@ -44,8 +35,20 @@ namespace xy.scraper.xyWebScraper
 
             formateDatagridview(dataGridView1);
 
-            lbPageTask.Text = "Page tasks: 0";
-            lbCurrentPage.Text = "Current page: ";
+            setUiText();
+        }
+        private void setUiText()
+        {
+            toolTip1.SetToolTip(cbConfigIdList, Resources.toolTipText_cbConfigIdList);
+            toolTip1.SetToolTip(txtUrl, Resources.toolTipText_txtUrl);
+            tbLog.ToolTipText = Resources.toolTipText_tbLog;
+            tbSetting.ToolTipText = Resources.toolTipText_tbSetting;
+            tbBreakPoint.ToolTipText = Resources.toolTipText_tbBreakPoint;
+            tbStart.ToolTipText = Resources.toolTipText_tbStart;
+
+            this.Text = Resources.text_AppName;
+            lbPageTask.Text = Resources.text_lbPageTask + "0";
+            lbCurrentPage.Text = Resources.text_lbCurrentPage;
         }
 
         private void setPageModelConfigs()
@@ -63,7 +66,7 @@ namespace xy.scraper.xyWebScraper
             }
             else
             {
-                tslbMsg.Text = "no page model configed";
+                tslbMsg.Text = Resources.msg_NoPageModel;
             }
         }
 
@@ -82,16 +85,14 @@ namespace xy.scraper.xyWebScraper
         {
             if (tbStart.Checked)
             {
-                tbStart.ToolTipText =
-                    "push to cancel scrap";
+                tbStart.ToolTipText = Resources.toolTipText_tbStart_scraping;
                 await runScrappingAsync();
             }
             else
             {
                 tbStart.Enabled = false;
 
-                tbStart.ToolTipText =
-                    "waitting for canceled...";
+                tbStart.ToolTipText = Resources.toolTipText_tbStart_waitingCancel; ;
 
                 cts?.Cancel();
             }
@@ -103,13 +104,12 @@ namespace xy.scraper.xyWebScraper
             {
                 tbStart.Checked = true;
                 tbStart.Enabled = true;
-                tbStart.ToolTipText =
-                    "push to cancel scrap";
+                tbStart.ToolTipText = Resources.toolTipText_tbStart_scraping;
                 await runScrappingAsync(true);
             }
             else
             {
-                tslbMsg.Text = "No break point";
+                tslbMsg.Text = Resources.msg_Nobreakpoint;
             }
         }
 
@@ -120,14 +120,12 @@ namespace xy.scraper.xyWebScraper
                 )
             {
                 tbStart.Enabled = true;
-                tbStart.ToolTipText =
-                    "push to start scrap";
+                tbStart.ToolTipText = Resources.toolTipText_tbStart_active;
             }
             else
             {
                 tbStart.Enabled = false;
-                tbStart.ToolTipText =
-                    "please select page model, and input page url to active this button";
+                tbStart.ToolTipText = Resources.toolTipText_tbStart;
             }
         }
         private void setUIScrappingStatus(bool inScrapping = true)
@@ -251,7 +249,8 @@ namespace xy.scraper.xyWebScraper
                     break;
                 case CReport.rType.PageDone:
                     showPageTaskInfo(data.PageRusult.pageUrl + " ("
-                        + (data.PageRusult.succeed ? "succeed" : "fail")
+                        + (data.PageRusult.succeed ? 
+                            Resources.msg_succeed : Resources.msg_fail)
                         + ")");
                     showMsg("");
                     break;
@@ -342,8 +341,8 @@ namespace xy.scraper.xyWebScraper
             }
             else
             {
-                lbPageTask.Text = "Page tasks: " + pageTaskList.Count;
-                lbCurrentPage.Text = "Current page: " + CurrentPage;
+                lbPageTask.Text = Resources.text_lbPageTask + pageTaskList.Count;
+                lbCurrentPage.Text = Resources.text_lbCurrentPage + CurrentPage;
             }
         }
 
@@ -352,7 +351,7 @@ namespace xy.scraper.xyWebScraper
             Form pageSetting = new Form();
             pageSetting.Height *= 2;
             pageSetting.Width *= 3;
-            pageSetting.Text = tbSetting.Text;
+            pageSetting.Text = tbSetting.ToolTipText;
 
             ScraperConfig sageScraper = new ScraperConfig();
             sageScraper.Saved += pageConifg_saved;

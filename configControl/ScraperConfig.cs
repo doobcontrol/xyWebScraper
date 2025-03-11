@@ -213,7 +213,6 @@ namespace xy.scraper.configControl
             }
         }
 
-
         private JsonObject getCurrentSearchJsonObject()
         {
             return CurrentSearchConfig.JsonObj;
@@ -254,8 +253,8 @@ namespace xy.scraper.configControl
             SaveFileDialog saveFileDialog1 = new SaveFileDialog()
             {
                 FileName = "pageConfig",
-                Filter = "page config files (*.cfg)|*.cfg",
-                Title = "Save config file"
+                Filter = Resources.fileType_cfg + " (*.cfg)|*.cfg",
+                Title = Resources.title_save
             };
 
             saveFileDialog1.FilterIndex = 2;
@@ -264,9 +263,9 @@ namespace xy.scraper.configControl
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 FrmPageModelSelect fpms = new FrmPageModelSelect(
-                    JsonObj, 
-                    "Save selected page models to - " + saveFileDialog1.FileName, 
-                    "Save");
+                    JsonObj,
+                    Resources.selectFormText_Save + saveFileDialog1.FileName,
+                    Resources.btnSave);
                 if(fpms.ShowDialog() == DialogResult.OK)
                 {
                     string jsonString = JsonSerializer.Serialize(fpms.SelectedJsonObj);
@@ -279,9 +278,9 @@ namespace xy.scraper.configControl
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog()
             {
-                FileName = "Select a page config file",
-                Filter = "page config files (*.cfg)|*.cfg",
-                Title = "Select config file"
+                FileName = "pageConfig",
+                Filter = Resources.fileType_cfg + " (*.cfg)|*.cfg",
+                Title = Resources.title_import
             }; 
             
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -291,8 +290,8 @@ namespace xy.scraper.configControl
                     string json = File.ReadAllText(openFileDialog1.FileName);
                     FrmPageModelSelect fpms = new FrmPageModelSelect(
                         JsonSerializer.Deserialize<JsonArray>(json),
-                        "Import selected page models from - " + openFileDialog1.FileName,
-                        "Import");
+                        Resources.selectFormText_Import + openFileDialog1.FileName,
+                        Resources.btnImport);
                     if (fpms.ShowDialog() == DialogResult.OK)
                     {
                         setJsonObj(fpms.SelectedJsonObj, false);
