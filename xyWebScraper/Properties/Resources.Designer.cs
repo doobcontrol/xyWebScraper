@@ -240,6 +240,15 @@ namespace xy.scraper.xyWebScraper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Files count: .
+        /// </summary>
+        internal static string text_lbFilesCount {
+            get {
+                return ResourceManager.GetString("text_lbFilesCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Page tasks: .
         /// </summary>
         internal static string text_lbPageTask {

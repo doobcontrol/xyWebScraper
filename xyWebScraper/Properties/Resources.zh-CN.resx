@@ -165,6 +165,9 @@
   <data name="text_lbPageTask" xml:space="preserve">
     <value>网页数量: </value>
   </data>
+  <data name="text_lbFilesCount" xml:space="preserve">
+    <value>文件数量: </value>
+  </data>
   <data name="toolTipText_tbStart" xml:space="preserve">
     <value>选择网页模型并输入网页地址以激活此按钮</value>
   </data>

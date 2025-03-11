@@ -190,6 +190,9 @@
   <data name="text_lbPageTask" xml:space="preserve">
     <value>Page tasks: </value>
   </data>
+  <data name="text_lbFilesCount" xml:space="preserve">
+    <value>Files count: </value>
+  </data>
   <data name="toolTipText_tbStart" xml:space="preserve">
     <value>please select page model, and input page url to active this button</value>
   </data>

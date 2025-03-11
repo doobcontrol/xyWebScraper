@@ -46,6 +46,7 @@
             toolTip1 = new ToolTip(components);
             dataGridView1 = new DataGridView();
             panelPageTaskInfo = new Panel();
+            lbFilesCount = new Label();
             lbCurrentPage = new Label();
             lbPageTask = new Label();
             panelScrappingShow = new Panel();
@@ -210,6 +211,7 @@
             // 
             // panelPageTaskInfo
             // 
+            panelPageTaskInfo.Controls.Add(lbFilesCount);
             panelPageTaskInfo.Controls.Add(lbCurrentPage);
             panelPageTaskInfo.Controls.Add(lbPageTask);
             panelPageTaskInfo.Dock = DockStyle.Top;
@@ -218,10 +220,19 @@
             panelPageTaskInfo.Size = new Size(536, 63);
             panelPageTaskInfo.TabIndex = 7;
             // 
+            // lbFilesCount
+            // 
+            lbFilesCount.AutoSize = true;
+            lbFilesCount.Location = new Point(12, 43);
+            lbFilesCount.Name = "lbFilesCount";
+            lbFilesCount.Size = new Size(38, 15);
+            lbFilesCount.TabIndex = 2;
+            lbFilesCount.Text = "label2";
+            // 
             // lbCurrentPage
             // 
             lbCurrentPage.AutoSize = true;
-            lbCurrentPage.Location = new Point(12, 29);
+            lbCurrentPage.Location = new Point(12, 23);
             lbCurrentPage.Name = "lbCurrentPage";
             lbCurrentPage.Size = new Size(38, 15);
             lbCurrentPage.TabIndex = 1;
@@ -318,5 +329,6 @@
         private PictureBox pbScrapeFlag;
         private ToolStripButton tbSetting;
         private ToolStripButton tbBreakPoint;
+        private Label lbFilesCount;
     }
 }

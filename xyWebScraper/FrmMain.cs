@@ -53,6 +53,7 @@ namespace xy.scraper.xyWebScraper
             this.Text = Resources.text_AppName;
             lbPageTask.Text = Resources.text_lbPageTask + "0";
             lbCurrentPage.Text = Resources.text_lbCurrentPage;
+            lbFilesCount.Text = Resources.text_lbFilesCount;
         }
 
         private void setPageModelConfigs()
@@ -231,6 +232,7 @@ namespace xy.scraper.xyWebScraper
                     spbFileTask.Value = 0;
                     spbFileTask.Visible = true;
                     showFileTask(data.FileTaskDict);
+                    showPageTaskInfo(null, "0/" + data.FileTaskDict.Count);
                     break;
                 case CReport.rType.FileStart:
                     changeRowColor(fileRowDic[data.FileUrl],
@@ -239,7 +241,9 @@ namespace xy.scraper.xyWebScraper
                         );
                     break;
                 case CReport.rType.FileDone:
-                    spbFileTask.Value = spbFileTask.Maximum - fileTaskDict.Count;
+                    spbFileTask.Value = spbFileTask.Maximum - fileTaskDict.Count + 1;
+                    showPageTaskInfo(null,
+                        spbFileTask.Value + "/" + spbFileTask.Maximum);
                     if (data.FileRusult.succeed)
                     {
                         changeRowColor(fileRowDic[data.FileRusult.fileUrl],
@@ -342,7 +346,7 @@ namespace xy.scraper.xyWebScraper
             dgv.Columns.Add("url", "url");
             dgv.Columns.Add("file", "file");
         }
-        private void showPageTaskInfo(string CurrentPage)
+        private void showPageTaskInfo(string? CurrentPage = null, string? FilesCount = null)
         {
 
             DataGridView dgv = dataGridView1;
@@ -351,14 +355,21 @@ namespace xy.scraper.xyWebScraper
             {
                 panelPageTaskInfo.Invoke(() =>
                 {
-                    showPageTaskInfo(CurrentPage);
+                    showPageTaskInfo(CurrentPage, FilesCount);
                 }
                 );
             }
             else
             {
                 lbPageTask.Text = Resources.text_lbPageTask + pageTaskList.Count;
-                lbCurrentPage.Text = Resources.text_lbCurrentPage + CurrentPage;
+                if (CurrentPage != null)
+                {
+                    lbCurrentPage.Text = Resources.text_lbCurrentPage + CurrentPage;
+                }
+                if (FilesCount != null)
+                {
+                    lbFilesCount.Text = Resources.text_lbFilesCount + FilesCount;
+                }
             }
         }
 
