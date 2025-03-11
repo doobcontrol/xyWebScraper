@@ -127,7 +127,7 @@
     <value>新增一项url搜索</value>
   </data>
   <data name="lbAddAfter" xml:space="preserve">
-    <value>在前面添加</value>
+    <value>在后面添加</value>
   </data>
   <data name="lbStart" xml:space="preserve">
     <value>开始位置</value>
@@ -148,7 +148,7 @@
     <value>结束位置</value>
   </data>
   <data name="lbAddBefore" xml:space="preserve">
-    <value>在后面添加</value>
+    <value>在前面添加</value>
   </data>
   <data name="cbSearchList" xml:space="preserve">
     <value>返回多个搜索结果</value>
