@@ -5,7 +5,6 @@ using xy.scraper.configControl;
 using xy.scraper.page;
 using xy.scraper.page.parserConfig;
 using xy.scraper.xyWebScraper.Properties;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using xySoft.log;
 
 namespace xy.scraper.xyWebScraper
@@ -35,6 +34,10 @@ namespace xy.scraper.xyWebScraper
             progress = new SimpleProgress<CReport>(scrappingReport);
 
             formateDatagridview(dataGridView1);
+
+            txtUrl.Click += new EventHandler((object? o, EventArgs e) => {
+                txtUrl.SelectAll();
+            });
 
             setUiText();
         }
