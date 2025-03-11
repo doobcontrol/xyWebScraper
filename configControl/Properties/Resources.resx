@@ -241,7 +241,7 @@
     <value>Show/Hide the test panel</value>
   </data>
   <data name="testMsg_FoundItems" xml:space="preserve">
-    <value>found  {} items: </value>
+    <value>found  {0} items: </value>
   </data>
   <data name="testMsg_FoundString" xml:space="preserve">
     <value>found string: </value>

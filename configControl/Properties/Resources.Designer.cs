@@ -403,7 +403,7 @@ namespace xy.scraper.configControl.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to found  {} items: .
+        ///   Looks up a localized string similar to found  {0} items: .
         /// </summary>
         internal static string testMsg_FoundItems {
             get {

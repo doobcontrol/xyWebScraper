@@ -241,7 +241,7 @@
     <value>显示/隐藏测试面板</value>
   </data>
   <data name="testMsg_FoundItems" xml:space="preserve">
-    <value>找到 {} 项: </value>
+    <value>找到 {0} 项: </value>
   </data>
   <data name="testMsg_FoundString" xml:space="preserve">
     <value>查找结果: </value>
