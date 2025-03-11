@@ -266,6 +266,7 @@ namespace xy.scraper.xyWebScraper
                         + (data.PageRusult.succeed ? 
                             Resources.msg_succeed : Resources.msg_fail)
                         + ")");
+                    spbFileTask.Visible = false;
                     showMsg("");
                     XyLog.log("");
                     break;
