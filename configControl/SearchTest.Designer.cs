@@ -126,13 +126,13 @@
             txtUrl.Dock = DockStyle.Fill;
             txtUrl.Location = new Point(0, 0);
             txtUrl.Name = "txtUrl";
-            txtUrl.Size = new Size(784, 23);
+            txtUrl.Size = new Size(675, 23);
             txtUrl.TabIndex = 1;
             // 
             // panel1
             // 
-            panel1.Controls.Add(panel2);
             panel1.Controls.Add(txtUrl);
+            panel1.Controls.Add(panel2);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
