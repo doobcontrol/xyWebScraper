@@ -84,7 +84,7 @@ namespace xy.scraper.page
                     {
                         CReport.reportMsg(progress,
                             Resources.GaveUpTry);
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -105,7 +105,7 @@ namespace xy.scraper.page
             {
                 //save the retList to a file
                 e.Data["retList"] = retList;
-                throw e;
+                throw;
             }
 
             return retList;
@@ -196,7 +196,7 @@ namespace xy.scraper.page
                                 CReport.reportMsg(progress,
                                     Resources.GaveUpTry + downloadDict[dUrl]);
                                 CReport.reportFileDone(progress, (dUrl, false));
-                                throw e;
+                                throw;
                             }
                         }
                     }

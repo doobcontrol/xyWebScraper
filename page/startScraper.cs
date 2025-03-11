@@ -48,7 +48,7 @@ namespace xy.scraper.page
                     //save the downloadDict to a file
                     saveBreakpoint(e, toBeHandledList);
                     pageSucceed = false;
-                    throw e;
+                    throw;
                 }
                 catch (Exception e)
                 {
