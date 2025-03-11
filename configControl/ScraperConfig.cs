@@ -31,6 +31,7 @@ namespace xy.scraper.configControl
             defaultPageConfig.PageID = "pageModel1";
             tabControl1.TabPages[0].Text = defaultPageConfig.PageID;
 
+            splitter1.Visible = false;
             searchTest1.SearchJsonObj =
                 new SearchTest.SearchJsonObject(getCurrentSearchJsonObject);
             searchTest1.GetHtmlStringHandler =
@@ -149,6 +150,7 @@ namespace xy.scraper.configControl
 
         private void tbShowTest_Click(object sender, EventArgs e)
         {
+            splitter1.Visible = tbShowTest.Checked;
             searchTest1.Visible = tbShowTest.Checked;
         }
         public string Encoding
