@@ -240,6 +240,15 @@
   <data name="tbShowTest" xml:space="preserve">
     <value>Show/Hide the test panel</value>
   </data>
+  <data name="testMsg_FoundItems" xml:space="preserve">
+    <value>found  {} items: </value>
+  </data>
+  <data name="testMsg_FoundString" xml:space="preserve">
+    <value>found string: </value>
+  </data>
+  <data name="testMsg_SearchError" xml:space="preserve">
+    <value>search error: </value>
+  </data>
   <data name="tbSave" xml:space="preserve">
     <value>Save</value>
   </data>

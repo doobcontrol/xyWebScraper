@@ -72,21 +72,23 @@ namespace xy.scraper.configControl
                 if (searchList)
                 {
                     List<string> searchResult = ParserJosnConfig.searchList(html, searchJson);
-                     txtShowBox.Text = "found " 
-                        + searchResult.Count 
-                        + " items:\r\n" 
+                     txtShowBox.Text = 
+                        string.Format(Resources.testMsg_FoundItems, searchResult.Count)
+                        + "\r\n" 
                         + string.Join("\r\n", searchResult);
                 }
                 else
                 {
                     string searchResult = ParserJosnConfig.search(html, searchJson);
                     txtShowBox.Text = searchResult;
-                    txtShowBox.Text = "found string:\r\n" + txtShowBox.Text;
+                    txtShowBox.Text = Resources.testMsg_FoundString + 
+                        "\r\n" + searchResult;
                 }
             }
             catch (Exception ex)
             {
-                txtShowBox.Text = "search error:\r\n" + ex.Message;
+                txtShowBox.Text = Resources.testMsg_SearchError 
+                    + "\r\n" + ex.Message;
             }
         }
 

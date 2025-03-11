@@ -240,6 +240,15 @@
   <data name="tbShowTest" xml:space="preserve">
     <value>显示/隐藏测试面板</value>
   </data>
+  <data name="testMsg_FoundItems" xml:space="preserve">
+    <value>找到 {} 项: </value>
+  </data>
+  <data name="testMsg_FoundString" xml:space="preserve">
+    <value>查找结果: </value>
+  </data>
+  <data name="testMsg_SearchError" xml:space="preserve">
+    <value>搜索错误: </value>
+  </data>
   <data name="tbSave" xml:space="preserve">
     <value>保存</value>
   </data>

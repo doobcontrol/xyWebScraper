@@ -403,6 +403,33 @@ namespace xy.scraper.configControl.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to found  {} items: .
+        /// </summary>
+        internal static string testMsg_FoundItems {
+            get {
+                return ResourceManager.GetString("testMsg_FoundItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to found string: .
+        /// </summary>
+        internal static string testMsg_FoundString {
+            get {
+                return ResourceManager.GetString("testMsg_FoundString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to search error: .
+        /// </summary>
+        internal static string testMsg_SearchError {
+            get {
+                return ResourceManager.GetString("testMsg_SearchError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Import from config file.
         /// </summary>
         internal static string title_import {
