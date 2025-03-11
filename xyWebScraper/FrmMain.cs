@@ -6,6 +6,7 @@ using xy.scraper.page;
 using xy.scraper.page.parserConfig;
 using xy.scraper.xyWebScraper.Properties;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using xySoft.log;
 
 namespace xy.scraper.xyWebScraper
 {
@@ -169,26 +170,33 @@ namespace xy.scraper.xyWebScraper
                 cts = new CancellationTokenSource();
                 if (breakPointResume)
                 {
+                    XyLog.log(Resources.log_resumeBreakpoint);
                     await new startScraper().resumeScrape(
                     cts.Token,
                     progress);
                 }
                 else
                 {
+                    XyLog.log(Resources.log_startScrape);
                     await new startScraper().newScrape(
                     txtUrl.Text,
                     cbConfigIdList.Text,
                     cts.Token,
                     progress);
                 }
+                XyLog.log(Resources.log_endSuccessfully);
             }
             catch (OperationCanceledException error)
             {
                 tslbMsg.Text = error.Message;
+                XyLog.log(Resources.log_cancel
+                    + error.Message + "\r\r" + error.StackTrace);
             }
             catch (Exception error)
             {
                 tslbMsg.Text = error.Message;
+                XyLog.log(Resources.log_error
+                    + error.Message + "\r\r" + error.StackTrace);
             }
             finally
             {
@@ -204,10 +212,12 @@ namespace xy.scraper.xyWebScraper
                 case CReport.rType.Msg:
                     tslbMsg.Text = data.Msg;
                     showMsg(data.Msg);
+                    XyLog.log(data.Msg);
                     break;
                 case CReport.rType.Error:
                     tslbMsg.Text = data.Msg;
                     showMsg(data.Msg);
+                    XyLog.log(data.Msg);
                     break;
 
                 case CReport.rType.FileTask:
@@ -253,6 +263,7 @@ namespace xy.scraper.xyWebScraper
                             Resources.msg_succeed : Resources.msg_fail)
                         + ")");
                     showMsg("");
+                    XyLog.log("");
                     break;
             }
         }

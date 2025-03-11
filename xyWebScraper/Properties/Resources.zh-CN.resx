@@ -138,6 +138,21 @@
   <data name="msg_fail" xml:space="preserve">
     <value>失败</value>
   </data>
+  <data name="log_startScrape" xml:space="preserve">
+    <value>开始抓取...</value>
+  </data>
+  <data name="log_error" xml:space="preserve">
+    <value>抓取任务出错中断: </value>
+  </data>
+  <data name="log_cancel" xml:space="preserve">
+    <value>抓取任务已被取消: </value>
+  </data>
+  <data name="log_endSuccessfully" xml:space="preserve">
+    <value>成功完成抓取</value>
+  </data>
+  <data name="log_resumeBreakpoint" xml:space="preserve">
+    <value>恢复断点抓取...</value>
+  </data>
   <data name="msg_succeed" xml:space="preserve">
     <value>成功</value>
   </data>

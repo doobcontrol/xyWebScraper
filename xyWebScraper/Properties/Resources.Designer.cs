@@ -131,6 +131,51 @@ namespace xy.scraper.xyWebScraper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to end scraping by cancel: .
+        /// </summary>
+        internal static string log_cancel {
+            get {
+                return ResourceManager.GetString("log_cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to end scraping successfully.
+        /// </summary>
+        internal static string log_endSuccessfully {
+            get {
+                return ResourceManager.GetString("log_endSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to end scraping by error: .
+        /// </summary>
+        internal static string log_error {
+            get {
+                return ResourceManager.GetString("log_error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to resume breakpoint scraping....
+        /// </summary>
+        internal static string log_resumeBreakpoint {
+            get {
+                return ResourceManager.GetString("log_resumeBreakpoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to start scraping....
+        /// </summary>
+        internal static string log_startScrape {
+            get {
+                return ResourceManager.GetString("log_startScrape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fail.
         /// </summary>
         internal static string msg_fail {

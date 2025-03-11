@@ -163,6 +163,21 @@
   <data name="msg_fail" xml:space="preserve">
     <value>Fail</value>
   </data>
+  <data name="log_startScrape" xml:space="preserve">
+    <value>start scraping...</value>
+  </data>
+  <data name="log_error" xml:space="preserve">
+    <value>end scraping by error: </value>
+  </data>
+  <data name="log_cancel" xml:space="preserve">
+    <value>end scraping by cancel: </value>
+  </data>
+  <data name="log_endSuccessfully" xml:space="preserve">
+    <value>end scraping successfully</value>
+  </data>
+  <data name="log_resumeBreakpoint" xml:space="preserve">
+    <value>resume breakpoint scraping...</value>
+  </data>
   <data name="msg_succeed" xml:space="preserve">
     <value>Succeed</value>
   </data>
