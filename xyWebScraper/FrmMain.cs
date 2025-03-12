@@ -223,7 +223,13 @@ namespace xy.scraper.xyWebScraper
                     tslbMsg.Text = data.Msg;
                     showMsg(data.Msg);
                     XyLog.log(data.Msg);
-                    XyLog.log(data.E.Message + "\r\n" + data.E.StackTrace);
+                    string errorInfo = data.E.Message + "\r\n" + data.E.StackTrace;
+                    if (data.E.InnerException != null)
+                    {
+                        errorInfo += "\r\nInnerException: " + data.E.InnerException.Message 
+                            + "\r\n" + data.E.InnerException.StackTrace;
+                    }
+                    XyLog.log(errorInfo);
                     break;
 
                 case CReport.rType.FileTask:
