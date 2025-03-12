@@ -223,6 +223,7 @@ namespace xy.scraper.xyWebScraper
                     tslbMsg.Text = data.Msg;
                     showMsg(data.Msg);
                     XyLog.log(data.Msg);
+                    XyLog.log(data.E.Message + "\r\n" + data.E.StackTrace);
                     break;
 
                 case CReport.rType.FileTask:
