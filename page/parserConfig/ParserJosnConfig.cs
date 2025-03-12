@@ -180,7 +180,7 @@ namespace xy.scraper.page.parserConfig
                     {
                         //make sure the file name is in the end of url ??
                         string[] tArr = fileUrl.Split("/");
-                        retDic[fileUrl] = path + tArr[tArr.Length - 1];
+                        retDic[fileUrl] = path + tArr[tArr.Length - 1].Split("?")[0];
                     }
                 }
             }
