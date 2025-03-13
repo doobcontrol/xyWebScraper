@@ -154,6 +154,8 @@ namespace xy.scraper.page.parserConfig
             return retList;
         }
 
+        private static List<string> fileNameSpliter = new List<string>()
+        { "?", "!"};
         public static Dictionary<string, string> searchDownloadDict(
             string configId, string htmlString)
         {
@@ -180,7 +182,12 @@ namespace xy.scraper.page.parserConfig
                     {
                         //make sure the file name is in the end of url ??
                         string[] tArr = fileUrl.Split("/");
-                        retDic[fileUrl] = path + tArr[tArr.Length - 1].Split("?")[0];
+                        string fileName = tArr[tArr.Length - 1];
+                        foreach (string spliter in fileNameSpliter)
+                        {
+                            fileName = fileName.Split(spliter)[0];
+                        }
+                        retDic[fileUrl] = path + fileName;
                     }
                 }
             }
