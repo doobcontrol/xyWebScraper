@@ -39,6 +39,8 @@ namespace xy.scraper.xyWebScraper
                 txtUrl.SelectAll();
             });
 
+            spbFileTask.AutoSize = false;
+
             setUiText();
         }
         private void setUiText()
