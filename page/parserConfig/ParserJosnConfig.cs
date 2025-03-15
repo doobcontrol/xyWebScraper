@@ -168,9 +168,10 @@ namespace xy.scraper.page.parserConfig
                 foreach (JsonObject pathE in parserJosnConfig.pathsE)
                 {
                     string? subpath = search(htmlString, pathE);
-                    if (subpath != null)
+                    if (subpath != null && subpath.Trim() != "")
                     {
-                        pathList.Add(htmlParserTool.washPathStr(subpath));
+                        pathList.Add(
+                            htmlParserTool.washPathStr(subpath.Trim()));
                     }
                 }
                 string path = @"\" + String.Join(@"\", pathList) + @"\";
