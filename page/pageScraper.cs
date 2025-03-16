@@ -91,7 +91,8 @@ namespace xy.scraper.page
 
             Dictionary<string, string> downloadDict =
                 _htmlParser.getDownloadDict(htmlString);
-            List<(string, string)> retList = _htmlParser.getOtherPageDict(htmlString);
+            List<(string, string)> retList = 
+                _htmlParser.getOtherPageDict(htmlString, pUrl);
             CReport.reportMsg(progress,
                 Resources.GotOtherPageLinks + retList.Count);
             CReport.reportMsg(progress,

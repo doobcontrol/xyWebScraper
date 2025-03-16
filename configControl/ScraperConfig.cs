@@ -207,7 +207,7 @@ namespace xy.scraper.configControl
         }
 
         //for test
-        public SearchConfig CurrentSearchConfig
+        public Control CurrentSearchConfig
         {
             get
             {
@@ -215,9 +215,20 @@ namespace xy.scraper.configControl
             }
         }
 
-        private JsonObject getCurrentSearchJsonObject()
+        private JsonObject? getCurrentSearchJsonObject()
         {
-            return CurrentSearchConfig.JsonObj;
+            if(CurrentSearchConfig is SearchConfig)
+            {
+                return ((SearchConfig)CurrentSearchConfig).JsonObj;
+            }
+            else if (CurrentSearchConfig is AutoGrowthUrl)
+            {
+                return ((AutoGrowthUrl)CurrentSearchConfig).JsonObj;
+            }
+            else
+            {
+                return null;
+            }
         }
         private async Task<string> GetHtmlStringObj(string Url)
         {

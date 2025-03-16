@@ -10,7 +10,8 @@ namespace xy.scraper.page
     public interface IHtmlParser
     {
         Dictionary<string, string> getDownloadDict(string htmlString);
-        List<(string, string)> getOtherPageDict(string htmlString);
+        List<(string, string)> getOtherPageDict(
+            string htmlString, string origUrl);
         string GetEncoding();
     }
 }

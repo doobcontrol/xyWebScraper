@@ -153,6 +153,36 @@ namespace xy.scraper.page.parserConfig
 
             return retList;
         }
+        public static string? createUrlFromUrl(
+            string htmlString, string origUrl, JsonObject AutoGrowthUrlE)
+        {
+            string CheckExist =
+                            AutoGrowthUrlE[JCfgName.CheckExist].GetValue<string>();
+            string? retUrl = null;
+            if (htmlString.Contains(CheckExist))
+            {
+                string[] urlArr = origUrl.Split("?");
+                if (urlArr.Length > 1)
+                {
+                    string[] parsArr = urlArr[1].Split("&");
+                    string AutoGrowthPar =
+                        AutoGrowthUrlE[JCfgName.AutoGrowthPar].GetValue<string>();
+                    for (int i = 0; i < parsArr.Length; i++)
+                    {
+                        string[] parArr = parsArr[i].Split("=");
+                        if (parArr.Length == 2
+                            && parArr[0] == AutoGrowthPar)
+                        {
+                            parsArr[i] = parArr[0] + "="
+                                + (int.Parse(parArr[1]) + 1);
+                        }
+                    }
+
+                    retUrl = urlArr[0] + "?" + string.Join("&", parsArr);
+                }
+            }
+            return retUrl;
+        }
 
         private static List<string> fileNameSpliter = new List<string>()
         { "?", "!"};
@@ -197,7 +227,7 @@ namespace xy.scraper.page.parserConfig
         }
 
         public static List<(string, string)> searchOtherPageDict(
-            string configId, string htmlString)
+            string configId, string htmlString, string origUrl)
         {
             ParserJosnConfig parserJosnConfig = getParserConfig(configId);
 
@@ -208,22 +238,36 @@ namespace xy.scraper.page.parserConfig
                 foreach (JsonObject nextE in parserJosnConfig.NextsE)
                 {
                     String cfgid = nextE[JCfgName.cfgid].GetValue<String>();
-                    JsonObject nextsSearchE = nextE[JCfgName.searchs].AsObject();
-                    bool isList = nextsSearchE[JCfgName.SearchList].GetValue<Boolean>();
-                    if (isList)
+
+                    if (nextE.ContainsKey(JCfgName.searchs))
                     {
-                        List<string> urlList = searchList(htmlString, nextsSearchE);
-                        foreach (string url in urlList)
+                        JsonObject nextsSearchE = nextE[JCfgName.searchs].AsObject();
+                        bool isList = nextsSearchE[JCfgName.SearchList].GetValue<Boolean>();
+                        if (isList)
                         {
-                            retList.Add((url, cfgid));
+                            List<string> urlList = searchList(htmlString, nextsSearchE);
+                            foreach (string url in urlList)
+                            {
+                                retList.Add((url, cfgid));
+                            }
+                        }
+                        else
+                        {
+                            string? url = search(htmlString, nextsSearchE);
+                            if (url != null)
+                            {
+                                retList.Add((url, cfgid));
+                            }
                         }
                     }
-                    else
+                    else if (nextE.ContainsKey(JCfgName.AutoGrowthUrl))
                     {
-                        string? url = search(htmlString, nextsSearchE);
-                        if (url != null)
+                        JsonObject AutoGrowthUrlE = nextE[JCfgName.AutoGrowthUrl].AsObject();
+                        string? newUrl = 
+                            createUrlFromUrl(htmlString, origUrl, AutoGrowthUrlE);
+                        if (newUrl != null)
                         {
-                            retList.Add((url, cfgid));
+                            retList.Add((newUrl, cfgid));
                         }
                     }
                 }

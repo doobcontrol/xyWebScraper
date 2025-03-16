@@ -56,6 +56,8 @@ namespace xy.scraper.configControl
             tbAddNext.Click += new EventHandler(tbAdd_Click);
             tbDelNext.Click += new EventHandler(tbDel_Click);
 
+            cbIsAutoUrl.CheckedChanged += cbIsAutoUrl_CheckedChanged;
+
             setUiText();
         }
         private void searchConfig_CheckedChanged(object sender, EventArgs e)
@@ -89,6 +91,7 @@ namespace xy.scraper.configControl
             tbDelFile.ToolTipText = Resources.tbDelFile;
             tbAddNext.ToolTipText = Resources.tbAddNext;
             tbDelNext.ToolTipText = Resources.tbDelNext;
+            cbIsAutoUrl.Text = Resources.cbIsAutoUrl_text;
         }
 
         private void tbAdd_Click(object sender, EventArgs e)
@@ -126,6 +129,14 @@ namespace xy.scraper.configControl
             textBox.Top = txtNextUrlPageID.Top;
             textBox.Left = txtNextUrlPageID.Left;
             textBox.Width = txtNextUrlPageID.Width;
+
+            CheckBox checkBox = new CheckBox();
+            panel.Controls.Add(checkBox);
+            checkBox.Text = cbIsAutoUrl.Text;
+            checkBox.Top = cbIsAutoUrl.Top;
+            checkBox.Left = cbIsAutoUrl.Left;
+            checkBox.Width = cbIsAutoUrl.Width;
+            checkBox.CheckedChanged += cbIsAutoUrl_CheckedChanged;
         }
 
         private void tbDel_Click(object sender, EventArgs e)
@@ -142,6 +153,62 @@ namespace xy.scraper.configControl
         private void txtPageID_TextChanged(object sender, EventArgs e)
         {
             onPageIDChanged?.Invoke(this, e);
+        }
+
+        private void cbIsAutoUrl_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+            Control nContainer = checkBox.Parent.Parent;
+            Dictionary<string, Control> bufferedControl;
+            if (checkBox.Tag == null)
+            {
+                bufferedControl = new Dictionary<string, Control>();
+                if (nContainer.Controls[0] is AutoGrowthUrl)
+                {
+                    bufferedControl.Add("AutoGrowthUrl", nContainer.Controls[0]);
+                }
+                else if (nContainer.Controls[0] is SearchConfig)
+                {
+                    bufferedControl.Add("SearchConfig", nContainer.Controls[0]);
+                }
+                checkBox.Tag = bufferedControl;
+            }
+            else
+            {
+                bufferedControl = (Dictionary<string, Control>)checkBox.Tag;
+            }
+
+            nContainer.SuspendLayout();
+            nContainer.Controls.RemoveAt(0);
+            Control newControls;
+            if (checkBox.Checked)
+            {
+                if (bufferedControl.ContainsKey("AutoGrowthUrl"))
+                {
+                    newControls = bufferedControl["AutoGrowthUrl"];
+                }
+                else
+                {
+                    newControls = new AutoGrowthUrl();
+                    bufferedControl.Add("AutoGrowthUrl", newControls);
+                }
+            }
+            else
+            {
+                if (bufferedControl.ContainsKey("SearchConfig"))
+                {
+                    newControls = bufferedControl["SearchConfig"];
+                }
+                else
+                {
+                    newControls = new SearchConfig();
+                    bufferedControl.Add("SearchConfig", newControls);
+                }
+            }
+            newControls.Dock = DockStyle.Fill;
+            nContainer.Controls.Add(newControls);
+            newControls.BringToFront();
+            nContainer.ResumeLayout();
         }
 
         private EventHandler onPageIDChanged;
@@ -182,11 +249,11 @@ namespace xy.scraper.configControl
         }
 
         //for test
-        public SearchConfig CurrentSearchConfig
+        public Control CurrentSearchConfig
         {
             get
             {
-                return (SearchConfig)((TabControl)tabControl1.SelectedTab.Controls[0])
+                return ((TabControl)tabControl1.SelectedTab.Controls[0])
                     .SelectedTab.Controls[0];
             }
         }
@@ -228,11 +295,21 @@ namespace xy.scraper.configControl
                     json[JCfgName.nexts] = nexts;
                     foreach (TabPage tp in tcNext.Controls)
                     {
-                        SearchConfig sc = (SearchConfig)tp.Controls[0];
-
                         JsonObject nextObj = new JsonObject();
-                        nextObj[JCfgName.cfgid] = ((TextBox)tp.Controls[1].Controls[1]).Text;
-                        nextObj[JCfgName.searchs] = sc.JsonObj;
+                        nextObj[JCfgName.cfgid] = 
+                            ((TextBox)tp.Controls[1].Controls[1]).Text;
+                        bool isAutoUrl = 
+                            ((CheckBox)tp.Controls[1].Controls[2]).Checked;
+                        if (isAutoUrl)
+                        {
+                            AutoGrowthUrl agu = (AutoGrowthUrl)tp.Controls[0];
+                            nextObj[JCfgName.AutoGrowthUrl] = agu.JsonObj;
+                        }
+                        else
+                        {
+                            SearchConfig sc = (SearchConfig)tp.Controls[0];
+                            nextObj[JCfgName.searchs] = sc.JsonObj;
+                        }
 
                         nexts.Add(nextObj);
                     }
@@ -324,7 +401,13 @@ namespace xy.scraper.configControl
                     = value[JCfgName.nexts].AsArray();
                     foreach (JsonObject item in nexts)
                     {
-                        SearchConfig sc = new SearchConfig();
+                        bool isAutoUrl = false;
+                        if (item.ContainsKey(JCfgName.AutoGrowthUrl))
+                        {
+                            isAutoUrl = true;
+                        }
+
+                        Control sc = new Control();
                         sc.Dock = DockStyle.Fill;
 
                         TabControl tc = tcNext;
@@ -332,11 +415,18 @@ namespace xy.scraper.configControl
                         if (nexts.IndexOf(item) == 0)
                         {
                             tp = ((TabPage)tc.Controls[0]);
-                            sc = ((SearchConfig)tp.Controls[0]);
+                            sc = tp.Controls[0];
                         }
                         else
                         {
-                            sc = new SearchConfig();
+                            if (isAutoUrl)
+                            {
+                                sc = new AutoGrowthUrl();
+                            }
+                            else
+                            {
+                                sc = new SearchConfig();
+                            }
                             sc.Dock = DockStyle.Fill;
 
                             tp = new TabPage();
@@ -345,8 +435,20 @@ namespace xy.scraper.configControl
                             tc.Controls.Add(tp);
                             tp.Controls.Add(sc);
                             addNextTargetTextBox(tp);
+                        } 
+                        ((CheckBox)tp.Controls[1].Controls[2]).Checked
+                            = isAutoUrl;
+                        sc = tp.Controls[0]; //after set isAutoUrl, sc may by deffent
+                        if (isAutoUrl)
+                        {
+                            ((AutoGrowthUrl)sc).JsonObj = 
+                                item[JCfgName.AutoGrowthUrl].AsObject();
                         }
-                        sc.JsonObj = item[JCfgName.searchs].AsObject();
+                        else
+                        {
+                            ((SearchConfig)sc).JsonObj =
+                                item[JCfgName.searchs].AsObject();
+                        }
 
                         ((TextBox)tp.Controls[1].Controls[1]).Text
                             = item[JCfgName.cfgid].GetValue<String>();

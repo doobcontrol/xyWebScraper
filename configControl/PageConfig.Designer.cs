@@ -58,6 +58,7 @@
             tabPage3 = new TabPage();
             searchConfig3 = new SearchConfig();
             panel3 = new Panel();
+            cbIsAutoUrl = new CheckBox();
             lbNextPageConfigID = new Label();
             txtNextUrlPageID = new TextBox();
             toolStrip3 = new ToolStrip();
@@ -362,11 +363,22 @@
             // 
             panel3.Controls.Add(lbNextPageConfigID);
             panel3.Controls.Add(txtNextUrlPageID);
+            panel3.Controls.Add(cbIsAutoUrl);
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(3, 3);
             panel3.Name = "panel3";
             panel3.Size = new Size(634, 42);
             panel3.TabIndex = 6;
+            // 
+            // cbIsAutoUrl
+            // 
+            cbIsAutoUrl.AutoSize = true;
+            cbIsAutoUrl.Location = new Point(348, 17);
+            cbIsAutoUrl.Name = "cbIsAutoUrl";
+            cbIsAutoUrl.Size = new Size(82, 19);
+            cbIsAutoUrl.TabIndex = 3;
+            cbIsAutoUrl.Text = "checkBox1";
+            cbIsAutoUrl.UseVisualStyleBackColor = true;
             // 
             // lbNextPageConfigID
             // 
@@ -483,5 +495,6 @@
         private Panel panel3;
         private Label lbNextPageConfigID;
         private TextBox txtNextUrlPageID;
+        private CheckBox cbIsAutoUrl;
     }
 }

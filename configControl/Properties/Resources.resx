@@ -261,4 +261,13 @@
   <data name="btnSearch" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="cbIsAutoUrl_text" xml:space="preserve">
+    <value>Is auto growth url</value>
+  </data>
+  <data name="lbAutoGrowthPar_text" xml:space="preserve">
+    <value>Auto Growth Par</value>
+  </data>
+  <data name="lbCheckExist_text" xml:space="preserve">
+    <value>Check exist string</value>
+  </data>
 </root>

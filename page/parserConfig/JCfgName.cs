@@ -21,5 +21,8 @@ namespace xy.scraper.page.parserConfig
         public static string replaces = "replaces";
         public static string start = "start";
         public static string end = "end";
+        public static string AutoGrowthPar = "AutoGrowthPar";
+        public static string CheckExist = "CheckExist";
+        public static string AutoGrowthUrl = "AutoGrowthUrl";
     }
 }

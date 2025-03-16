@@ -68,22 +68,33 @@ namespace xy.scraper.configControl
             try
             {
                 JsonObject searchJson = searchJsonObject();
-                bool searchList = searchJson[JCfgName.SearchList].GetValue<bool>();
-                if (searchList)
+
+                if (searchJson.ContainsKey(JCfgName.SearchList))
                 {
-                    List<string> searchResult = ParserJosnConfig.searchList(html, searchJson);
-                     txtShowBox.Text = 
-                        string.Format(Resources.testMsg_FoundItems, searchResult.Count)
-                        + "\r\n" 
-                        + string.Join("\r\n", searchResult);
+                    bool searchList = searchJson[JCfgName.SearchList].GetValue<bool>();
+                    if (searchList)
+                    {
+                        List<string> searchResult = ParserJosnConfig.searchList(html, searchJson);
+                        txtShowBox.Text =
+                           string.Format(Resources.testMsg_FoundItems, searchResult.Count)
+                           + "\r\n"
+                           + string.Join("\r\n", searchResult);
+                    }
+                    else
+                    {
+                        string? searchResult = ParserJosnConfig.search(html, searchJson);
+                        txtShowBox.Text = Resources.testMsg_FoundString +
+                            "\r\n" + searchResult;
+                    }
                 }
-                else
+                else if(searchJson.ContainsKey(JCfgName.AutoGrowthPar))
                 {
-                    string searchResult = ParserJosnConfig.search(html, searchJson);
-                    txtShowBox.Text = searchResult;
-                    txtShowBox.Text = Resources.testMsg_FoundString + 
+                    string? searchResult = ParserJosnConfig.createUrlFromUrl(
+                        html, txtUrl.Text, searchJson);
+                    txtShowBox.Text = Resources.testMsg_FoundString +
                         "\r\n" + searchResult;
                 }
+
             }
             catch (Exception ex)
             {

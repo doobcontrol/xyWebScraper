@@ -261,4 +261,13 @@
   <data name="btnSearch" xml:space="preserve">
     <value>搜索</value>
   </data>
+  <data name="cbIsAutoUrl_text" xml:space="preserve">
+    <value>由源地址自动增长生成</value>
+  </data>
+  <data name="lbAutoGrowthPar_text" xml:space="preserve">
+    <value>自动增长参数</value>
+  </data>
+  <data name="lbCheckExist_text" xml:space="preserve">
+    <value>增长条件检查</value>
+  </data>
 </root>

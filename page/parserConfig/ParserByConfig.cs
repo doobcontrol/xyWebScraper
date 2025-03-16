@@ -21,9 +21,11 @@ namespace xy.scraper.page.parserConfig
             return ParserJosnConfig.searchDownloadDict(_configId, htmlString);
         }
 
-        public List<(string, string)> getOtherPageDict(string htmlString)
+        public List<(string, string)> getOtherPageDict(
+            string htmlString, string origUrl)
         {
-            return ParserJosnConfig.searchOtherPageDict(_configId, htmlString);
+            return ParserJosnConfig.searchOtherPageDict(
+                _configId, htmlString, origUrl);
         }
 
         public string GetEncoding()

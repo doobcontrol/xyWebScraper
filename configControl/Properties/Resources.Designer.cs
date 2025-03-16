@@ -106,6 +106,15 @@ namespace xy.scraper.configControl.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is auto growth url.
+        /// </summary>
+        internal static string cbIsAutoUrl_text {
+            get {
+                return ResourceManager.GetString("cbIsAutoUrl_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search List.
         /// </summary>
         internal static string cbSearchList {
@@ -147,6 +156,24 @@ namespace xy.scraper.configControl.Properties {
         internal static string lbAddBefore {
             get {
                 return ResourceManager.GetString("lbAddBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto Growth Par.
+        /// </summary>
+        internal static string lbAutoGrowthPar_text {
+            get {
+                return ResourceManager.GetString("lbAutoGrowthPar_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check exist string.
+        /// </summary>
+        internal static string lbCheckExist_text {
+            get {
+                return ResourceManager.GetString("lbCheckExist_text", resourceCulture);
             }
         }
         
