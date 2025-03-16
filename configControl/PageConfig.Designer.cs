@@ -58,9 +58,9 @@
             tabPage3 = new TabPage();
             searchConfig3 = new SearchConfig();
             panel3 = new Panel();
-            cbIsAutoUrl = new CheckBox();
             lbNextPageConfigID = new Label();
             txtNextUrlPageID = new TextBox();
+            cbIsAutoUrl = new CheckBox();
             toolStrip3 = new ToolStrip();
             tbAddNext = new ToolStripButton();
             tbDelNext = new ToolStripButton();
@@ -92,12 +92,12 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(656, 109);
+            panel1.Size = new Size(464, 78);
             panel1.TabIndex = 0;
             // 
             // txtCoding
             // 
-            txtCoding.Location = new Point(102, 44);
+            txtCoding.Location = new Point(102, 31);
             txtCoding.Name = "txtCoding";
             txtCoding.Size = new Size(244, 23);
             txtCoding.TabIndex = 4;
@@ -106,7 +106,7 @@
             // lbEncoding
             // 
             lbEncoding.AutoSize = true;
-            lbEncoding.Location = new Point(13, 47);
+            lbEncoding.Location = new Point(13, 34);
             lbEncoding.Name = "lbEncoding";
             lbEncoding.Size = new Size(57, 15);
             lbEncoding.TabIndex = 3;
@@ -114,7 +114,7 @@
             // 
             // txtPageID
             // 
-            txtPageID.Location = new Point(102, 12);
+            txtPageID.Location = new Point(102, 5);
             txtPageID.Name = "txtPageID";
             txtPageID.Size = new Size(244, 23);
             txtPageID.TabIndex = 2;
@@ -123,7 +123,7 @@
             // lbPageConfigID
             // 
             lbPageConfigID.AutoSize = true;
-            lbPageConfigID.Location = new Point(13, 15);
+            lbPageConfigID.Location = new Point(13, 8);
             lbPageConfigID.Name = "lbPageConfigID";
             lbPageConfigID.Size = new Size(83, 15);
             lbPageConfigID.TabIndex = 1;
@@ -135,15 +135,15 @@
             panel2.Controls.Add(filesCb);
             panel2.Controls.Add(pathsCb);
             panel2.Dock = DockStyle.Bottom;
-            panel2.Location = new Point(0, 73);
+            panel2.Location = new Point(0, 55);
             panel2.Name = "panel2";
-            panel2.Size = new Size(656, 36);
+            panel2.Size = new Size(464, 23);
             panel2.TabIndex = 0;
             // 
             // nextsCb
             // 
             nextsCb.AutoSize = true;
-            nextsCb.Location = new Point(193, 14);
+            nextsCb.Location = new Point(193, 4);
             nextsCb.Name = "nextsCb";
             nextsCb.Size = new Size(53, 19);
             nextsCb.TabIndex = 2;
@@ -153,7 +153,7 @@
             // filesCb
             // 
             filesCb.AutoSize = true;
-            filesCb.Location = new Point(108, 14);
+            filesCb.Location = new Point(108, 4);
             filesCb.Name = "filesCb";
             filesCb.Size = new Size(47, 19);
             filesCb.TabIndex = 1;
@@ -163,7 +163,7 @@
             // pathsCb
             // 
             pathsCb.AutoSize = true;
-            pathsCb.Location = new Point(15, 14);
+            pathsCb.Location = new Point(15, 4);
             pathsCb.Name = "pathsCb";
             pathsCb.Size = new Size(55, 19);
             pathsCb.TabIndex = 0;
@@ -176,10 +176,10 @@
             tabControl1.Controls.Add(filesTp);
             tabControl1.Controls.Add(nextsTp);
             tabControl1.Dock = DockStyle.Fill;
-            tabControl1.Location = new Point(0, 109);
+            tabControl1.Location = new Point(0, 78);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(656, 298);
+            tabControl1.Size = new Size(464, 225);
             tabControl1.TabIndex = 1;
             // 
             // pathsTp
@@ -189,7 +189,7 @@
             pathsTp.Location = new Point(4, 24);
             pathsTp.Name = "pathsTp";
             pathsTp.Padding = new Padding(3);
-            pathsTp.Size = new Size(648, 270);
+            pathsTp.Size = new Size(456, 197);
             pathsTp.TabIndex = 0;
             pathsTp.Text = "paths";
             pathsTp.UseVisualStyleBackColor = true;
@@ -201,7 +201,7 @@
             tcPath.Location = new Point(3, 28);
             tcPath.Name = "tcPath";
             tcPath.SelectedIndex = 0;
-            tcPath.Size = new Size(642, 239);
+            tcPath.Size = new Size(450, 166);
             tcPath.TabIndex = 3;
             // 
             // tcPathdefaultPage
@@ -210,7 +210,7 @@
             tcPathdefaultPage.Location = new Point(4, 24);
             tcPathdefaultPage.Name = "tcPathdefaultPage";
             tcPathdefaultPage.Padding = new Padding(3);
-            tcPathdefaultPage.Size = new Size(634, 211);
+            tcPathdefaultPage.Size = new Size(442, 138);
             tcPathdefaultPage.TabIndex = 0;
             tcPathdefaultPage.Text = "path";
             tcPathdefaultPage.UseVisualStyleBackColor = true;
@@ -220,7 +220,7 @@
             searchConfig1.Dock = DockStyle.Fill;
             searchConfig1.Location = new Point(3, 3);
             searchConfig1.Name = "searchConfig1";
-            searchConfig1.Size = new Size(628, 205);
+            searchConfig1.Size = new Size(436, 132);
             searchConfig1.TabIndex = 1;
             // 
             // toolStrip1
@@ -228,7 +228,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { tbAddPath, tbDelPath });
             toolStrip1.Location = new Point(3, 3);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(642, 25);
+            toolStrip1.Size = new Size(450, 25);
             toolStrip1.TabIndex = 2;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -257,7 +257,7 @@
             filesTp.Location = new Point(4, 24);
             filesTp.Name = "filesTp";
             filesTp.Padding = new Padding(3);
-            filesTp.Size = new Size(648, 270);
+            filesTp.Size = new Size(648, 301);
             filesTp.TabIndex = 1;
             filesTp.Text = "files";
             filesTp.UseVisualStyleBackColor = true;
@@ -269,7 +269,7 @@
             tcFile.Location = new Point(3, 28);
             tcFile.Name = "tcFile";
             tcFile.SelectedIndex = 0;
-            tcFile.Size = new Size(642, 239);
+            tcFile.Size = new Size(642, 270);
             tcFile.TabIndex = 5;
             // 
             // tabPage1
@@ -278,7 +278,7 @@
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(634, 211);
+            tabPage1.Size = new Size(634, 242);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "file";
             tabPage1.UseVisualStyleBackColor = true;
@@ -288,7 +288,7 @@
             searchConfig2.Dock = DockStyle.Fill;
             searchConfig2.Location = new Point(3, 3);
             searchConfig2.Name = "searchConfig2";
-            searchConfig2.Size = new Size(628, 205);
+            searchConfig2.Size = new Size(628, 236);
             searchConfig2.TabIndex = 4;
             // 
             // toolStrip2
@@ -324,7 +324,7 @@
             nextsTp.Controls.Add(toolStrip3);
             nextsTp.Location = new Point(4, 24);
             nextsTp.Name = "nextsTp";
-            nextsTp.Size = new Size(648, 270);
+            nextsTp.Size = new Size(648, 301);
             nextsTp.TabIndex = 2;
             nextsTp.Text = "nexts";
             nextsTp.UseVisualStyleBackColor = true;
@@ -336,7 +336,7 @@
             tcNext.Location = new Point(0, 25);
             tcNext.Name = "tcNext";
             tcNext.SelectedIndex = 0;
-            tcNext.Size = new Size(648, 245);
+            tcNext.Size = new Size(648, 276);
             tcNext.TabIndex = 6;
             // 
             // tabPage3
@@ -346,7 +346,7 @@
             tabPage3.Location = new Point(4, 24);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(640, 217);
+            tabPage3.Size = new Size(640, 248);
             tabPage3.TabIndex = 0;
             tabPage3.Text = "Next";
             tabPage3.UseVisualStyleBackColor = true;
@@ -356,7 +356,7 @@
             searchConfig3.Dock = DockStyle.Fill;
             searchConfig3.Location = new Point(3, 45);
             searchConfig3.Name = "searchConfig3";
-            searchConfig3.Size = new Size(634, 169);
+            searchConfig3.Size = new Size(634, 200);
             searchConfig3.TabIndex = 4;
             // 
             // panel3
@@ -369,16 +369,6 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(634, 42);
             panel3.TabIndex = 6;
-            // 
-            // cbIsAutoUrl
-            // 
-            cbIsAutoUrl.AutoSize = true;
-            cbIsAutoUrl.Location = new Point(348, 17);
-            cbIsAutoUrl.Name = "cbIsAutoUrl";
-            cbIsAutoUrl.Size = new Size(82, 19);
-            cbIsAutoUrl.TabIndex = 3;
-            cbIsAutoUrl.Text = "checkBox1";
-            cbIsAutoUrl.UseVisualStyleBackColor = true;
             // 
             // lbNextPageConfigID
             // 
@@ -395,6 +385,16 @@
             txtNextUrlPageID.Name = "txtNextUrlPageID";
             txtNextUrlPageID.Size = new Size(244, 23);
             txtNextUrlPageID.TabIndex = 2;
+            // 
+            // cbIsAutoUrl
+            // 
+            cbIsAutoUrl.AutoSize = true;
+            cbIsAutoUrl.Location = new Point(348, 17);
+            cbIsAutoUrl.Name = "cbIsAutoUrl";
+            cbIsAutoUrl.Size = new Size(82, 19);
+            cbIsAutoUrl.TabIndex = 3;
+            cbIsAutoUrl.Text = "checkBox1";
+            cbIsAutoUrl.UseVisualStyleBackColor = true;
             // 
             // toolStrip3
             // 
@@ -430,7 +430,7 @@
             Controls.Add(tabControl1);
             Controls.Add(panel1);
             Name = "PageConfig";
-            Size = new Size(656, 407);
+            Size = new Size(464, 303);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);

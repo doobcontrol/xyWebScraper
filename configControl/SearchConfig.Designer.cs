@@ -71,7 +71,7 @@
             tabControl1.Location = new Point(0, 0);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(606, 298);
+            tabControl1.Size = new Size(430, 203);
             tabControl1.TabIndex = 0;
             // 
             // tpSearchLayers
@@ -150,7 +150,7 @@
             tpFinalHandle.Location = new Point(4, 24);
             tpFinalHandle.Name = "tpFinalHandle";
             tpFinalHandle.Padding = new Padding(3);
-            tpFinalHandle.Size = new Size(598, 270);
+            tpFinalHandle.Size = new Size(422, 175);
             tpFinalHandle.TabIndex = 1;
             tpFinalHandle.Text = "Final Handle";
             tpFinalHandle.UseVisualStyleBackColor = true;
@@ -158,17 +158,17 @@
             // txtAddAfter
             // 
             txtAddAfter.Dock = DockStyle.Top;
-            txtAddAfter.Location = new Point(125, 206);
+            txtAddAfter.Location = new Point(125, 126);
             txtAddAfter.Name = "txtAddAfter";
-            txtAddAfter.Size = new Size(470, 23);
+            txtAddAfter.Size = new Size(294, 23);
             txtAddAfter.TabIndex = 5;
             // 
             // txtAddBefore
             // 
             txtAddBefore.Dock = DockStyle.Top;
-            txtAddBefore.Location = new Point(125, 183);
+            txtAddBefore.Location = new Point(125, 103);
             txtAddBefore.Name = "txtAddBefore";
-            txtAddBefore.Size = new Size(470, 23);
+            txtAddBefore.Size = new Size(294, 23);
             txtAddBefore.TabIndex = 4;
             // 
             // panel3
@@ -179,7 +179,7 @@
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(125, 3);
             panel3.Name = "panel3";
-            panel3.Size = new Size(470, 180);
+            panel3.Size = new Size(294, 100);
             panel3.TabIndex = 3;
             // 
             // lbReplaceList
@@ -189,7 +189,7 @@
             lbReplaceList.ItemHeight = 15;
             lbReplaceList.Location = new Point(0, 48);
             lbReplaceList.Name = "lbReplaceList";
-            lbReplaceList.Size = new Size(470, 124);
+            lbReplaceList.Size = new Size(294, 49);
             lbReplaceList.TabIndex = 2;
             // 
             // txtAddReplace
@@ -197,7 +197,7 @@
             txtAddReplace.Dock = DockStyle.Top;
             txtAddReplace.Location = new Point(0, 25);
             txtAddReplace.Name = "txtAddReplace";
-            txtAddReplace.Size = new Size(470, 23);
+            txtAddReplace.Size = new Size(294, 23);
             txtAddReplace.TabIndex = 4;
             // 
             // toolStrip2
@@ -205,7 +205,7 @@
             toolStrip2.Items.AddRange(new ToolStripItem[] { tbAddReplace, tbDelReplace });
             toolStrip2.Location = new Point(0, 0);
             toolStrip2.Name = "toolStrip2";
-            toolStrip2.Size = new Size(470, 25);
+            toolStrip2.Size = new Size(294, 25);
             toolStrip2.TabIndex = 3;
             toolStrip2.Text = "toolStrip2";
             // 
@@ -237,13 +237,13 @@
             panel2.Dock = DockStyle.Left;
             panel2.Location = new Point(3, 3);
             panel2.Name = "panel2";
-            panel2.Size = new Size(122, 264);
+            panel2.Size = new Size(122, 169);
             panel2.TabIndex = 1;
             // 
             // lbAddAfter
             // 
             lbAddAfter.AutoSize = true;
-            lbAddAfter.Location = new Point(26, 203);
+            lbAddAfter.Location = new Point(26, 126);
             lbAddAfter.Name = "lbAddAfter";
             lbAddAfter.Size = new Size(58, 15);
             lbAddAfter.TabIndex = 2;
@@ -252,7 +252,7 @@
             // lbAddBefore
             // 
             lbAddBefore.AutoSize = true;
-            lbAddBefore.Location = new Point(26, 180);
+            lbAddBefore.Location = new Point(26, 103);
             lbAddBefore.Name = "lbAddBefore";
             lbAddBefore.Size = new Size(66, 15);
             lbAddBefore.TabIndex = 1;
@@ -293,7 +293,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(tabControl1);
             Name = "SearchConfig";
-            Size = new Size(606, 298);
+            Size = new Size(430, 203);
             tabControl1.ResumeLayout(false);
             tpSearchLayers.ResumeLayout(false);
             tpSearchLayers.PerformLayout();
