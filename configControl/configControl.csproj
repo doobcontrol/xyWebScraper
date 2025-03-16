@@ -7,6 +7,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>xy.scraper.configControl</AssemblyName>
     <RootNamespace>xy.scraper.configControl</RootNamespace>
+    <ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
+    <ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
   </PropertyGroup>
 
   <ItemGroup>
