@@ -6,6 +6,7 @@ using xy.scraper.page;
 using xy.scraper.page.parserConfig;
 using xy.scraper.xyWebScraper.Properties;
 using xySoft.log;
+using System.Runtime.CompilerServices;
 
 namespace xy.scraper.xyWebScraper
 {
@@ -40,7 +41,7 @@ namespace xy.scraper.xyWebScraper
             });
 
             spbFileTask.AutoSize = false;
-
+            this.Icon = Resources.xyWebScraper;
             setUiText();
         }
         private void setUiText()
@@ -388,6 +389,7 @@ namespace xy.scraper.xyWebScraper
         private void tbSetting_Click(object sender, EventArgs e)
         {
             Form pageSetting = new Form();
+            pageSetting.Icon = Resources.xyWebScraper;
             pageSetting.Height *= 2;
             pageSetting.Width *= 3;
             pageSetting.Text = tbSetting.ToolTipText;
