@@ -370,7 +370,10 @@ namespace xy.scraper.xyWebScraper
             }
             else
             {
-                lbPageTask.Text = Resources.text_lbPageTask + pageTaskList.Count;
+                if(pageTaskList != null)
+                {
+                    lbPageTask.Text = Resources.text_lbPageTask + pageTaskList.Count;
+                }
                 if (CurrentPage != null)
                 {
                     lbCurrentPage.Text = Resources.text_lbCurrentPage + CurrentPage;
