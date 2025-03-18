@@ -152,6 +152,7 @@ namespace xy.scraper.page
             "`", 
             "|", 
             "=",
+            ".",
             " " };
 
         static public string washPathStr(string pathStr)
