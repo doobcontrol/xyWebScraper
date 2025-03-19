@@ -388,6 +388,13 @@ namespace xy.scraper.xyWebScraper
 
         private void tbSetting_Click(object sender, EventArgs e)
         {
+            var tokenSource2 = new CancellationTokenSource();
+            CancellationToken ct = tokenSource2.Token;
+            _ = Task.Run(() =>
+            {
+                Application.Run(new FrmLoading(ct));
+            });
+
             Form pageSetting = new Form();
             pageSetting.Icon = Resources.xyWebScraper;
             pageSetting.Height *= 2;
@@ -405,6 +412,9 @@ namespace xy.scraper.xyWebScraper
             }
 
             pageSetting.Controls.Add(sageScraper);
+
+            tokenSource2.Cancel();
+
             pageSetting.Show();
         }
         private void pageConifg_saved(object? sender, EventArgs e)

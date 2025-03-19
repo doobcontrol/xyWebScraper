@@ -121,6 +121,15 @@ namespace xy.scraper.xyWebScraper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading....
+        /// </summary>
+        internal static string LoadingSplashMsg {
+            get {
+                return ResourceManager.GetString("LoadingSplashMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Log {

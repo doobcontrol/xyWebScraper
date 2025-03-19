@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -117,73 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="toolTipText_cbConfigIdList" xml:space="preserve">
-    <value>选择网页模型</value>
-  </data>
-  <data name="toolTipText_tbSetting" xml:space="preserve">
-    <value>网页模型配置</value>
-  </data>
-  <data name="toolTipText_tbBreakPoint" xml:space="preserve">
-    <value>任务断点续传</value>
-  </data>
-  <data name="toolTipText_txtUrl" xml:space="preserve">
-    <value>输入网页地址</value>
-  </data>
-  <data name="msg_NoPageModel" xml:space="preserve">
-    <value>没有配置好的网页模型</value>
-  </data>
-  <data name="msg_Nobreakpoint" xml:space="preserve">
-    <value>没有断点</value>
-  </data>
-  <data name="msg_fail" xml:space="preserve">
-    <value>失败</value>
-  </data>
-  <data name="log_startScrape" xml:space="preserve">
-    <value>开始抓取...</value>
-  </data>
-  <data name="log_error" xml:space="preserve">
-    <value>抓取任务出错中断: </value>
-  </data>
-  <data name="log_cancel" xml:space="preserve">
-    <value>抓取任务已被取消: </value>
-  </data>
-  <data name="log_endSuccessfully" xml:space="preserve">
-    <value>成功完成抓取</value>
-  </data>
-  <data name="log_resumeBreakpoint" xml:space="preserve">
-    <value>恢复断点抓取...</value>
-  </data>
-  <data name="msg_succeed" xml:space="preserve">
-    <value>成功</value>
-  </data>
-  <data name="text_AppName" xml:space="preserve">
-    <value>西山爬虫</value>
-  </data>
-  <data name="text_lbCurrentPage" xml:space="preserve">
-    <value>当前网页: </value>
-  </data>
-  <data name="text_lbPageTask" xml:space="preserve">
-    <value>网页数量: </value>
-  </data>
-  <data name="text_lbFilesCount" xml:space="preserve">
-    <value>文件数量: </value>
-  </data>
-  <data name="toolTipText_tbStart" xml:space="preserve">
-    <value>选择网页模型并输入网页地址以激活此按钮</value>
-  </data>
-  <data name="toolTipText_tbStart_active" xml:space="preserve">
-    <value>开始抓取</value>
-  </data>
-  <data name="toolTipText_tbStart_scraping" xml:space="preserve">
-    <value>抓取进行中, 点击取消</value>
-  </data>
-  <data name="toolTipText_tbStart_waitingCancel" xml:space="preserve">
-    <value>正在取消任务...</value>
-  </data>
-  <data name="toolTipText_tbLog" xml:space="preserve">
-    <value>显示/隐藏实时日志</value>
-  </data>
-  <data name="LoadingSplashMsg" xml:space="preserve">
-    <value>正在加载...</value>
-  </data>
 </root>
