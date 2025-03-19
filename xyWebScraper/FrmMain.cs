@@ -385,37 +385,49 @@ namespace xy.scraper.xyWebScraper
                 }
             }
         }
-
+        Form? pageSetting;
         private void tbSetting_Click(object sender, EventArgs e)
         {
-            var tokenSource2 = new CancellationTokenSource();
-            CancellationToken ct = tokenSource2.Token;
-            _ = Task.Run(() =>
+            if (pageSetting != null)
             {
-                Application.Run(new FrmLoading(ct));
-            });
-
-            Form pageSetting = new Form();
-            pageSetting.Icon = Resources.xyWebScraper;
-            pageSetting.Height *= 2;
-            pageSetting.Width *= 3;
-            pageSetting.Text = tbSetting.ToolTipText;
-
-            ScraperConfig sageScraper = new ScraperConfig();
-            sageScraper.Saved += pageConifg_saved;
-            sageScraper.Dock = DockStyle.Fill;
-
-            if (File.Exists(confnfigFile))
-            {
-                string json = File.ReadAllText(confnfigFile);
-                sageScraper.JsonObj = JsonSerializer.Deserialize<JsonArray>(json);
+                pageSetting.Activate();
             }
+            else
+            {
+                var tokenSource2 = new CancellationTokenSource();
+                CancellationToken ct = tokenSource2.Token;
+                _ = Task.Run(() =>
+                {
+                    Application.Run(new FrmLoading(ct));
+                });
 
-            pageSetting.Controls.Add(sageScraper);
+                pageSetting = new Form();
+                pageSetting.Icon = Resources.xyWebScraper;
+                pageSetting.Height *= 2;
+                pageSetting.Width *= 3;
+                pageSetting.Text = tbSetting.ToolTipText;
+                pageSetting.FormClosed +=
+                    (object? sender, FormClosedEventArgs e) =>
+                    {
+                        pageSetting = null;
+                    };
 
-            tokenSource2.Cancel();
+                ScraperConfig sageScraper = new ScraperConfig();
+                sageScraper.Saved += pageConifg_saved;
+                sageScraper.Dock = DockStyle.Fill;
 
-            pageSetting.Show();
+                if (File.Exists(confnfigFile))
+                {
+                    string json = File.ReadAllText(confnfigFile);
+                    sageScraper.JsonObj = JsonSerializer.Deserialize<JsonArray>(json);
+                }
+
+                pageSetting.Controls.Add(sageScraper);
+
+                tokenSource2.Cancel();
+
+                pageSetting.Show();
+            }
         }
         private void pageConifg_saved(object? sender, EventArgs e)
         {
