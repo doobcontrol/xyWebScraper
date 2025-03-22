@@ -131,6 +131,10 @@ namespace xy.scraper.page
         static List<string> illegalChrs = new List<string>{
             "&nbsp;",
             "amp;",
+            "\r\n",
+            "\n\r",
+            "\r",
+            "\n",
             "#", 
             "%", 
             "&",
