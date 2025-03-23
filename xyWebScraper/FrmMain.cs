@@ -210,6 +210,7 @@ namespace xy.scraper.xyWebScraper
             }
             finally
             {
+                logStatistic();
                 setUIScrappingStatus(false);
             }
         }
@@ -529,24 +530,22 @@ namespace xy.scraper.xyWebScraper
         }
         private void logStatistic()
         {
-            XyLog.log("" //Resources.log_downloadStatistic
+            string log = "Scrape Statistic\r\nDownloaded Files - " //Resources.log_downloadStatistic
                 + "total: " + DownloadStatistic[St_total]
                 + " succeed: " + DownloadStatistic[St_succeed]
                 + " failure: " + DownloadStatistic[St_failure]
-                );
-            XyLog.log("" //Resources.log_scrapeStatistic
+                + "\r\nScraped Pages - " //Resources.log_scrapeStatistic
                 + "total: " + ScrapeStatistic[St_total]
                 + " succeed: " + ScrapeStatistic[St_succeed]
-                + " failure: " + ScrapeStatistic[St_failure]
-                );
+                + " failure: " + ScrapeStatistic[St_failure];
             foreach (string key in ScrapeDetailStatistic.Keys)
             {
-                XyLog.log(ScrapeDetailStatistic.Keys
-                    + "total: " + ScrapeDetailStatistic[key][St_total]
+                log += "\r\n" + key + " - "; //Resources.log_scrapeDetailStatistic
+                log += "total: " + ScrapeDetailStatistic[key][St_total]
                     + " succeed: " + ScrapeDetailStatistic[key][St_succeed]
-                    + " failure: " + ScrapeDetailStatistic[key][St_failure]
-                    );
+                    + " failure: " + ScrapeDetailStatistic[key][St_failure];
             }
+            XyLog.log(log);
         }
         private void updateFileStatistic(bool succeed)
         {
