@@ -214,4 +214,22 @@
   <data name="LoadingSplashMsg" xml:space="preserve">
     <value>Loading...</value>
   </data>
+  <data name="text_gbStatistic" xml:space="preserve">
+    <value>Statistic</value>
+  </data>
+  <data name="text_gbDFSt" xml:space="preserve">
+    <value>Files Downloaded</value>
+  </data>
+  <data name="text_gbSPSt" xml:space="preserve">
+    <value>Pages Scraped</value>
+  </data>
+  <data name="st_Total" xml:space="preserve">
+    <value>Total: </value>
+  </data>
+  <data name="st_Succeed" xml:space="preserve">
+    <value>Succeed: </value>
+  </data>
+  <data name="st_Failure" xml:space="preserve">
+    <value>Failure: </value>
+  </data>
 </root>

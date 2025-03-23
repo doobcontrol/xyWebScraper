@@ -58,6 +58,16 @@ namespace xy.scraper.xyWebScraper
             lbPageTask.Text = Resources.text_lbPageTask + "0";
             lbCurrentPage.Text = Resources.text_lbCurrentPage;
             lbFilesCount.Text = Resources.text_lbFilesCount;
+
+            gbStatistic.Text = Resources.text_gbStatistic;
+            gbDFSt.Text = Resources.text_gbDFSt;
+            ((Label)gbDFSt.Controls[0]).Text = Resources.st_Total + "0";
+            ((Label)gbDFSt.Controls[1]).Text = Resources.st_Succeed + "0";
+            ((Label)gbDFSt.Controls[2]).Text = Resources.st_Failure + "0";
+            gbSPSt.Text = Resources.text_gbSPSt;
+            ((Label)gbSPSt.Controls[0]).Text = Resources.st_Total + "0";
+            ((Label)gbSPSt.Controls[1]).Text = Resources.st_Succeed + "0";
+            ((Label)gbSPSt.Controls[2]).Text = Resources.st_Failure + "0";
         }
 
         private void setPageModelConfigs()
@@ -530,20 +540,22 @@ namespace xy.scraper.xyWebScraper
         }
         private void logStatistic()
         {
-            string log = "Scrape Statistic\r\nDownloaded Files - " //Resources.log_downloadStatistic
-                + "total: " + DownloadStatistic[St_total]
-                + " succeed: " + DownloadStatistic[St_succeed]
-                + " failure: " + DownloadStatistic[St_failure]
-                + "\r\nScraped Pages - " //Resources.log_scrapeStatistic
-                + "total: " + ScrapeStatistic[St_total]
-                + " succeed: " + ScrapeStatistic[St_succeed]
-                + " failure: " + ScrapeStatistic[St_failure];
+            string log = 
+                Resources.text_gbStatistic + "\r\n" 
+                + Resources.text_gbDFSt + " - "
+                + Resources.st_Total + DownloadStatistic[St_total] + "; "
+                + Resources.st_Succeed + DownloadStatistic[St_succeed] + "; "
+                + Resources.st_Failure + DownloadStatistic[St_failure]
+                + "\r\n" + Resources.text_gbSPSt + " - "
+                + Resources.st_Total + ScrapeStatistic[St_total] + "; "
+                + Resources.st_Succeed + ScrapeStatistic[St_succeed] + "; "
+                + Resources.st_Failure + ScrapeStatistic[St_failure];
             foreach (string key in ScrapeDetailStatistic.Keys)
             {
-                log += "\r\n" + key + " - "; //Resources.log_scrapeDetailStatistic
-                log += "total: " + ScrapeDetailStatistic[key][St_total]
-                    + " succeed: " + ScrapeDetailStatistic[key][St_succeed]
-                    + " failure: " + ScrapeDetailStatistic[key][St_failure];
+                log += "\r\n" + key + " - ";
+                log += Resources.st_Total + ScrapeDetailStatistic[key][St_total] + "; "
+                    + Resources.st_Succeed + ScrapeDetailStatistic[key][St_succeed] + "; "
+                    + Resources.st_Failure + ScrapeDetailStatistic[key][St_failure];
             }
             XyLog.log(log);
         }
@@ -609,12 +621,12 @@ namespace xy.scraper.xyWebScraper
             }
             else
             {
-                ((Label)gb.Controls[0]).Text = 
-                    "Total: " + statisticDic[St_total];
-                ((Label)gb.Controls[1]).Text = 
-                    "Succeed: " + statisticDic[St_succeed];
-                ((Label)gb.Controls[2]).Text = 
-                    "Failure: " + statisticDic[St_failure];
+                ((Label)gb.Controls[0]).Text =
+                    Resources.st_Total + statisticDic[St_total];
+                ((Label)gb.Controls[1]).Text =
+                    Resources.st_Succeed + statisticDic[St_succeed];
+                ((Label)gb.Controls[2]).Text =
+                    Resources.st_Failure + statisticDic[St_failure];
             }
         }
 
@@ -638,15 +650,15 @@ namespace xy.scraper.xyWebScraper
 
                 Label lbTotal = new Label();
                 lbTotal.Location = ((Label)gbDFSt.Controls[0]).Location;
-                lbTotal.Text = "Total: 0";
+                lbTotal.Text = Resources.st_Total + "0";
                 gb.Controls.Add(lbTotal);
                 Label lbSucceed = new Label();
                 lbSucceed.Location = ((Label)gbDFSt.Controls[1]).Location;
-                lbSucceed.Text = "Succeed: 0";
+                lbSucceed.Text = Resources.st_Succeed + "0";
                 gb.Controls.Add(lbSucceed);
                 Label lbFailure = new Label();
                 lbFailure.Location = ((Label)gbDFSt.Controls[2]).Location;
-                lbFailure.Text = "Failure: 0";
+                lbFailure.Text = Resources.st_Failure + "0";
                 gb.Controls.Add(lbFailure);
 
                 tableLayoutPanel1.Controls.Add(gb);

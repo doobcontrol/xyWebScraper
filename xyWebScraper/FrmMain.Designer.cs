@@ -46,7 +46,6 @@
             toolTip1 = new ToolTip(components);
             dataGridView1 = new DataGridView();
             panelPageTaskInfo = new Panel();
-            label1 = new Label();
             lbFilesCount = new Label();
             lbCurrentPage = new Label();
             lbPageTask = new Label();
@@ -238,7 +237,6 @@
             // 
             // panelPageTaskInfo
             // 
-            panelPageTaskInfo.Controls.Add(label1);
             panelPageTaskInfo.Controls.Add(lbFilesCount);
             panelPageTaskInfo.Controls.Add(lbCurrentPage);
             panelPageTaskInfo.Controls.Add(lbPageTask);
@@ -248,15 +246,6 @@
             panelPageTaskInfo.Name = "panelPageTaskInfo";
             panelPageTaskInfo.Size = new Size(613, 84);
             panelPageTaskInfo.TabIndex = 7;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(336, 31);
-            label1.Name = "label1";
-            label1.Size = new Size(61, 20);
-            label1.TabIndex = 1;
-            label1.Text = "Statistic";
             // 
             // lbFilesCount
             // 
@@ -495,7 +484,6 @@
         private ToolStripButton tbSetting;
         private ToolStripButton tbBreakPoint;
         private Label lbFilesCount;
-        private Label label1;
         private Splitter splitter2;
         private GroupBox gbStatistic;
         private TableLayoutPanel tableLayoutPanel1;

@@ -221,6 +221,33 @@ namespace xy.scraper.xyWebScraper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failure: .
+        /// </summary>
+        internal static string st_Failure {
+            get {
+                return ResourceManager.GetString("st_Failure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Succeed: .
+        /// </summary>
+        internal static string st_Succeed {
+            get {
+                return ResourceManager.GetString("st_Succeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total: .
+        /// </summary>
+        internal static string st_Total {
+            get {
+                return ResourceManager.GetString("st_Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap StartWebSite {
@@ -236,6 +263,33 @@ namespace xy.scraper.xyWebScraper.Properties {
         internal static string text_AppName {
             get {
                 return ResourceManager.GetString("text_AppName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Files Downloaded.
+        /// </summary>
+        internal static string text_gbDFSt {
+            get {
+                return ResourceManager.GetString("text_gbDFSt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pages Scraped.
+        /// </summary>
+        internal static string text_gbSPSt {
+            get {
+                return ResourceManager.GetString("text_gbSPSt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistic.
+        /// </summary>
+        internal static string text_gbStatistic {
+            get {
+                return ResourceManager.GetString("text_gbStatistic", resourceCulture);
             }
         }
         
