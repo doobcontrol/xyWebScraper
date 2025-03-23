@@ -7,6 +7,7 @@ using xy.scraper.page.parserConfig;
 using xy.scraper.xyWebScraper.Properties;
 using xySoft.log;
 using System.Runtime.CompilerServices;
+using System.Windows.Forms;
 
 namespace xy.scraper.xyWebScraper
 {
@@ -176,6 +177,7 @@ namespace xy.scraper.xyWebScraper
                 setUIScrappingStatus();
 
                 cts = new CancellationTokenSource();
+                initStatistic();
                 if (breakPointResume)
                 {
                     XyLog.log(Resources.log_resumeBreakpoint);
@@ -259,12 +261,14 @@ namespace xy.scraper.xyWebScraper
                         changeRowColor(fileRowDic[data.FileRusult.fileUrl],
                         ColorTranslator.FromHtml("#81E979"),
                         ColorTranslator.FromHtml("#595A4A"));
+                        updateFileStatistic(true);
                     }
                     else
                     {
                         changeRowColor(fileRowDic[data.FileRusult.fileUrl],
                         ColorTranslator.FromHtml("#DBC2CF"),
                         ColorTranslator.FromHtml("#DBC2CF"));
+                        updateFileStatistic(false);
                     }
                     break;
 
@@ -283,6 +287,14 @@ namespace xy.scraper.xyWebScraper
                     spbFileTask.Visible = false;
                     showMsg("");
                     XyLog.log("");
+                    if (data.PageRusult.succeed)
+                    {
+                        updatePageStatistic(true, data.PageRusult.configId);
+                    }
+                    else
+                    {
+                        updatePageStatistic(false, data.PageRusult.configId);
+                    }
                     break;
             }
         }
@@ -465,6 +477,180 @@ namespace xy.scraper.xyWebScraper
                 txtLog.Text = msg;
                 txtLog.Select(txtLog.Text.Length, 0);
                 txtLog.ScrollToCaret();
+            }
+        }
+
+        #endregion
+
+        #region scrapping statistic
+
+        private static string St_total = "total";
+        private static string St_succeed = "succeed";
+        private static string St_failure = "failure";
+        private Dictionary<string, int> DownloadStatistic 
+            = new Dictionary<string, int>() { 
+                { St_total, 0 },
+                { St_succeed, 0 },
+                { St_failure, 0 }
+            };
+        private Dictionary<string, int> ScrapeStatistic
+            = new Dictionary<string, int>() {
+                { St_total, 0 },
+                { St_succeed, 0 },
+                { St_failure, 0 }
+            };
+        private Dictionary<string, Dictionary<string, int>> 
+            ScrapeDetailStatistic;
+        private void initStatistic()
+        {
+            DownloadStatistic[St_total] = 0;
+            DownloadStatistic[St_succeed] = 0;
+            DownloadStatistic[St_failure] = 0;
+            ScrapeStatistic[St_total] = 0;
+            ScrapeStatistic[St_succeed] = 0;
+            ScrapeStatistic[St_failure] = 0;
+            ScrapeDetailStatistic = 
+                new Dictionary<string, Dictionary<string, int>>();
+
+            if(tableLayoutPanel1.Tag!=null 
+                && tableLayoutPanel1.Tag is Dictionary<string, GroupBox>)
+            {
+                foreach(GroupBox gb in
+                    (tableLayoutPanel1.Tag as Dictionary<string, GroupBox>).Values)
+                {
+                    tableLayoutPanel1.Controls.Remove(gb);
+                }
+                (tableLayoutPanel1.Tag as Dictionary<string, GroupBox>).Clear();
+            }
+            else
+            {
+                tableLayoutPanel1.Tag = new Dictionary<string, GroupBox>();
+            }
+        }
+        private void logStatistic()
+        {
+            XyLog.log("" //Resources.log_downloadStatistic
+                + "total: " + DownloadStatistic[St_total]
+                + " succeed: " + DownloadStatistic[St_succeed]
+                + " failure: " + DownloadStatistic[St_failure]
+                );
+            XyLog.log("" //Resources.log_scrapeStatistic
+                + "total: " + ScrapeStatistic[St_total]
+                + " succeed: " + ScrapeStatistic[St_succeed]
+                + " failure: " + ScrapeStatistic[St_failure]
+                );
+            foreach (string key in ScrapeDetailStatistic.Keys)
+            {
+                XyLog.log(ScrapeDetailStatistic.Keys
+                    + "total: " + ScrapeDetailStatistic[key][St_total]
+                    + " succeed: " + ScrapeDetailStatistic[key][St_succeed]
+                    + " failure: " + ScrapeDetailStatistic[key][St_failure]
+                    );
+            }
+        }
+        private void updateFileStatistic(bool succeed)
+        {
+            DownloadStatistic[St_total] += 1;
+            if (succeed)
+            {
+                DownloadStatistic[St_succeed] += 1;
+            }
+            else
+            {
+                DownloadStatistic[St_failure] += 1;
+            }
+            showStatistic(gbDFSt, DownloadStatistic);
+        }
+        private void updatePageStatistic(bool succeed, string pageModelID)
+        {
+            ScrapeStatistic[St_total] += 1;
+            if (succeed)
+            {
+                ScrapeStatistic[St_succeed] += 1;
+            }
+            else
+            {
+                ScrapeStatistic[St_failure] += 1;
+            }
+            showStatistic(gbSPSt, ScrapeStatistic);
+
+            if (!ScrapeDetailStatistic.ContainsKey(pageModelID))
+            {
+                ScrapeDetailStatistic[pageModelID] = new Dictionary<string, int>() {
+                    { St_total, 0 },
+                    { St_succeed, 0 },
+                    { St_failure, 0 }
+                };
+                createNewStatisticGroupBox(pageModelID);
+            }
+            Dictionary<string, int> pageStatic = ScrapeDetailStatistic[pageModelID];
+            pageStatic[St_total] += 1;
+            if (succeed)
+            {
+                pageStatic[St_succeed] += 1;
+            }
+            else
+            {
+                pageStatic[St_failure] += 1;
+            }
+            showStatistic(
+                (tableLayoutPanel1.Tag as Dictionary<string, GroupBox>)[pageModelID]
+                , pageStatic);
+        }
+        private void showStatistic(GroupBox gb, 
+            Dictionary<string, int> statisticDic)
+        {
+            if (gb.InvokeRequired)
+            {
+                txtLog.Invoke(() =>
+                {
+                    showStatistic(gb, statisticDic);
+                }
+                );
+            }
+            else
+            {
+                ((Label)gb.Controls[0]).Text = 
+                    "Total: " + statisticDic[St_total];
+                ((Label)gb.Controls[1]).Text = 
+                    "Succeed: " + statisticDic[St_succeed];
+                ((Label)gb.Controls[2]).Text = 
+                    "Failure: " + statisticDic[St_failure];
+            }
+        }
+
+        private void createNewStatisticGroupBox(string name)
+        {
+            if (tableLayoutPanel1.InvokeRequired)
+            {
+                txtLog.Invoke(() =>
+                {
+                    createNewStatisticGroupBox(name);
+                }
+                );
+            }
+            else
+            {
+                GroupBox gb = new GroupBox();
+                gb.Dock = gbDFSt.Dock;
+                gb.Height = gbDFSt.Height;
+                gb.Text = name;
+                ((Dictionary<string, GroupBox>)tableLayoutPanel1.Tag).Add(name, gb);
+
+                Label lbTotal = new Label();
+                lbTotal.Location = ((Label)gbDFSt.Controls[0]).Location;
+                lbTotal.Text = "Total: 0";
+                gb.Controls.Add(lbTotal);
+                Label lbSucceed = new Label();
+                lbSucceed.Location = ((Label)gbDFSt.Controls[1]).Location;
+                lbSucceed.Text = "Succeed: 0";
+                gb.Controls.Add(lbSucceed);
+                Label lbFailure = new Label();
+                lbFailure.Location = ((Label)gbDFSt.Controls[2]).Location;
+                lbFailure.Text = "Failure: 0";
+                gb.Controls.Add(lbFailure);
+
+                tableLayoutPanel1.Controls.Add(gb);
             }
         }
 

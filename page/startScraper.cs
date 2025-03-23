@@ -91,7 +91,8 @@ namespace xy.scraper.page
                 CReport.reportMsg(progress, 
                     Resources.ToBeDone + toBeHandledList.Count);
 
-                CReport.reportPageDone(progress, (toBeHandledUrl, pageSucceed));
+                CReport.reportPageDone(progress, 
+                    (toBeHandledUrl, toBeHandled.Item2, pageSucceed));
             }
         }
 

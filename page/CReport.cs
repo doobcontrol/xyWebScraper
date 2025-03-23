@@ -26,7 +26,7 @@ namespace xy.scraper.page
 
         internal List<(string, string)>? pageTaskList;
         internal string pageUrl;
-        internal (string pageUrl, bool succeed) pageRusult;
+        internal (string pageUrl, string configId, bool succeed) pageRusult;
 
         internal Dictionary<string, string>? fileTaskDict;
         internal string fileUrl;
@@ -42,7 +42,7 @@ namespace xy.scraper.page
         public string FileUrl { get => fileUrl; set => fileUrl = value; }
         public (string fileUrl, bool succeed) FileRusult { get => fileRusult; set => fileRusult = value; }
         public string PageUrl { get => pageUrl; set => pageUrl = value; }
-        public (string pageUrl, bool succeed) PageRusult { get => pageRusult; set => pageRusult = value; }
+        public (string pageUrl, string configId, bool succeed) PageRusult { get => pageRusult; set => pageRusult = value; }
 
         static public void reportMsg(IProgress<CReport> progress, string msg)
         {
@@ -109,7 +109,7 @@ namespace xy.scraper.page
         }
 
         static public void reportPageDone(IProgress<CReport> progress,
-            (string pageUrl, bool succeed) pageRusult)
+            (string pageUrl, string configId, bool succeed) pageRusult)
         {
             progress.Report(new CReport()
             {
