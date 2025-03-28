@@ -23,7 +23,7 @@ namespace configControlWpf
     /// </summary>
     public partial class SearchLayer : UserControl
     {
-        public Brush focusBrush = Brushes.LightBlue;
+        public Brush focusBrush = Brushes.Blue; //Brushes.LightBlue;
         public Brush unfocusBrush;
         public SearchLayer()
         {
@@ -33,14 +33,6 @@ namespace configControlWpf
         private void mouseUp(object sender, RoutedEventArgs e)
         {
             txtStart.Focus();
-        }
-        private void getFocus(object sender, RoutedEventArgs e)
-        {
-            //this.Background = focusBrush;
-        }
-        private void lostFocus(object sender, RoutedEventArgs e)
-        {
-            //this.Background = unfocusBrush;
         }
 
         public string Start
@@ -83,11 +75,6 @@ namespace configControlWpf
                 Start = value[JCfgName.start].GetValue<String>();
                 End = value[JCfgName.end].GetValue<String>();
             }
-        }
-
-        private void UserControl_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-
         }
     }
 }

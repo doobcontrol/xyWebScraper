@@ -12,27 +12,41 @@
     </UserControl.CommandBindings>
     <TabControl x:Name="tabControl">
         <TabItem Header="Search Layers">
-            <DockPanel LastChildFill="True">
-                <ToolBarTray DockPanel.Dock="Top">
-                    <ToolBar x:Name="toolBar">
-                        <Button x:Name="btnAdd" Command="ApplicationCommands.New">
-                            <Image x:Name="imageAdd" Source="/configControlWpf;component/AddLayoutItem.png" />
-                        </Button>
-                        <Button x:Name="btnDel" Command="ApplicationCommands.Delete">
-                            <Image x:Name="imageDel" Source="/configControlWpf;component/DeleteListItem.png" />
-                        </Button>
-                    </ToolBar>
-                </ToolBarTray>
-                <StackPanel Name="panelSearchLayers" Background="#FFE5E5E5">
-                    <!--local:SearchLayer/-->
-                </StackPanel>
-            </DockPanel>
+            <local:SearchLayers x:Name="slSearchLayers" />
         </TabItem>
         <TabItem Header="Final Handle">
-            <Grid Background="#FFE5E5E5"/>
-        </TabItem>
-        <TabItem Header="Other Setting">
-            <Grid Background="#FFE5E5E5"/>
+            <Grid Background="#FFE5E5E5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="lbReplace" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Replace" VerticalAlignment="Center"/>
+                <TextBlock x:Name="lbAddBefore" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" Text="Add Before" VerticalAlignment="Center"/>
+                <TextBlock x:Name="lbAddAfter" HorizontalAlignment="Left" Grid.Row="2" TextWrapping="Wrap" Text="Add After" VerticalAlignment="Center"/>
+                <StackPanel Grid.Column="1" Margin="4,0,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="txtSearch" Width="100" Height="20" TextWrapping="Wrap"/>
+                        <ToolBarPanel>
+                            <ToolBar x:Name="toolBar">
+                                <Button x:Name="btnAdd" Command="ApplicationCommands.New">
+                                    <Image x:Name="imageAdd" Source="/configControlWpf;component/AddLayoutItem.png" />
+                                </Button>
+                                <Button x:Name="btnDel" Command="ApplicationCommands.Delete">
+                                    <Image x:Name="imageDel" Source="/configControlWpf;component/DeleteListItem.png" />
+                                </Button>
+                            </ToolBar>
+                        </ToolBarPanel>
+                    </StackPanel>
+                    <ListBox x:Name="lbReplaceList" Height="40" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                </StackPanel>
+                <TextBox x:Name="txtAddBefore" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Margin="4,0,0,0"/>
+                <TextBox x:Name="txtAddAfter" Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Margin="4,0,0,0"/>
+            </Grid>
         </TabItem>
     </TabControl>
 </UserControl>
