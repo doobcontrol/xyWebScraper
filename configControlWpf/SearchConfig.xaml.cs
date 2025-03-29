@@ -25,17 +25,34 @@ namespace configControlWpf
         public SearchConfig()
         {
             InitializeComponent();
+            this.DataContext = this;
+
+            gdAuto.Visibility = Visibility.Collapsed;
+        }
+
+        private void checkBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if(((CheckBox)sender).IsChecked == true)
+            {
+                tcSearch.Visibility = Visibility.Collapsed;
+                gdAuto.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                gdAuto.Visibility = Visibility.Collapsed;
+                tcSearch.Visibility = Visibility.Visible;
+            }
         }
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute =
-                txtSearch.Text != null
-                && txtSearch.Text.Trim() != "";
+                txtReplace.Text != null
+                && txtReplace.Text.Trim() != "";
         }
         private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            lbReplaceList.Items.Add(txtSearch.Text.Trim());
-            txtSearch.Text = "";
+            lbReplaceList.Items.Add(txtReplace.Text.Trim());
+            txtReplace.Text = "";
         }
         private void DeleteCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -48,6 +65,26 @@ namespace configControlWpf
             lbReplaceList.Items.RemoveAt(lbReplaceList.SelectedIndex);
         }
 
+        private Visibility showNavgateSearchConfig = Visibility.Collapsed;
+        public Visibility ShowNavgateSearchConfig
+        {
+            get
+            {
+                return showNavgateSearchConfig;
+            }
+        }
+        public bool IsNavgateSearchConfig
+        {
+            get
+            {
+                return showNavgateSearchConfig == Visibility.Visible;
+            }
+            set
+            {
+                showNavgateSearchConfig = value ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+        
         public JsonObject JsonObj
         {
             get
