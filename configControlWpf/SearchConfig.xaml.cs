@@ -27,7 +27,7 @@ namespace configControlWpf
             InitializeComponent();
             this.DataContext = this;
 
-            gdAuto.Visibility = Visibility.Collapsed;
+            aguAutoGrowthUrl.Visibility = Visibility.Collapsed;
         }
 
         private void checkBox_Checked(object sender, RoutedEventArgs e)
@@ -35,11 +35,11 @@ namespace configControlWpf
             if(((CheckBox)sender).IsChecked == true)
             {
                 tcSearch.Visibility = Visibility.Collapsed;
-                gdAuto.Visibility = Visibility.Visible;
+                aguAutoGrowthUrl.Visibility = Visibility.Visible;
             }
             else
             {
-                gdAuto.Visibility = Visibility.Collapsed;
+                aguAutoGrowthUrl.Visibility = Visibility.Collapsed;
                 tcSearch.Visibility = Visibility.Visible;
             }
         }
@@ -84,7 +84,39 @@ namespace configControlWpf
                 showNavgateSearchConfig = value ? Visibility.Visible : Visibility.Collapsed;
             }
         }
-        
+        public string PageConfigID
+        {
+            get {
+
+                return txtPageConfigID.Text;
+            }
+            
+            set {
+                txtPageConfigID.Text = value;
+            }
+        }
+        public bool IsAutoUrl
+        {
+            get
+            {
+                return cbIsAutoUrl.IsChecked == true;
+            }
+            set
+            {
+                cbIsAutoUrl.IsChecked = value;
+            }
+        }
+        public JsonObject AutoGrowthUrl
+        {
+            get
+            {
+                return aguAutoGrowthUrl.JsonObj;
+            }
+            set
+            {
+                aguAutoGrowthUrl.JsonObj = value;
+            }
+        }
         public JsonObject JsonObj
         {
             get

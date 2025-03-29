@@ -17,23 +17,23 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="TextBlock" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="TextBlock" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBox x:Name="textBox" TextWrapping="Wrap" Text="TextBox" Grid.Column="1"/>
-                <TextBox x:Name="textBox1" TextWrapping="Wrap" Text="TextBox" Grid.Row="1" Grid.Column="1"/>
+                <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Page Model ID" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="Coding" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtPageID" TextWrapping="Wrap" Text="TextBox" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox x:Name="txtCoding" TextWrapping="Wrap" Text="TextBox" Grid.Row="1" Grid.Column="1" Margin="4,0,0,0"/>
             </Grid>
             <StackPanel Orientation="Horizontal">
-                <CheckBox x:Name="cbpaths" Content="paths" Checked="cbpaths_CheckedChanged" Unchecked="cbpaths_CheckedChanged"/>
-                <CheckBox x:Name="cbfiles" Content="files" Checked="cbpaths_CheckedChanged" Unchecked="cbpaths_CheckedChanged"/>
-                <CheckBox x:Name="cbnexts" Content="nexts" Checked="cbpaths_CheckedChanged" Unchecked="cbpaths_CheckedChanged"/>
+                <CheckBox x:Name="cbpaths" Content="paths" Checked="cbSearch_CheckedChanged" Unchecked="cbSearch_CheckedChanged"/>
+                <CheckBox x:Name="cbfiles" Content="files" Checked="cbSearch_CheckedChanged" Unchecked="cbSearch_CheckedChanged"/>
+                <CheckBox x:Name="cbnexts" Content="nexts" Checked="cbSearch_CheckedChanged" Unchecked="cbSearch_CheckedChanged"/>
             </StackPanel>
         </StackPanel>
         <TabControl x:Name="tabControl" TabStripPlacement="Left">
             <TabItem Header="paths" x:Name="tipaths">
-                <local:SearchConfigs />
+                <local:SearchConfigs x:Name="scpaths" />
             </TabItem>
             <TabItem Header="files" x:Name="tifiles">
-                <local:SearchConfigs />
+                <local:SearchConfigs x:Name="scfiles" />
             </TabItem>
             <TabItem Header="nexts" x:Name="tinexts">
                 <local:SearchConfigs x:Name="scnexts" IsNavgateSearchConfig="True" />

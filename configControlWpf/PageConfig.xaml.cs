@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
+using xy.scraper.page.parserConfig;
 
 namespace configControlWpf
 {
@@ -31,7 +35,7 @@ namespace configControlWpf
 
         Dictionary<CheckBox, TabItem> cbList = 
             new Dictionary<CheckBox, TabItem>();
-        private void cbpaths_CheckedChanged(object sender, RoutedEventArgs e)
+        private void cbSearch_CheckedChanged(object sender, RoutedEventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
             int TabItemIndex = tabControl.Items.IndexOf(cbList[checkBox]);
@@ -62,5 +66,96 @@ namespace configControlWpf
                 }
             }
         }
+
+
+        public string PageID
+        {
+            get
+            {
+                return txtPageID.Text;
+            }
+
+            set
+            {
+                txtPageID.Text = value;
+            }
+        }
+        public string Encoding
+        {
+            get
+            {
+                return txtCoding.Text;
+            }
+            set
+            {
+                txtCoding.Text = value;
+            }
+        }
+        public JsonObject JsonObj
+        {
+            get
+            {
+                JsonObject json = new JsonObject();
+
+                json[JCfgName.cfgid] = PageID;
+                json[JCfgName.encoding] = txtCoding.Text;
+
+                if (cbpaths.IsChecked == true)
+                {
+                    json[JCfgName.paths] = scpaths.JsonObj;
+                }
+
+                if (cbfiles.IsChecked == true)
+                {
+                    json[JCfgName.files] = scfiles.JsonObj;
+                }
+
+                if (cbnexts.IsChecked == true)
+                {
+                    json[JCfgName.nexts] = scnexts.JsonObj;
+                }
+
+                return json;
+            }
+
+            set
+            {
+                PageID
+                    = value[JCfgName.cfgid].GetValue<String>();
+                txtCoding.Text
+                    = value[JCfgName.encoding].GetValue<String>();
+
+                if (value.ContainsKey(JCfgName.paths))
+                {
+                    scpaths.JsonObj = value[JCfgName.paths].AsArray();
+                    cbpaths.IsChecked = true;
+                }
+                else
+                {
+                    cbpaths.IsChecked = false;
+                }
+
+                if (value.ContainsKey(JCfgName.files))
+                {
+                    scfiles.JsonObj = value[JCfgName.files].AsArray();
+                    cbfiles.IsChecked = true;
+                }
+                else
+                {
+                    cbfiles.IsChecked = false;
+                }
+
+                if (value.ContainsKey(JCfgName.nexts))
+                {
+                    scnexts.JsonObj = value[JCfgName.nexts].AsArray();
+                    cbnexts.IsChecked = true;
+                }
+                else
+                {
+                    cbnexts.IsChecked = false;
+                }
+            }
+        }
+
     }
 }
