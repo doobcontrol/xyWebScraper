@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="configControlWpf.ScraperConfig"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:configControlWpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="340" d:DesignWidth="600">
+    <DockPanel>
+        <ToolBarTray DockPanel.Dock="Top" Orientation="Horizontal" >
+            <ToolBar x:Name="toolBar">
+                <ToolBar.CommandBindings>
+                    <CommandBinding Command="ApplicationCommands.New" Executed="NewCommand_Executed" CanExecute="NewCommand_CanExecute" />
+                    <CommandBinding Command="ApplicationCommands.Delete" Executed="DeleteCommand_Executed" CanExecute="DeleteCommand_CanExecute" />
+                    <CommandBinding Command="ApplicationCommands.Copy" Executed="CopyCommand_Executed" CanExecute="CopyCommand_CanExecute" />
+                </ToolBar.CommandBindings>
+                <Button x:Name="button3" Command="ApplicationCommands.New">
+                    <Image x:Name="image" Source="/configControlWpf;component/AddLayoutItem.png"/>
+                </Button>
+                <Button x:Name="button4" Command="ApplicationCommands.Delete">
+                    <Image x:Name="image1" Source="/configControlWpf;component/DeleteListItem.png"/>
+                </Button>
+                <Button x:Name="button5" Command="ApplicationCommands.Copy">
+                    <Image x:Name="image2" Source="/configControlWpf;component/CopyItem.png"/>
+                </Button>
+            </ToolBar>
+            <ToolBar x:Name="toolBar1">
+                <Button x:Name="button">
+                    <Image x:Name="image3" Source="/configControlWpf;component/Save.png"/>
+                </Button>
+                <Button x:Name="button1">
+                    <Image x:Name="image4" Source="/configControlWpf;component/SaveAs.png"/>
+                </Button>
+                <Button x:Name="button2">
+                    <Image x:Name="image5" Source="/configControlWpf;component/Import.png"/>
+                </Button>
+            </ToolBar>
+            <ToolBar x:Name="toolBar2">
+                <Button x:Name="button6">
+                    <Image x:Name="image6" Source="/configControlWpf;component/Test.png"/>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        <DockPanel LastChildFill="true">
+            <StackPanel DockPanel.Dock="Right" Width="200" Visibility="Collapsed"/>
+            <TabControl x:Name="tabControl" TabStripPlacement="Left"/>
+        </DockPanel>
+    </DockPanel>
+</UserControl>

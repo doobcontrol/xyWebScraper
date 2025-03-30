@@ -16,13 +16,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static System.Net.Mime.MediaTypeNames;
 using xy.scraper.page.parserConfig;
+using System.ComponentModel;
 
 namespace configControlWpf
 {
     /// <summary>
     /// Interaction logic for PageConfig.xaml
     /// </summary>
-    public partial class PageConfig : UserControl
+    public partial class PageConfig : UserControl,INotifyPropertyChanged
     {
         public PageConfig()
         {
@@ -35,6 +36,9 @@ namespace configControlWpf
 
         Dictionary<CheckBox, TabItem> cbList = 
             new Dictionary<CheckBox, TabItem>();
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         private void cbSearch_CheckedChanged(object sender, RoutedEventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
@@ -67,7 +71,6 @@ namespace configControlWpf
             }
         }
 
-
         public string PageID
         {
             get
@@ -78,6 +81,7 @@ namespace configControlWpf
             set
             {
                 txtPageID.Text = value;
+                NotePageIDPropertyChanged();
             }
         }
         public string Encoding
@@ -157,5 +161,17 @@ namespace configControlWpf
             }
         }
 
+        private void NotePageIDPropertyChanged()
+        {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(
+                    this,
+                    new PropertyChangedEventArgs("PageID")
+                    );
+        }
+        private void txtPageID_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            NotePageIDPropertyChanged();
+        }
     }
 }

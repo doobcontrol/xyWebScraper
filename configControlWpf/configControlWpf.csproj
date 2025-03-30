@@ -9,8 +9,13 @@
 
   <ItemGroup>
     <None Remove="AddLayoutItem.png" />
+    <None Remove="CopyItem.png" />
     <None Remove="DeleteListItem.png" />
+    <None Remove="Import.png" />
     <None Remove="ListView.png" />
+    <None Remove="Save.png" />
+    <None Remove="SaveAs.png" />
+    <None Remove="Test.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,8 +24,13 @@
 
   <ItemGroup>
     <Resource Include="AddLayoutItem.png" />
+    <Resource Include="CopyItem.png" />
     <Resource Include="DeleteListItem.png" />
+    <Resource Include="Import.png" />
     <Resource Include="ListView.png" />
+    <Resource Include="Save.png" />
+    <Resource Include="SaveAs.png" />
+    <Resource Include="Test.png" />
   </ItemGroup>
 
 </Project>

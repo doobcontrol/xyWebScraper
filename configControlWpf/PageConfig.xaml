@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="310" d:DesignWidth="610">
     <DockPanel>
-        <StackPanel DockPanel.Dock="Top">
+        <StackPanel DockPanel.Dock="Top" Margin="8,0,0,0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -19,8 +19,8 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Page Model ID" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="Coding" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtPageID" TextWrapping="Wrap" Text="TextBox" Grid.Column="1" Margin="4,0,0,0"/>
-                <TextBox x:Name="txtCoding" TextWrapping="Wrap" Text="TextBox" Grid.Row="1" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox x:Name="txtPageID" TextChanged="txtPageID_TextChanged" TextWrapping="Wrap" Grid.Column="1" Margin="4,0,0,0"/>
+                <TextBox x:Name="txtCoding" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" Margin="4,0,0,0"/>
             </Grid>
             <StackPanel Orientation="Horizontal">
                 <CheckBox x:Name="cbpaths" Content="paths" Checked="cbSearch_CheckedChanged" Unchecked="cbSearch_CheckedChanged"/>
