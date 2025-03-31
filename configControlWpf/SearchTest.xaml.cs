@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using xy.scraper.page;
 
 namespace configControlWpf
 {
@@ -20,9 +21,46 @@ namespace configControlWpf
     /// </summary>
     public partial class SearchTest : UserControl
     {
+
+        private string? html;
         public SearchTest()
         {
             InitializeComponent();
+
+            spTest.Visibility = Visibility.Hidden;
+            lbMsg.Text = "Input url and click 'Get Html Text' button";
+
+            btnGetHtmlText.Click += async void (o, e) =>
+            {
+                spTest.Visibility = Visibility.Hidden;
+                btnGetHtmlText.IsEnabled = false;
+
+                HttpClientDownloader httpClientDownloader = new HttpClientDownloader();
+
+                try
+                {
+                    lbMsg.Text = "Getting...";
+                    html =
+                        await getHtmlString(txtUrl.Text);
+                    tabControl.SelectedItem = tiHtmlText;
+                    txtHtmlText.Text = html;
+                    spTest.Visibility = Visibility.Visible;
+
+                    lbMsg.Text = "Got Html text, switch to Test tab for search test.";
+                }
+                catch (Exception ex)
+                {
+                    lbMsg.Text = "Fail, check the url and retry.";
+                    txtHtmlText.Text = ex.Message;
+                }
+                finally
+                {
+                    btnGetHtmlText.IsEnabled = true;
+                }
+            };
         }
+
+        public delegate Task<string> GetHtmlString(string Url);
+        public GetHtmlString getHtmlString;
     }
 }

@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using xy.scraper.page;
 using xy.scraper.page.parserConfig;
 
 namespace configControlWpf
@@ -38,8 +39,23 @@ namespace configControlWpf
                     JsonObj = JsonNode.Parse(jsonString).AsArray();
                 }
             };
+            searchTest.getHtmlString += async (url) =>
+            {
+                string html =
+                        await new HttpClientDownloader().GetHtmlStringAsync(
+                            url,
+                            Encoding);
+                return html;
+            };
         }
 
+        public string Encoding
+        {
+            get
+            {
+                return ((PageConfig)((TabItem)tabControl.SelectedItem).Content).Encoding;
+            }
+        }
         public JsonArray JsonObj
         {
             get
@@ -280,7 +296,9 @@ namespace configControlWpf
 
         private void TestCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = true;
+            e.CanExecute =
+                tabControl != null
+                && tabControl.Items.Count > 0;
         }
         private void TestCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {

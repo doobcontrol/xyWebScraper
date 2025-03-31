@@ -17,10 +17,10 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="textBox"/>
-            <Button x:Name="button" Content="Get Html Text" Grid.Column="1"/>
+            <TextBox x:Name="txtUrl"/>
+            <Button x:Name="btnGetHtmlText" Content="Get Html Text" Grid.Column="1"/>
         </Grid>
-        <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="..." Grid.Row="1"/>
+        <TextBlock x:Name="lbMsg" TextWrapping="Wrap" Text="..." Grid.Row="1"/>
         <TabControl x:Name="tabControl" Grid.Row="2">
             <TabItem x:Name="tiTest" Header="Test">
                 <Grid>
@@ -28,14 +28,14 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel x:Name="spTest" Orientation="Horizontal">
                         <Button x:Name="btnTest" Content="Test"/>
                     </StackPanel>
-                    <TextBox x:Name="txtTest" TextWrapping="Wrap" Text="TextBox" Grid.Row="1"/>
+                    <TextBox x:Name="txtTest" TextWrapping="Wrap" Grid.Row="1" VerticalScrollBarVisibility="Auto"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="tiHtmlText" Header="Html Text">
-                <TextBox x:Name="txtHtmlText" TextWrapping="Wrap" Text="TextBox"/>
+                <TextBox x:Name="txtHtmlText" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
             </TabItem>
         </TabControl>
 
