@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:configControlWpf"
              mc:Ignorable="d" 
              d:DesignHeight="340" d:DesignWidth="600">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
     <Grid x:Name="topGrid">
         <DockPanel x:Name="dpMain">
             <ToolBarTray DockPanel.Dock="Top" Orientation="Horizontal" >
@@ -49,15 +52,27 @@
                     <ToolBar.CommandBindings>
                         <CommandBinding Command="local:ScCmd.Test" Executed="TestCommand_Executed" CanExecute="TestCommand_CanExecute" />
                     </ToolBar.CommandBindings>
-                    <Button x:Name="button6" Command="local:ScCmd.Test">
+                    <CheckBox x:Name="btnToggleTest" Command="local:ScCmd.Test">
                         <Image x:Name="image6" Source="/configControlWpf;component/Test.png"/>
-                    </Button>
+                    </CheckBox>
                 </ToolBar>
             </ToolBarTray>
-            <DockPanel LastChildFill="true">
-                <StackPanel DockPanel.Dock="Right" Width="200" Visibility="Collapsed"/>
+            <Grid x:Name="mainGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
                 <TabControl x:Name="tabControl" TabStripPlacement="Left" />
-            </DockPanel>
+                <Grid Grid.Column="1"
+                    Visibility="{Binding IsChecked, ElementName=btnToggleTest, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <GridSplitter x:Name="gridSplitter" Width="5" Visibility="Collapsed" ResizeBehavior="CurrentAndNext"/>
+                    <local:SearchTest x:Name="searchTest" DockPanel.Dock="Right" Visibility="Collapsed" Grid.Column="1"/>
+                </Grid>
+            </Grid>
         </DockPanel>
     </Grid>
 </UserControl>

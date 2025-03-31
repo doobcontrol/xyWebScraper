@@ -284,8 +284,17 @@ namespace configControlWpf
         }
         private void TestCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            if (btnToggleTest.IsChecked == true)
+            {
+                searchTest.Visibility = Visibility.Visible;
+                gridSplitter.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                searchTest.Visibility = Visibility.Collapsed;
+                gridSplitter.Visibility = Visibility.Collapsed;
+            }
         }
-
         #endregion
     }
 
