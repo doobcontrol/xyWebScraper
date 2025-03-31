@@ -69,8 +69,8 @@
                         <ColumnDefinition />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <GridSplitter x:Name="gridSplitter" Width="5" Visibility="Collapsed" ResizeBehavior="CurrentAndNext"/>
-                    <local:SearchTest x:Name="searchTest" DockPanel.Dock="Right" Visibility="Collapsed" Grid.Column="1"/>
+                    <GridSplitter x:Name="gridSplitter" Width="5" ResizeBehavior="CurrentAndNext"/>
+                    <local:SearchTest x:Name="searchTest" DockPanel.Dock="Right" Grid.Column="1"/>
                 </Grid>
             </Grid>
         </DockPanel>
