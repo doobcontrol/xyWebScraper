@@ -13,6 +13,7 @@
     <None Remove="DeleteListItem.png" />
     <None Remove="Import.png" />
     <None Remove="ListView.png" />
+    <None Remove="OpenfileDialog.png" />
     <None Remove="Save.png" />
     <None Remove="SaveAs.png" />
     <None Remove="Test.png" />
@@ -28,6 +29,7 @@
     <Resource Include="DeleteListItem.png" />
     <Resource Include="Import.png" />
     <Resource Include="ListView.png" />
+    <Resource Include="OpenfileDialog.png" />
     <Resource Include="Save.png" />
     <Resource Include="SaveAs.png" />
     <Resource Include="Test.png" />

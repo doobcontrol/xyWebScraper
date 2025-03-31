@@ -23,7 +23,7 @@ namespace configControlWpf
     /// <summary>
     /// Interaction logic for PageConfig.xaml
     /// </summary>
-    public partial class PageConfig : UserControl,INotifyPropertyChanged
+    public partial class PageConfig : UserControl, INotifyPropertyChanged
     {
         public PageConfig()
         {

@@ -25,6 +25,17 @@ namespace configControlWpf
         public SearchConfigs()
         {
             InitializeComponent();
+            
+            Loaded += (s, e) =>
+            {
+                if (tabControl.Items.Count == 0)
+                {
+                    // Add the first SearchConfig.
+                    // This need isNavgateSearchConfig been set, but xmal can't put parameters to constructor.
+                    // So when in SearchConfigs() not get isNavgateSearchConfig value yet.
+                    AddSearchConfig();
+                }
+            };
         }
         private void AddSearchConfig()
         {
@@ -76,12 +87,6 @@ namespace configControlWpf
             set
             {
                 isNavgateSearchConfig = value;
-                // Add the first SearchConfig.
-                // When in SearchConfigs() not get isNavgateSearchConfig value yet.
-                // Try excute this in UserControl_Loaded, but, every time tabItem switch, UserControl_Loaded is called.
-                // So, add the first SearchConfig here.
-                // Must insure this excute only once.
-                AddSearchConfig();
             }
         }
 
@@ -107,7 +112,7 @@ namespace configControlWpf
                         }
                         else
                         {
-                            searchConfigObj[JCfgName.search] = searchConfig.JsonObj;
+                            searchConfigObj[JCfgName.searchs] = searchConfig.JsonObj;
                         }
                         searchConfigs.Add(searchConfigObj);
                     }
@@ -143,14 +148,14 @@ namespace configControlWpf
                         if (jsonObj.ContainsKey(JCfgName.AutoGrowthUrl))
                         {
                             searchConfig.IsAutoUrl = true;
-                            searchConfig.JsonObj =
+                            searchConfig.AutoGrowthUrl =
                                 jsonObj[JCfgName.AutoGrowthUrl].AsObject();
                         }
                         else
                         {
                             searchConfig.IsAutoUrl = false;
                             searchConfig.JsonObj = 
-                                jsonObj[JCfgName.search].AsObject();
+                                jsonObj[JCfgName.searchs].AsObject();
                         }
                     }
                     else
