@@ -41,7 +41,6 @@ namespace xy.scraper.configControl
             lbGetting.Visible = true;
             tabControl1.Visible = false;
             btnGetHtml.Enabled = false;
-            HttpClientDownloader httpClientDownloader = new HttpClientDownloader();
             try
             {
                 html =
