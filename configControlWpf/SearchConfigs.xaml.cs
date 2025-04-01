@@ -165,5 +165,15 @@ namespace configControlWpf
                 }
             }
         }
+
+        //for search test
+        public JsonObject CurrentSearchConfig
+        {
+            get
+            {
+                return ((SearchConfig)((TabItem)tabControl.SelectedItem).Content)
+                    .JsonObj;
+            }
+        }
     }
 }

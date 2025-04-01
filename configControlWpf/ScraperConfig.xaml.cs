@@ -47,6 +47,10 @@ namespace configControlWpf
                             Encoding);
                 return html;
             };
+            searchTest.getSearchJsonObject += () =>
+            {
+                return CurrentSearchConfig;
+            };
         }
 
         public string Encoding
@@ -304,6 +308,15 @@ namespace configControlWpf
         {
         }
         #endregion
+
+        //for search test
+        public JsonObject CurrentSearchConfig
+        {
+            get
+            {
+                return ((PageConfig)((TabItem)tabControl.SelectedItem).Content).CurrentSearchConfig;
+            }
+        }
     }
 
     public static class ScCmd

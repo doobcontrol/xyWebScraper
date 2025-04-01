@@ -173,5 +173,15 @@ namespace configControlWpf
         {
             NotePageIDPropertyChanged();
         }
+
+        //for search test
+        public JsonObject CurrentSearchConfig
+        {
+            get
+            {
+                return ((SearchConfigs)((TabItem)tabControl.SelectedItem).Content)
+                    .CurrentSearchConfig;
+            }
+        }
     }
 }

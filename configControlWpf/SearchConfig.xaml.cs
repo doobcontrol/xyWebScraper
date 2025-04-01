@@ -122,7 +122,14 @@ namespace configControlWpf
             get
             {
                 JsonObject json = new JsonObject();
-                json[JCfgName.search] = slSearchLayers.JsonObj;
+                if(cbIsAutoUrl.IsChecked == true)
+                {
+                    json[JCfgName.AutoGrowthUrl] = aguAutoGrowthUrl.JsonObj;
+                }
+                else
+                {
+                    json[JCfgName.search] = slSearchLayers.JsonObj;
+                }
 
                 JsonArray replaces = new JsonArray();
                 json[JCfgName.replaces] = replaces;
