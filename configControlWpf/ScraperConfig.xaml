@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:configControlWpf"
+             xmlns:p="clr-namespace:configControlWpf.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="340" d:DesignWidth="600">
     <UserControl.Resources>
@@ -18,13 +19,16 @@
                         <CommandBinding Command="ApplicationCommands.Delete" Executed="DeleteCommand_Executed" CanExecute="DeleteCommand_CanExecute" />
                         <CommandBinding Command="ApplicationCommands.Copy" Executed="CopyCommand_Executed" CanExecute="CopyCommand_CanExecute" />
                     </ToolBar.CommandBindings>
-                    <Button x:Name="button3" Command="ApplicationCommands.New">
+                    <Button x:Name="button3" Command="ApplicationCommands.New"
+                        ToolTip="{x:Static p:Resource.ttbtnAddPage}">
                         <Image x:Name="image" Source="/configControlWpf;component/AddLayoutItem.png"/>
                     </Button>
-                    <Button x:Name="button4" Command="ApplicationCommands.Delete">
+                    <Button x:Name="button4" Command="ApplicationCommands.Delete"
+                        ToolTip="{x:Static p:Resource.ttbtnDelPage}">
                         <Image x:Name="image1" Source="/configControlWpf;component/DeleteListItem.png"/>
                     </Button>
-                    <Button x:Name="button5" Command="ApplicationCommands.Copy">
+                    <Button x:Name="button5" Command="ApplicationCommands.Copy"
+                        ToolTip="{x:Static p:Resource.ttbtnCopyPage}">
                         <Image x:Name="image2" Source="/configControlWpf;component/CopyItem.png"/>
                     </Button>
                 </ToolBar>
@@ -35,16 +39,20 @@
                         <CommandBinding Command="ApplicationCommands.SaveAs" Executed="SaveAsCommand_Executed" CanExecute="SaveAsCommand_CanExecute" />
                         <CommandBinding Command="local:ScCmd.Import" Executed="ImportCommand_Executed" CanExecute="ImportCommand_CanExecute" />
                     </ToolBar.CommandBindings>
-                    <Button x:Name="button7" Command="ApplicationCommands.Open">
+                    <Button x:Name="button7" Command="ApplicationCommands.Open"
+                        ToolTip="{x:Static p:Resource.ttbtnOpen}">
                         <Image x:Name="image7" Source="/configControlWpf;component/OpenfileDialog.png"/>
                     </Button>
-                    <Button x:Name="button" Command="ApplicationCommands.Save">
+                    <Button x:Name="button" Command="ApplicationCommands.Save"
+                        ToolTip="{x:Static p:Resource.ttbtnSave}">
                         <Image x:Name="image3" Source="/configControlWpf;component/Save.png"/>
                     </Button>
-                    <Button x:Name="button1" Command="ApplicationCommands.SaveAs">
+                    <Button x:Name="button1" Command="ApplicationCommands.SaveAs"
+                        ToolTip="{x:Static p:Resource.ttbtnSaveAs}">
                         <Image x:Name="image4" Source="/configControlWpf;component/SaveAs.png"/>
                     </Button>
-                    <Button x:Name="button2" Command="local:ScCmd.Import">
+                    <Button x:Name="button2" Command="local:ScCmd.Import"
+                        ToolTip="{x:Static p:Resource.ttbtnImport}">
                         <Image x:Name="image5" Source="/configControlWpf;component/Import.png"/>
                     </Button>
                 </ToolBar>
@@ -52,7 +60,8 @@
                     <ToolBar.CommandBindings>
                         <CommandBinding Command="local:ScCmd.Test" Executed="TestCommand_Executed" CanExecute="TestCommand_CanExecute" />
                     </ToolBar.CommandBindings>
-                    <CheckBox x:Name="btnToggleTest" Command="local:ScCmd.Test">
+                    <CheckBox x:Name="btnToggleTest" Command="local:ScCmd.Test"
+                        ToolTip="{x:Static p:Resource.ttbtnTest}">
                         <Image x:Name="image6" Source="/configControlWpf;component/Test.png"/>
                     </CheckBox>
                 </ToolBar>

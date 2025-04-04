@@ -30,7 +30,7 @@ namespace configControlWpf
             InitializeComponent();
 
             spTest.Visibility = Visibility.Hidden;
-            lbMsg.Text = "Input url and click 'Get Html Text' button";
+            lbMsg.Text = Properties.Resource.testMsgInit;
 
             btnGetHtmlText.Click += async void (o, e) =>
             {
@@ -65,7 +65,7 @@ namespace configControlWpf
             {
                 try
                 {
-                    lbMsg.Text = "Testing...";
+                    lbMsg.Text = Properties.Resource.testMsgTesting;
                     JsonObject searchJson = getSearchJsonObject();
 
                     if (searchJson.ContainsKey(JCfgName.search))
@@ -75,14 +75,15 @@ namespace configControlWpf
                         {
                             List<string> searchResult = ParserJosnConfig.searchList(html, searchJson);
                             txtTest.Text =
-                               string.Format("found  {0} items: ", searchResult.Count)
+                               string.Format(Properties.Resource.testMsgFoundItems, 
+                                    searchResult.Count)
                                + "\r\n"
                                + string.Join("\r\n", searchResult);
                         }
                         else
                         {
                             string? searchResult = ParserJosnConfig.search(html, searchJson);
-                            txtTest.Text = "found string: " +
+                            txtTest.Text = Properties.Resource.testMsgFoundString +
                                 "\r\n" + searchResult;
                         }
                     }
@@ -90,16 +91,16 @@ namespace configControlWpf
                     {
                         string? searchResult = ParserJosnConfig.createUrlFromUrl(
                             html, txtUrl.Text, searchJson[JCfgName.AutoGrowthUrl].AsObject());
-                        txtTest.Text = "found string: " +
+                        txtTest.Text = Properties.Resource.testMsgFoundString +
                             "\r\n" + searchResult;
                     }
 
-                    lbMsg.Text = "Test done.";
+                    lbMsg.Text = Properties.Resource.testMsgTestdone;
                 }
                 catch (Exception ex)
                 {
-                    lbMsg.Text = "Test fail.";
-                    txtTest.Text = "search error: "
+                    lbMsg.Text = Properties.Resource.testMsgTestfail;
+                    txtTest.Text = Properties.Resource.testMsgTestError
                         + "\r\n" + ex.Message;
                 }
             };

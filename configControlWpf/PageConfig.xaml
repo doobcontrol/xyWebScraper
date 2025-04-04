@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:configControlWpf"
+             xmlns:p="clr-namespace:configControlWpf.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="310" d:DesignWidth="610">
     <DockPanel>
@@ -17,25 +18,30 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Page Model ID" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Text="Coding" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock x:Name="textBlock" TextWrapping="Wrap" 
+                           Text="{x:Static p:Resource.tbPageConfigID}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock x:Name="textBlock1" TextWrapping="Wrap" Grid.Row="1" 
+                           Text="{x:Static p:Resource.tbCoding}"/>
                 <TextBox x:Name="txtPageID" TextChanged="txtPageID_TextChanged" TextWrapping="Wrap" Grid.Column="1" Margin="4,0,0,0"/>
                 <TextBox x:Name="txtCoding" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" Margin="4,0,0,0"/>
             </Grid>
             <StackPanel Orientation="Horizontal">
-                <CheckBox x:Name="cbpaths" Content="paths" Checked="cbSearch_CheckedChanged" Unchecked="cbSearch_CheckedChanged"/>
-                <CheckBox x:Name="cbfiles" Content="files" Checked="cbSearch_CheckedChanged" Unchecked="cbSearch_CheckedChanged"/>
-                <CheckBox x:Name="cbnexts" Content="nexts" Checked="cbSearch_CheckedChanged" Unchecked="cbSearch_CheckedChanged"/>
+                <CheckBox x:Name="cbpaths" Checked="cbSearch_CheckedChanged" Unchecked="cbSearch_CheckedChanged" 
+                          Content="{x:Static p:Resource.cbpaths}"/>
+                <CheckBox x:Name="cbfiles" Checked="cbSearch_CheckedChanged" Unchecked="cbSearch_CheckedChanged" 
+                          Content="{x:Static p:Resource.cbfiles}"/>
+                <CheckBox x:Name="cbnexts" Checked="cbSearch_CheckedChanged" Unchecked="cbSearch_CheckedChanged" 
+                          Content="{x:Static p:Resource.cbnexts}"/>
             </StackPanel>
         </StackPanel>
         <TabControl x:Name="tabControl" TabStripPlacement="Left">
-            <TabItem Header="paths" x:Name="tipaths">
+            <TabItem Header="{x:Static p:Resource.cbpaths}" x:Name="tipaths">
                 <local:SearchConfigs x:Name="scpaths" />
             </TabItem>
-            <TabItem Header="files" x:Name="tifiles">
+            <TabItem Header="{x:Static p:Resource.cbfiles}" x:Name="tifiles">
                 <local:SearchConfigs x:Name="scfiles" />
             </TabItem>
-            <TabItem Header="nexts" x:Name="tinexts">
+            <TabItem Header="{x:Static p:Resource.cbnexts}" x:Name="tinexts">
                 <local:SearchConfigs x:Name="scnexts" IsNavgateSearchConfig="True" />
             </TabItem>
         </TabControl>

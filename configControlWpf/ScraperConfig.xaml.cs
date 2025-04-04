@@ -99,7 +99,7 @@ namespace configControlWpf
                 pc = new PageConfig();
             }
             PageConfig pageConfig = pc;
-            string pageID = "Page Model " 
+            string pageID = Properties.Resource.tihPageModel
                 + (tabControl.Items.Count + 1);
             TabItem tabItem = new TabItem()
             {
@@ -164,7 +164,8 @@ namespace configControlWpf
         private void OpenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "page config files (*.cfg)|*.cfg";
+            openFileDialog.Filter = Properties.Resource.fdFileType
+                + "(*.cfg)|*.cfg";
             if (openFileDialog.ShowDialog() == true)
             {
                 confnfigFile = openFileDialog.FileName;
@@ -207,7 +208,8 @@ namespace configControlWpf
                     dpMain.Opacity = 1;
 
                     SaveFileDialog saveFileDialog = new SaveFileDialog();
-                    saveFileDialog.Filter = "page config files (*.cfg)|*.cfg";
+                    saveFileDialog.Filter = Properties.Resource.fdFileType
+                        + "(*.cfg)|*.cfg";
                     if (saveFileDialog.ShowDialog() == true)
                     {
                         string saveFile = saveFileDialog.FileName;
@@ -250,7 +252,8 @@ namespace configControlWpf
         private void ImportCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "page config files (*.cfg)|*.cfg";
+            openFileDialog.Filter = Properties.Resource.fdFileType
+                + "(*.cfg)|*.cfg";
             if (openFileDialog.ShowDialog() == true)
             {
                 confnfigFile = openFileDialog.FileName;

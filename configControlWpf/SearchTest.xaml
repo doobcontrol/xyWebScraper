@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:configControlWpf"
+             xmlns:p="clr-namespace:configControlWpf.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -18,23 +19,25 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <TextBox x:Name="txtUrl"/>
-            <Button x:Name="btnGetHtmlText" Content="Get Html Text" Grid.Column="1"/>
+            <Button x:Name="btnGetHtmlText" Grid.Column="1" 
+                    Content="{x:Static p:Resource.btnGetHtmlText}"/>
         </Grid>
         <TextBlock x:Name="lbMsg" TextWrapping="Wrap" Text="..." Grid.Row="1"/>
         <TabControl x:Name="tabControl" Grid.Row="2">
-            <TabItem x:Name="tiTest" Header="Test">
+            <TabItem x:Name="tiTest" Header="{x:Static p:Resource.tihTest}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <StackPanel x:Name="spTest" Orientation="Horizontal">
-                        <Button x:Name="btnTest" Content="Test"/>
+                        <Button x:Name="btnTest" 
+                                Content="{x:Static p:Resource.btnTestText}"/>
                     </StackPanel>
                     <TextBox x:Name="txtTest" TextWrapping="Wrap" Grid.Row="1" VerticalScrollBarVisibility="Auto"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="tiHtmlText" Header="Html Text">
+            <TabItem x:Name="tiHtmlText" Header="{x:Static p:Resource.tihHtmlText}">
                 <TextBox x:Name="txtHtmlText" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
             </TabItem>
         </TabControl>

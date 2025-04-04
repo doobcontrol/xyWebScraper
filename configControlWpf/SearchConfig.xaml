@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:configControlWpf"
+             xmlns:p="clr-namespace:configControlWpf.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="305" d:DesignWidth="535">
     <Grid x:Name="topGrid">
@@ -12,22 +13,23 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel VerticalAlignment="Top" Visibility="{Binding ShowNavgateSearchConfig}">
-            <CheckBox x:Name="cbIsAutoUrl" Content="Is auto growth url"
+            <CheckBox x:Name="cbIsAutoUrl" Content="{x:Static p:Resource.cbIsautogrowthurl}"
                       Checked="checkBox_Checked" Unchecked="checkBox_Checked" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="lbPageConfigID" TextWrapping="Wrap" Text="PageConfig ID"/>
+                <TextBlock x:Name="lbPageConfigID" TextWrapping="Wrap" 
+                           Text="{x:Static p:Resource.tbPageConfigID}"/>
                 <TextBox x:Name="txtPageConfigID" Grid.ColumnSpan="2" TextWrapping="Wrap" Grid.Column="1" Margin="4,0,0,0"/>
             </Grid>
         </StackPanel>
         <TabControl x:Name="tcSearch" TabStripPlacement="Left" Grid.Row="1">
-            <TabItem Header="Search Layers">
+            <TabItem Header="{x:Static p:Resource.tiSearchLayers}">
                 <local:SearchLayers x:Name="slSearchLayers" />
             </TabItem>
-            <TabItem Header="Final Handle">
+            <TabItem Header="{x:Static p:Resource.tiFinalHandle}">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -38,9 +40,12 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="lbReplace" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Replace" VerticalAlignment="Center"/>
-                    <TextBlock x:Name="lbAddBefore" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" Text="Add Before" VerticalAlignment="Center"/>
-                    <TextBlock x:Name="lbAddAfter" HorizontalAlignment="Left" Grid.Row="2" TextWrapping="Wrap" Text="Add After" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="lbReplace" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center"
+                               Text="{x:Static p:Resource.tbReplace}"/>
+                    <TextBlock x:Name="lbAddBefore" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center"
+                               Text="{x:Static p:Resource.tbAddBefore}"/>
+                    <TextBlock x:Name="lbAddAfter" HorizontalAlignment="Left" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center"
+                               Text="{x:Static p:Resource.tbAddAfter}"/>
                     <StackPanel Grid.Column="1" Margin="4,0,0,0">
                         <StackPanel Orientation="Horizontal">
                             <TextBox x:Name="txtReplace" Width="100" Height="20" TextWrapping="Wrap"/>
@@ -50,10 +55,12 @@
                                         <CommandBinding Command="ApplicationCommands.New" Executed="NewCommand_Executed" CanExecute="NewCommand_CanExecute" />
                                         <CommandBinding Command="ApplicationCommands.Delete" Executed="DeleteCommand_Executed" CanExecute="DeleteCommand_CanExecute" />
                                     </ToolBar.CommandBindings>
-                                    <Button x:Name="btnAdd" Command="ApplicationCommands.New">
+                                    <Button x:Name="btnAdd" Command="ApplicationCommands.New" 
+                                            ToolTip="{x:Static p:Resource.ttbtnAddReplace}">
                                         <Image x:Name="imageAdd" Source="/configControlWpf;component/AddLayoutItem.png" />
                                     </Button>
-                                    <Button x:Name="btnDel" Command="ApplicationCommands.Delete">
+                                    <Button x:Name="btnDel" Command="ApplicationCommands.Delete" 
+                                            ToolTip="{x:Static p:Resource.ttbtnDelReplace}">
                                         <Image x:Name="imageDel" Source="/configControlWpf;component/DeleteListItem.png" />
                                     </Button>
                                 </ToolBar>

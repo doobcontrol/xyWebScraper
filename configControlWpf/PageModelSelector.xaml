@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:configControlWpf"
+             xmlns:p="clr-namespace:configControlWpf.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" HorizontalAlignment="Center" VerticalAlignment="Center">
 
@@ -16,7 +17,8 @@
                     Opacity="0.4" />
         </Border.Effect>
         <DockPanel LastChildFill="true" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock x:Name="textBlock" DockPanel.Dock="Top" TextWrapping="Wrap" Text="Select Page Model ID" Padding="5,5,1,5" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"
+            <TextBlock x:Name="textBlock" DockPanel.Dock="Top" TextWrapping="Wrap" Padding="5,5,1,5" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"
+                       Text="{x:Static p:Resource.titleSelectPageModelID}"
                    />
             <Grid DockPanel.Dock="Bottom" VerticalAlignment="Center" HorizontalAlignment="Right"
                   IsSharedSizeScope="True" >
@@ -26,8 +28,10 @@
                 </Grid.ColumnDefinitions>
                 <Button x:Name="btnOk"
                         IsEnabled ="{Binding HasItemSelected}"
-                        Click="btnOk_Click" Content="Ok" Padding="5,1,5,1" Margin="1,1,1,1" />
-                <Button x:Name="btnCancel" Click="btnCancel_Click" Content="Cancel" Padding="5,1,5,1" Grid.Column="1" Margin="1,1,1,1"/>
+                        Click="btnOk_Click" Padding="5,1,5,1" Margin="1,1,1,1" 
+                        Content="{x:Static p:Resource.btnOkText}" />
+                <Button x:Name="btnCancel" Click="btnCancel_Click" Padding="5,1,5,1" Grid.Column="1" Margin="1,1,1,1" 
+                        Content="{x:Static p:Resource.btnCancelText}"/>
             </Grid>
             <ListBox x:Name="lbPageModelId" SelectionMode="Multiple"
                  ItemsSource="{Binding PageModelIdList}"

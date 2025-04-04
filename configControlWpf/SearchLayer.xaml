@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:configControlWpf"
+             xmlns:p="clr-namespace:configControlWpf.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="40" d:DesignWidth="315"
              Focusable="True"
@@ -17,9 +18,11 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="textBlock" Margin="0,2,0,2" Grid.Row="0" TextWrapping="Wrap" Text="Start"/>
+        <TextBlock x:Name="textBlock" Margin="0,2,0,2" Grid.Row="0" TextWrapping="Wrap" 
+                   Text="{x:Static p:Resource.tbStart}"/>
         <TextBox x:Name="txtStart" TextWrapping="Wrap" Grid.Column="1" Margin="4,0,0,0"/>
-        <TextBlock x:Name="textBlock1" Grid.Row="1" TextWrapping="Wrap" Text="End"/>
+        <TextBlock x:Name="textBlock1" Grid.Row="1" TextWrapping="Wrap" 
+                   Text="{x:Static p:Resource.tbEnd}"/>
         <TextBox x:Name="txtEnd" Grid.Row="1" TextWrapping="Wrap" Grid.Column="1" Margin="4,0,0,0"/>
 
     </Grid>

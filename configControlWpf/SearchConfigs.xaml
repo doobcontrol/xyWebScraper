@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:configControlWpf"
+             xmlns:p="clr-namespace:configControlWpf.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel LastChildFill="True">
@@ -13,10 +14,12 @@
                     <CommandBinding Command="ApplicationCommands.New" Executed="NewCommand_Executed" CanExecute="NewCommand_CanExecute" />
                     <CommandBinding Command="ApplicationCommands.Delete" Executed="DeleteCommand_Executed" CanExecute="DeleteCommand_CanExecute" />
                 </ToolBar.CommandBindings>
-                <Button x:Name="btnAdd" Command="ApplicationCommands.New">
+                <Button x:Name="btnAdd" Command="ApplicationCommands.New" 
+                        ToolTip="{x:Static p:Resource.ttbtnAddSearch}">
                     <Image x:Name="imageAdd" Source="/configControlWpf;component/AddLayoutItem.png" />
                 </Button>
-                <Button x:Name="btnDel" Command="ApplicationCommands.Delete">
+                <Button x:Name="btnDel" Command="ApplicationCommands.Delete" 
+                        ToolTip="{x:Static p:Resource.ttbtnDelSearch}">
                     <Image x:Name="imageDel" Source="/configControlWpf;component/DeleteListItem.png" />
                 </Button>
                 <Separator />

@@ -42,7 +42,8 @@ namespace configControlWpf
             tabControl.Items.Add(
                 new TabItem()
                 {
-                    Header = "Search",
+                    Header = Properties.Resource.tihSearch 
+                        + tabControl.Items.Count,
                     Content = new SearchConfig()
                     {
                         IsNavgateSearchConfig = isNavgateSearchConfig

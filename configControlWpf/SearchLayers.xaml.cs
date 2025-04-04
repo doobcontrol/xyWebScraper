@@ -24,10 +24,6 @@ namespace configControlWpf
         public SearchLayers()
         {
             InitializeComponent();
-
-            cbSearchMultiResults.ToolTip = 
-                "If checked, the search will return multiple results. If unchecked, the search will return only the first result.";
-
             addSearchLayer();
         }
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
